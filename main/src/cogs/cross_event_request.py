@@ -103,38 +103,38 @@ class CrossEventsMode(BaseCog):
     async def list(self, ctx):
         staff_button = cross_staff_view_builder.staff_list_view()
         members = cross_event_system.enumeration_events_mode(guild_id=ctx.guild.id)
-        description = staff_event_list(members)
+        description = get_staff_event_list(members)
         list_response = await ctx.send(embed=StaffListEmbed(description=description, guild=ctx.guild.name, user=ctx.author.name, icon=ctx.guild.icon).embed,
                                        view=staff_button,
                                        delete_after=160)
 
         async def tenderly_callback(interact: discord.Interaction):
-            await staff_list(interaction=interact, ctx=ctx, clan_id=TENDERLY_ID, list_response=list_response, button=staff_button)
+            await get_staff_list_async(interaction=interact, ctx=ctx, clan_id=TENDERLY_ID, list_response=list_response, button=staff_button)
 
         async def meta_callback(interact: discord.Interaction):
-            await staff_list(interaction=interact, ctx=ctx, clan_id=META_ID, list_response=list_response, button=staff_button)
+            await get_staff_list_async(interaction=interact, ctx=ctx, clan_id=META_ID, list_response=list_response, button=staff_button)
 
         async def darkness_callback(interact: discord.Interaction):
-            await staff_list(interaction=interact, ctx=ctx, clan_id=DARKNESS_ID, list_response=list_response, button=staff_button)
+            await get_staff_list_async(interaction=interact, ctx=ctx, clan_id=DARKNESS_ID, list_response=list_response, button=staff_button)
 
         async def hatory_callback(interact: discord.Interaction):
-            await staff_list(interaction=interact, ctx=ctx, clan_id=HATORY_ID, list_response=list_response, button=staff_button)
+            await get_staff_list_async(interaction=interact, ctx=ctx, clan_id=HATORY_ID, list_response=list_response, button=staff_button)
 
         async def guild_callback(interact: discord.Interaction):
             guild_button = cross_staff_view_builder.guild_list_view()
-            await guilds_list(interaction=interact, ctx=ctx, clan_id=TENDERLY_ID, list_response=list_response, buton=guild_button)
+            await get_guilds_list_async(interaction=interact, ctx=ctx, clan_id=TENDERLY_ID, list_response=list_response, button=guild_button)
 
             async def guild_tenderly_callback(inter: discord.Interaction):
-                await guilds_list(interaction=inter, ctx=ctx, clan_id=TENDERLY_ID, list_response=list_response, buton=guild_button)
+                await get_guilds_list_async(interaction=inter, ctx=ctx, clan_id=TENDERLY_ID, list_response=list_response, button=guild_button)
 
             async def guild_meta_callback(inter: discord.Interaction):
-                await guilds_list(interaction=inter, ctx=ctx, clan_id=META_ID, list_response=list_response, buton=guild_button)
+                await get_guilds_list_async(interaction=inter, ctx=ctx, clan_id=META_ID, list_response=list_response, button=guild_button)
 
             async def guild_darkness_callback(inter: discord.Interaction):
-                await guilds_list(interaction=inter, ctx=ctx, clan_id=DARKNESS_ID, list_response=list_response, buton=guild_button)
+                await get_guilds_list_async(interaction=inter, ctx=ctx, clan_id=DARKNESS_ID, list_response=list_response, button=guild_button)
 
             async def guild_hatory_callback(inter: discord.Interaction):
-                await guilds_list(interaction=inter, ctx=ctx, clan_id=HATORY_ID, list_response=list_response, buton=guild_button)
+                await get_guilds_list_async(interaction=inter, ctx=ctx, clan_id=HATORY_ID, list_response=list_response, button=guild_button)
 
             cross_staff_view_builder.button_guild_tenderly.callback = guild_tenderly_callback
             cross_staff_view_builder.button_guild_meta.callback = guild_meta_callback
@@ -159,7 +159,7 @@ class CrossEventsMode(BaseCog):
         channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_all_by_guild_id(guild.id)
         event_request_view = event_request_view_builder.create_event_request_view()
 
-        member_ids = check_member_on_voice(guild.categories, client.get_channel(voice_category_id).name)
+        member_ids = is_member_in_voice(guild.categories, client.get_channel(voice_category_id).name)
         get_event_channel = client.get_channel(channel_id)
 
         if interaction.user.id not in member_ids:

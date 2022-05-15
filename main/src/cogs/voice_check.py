@@ -3,7 +3,7 @@ import time
 import discord
 from discord.ext import commands, tasks
 
-from base.funcs import check_clan_stats
+from base.funcs import get_clan_stats
 from config import PREFIX, STATS_CHAT, TENDERLY_CATEGORY, META_CATEGORY, TENDERLY_CATEGORY_NAME, META_CATEGORY_NAME, TENDERLY_ID, META_ID, DARKNESS_ID, HATORY_ID, DARKNESS_CATEGORY_NAME, \
     HATORY_CATEGORY_NAME
 from cogs.base import BaseCog
@@ -27,10 +27,10 @@ class CheckAllMemberOnClan(BaseCog):
 
     @tasks.loop(minutes=5)
     async def check_all_member_voice(self):
-        tenderly = check_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
-        meta = check_clan_stats(self.client.get_guild(META_ID), META_CATEGORY_NAME)
-        darkness = check_clan_stats(self.client.get_guild(DARKNESS_ID), DARKNESS_CATEGORY_NAME)
-        hatory = check_clan_stats(self.client.get_guild(HATORY_ID), HATORY_CATEGORY_NAME)
+        tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+        meta = get_clan_stats(self.client.get_guild(META_ID), META_CATEGORY_NAME)
+        darkness = get_clan_stats(self.client.get_guild(DARKNESS_ID), DARKNESS_CATEGORY_NAME)
+        hatory = get_clan_stats(self.client.get_guild(HATORY_ID), HATORY_CATEGORY_NAME)
         await self.stats_chat.send(embed=DefaultEmbed(
             f'<:tenderly:970112564564459530> {tenderly}\n\n<:meta:970111815591804989> {meta}\n\n<:darkness:970112958120218655> {darkness}'
             f'\n\n<:hatory:970112576732143748> {hatory}\n\n<t:{int(time.time())}:R>'))
