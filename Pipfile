@@ -13,6 +13,7 @@ pydantic = "*"
 requests = "*"
 wget = "*"
 mongoengine = "==0.24.1"
+twisted = "*"
 
 [dev-packages]
 

@@ -104,7 +104,7 @@ class CrossEventsSystem(DatabaseSystem):
 
         return res['voice_category_id']
 
-    def get_all_field_by_guild_id(self, guild_id: int):
+    def get_all_by_guild_id(self, guild_id: int):
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
@@ -160,12 +160,12 @@ class CrossEventsSystem(DatabaseSystem):
 
     # ========================================= this request system ======================================== $
 
-    def create_close_request(self, guild_id: int, message_id: int, event_num: int, clan_send_name: str, clan_accept_name: int):
-        close_request = CrossRequstModel(guild_id=guild_id, message_id=message_id, event_num=event_num)
+    def create_close_request(self, guild_id: int, message_id: int, event_name: str, clan_send_name: str, clan_accept_name: int):
+        close_request = CrossRequstModel(guild_id=guild_id, message_id=message_id, event_name=event_name)
 
         close_request.guild_id = guild_id
         close_request.message_id = message_id
-        close_request.event_num = event_num
+        close_request.event_num = event_name
         close_request.clan_send_name = clan_send_name
         close_request.clan_accept_name = clan_accept_name
         close_request.time_send_request = int(time.time())

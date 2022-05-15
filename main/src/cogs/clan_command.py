@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 from cogs.base import BaseCog
-from config import CLAN_STAFF, AUCTION_STOP_WORD, AUCTION_BET_LIMIT
+from config import CLAN_STAFF, AUCTION_STOP_WORD, AUCTION_BET_LIMIT, OWNER_IDS
 from embeds.clan_events_mode.staff_embed.auction import AuctionStartEmbed, AuctionLot
 from embeds.clan_events_mode.staff_embed.clan_command import ClanCommandsEmbed
 from embeds.def_embed import DefaultEmbed
@@ -42,57 +42,59 @@ class ClanCommand(BaseCog):
     @clan.command(description='Выставить клан на аукцион')
     async def auction(self, ctx, role: discord.Role, amount: int):
         author = ctx.author.id
-        match author:
-            case 450361269128790026 | 709820533176270911 | 701614486880125010 | 718171682824519721 as author:
-                get_auction_channel = client.get_channel(cross_event_system.get_auction_channel(ctx.guild.id))
-                auction_msg = await get_auction_channel.send(embed=AuctionStartEmbed(clan=role.mention, amount=amount, guild=ctx.guild).embed)
-                await auction_msg.pin()
 
-                def check(m):
-                    if m.channel == get_auction_channel:
-                        if not m.author.bot:
-                            return m
+        if author not in OWNER_IDS:
+            return False
 
-                while True:
-                    msg = await client.wait_for('message', check=check)
-                    if msg.author.id == ctx.author.id and msg.content == AUCTION_STOP_WORD:
-                        break
-                    try:
-                        if amount < int(msg.content) <= amount + AUCTION_BET_LIMIT:
-                            amount = int(msg.content)
-                            await get_auction_channel.send(embed=AuctionLot(msg.author, msg.content).embed)
-                        else:
-                            raise ValueError
-                    except ValueError:
-                        await msg.delete()
-                return await get_auction_channel.send(f'Аукцион окончен.')
+        get_auction_channel = client.get_channel(cross_event_system.get_auction_channel(ctx.guild.id))
+        auction_msg = await get_auction_channel.send(embed=AuctionStartEmbed(clan=role.mention, amount=amount, guild=ctx.guild).embed)
+        await auction_msg.pin()
+
+        def check(m):
+            if m.channel == get_auction_channel:
+                if not m.author.bot:
+                    return m
+
+        while True:
+            msg = await client.wait_for('message', check=check)
+            if msg.author.id == ctx.author.id and msg.content == AUCTION_STOP_WORD:
+                break
+            try:
+                if amount < int(msg.content) <= amount + AUCTION_BET_LIMIT:
+                    amount = int(msg.content)
+                    await get_auction_channel.send(embed=AuctionLot(msg.author, msg.content).embed)
+                else:
+                    raise ValueError
+            except ValueError:
+                await msg.delete()
+        return await get_auction_channel.send(f'Аукцион окончен.')
 
     @clan.command(description='Отправка сообщения по всем кланам')
     async def send(self, ctx, *args):
         def_view = default_view_builder.chose_puth()
-        author_id = ctx.author.id
+        author = ctx.author.id
         send_message = ' '.join(args)
-        match author_id:
-            case 450361269128790026 | 709820533176270911 | 701614486880125010 | 718171682824519721 as author:
-                msg = await ctx.send(embed=DefaultEmbed(f'{ctx.author.name}, подтвердите отправку оповещений.'), view=def_view, delete_after=60)
+        if author not in OWNER_IDS:
+            return False
+        msg = await ctx.send(embed=DefaultEmbed(f'{ctx.author.name}, подтвердите отправку оповещений.'), view=def_view, delete_after=60)
 
-                async def accept_callback(interaction: discord.Interaction):
-                    if interaction.user.id != ctx.author.id:
-                        return False
-                    get_text_category = client.get_channel(cross_event_system.get_text_category_by_guild_id(ctx.guild.id))
-                    for category in interaction.guild.categories:
-                        if category.name == get_text_category.name:
-                            for channel in category.text_channels:
-                                await channel.send(embed=SendingMessagesClans(args=send_message).embed)
-                    return await msg.edit(embed=DefaultEmbed('Отправка сообщение по кланам прошла успешно'), view=default_view_builder.remove_chose(), delete_after=60)
+        async def accept_callback(interaction: discord.Interaction):
+            if interaction.user.id != ctx.author.id:
+                return False
+            get_text_category = client.get_channel(cross_event_system.get_text_category_by_guild_id(ctx.guild.id))
+            for category in interaction.guild.categories:
+                if category.name == get_text_category.name:
+                    for channel in category.text_channels:
+                        await channel.send(embed=SendingMessagesClans(args=send_message).embed)
+            return await msg.edit(embed=DefaultEmbed('Отправка сообщение по кланам прошла успешно'), view=default_view_builder.remove_chose(), delete_after=60)
 
-                async def decline_callback(interaction: discord.Interaction):
-                    if interaction.user.id != ctx.author.id:
-                        return False
-                    return await msg.edit(embed=DefaultEmbed(f'Команда была отклонена'), view=default_view_builder.remove_chose(), delete_after=60)
+        async def decline_callback(interaction: discord.Interaction):
+            if interaction.user.id != ctx.author.id:
+                return False
+            return await msg.edit(embed=DefaultEmbed(f'Команда была отклонена'), view=default_view_builder.remove_chose(), delete_after=60)
 
-                default_view_builder.button_accept.callback = accept_callback
-                default_view_builder.button_decline.callback = decline_callback
+        default_view_builder.button_accept.callback = accept_callback
+        default_view_builder.button_decline.callback = decline_callback
 
 
 def setup(bot):

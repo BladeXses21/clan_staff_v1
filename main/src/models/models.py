@@ -32,11 +32,11 @@ class RequestModel(Document):
 
 
 class CrossRequstModel(Document):
-    guild_id = IntField(min_value=0)
-    message_id = IntField(min_value=0)
-    event_num = IntField(min_value=0)
-    clan_send_request = StringField()
-    clan_accept_request = StringField()
-    clan_staff_id = IntField(min_value=0)
-    time_send_request = IntField(min_value=0)
-    time_accept_request = IntField(min_value=0)
+    guild_id = IntField(min_value=0)  # guild id
+    message_id = IntField(min_value=0)  # response message id
+    event_name = StringField()  # enum event dict
+    clan_send_request = StringField()  # name clan which send close request
+    clan_accept_request = StringField()  # name clan which accept close request
+    clan_staff_id = IntField(min_value=0)  # id clan staff user which accept this close request
+    time_send_request = IntField(min_value=0)  # time send request
+    time_accept_request = IntField(min_value=0)  # time accept request

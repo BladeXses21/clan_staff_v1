@@ -1,3 +1,5 @@
+import asyncio
+
 import discord
 from discord import Embed
 from discord.commands import Option
@@ -11,7 +13,7 @@ from embeds.clan_events_mode.request_event_embed.embed_request_decline_event_mod
 from embeds.clan_events_mode.request_event_embed.embed_request_to_event_mode import full_request_respons
 from embeds.clan_events_mode.request_event_embed.embed_request_pass_event_mode import pass_event_embed
 from cogs.base import BaseCog
-from config import PREFIX, TENDERLY_ID, META_ID, DARKNESS_ID, HATORY_ID, CLAN_STAFF, AUCTION_BET_LIMIT, AUCTION_STOP_WORD
+from config import PREFIX, TENDERLY_ID, META_ID, DARKNESS_ID, HATORY_ID, CLAN_STAFF, OWNER_IDS
 from embeds.clan_events_mode.staff_embed.auction import AuctionStartEmbed
 from embeds.clan_events_mode.staff_embed.staff_command import StaffCommandEmbed
 from embeds.clan_events_mode.staff_embed.staff_list import StaffListEmbed, GuildListEmbed
@@ -42,32 +44,32 @@ class CrossEventsMode(BaseCog):
         author = ctx.author.id
         author_name = ctx.author.name
         guild = ctx.guild.id
-        match author:
-            case 450361269128790026 | 709820533176270911 | 701614486880125010 | 718171682824519721 | 764219880786362390 as author:
-                if member is None:
-                    return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, вы не указали пользователя```***'), delete_after=60)
-                if cross_event_system.find_guild_id(guild_id=guild) is False:
-                    return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, клан стафф не существует на этом сервере```***'), delete_after=60)
-                if cross_event_system.does_it_clan_staff(guild_id=guild, clan_staff_id=member.id) is True:
-                    return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, пользователь {member.name}, уже есть в списке clan staff```***'), delete_after=60)
-                cross_event_system.add_clan_staff(guild_id=guild, clan_staff_id=member.id)
-                return await ctx.send(embed=DefaultEmbed(add_clan_staff_response(member)))
+        if author not in OWNER_IDS:
+            return False
+        if member is None:
+            return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, вы не указали пользователя```***'), delete_after=60)
+        if cross_event_system.find_guild_id(guild_id=guild) is False:
+            return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, клан стафф не существует на этом сервере```***'), delete_after=60)
+        if cross_event_system.does_it_clan_staff(guild_id=guild, clan_staff_id=member.id) is True:
+            return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, пользователь {member.name}, уже есть в списке clan staff```***'), delete_after=60)
+        cross_event_system.add_clan_staff(guild_id=guild, clan_staff_id=member.id)
+        return await ctx.send(embed=DefaultEmbed(add_clan_staff_response(member)))
 
     @staff.command(description='Убрать человека из clan staff')
     async def kick(self, ctx, member: discord.Member):
         author = ctx.author.id
         author_name = ctx.author.name
         guild = ctx.guild.id
-        match author:
-            case 450361269128790026 | 709820533176270911 | 701614486880125010 | 718171682824519721 | 764219880786362390 as author:
-                if member is None:
-                    return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, вы не указали пользователя```***'), delete_after=60)
-                if cross_event_system.find_guild_id(guild_id=guild) is False:
-                    return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, клан стафф не существует на этом сервере```***'), delete_after=60)
-                if cross_event_system.does_it_clan_staff(guild_id=guild, clan_staff_id=member.id) is False:
-                    return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, пользователя {member.name}, нет в списке clan staff```***'), delete_after=60)
-                cross_event_system.remove_clan_staff(guild_id=guild, clan_staff_id=member.id)
-                return await ctx.send(embed=DefaultEmbed(remove_clan_staff_response(member)))
+        if author not in OWNER_IDS:
+            return False
+        if member is None:
+            return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, вы не указали пользователя```***'), delete_after=60)
+        if cross_event_system.find_guild_id(guild_id=guild) is False:
+            return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, клан стафф не существует на этом сервере```***'), delete_after=60)
+        if cross_event_system.does_it_clan_staff(guild_id=guild, clan_staff_id=member.id) is False:
+            return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, пользователя {member.name}, нет в списке clan staff```***'), delete_after=60)
+        cross_event_system.remove_clan_staff(guild_id=guild, clan_staff_id=member.id)
+        return await ctx.send(embed=DefaultEmbed(remove_clan_staff_response(member)))
 
     @staff.command(description='Очистка статы clan staff')
     async def clear(self, ctx):
@@ -75,26 +77,26 @@ class CrossEventsMode(BaseCog):
         author_name = ctx.author.name
         guild = ctx.guild.id
         def_view = default_view_builder.chose_puth()
-        match author:
-            case 450361269128790026 | 709820533176270911 | 701614486880125010 | 718171682824519721 | 764219880786362390 as author:
-                if cross_event_system.find_guild_id(guild_id=guild) is False:
-                    return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, клан стафф не существует на этом сервере```***'), delete_after=60)
-                msg = await ctx.send(embed=DefaultEmbed(f'{ctx.author.name}, подтвердите очистку статистики.'), view=def_view, delete_after=60)
+        if author not in OWNER_IDS:
+            return False
+        if cross_event_system.find_guild_id(guild_id=guild) is False:
+            return await ctx.send(embed=DefaultEmbed(f'***```{author_name}, клан стафф не существует на этом сервере```***'), delete_after=60)
+        msg = await ctx.send(embed=DefaultEmbed(f'{ctx.author.name}, подтвердите очистку статистики.'), view=def_view, delete_after=60)
 
-                async def accept_callback(interaction: discord.Interaction):
-                    if interaction.user.id != ctx.author.id:
-                        return False
-                    cross_event_system.clear_staff_stats(guild)
-                    return await msg.edit(embed=DefaultEmbed(f'***```{author_name}, вы успешно очистили статистику clan staff на {ctx.guild.name}```***'), delete_after=60,
-                                          view=default_view_builder.remove_chose())
+        async def accept_callback(interaction: discord.Interaction):
+            if interaction.user.id != ctx.author.id:
+                return False
+            cross_event_system.clear_staff_stats(guild)
+            return await msg.edit(embed=DefaultEmbed(f'***```{author_name}, вы успешно очистили статистику clan staff на {ctx.guild.name}```***'), delete_after=60,
+                                  view=default_view_builder.remove_chose())
 
-                async def decline_callback(interaction: discord.Interaction):
-                    if interaction.user.id != ctx.author.id:
-                        return False
-                    return await msg.edit(embed=DefaultEmbed(f'Команда была отклонена'), delete_after=60, view=default_view_builder.remove_chose())
+        async def decline_callback(interaction: discord.Interaction):
+            if interaction.user.id != ctx.author.id:
+                return False
+            return await msg.edit(embed=DefaultEmbed(f'Команда была отклонена'), delete_after=60, view=default_view_builder.remove_chose())
 
-                default_view_builder.button_accept.callback = accept_callback
-                default_view_builder.button_decline.callback = decline_callback
+        default_view_builder.button_accept.callback = accept_callback
+        default_view_builder.button_decline.callback = decline_callback
 
     @staff.command(description='Просмотреть список всех челиксов из clan staff')
     @commands.has_any_role(*CLAN_STAFF)
@@ -154,111 +156,114 @@ class CrossEventsMode(BaseCog):
         guild = interaction.guild
         event_num = all_events[event_num]
 
-        channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_all_field_by_guild_id(guild.id)
+        channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_all_by_guild_id(guild.id)
         event_request_view = event_request_view_builder.create_event_request_view()
 
         member_ids = check_member_on_voice(guild.categories, client.get_channel(voice_category_id).name)
         get_event_channel = client.get_channel(channel_id)
-        if interaction.user.id in member_ids:
-            clan_name = interaction.user.voice.channel.name
-            request_msg = await full_request_respons(interaction=interaction, event_channel=get_event_channel, role_id=role_id, event_num=event_num,
-                                                     users_count=users_count, comment=comment, event_request_view=event_request_view)
-            cross_event_system.create_request(guild_id=interaction.guild.id, message_id=request_msg.id, clan_name=clan_name, event_num=event_num, member_send_request=interaction.user.id,
-                                              comment=comment)
 
-            async def accept_callback(ctx):
-                user = ctx.user
-                server = ctx.guild
-                get_msg = client.get_message(ctx.message.id)
-                ev_num, com, clan_n, member_send_id = cross_event_system.get_field_request(guild_id=server.id, message_id=get_msg.id)
-                get_member_send = ctx.guild.get_member(member_send_id)
-
-                if cross_event_system.does_it_clan_staff(server.id, user.id) is False:
-                    return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
-
-                if cross_event_system.check_on_request_id(server.id, user.id) is False:
-                    return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'), ephemeral=True)
-
-                cross_event_system.accept_event_request(guild_id=server.id, message_id=request_msg.id, clan_staff_id=user.id)
-
-                event_request_view.remove_item(event_request_view_builder.button_accept)
-                event_request_view.remove_item(event_request_view_builder.button_decline)
-
-                pass_view = event_request_view_builder.pass_event_request_view()
-
-                await accept_event_embed(user=get_member_send, request_msg=get_msg, clan_name=clan_n, event_num=ev_num, clan_staff=user, pass_view=pass_view)
-
-            async def decline_callback(ctx):
-                user = ctx.user
-                server = ctx.guild
-                get_msg = client.get_message(ctx.message.id)
-                ev_num, com, clan_n, member_send_id = cross_event_system.get_field_request(guild_id=server.id, message_id=get_msg.id)
-                get_member_send = ctx.guild.get_member(member_send_id)
-
-                if cross_event_system.does_it_clan_staff(server.id, user.id) is False:
-                    return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
-
-                if cross_event_system.check_on_request_id(server.id, user.id) is False:
-                    return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'), ephemeral=True)
-
-                cross_event_system.delete_request(guild_id=server.id, message_id=get_msg.id)
-
-                event_request_view.remove_item(event_request_view_builder.button_accept)
-                event_request_view.remove_item(event_request_view_builder.button_decline)
-
-                await decline_event_embed(user=get_member_send, request_msg=get_msg, clan_name=clan_n, event_num=ev_num, clan_staff=user, decline_view=event_request_view)
-
-            async def pass_callback(ctx):
-                user = ctx.user
-                server = ctx.guild
-                message = ctx.message
-                channel = client.get_channel(ctx.channel.id)
-                get_msg = await channel.fetch_message(message.id)
-                ev_num, com, clan_n, member_send_id = cross_event_system.get_field_request(guild_id=server.id, message_id=message.id)
-                time_accept = cross_event_system.get_time_accept_request(guild_id=server.id, message_id=message.id)
-                request_member_id = cross_event_system.get_request_msg_id(guild_id=server.id, clan_staff_id=user.id)
-
-                event_request_view.remove_item(event_request_view_builder.button_pass)
-
-                if cross_event_system.does_it_clan_staff(server.id, user.id) is False:
-                    return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
-                if request_member_id != message.id:
-                    return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, это не ваш ивент.```***'), ephemeral=True)
-
-                await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, введите конечный итог ивента по форме\n@link [количество конфет] @link [количество конфет]...```***'),
-                                                ephemeral=True)
-
-                def check(m):
-                    if m.channel == channel:
-                        if not m.author.bot:
-                            return m
-
-                msg = await client.wait_for('message', check=check)
-                if msg.author.id == ctx.user.id:
-                    sum_time_event = sum_event_time(guild=server.id, message_id=message.id)
-
-                    await pass_event_embed(request_msg=get_msg, event_num=ev_num, clan_name=clan_n, clan_staff=user, sum_time_event=sum_time_event, time_accept_request=time_accept,
-                                           comment=comment, pass_view=event_request_view, end_result=msg.content)
-
-                    cross_event_system.pass_request(guild_id=server.id, clan_staff_id=user.id, waisting_time=int(time.time()) - int(time_accept))
-                    cross_event_system.delete_request(guild_id=server.id, message_id=message.id)
-                    await msg.delete()
-                    print(ev_num, com, clan_n, user.name, 'Ивент завершен!')
-
-            event_request_view_builder.button_decline.callback = decline_callback
-            event_request_view_builder.button_accept.callback = accept_callback
-            event_request_view_builder.button_pass.callback = pass_callback
-        else:
+        if interaction.user.id not in member_ids:
             return await interaction.response.send_message(embed=DefaultEmbed(f'***```Вы должны быть в голосовом канале клана.```***'), ephemeral=True)
+
+        clan_name = interaction.user.voice.channel.name
+        request_msg = await full_request_respons(interaction=interaction, event_channel=get_event_channel, role_id=role_id, event_num=event_num,
+                                                 users_count=users_count, comment=comment, event_request_view=event_request_view)
+        cross_event_system.create_request(guild_id=interaction.guild.id, message_id=request_msg.id, clan_name=clan_name, event_num=event_num, member_send_request=interaction.user.id,
+                                          comment=comment)
+
+        async def accept_callback(ctx):
+            user = ctx.user
+            server = ctx.guild
+            get_msg = client.get_message(ctx.message.id)
+            ev_num, com, clan_n, member_send_id = cross_event_system.get_field_request(guild_id=server.id, message_id=get_msg.id)
+            get_member_send = ctx.guild.get_member(member_send_id)
+
+            if cross_event_system.does_it_clan_staff(server.id, user.id) is False:
+                return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
+
+            if cross_event_system.check_on_request_id(server.id, user.id) is False:
+                return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'), ephemeral=True)
+
+            cross_event_system.accept_event_request(guild_id=server.id, message_id=request_msg.id, clan_staff_id=user.id)
+
+            event_request_view.remove_item(event_request_view_builder.button_accept)
+            event_request_view.remove_item(event_request_view_builder.button_decline)
+
+            pass_view = event_request_view_builder.pass_event_request_view()
+
+            await accept_event_embed(user=get_member_send, request_msg=get_msg, clan_name=clan_n, event_num=ev_num, clan_staff=user, pass_view=pass_view)
+
+        async def decline_callback(ctx):
+            user = ctx.user
+            server = ctx.guild
+            get_msg = client.get_message(ctx.message.id)
+            ev_num, com, clan_n, member_send_id = cross_event_system.get_field_request(guild_id=server.id, message_id=get_msg.id)
+            get_member_send = ctx.guild.get_member(member_send_id)
+
+            if cross_event_system.does_it_clan_staff(server.id, user.id) is False:
+                return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
+
+            if cross_event_system.check_on_request_id(server.id, user.id) is False:
+                return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'), ephemeral=True)
+
+            cross_event_system.delete_request(guild_id=server.id, message_id=get_msg.id)
+
+            event_request_view.remove_item(event_request_view_builder.button_accept)
+            event_request_view.remove_item(event_request_view_builder.button_decline)
+
+            await decline_event_embed(user=get_member_send, request_msg=get_msg, clan_name=clan_n, event_num=ev_num, clan_staff=user, decline_view=event_request_view)
+
+        async def pass_callback(ctx):
+            user = ctx.user
+            server = ctx.guild
+            message = ctx.message
+            channel = client.get_channel(ctx.channel.id)
+            get_msg = await channel.fetch_message(message.id)
+            ev_num, com, clan_n, member_send_id = cross_event_system.get_field_request(guild_id=server.id, message_id=message.id)
+            time_accept = cross_event_system.get_time_accept_request(guild_id=server.id, message_id=message.id)
+            request_member_id = cross_event_system.get_request_msg_id(guild_id=server.id, clan_staff_id=user.id)
+
+            event_request_view.remove_item(event_request_view_builder.button_pass)
+
+            if cross_event_system.does_it_clan_staff(server.id, user.id) is False:
+                return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
+            if request_member_id != message.id:
+                return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, это не ваш ивент.```***'), ephemeral=True)
+
+            await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, введите конечный итог ивента по форме\n@link [количество конфет] @link [количество конфет]...```***'),
+                                            ephemeral=True)
+
+            def check(m):
+                if m.channel == channel:
+                    if not m.author.bot:
+                        return m
+
+            msg = await client.wait_for('message', check=check)
+            if msg.author.id == ctx.user.id:
+                sum_time_event = sum_event_time(guild=server.id, message_id=message.id)
+
+                await pass_event_embed(request_msg=get_msg, event_num=ev_num, clan_name=clan_n, clan_staff=user, sum_time_event=sum_time_event, time_accept_request=time_accept,
+                                       comment=com, pass_view=event_request_view, end_result=msg.content)
+
+                cross_event_system.pass_request(guild_id=server.id, clan_staff_id=user.id, waisting_time=int(time.time()) - int(time_accept))
+                cross_event_system.delete_request(guild_id=server.id, message_id=message.id)
+                await msg.delete()
+                print(ev_num, com, clan_n, user.name, 'Ивент завершен!')
+
+        event_request_view_builder.button_decline.callback = decline_callback
+        event_request_view_builder.button_accept.callback = accept_callback
+        event_request_view_builder.button_pass.callback = pass_callback
 
     # @tasks.loop(time=datetime.time(0, 0, 1, 0))
     # def clear(self):
     #     pass
 
 
-# todo - Командв /event request ||| Дневные задания ||| Балы и магазин - clan staff ||| Команда /close request |||
-#  автоматически отклонять ивент если его не приняли на протяжении 15 минут ||| прибвка времени овнерами ||| команда клан аукиона |||
+# todo - Дневные задания ||| Балы и магазин - clan staff ||| Команда /close request |||
+#  автоматически отклонять ивент если его не приняли на протяжении 15 минут |||
 #  !staff add - возможность удаления сервера, указывая только его id |||
+# todo - профиль для челиксов из clan staff - выбор рабочих дней(онли куратор) -
+#  выбор выходных(онли куратор) - стата проведенных ивентов для каждого для и сумарно - поинты по времени - выговоры.
 
 
 def setup(bot):
