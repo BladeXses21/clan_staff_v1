@@ -2,7 +2,7 @@ import discord
 from discord import Option
 
 from base.funcs import is_member_in_voice, get_clan_channel_names
-from clan_staff_service.enum_close_list import EnumCloseList
+from clan_staff_service.close_list import CloseListEnum
 from cogs.base import BaseCog
 from embeds.clan_events_mode.request_close_embed.embed_to_enemy_clan import RequestToEnemy
 from embeds.clan_events_mode.request_close_embed.enemy_accept_close import EnemyAcceptClose

@@ -2,11 +2,11 @@ from enum import Enum, unique
 
 
 @unique
-class EnumCloseList(Enum):
+class CloseListEnum(Enum):
     # events
-    dota_close = 'Dota 2 5x5'
-    cs_go_close = 'CS:GO 5x5'
-    valorant_close = 'VALORANT 5x5'
+    dota = 'Dota 2 5x5'
+    cs_go = 'CS:GO 5x5'
+    valorant = 'VALORANT 5x5'
     brawl_stars = 'Brawl Stars'
 
     @classmethod
