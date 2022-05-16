@@ -11,7 +11,7 @@ from main import client
 from systems.clan_staff.cross_event_request_system import cross_event_system
 
 
-class CrossCloseReuqest(BaseCog):
+class CrossCloseRequest(BaseCog):
     def __init__(self, client):
         super().__init__(client)
         print("Cog 'clan close' connected!")
@@ -60,4 +60,4 @@ class CrossCloseReuqest(BaseCog):
 
 
 def setup(bot):
-    bot.add_cog(CrossCloseReuqest(bot))
+    bot.add_cog(CrossCloseRequest(bot))
