@@ -87,7 +87,7 @@ class Clan(BaseCog):
 
     @clan.command(description='Отправка сообщения по всем кланам')
     async def send(self, ctx, *args):
-        def_view = default_view_builder.chose_puth()
+        def_view = default_view_builder.create_choice_view()
         author = ctx.author.id
         send_message = ' '.join(args)
 
@@ -113,7 +113,7 @@ class Clan(BaseCog):
 
             return await msg.edit(
                 embed=DefaultEmbed('Отправка сообщение по кланам прошла успешно'),
-                view=default_view_builder.remove_chose(),
+                view=default_view_builder.create_view(),
                 delete_after=60
             )
 
@@ -123,7 +123,7 @@ class Clan(BaseCog):
 
             return await msg.edit(
                 embed=DefaultEmbed(f'Команда была отклонена'),
-                view=default_view_builder.remove_chose(),
+                view=default_view_builder.create_view(),
                 delete_after=60
             )
 

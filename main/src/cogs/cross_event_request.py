@@ -104,7 +104,7 @@ class CrossEventsMode(BaseCog):
     async def clear(self, ctx):
         author_name = ctx.author.name
         guild = ctx.guild.id
-        def_view = default_view_builder.chose_puth()
+        def_view = default_view_builder.create_choice_view()
 
         if ctx.author.id not in OWNER_IDS:
             return False
@@ -129,7 +129,7 @@ class CrossEventsMode(BaseCog):
             return await msg.edit(
                 embed=DefaultEmbed(f'***```{author_name}, вы успешно очистили статистику clan staff на {ctx.guild.name}```***'),
                 delete_after=60,
-                view=default_view_builder.remove_chose()
+                view=default_view_builder.create_view()
             )
 
         async def decline_callback(interaction: discord.Interaction):
@@ -139,7 +139,7 @@ class CrossEventsMode(BaseCog):
             return await msg.edit(
                 embed=DefaultEmbed(f'Команда была отклонена'),
                 delete_after=60,
-                view=default_view_builder.remove_chose()
+                view=default_view_builder.create_view()
             )
 
         default_view_builder.button_accept.callback = accept_callback
