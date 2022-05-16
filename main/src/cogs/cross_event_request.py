@@ -16,7 +16,7 @@ from embeds.clan_events_mode.staff_embed.auction import AuctionStartEmbed
 from embeds.clan_events_mode.staff_embed.staff_command import StaffCommandEmbed
 from embeds.def_view_builder import default_view_builder
 from embeds.def_embed import DefaultEmbed
-from systems.clan_staff.cross_event_request_system import cross_event_system
+from systems.clan_staff.cross_event_system import cross_event_system
 from clan_staff_service.event_dict import all_events
 from config import PREFIX, TENDERLY_ID, META_ID, DARKNESS_ID, HATORY_ID, CLAN_STAFF, OWNER_IDS
 from base.funcs import *
@@ -61,7 +61,7 @@ class CrossEventsMode(BaseCog):
                 delete_after=60
             )
 
-        if cross_event_system.does_it_clan_staff(guild_id=guild, clan_staff_id=member.id) is True:
+        if cross_event_system.is_clan_staff(guild_id=guild, clan_staff_id=member.id) is True:
             return await ctx.send(
                 embed=DefaultEmbed(f'***```{author_name}, пользователь {member.name}, уже есть в списке clan staff```***'),
                 delete_after=60
@@ -91,13 +91,13 @@ class CrossEventsMode(BaseCog):
                 delete_after=60
             )
 
-        if cross_event_system.does_it_clan_staff(guild_id=guild, clan_staff_id=member.id) is False:
+        if cross_event_system.is_clan_staff(guild_id=guild, clan_staff_id=member.id) is False:
             return await ctx.send(
                 embed=DefaultEmbed(f'***```{author_name}, пользователя {member.name}, нет в списке clan staff```***'),
                 delete_after=60
             )
 
-        cross_event_system.remove_clan_staff(guild_id=guild, clan_staff_id=member.id)
+        cross_event_system.delete_clan_staff(guild_id=guild, clan_staff_id=member.id)
         return await ctx.send(embed=DefaultEmbed(remove_clan_staff_response(member)))
 
     @staff.command(description='Очистка статы clan staff')
@@ -125,7 +125,7 @@ class CrossEventsMode(BaseCog):
             if interaction.user.id != ctx.author.id:
                 return False
 
-            cross_event_system.clear_staff_stats(guild)
+            cross_event_system.reset_staff_stats(guild)
             return await msg.edit(
                 embed=DefaultEmbed(f'***```{author_name}, вы успешно очистили статистику clan staff на {ctx.guild.name}```***'),
                 delete_after=60,
@@ -149,7 +149,7 @@ class CrossEventsMode(BaseCog):
     @commands.has_any_role(*CLAN_STAFF)
     async def list(self, ctx):
         staff_button = cross_staff_view_builder.staff_list_view()
-        members = cross_event_system.enumeration_events_mode(guild_id=ctx.guild.id)
+        members = cross_event_system.get_event_organizers(guild_id=ctx.guild.id)
         description = get_staff_event_list(members)
         list_response = await ctx.send(
             embed=StaffListEmbed(
@@ -265,7 +265,7 @@ class CrossEventsMode(BaseCog):
         guild = interaction.guild
         event_num = all_events[event_num]
 
-        channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_all_by_guild_id(guild.id)
+        channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_cross_guild(guild.id)
         event_request_view = event_request_view_builder.create_event_request_view()
 
         member_ids = is_member_in_voice(guild.categories, client.get_channel(voice_category_id).name)
@@ -295,23 +295,23 @@ class CrossEventsMode(BaseCog):
             user = ctx.user
             server = ctx.guild
             get_msg = client.get_message(ctx.message.id)
-            ev_num, com, clan_n, member_send_id = cross_event_system.get_field_request(guild_id=server.id,
-                                                                                       message_id=get_msg.id)
+            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id,
+                                                                                    message_id=get_msg.id)
             get_member_send = ctx.guild.get_member(member_send_id)
 
-            if cross_event_system.does_it_clan_staff(server.id, user.id) is False:
+            if cross_event_system.is_clan_staff(server.id, user.id) is False:
                 return await ctx.response.send_message(
                     embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'),
                     ephemeral=True
                 )
 
-            if cross_event_system.check_on_request_id(server.id, user.id) is False:
+            if cross_event_system.is_event_completed(server.id, user.id) is False:
                 return await ctx.response.send_message(
                     embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'),
                     ephemeral=True
                 )
 
-            cross_event_system.accept_event_request(
+            cross_event_system.accept_clan_event(
                 guild_id=server.id,
                 message_id=request_msg.id,
                 clan_staff_id=user.id
@@ -335,23 +335,23 @@ class CrossEventsMode(BaseCog):
             user = ctx.user
             server = ctx.guild
             get_msg = client.get_message(ctx.message.id)
-            ev_num, com, clan_n, member_send_id = cross_event_system.get_field_request(guild_id=server.id,
-                                                                                       message_id=get_msg.id)
+            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id,
+                                                                                    message_id=get_msg.id)
             get_member_send = ctx.guild.get_member(member_send_id)
 
-            if cross_event_system.does_it_clan_staff(server.id, user.id) is False:
+            if cross_event_system.is_clan_staff(server.id, user.id) is False:
                 return await ctx.response.send_message(
                     embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'),
                     ephemeral=True
                 )
 
-            if cross_event_system.check_on_request_id(server.id, user.id) is False:
+            if cross_event_system.is_event_completed(server.id, user.id) is False:
                 return await ctx.response.send_message(
                     embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'),
                     ephemeral=True
                 )
 
-            cross_event_system.delete_request(guild_id=server.id, message_id=get_msg.id)
+            cross_event_system.delete_clan_event(guild_id=server.id, message_id=get_msg.id)
 
             event_request_view.remove_item(event_request_view_builder.button_accept)
             event_request_view.remove_item(event_request_view_builder.button_decline)
@@ -371,18 +371,18 @@ class CrossEventsMode(BaseCog):
             message = ctx.message
             channel = client.get_channel(ctx.channel.id)
             get_msg = await channel.fetch_message(message.id)
-            ev_num, com, clan_n, member_send_id = cross_event_system.get_field_request(guild_id=server.id,
-                                                                                       message_id=message.id)
+            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id,
+                                                                                    message_id=message.id)
 
-            time_accept = cross_event_system.get_time_accept_request(guild_id=server.id,
-                                                                     message_id=message.id)
+            time_accept = cross_event_system.get_time_accept_clan_event(guild_id=server.id,
+                                                                        message_id=message.id)
 
             request_member_id = cross_event_system.get_request_msg_id(guild_id=server.id,
                                                                       clan_staff_id=user.id)
 
             event_request_view.remove_item(event_request_view_builder.button_pass)
 
-            if cross_event_system.does_it_clan_staff(server.id, user.id) is False:
+            if cross_event_system.is_clan_staff(server.id, user.id) is False:
                 return await ctx.response.send_message(
                     embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'),
                     ephemeral=True
@@ -417,9 +417,9 @@ class CrossEventsMode(BaseCog):
                     pass_view=event_request_view, end_result=msg.content
                 )
 
-                cross_event_system.pass_request(guild_id=server.id, clan_staff_id=user.id,
-                                                waisting_time=int(time.time()) - int(time_accept))
-                cross_event_system.delete_request(guild_id=server.id, message_id=message.id)
+                cross_event_system.pass_clan_event(guild_id=server.id, clan_staff_id=user.id,
+                                                   waisting_time=int(time.time()) - int(time_accept))
+                cross_event_system.delete_clan_event(guild_id=server.id, message_id=message.id)
                 await msg.delete()
                 print(ev_num, com, clan_n, user.name, 'Ивент завершен!')
 

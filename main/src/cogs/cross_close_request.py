@@ -8,7 +8,7 @@ from embeds.clan_events_mode.request_close_embed.embed_to_enemy_clan import Requ
 from embeds.clan_events_mode.request_close_embed.enemy_accept_close import EnemyAcceptClose
 from embeds.def_embed import DefaultEmbed
 from main import client
-from systems.clan_staff.cross_event_request_system import cross_event_system
+from systems.clan_staff.cross_event_system import cross_event_system
 
 
 class CrossCloseRequest(BaseCog):

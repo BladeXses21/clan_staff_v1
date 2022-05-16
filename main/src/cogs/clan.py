@@ -9,7 +9,7 @@ from embeds.def_embed import DefaultEmbed
 from embeds.def_view_builder import default_view_builder
 from main import client
 from base.funcs import *
-from systems.clan_staff.cross_event_request_system import cross_event_system
+from systems.clan_staff.cross_event_system import cross_event_system
 from embeds.clan_events_mode.staff_embed.sending_message_to_clan import SendingMessagesClans
 
 

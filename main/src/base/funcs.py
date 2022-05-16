@@ -5,7 +5,7 @@ from discord import Member
 from config import DAY_IN_SECONDS
 from main import client
 from embeds.clan_events_mode.staff_embed.staff_list import StaffListEmbed, GuildListEmbed
-from systems.clan_staff.cross_event_request_system import cross_event_system
+from systems.clan_staff.cross_event_system import cross_event_system
 
 
 def add_clan_staff_response(member: Member) -> str:
@@ -68,7 +68,7 @@ def get_guild_list(guild) -> str:
 
 
 def sum_event_time(guild: int, message_id: int):
-    time_accept_request = cross_event_system.get_time_accept_request(guild_id=guild, message_id=message_id)
+    time_accept_request = cross_event_system.get_time_accept_clan_event(guild_id=guild, message_id=message_id)
     result = time.gmtime(int(time.time()) - int(time_accept_request))
     return str(time.strftime("%H:%M:%S", result))
 
@@ -125,7 +125,7 @@ async def get_staff_list_async(interaction, ctx, clan_id, list_response, button)
     if interaction.user.id != ctx.author.id:
         return False
     get_tenderly_guild = client.get_guild(clan_id)
-    server_members = cross_event_system.enumeration_events_mode(guild_id=clan_id)
+    server_members = cross_event_system.get_event_organizers(guild_id=clan_id)
     event_list = get_staff_event_list(server_members)
     await list_response.edit(
         embed=StaffListEmbed(event_list, guild=get_tenderly_guild.name, user=interaction.user.name, icon=get_tenderly_guild.icon).embed,
