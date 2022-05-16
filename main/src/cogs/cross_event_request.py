@@ -5,19 +5,19 @@ from discord.commands import Option
 from discord.ext import commands, tasks
 from asyncio import TimeoutError
 
-from embeds.clan_events_mode.event_mode_view.guild_list_view_builder import cross_staff_view_builder
-from embeds.clan_events_mode.event_mode_view.event_request_view_builder import event_request_view_builder
-from embeds.clan_events_mode.request_event_embed.embed_request_accept_event_mode import accept_event_embed
-from embeds.clan_events_mode.request_event_embed.embed_request_decline_event_mode import decline_event_embed
-from embeds.clan_events_mode.request_event_embed.embed_request_to_event_mode import full_request_respons
-from embeds.clan_events_mode.request_event_embed.embed_request_pass_event_mode import pass_event_embed
-from embeds.clan_events_mode.staff_embed.staff_list import StaffListEmbed, GuildListEmbed
-from embeds.clan_events_mode.staff_embed.auction import AuctionStartEmbed
-from embeds.clan_events_mode.staff_embed.staff_command import StaffCommandEmbed
-from embeds.def_view_builder import default_view_builder
-from embeds.def_embed import DefaultEmbed
-from systems.clan_staff.cross_event_system import cross_event_system
-from clan_staff_service.event_dict import all_events
+from embeds.clan_events_mode.view_builders.staff_view_builder import staff_view_builder
+from embeds.clan_events_mode.view_builders.event_view_builder import event_view_builder
+from embeds.clan_events_mode.events.accpeted_event_mode import accept_event_embed
+from embeds.clan_events_mode.events.declined_event_mode import decline_event_embed
+from embeds.clan_events_mode.events.clan_event import full_request_respons
+from embeds.clan_events_mode.events.passed_event_mode import pass_event_embed
+from embeds.clan_events_mode.staff.staff import StaffEmbed, GuildListEmbed
+from embeds.clan_events_mode.staff.auction import AuctionEmbed
+from embeds.clan_events_mode.staff.staff_command import StaffCommandsEmbed
+from embeds.view_builder import default_view_builder
+from embeds.base import DefaultEmbed
+from systems.cross_events.cross_event_system import cross_event_system
+from utils.events import ALL_EVENTS
 from config import PREFIX, TENDERLY_ID, META_ID, DARKNESS_ID, HATORY_ID, CLAN_STAFF, OWNER_IDS
 from base.funcs import *
 from cogs.base import BaseCog
@@ -36,7 +36,7 @@ class CrossEventsMode(BaseCog):
     async def staff(self, ctx):
         if not ctx.invoked_subcommand:
             if len(ctx.message.role_mentions) != 1:
-                return await ctx.send(embed=StaffCommandEmbed().embed, delete_after=60)
+                return await ctx.send(embed=StaffCommandsEmbed().embed, delete_after=60)
 
     @staff.command(description='Добавить человека в clan staff')
     async def add(self, ctx, member: discord.Member):
@@ -148,11 +148,11 @@ class CrossEventsMode(BaseCog):
     @staff.command(description='Просмотреть список всех челиксов из clan staff')
     @commands.has_any_role(*CLAN_STAFF)
     async def list(self, ctx):
-        staff_button = cross_staff_view_builder.staff_list_view()
+        staff_button = staff_view_builder.create_staff_list_view()
         members = cross_event_system.get_event_organizers(guild_id=ctx.guild.id)
         description = get_staff_event_list(members)
         list_response = await ctx.send(
-            embed=StaffListEmbed(
+            embed=StaffEmbed(
                 description=description,
                 guild=ctx.guild.name,
                 user=ctx.author.name,
@@ -199,7 +199,7 @@ class CrossEventsMode(BaseCog):
             )
 
         async def guild_callback(interact: discord.Interaction):
-            guild_button = cross_staff_view_builder.guild_list_view()
+            guild_button = staff_view_builder.create_guild_list_view()
             await get_guilds_list_async(
                 interaction=interact,
                 ctx=ctx,
@@ -244,17 +244,17 @@ class CrossEventsMode(BaseCog):
                     button=guild_button
                 )
 
-            cross_staff_view_builder.button_guild_tenderly.callback = guild_tenderly_callback
-            cross_staff_view_builder.button_guild_meta.callback = guild_meta_callback
-            cross_staff_view_builder.button_guild_darkness.callback = guild_darkness_callback
-            cross_staff_view_builder.button_guild_hatory.callback = guild_hatory_callback
-            cross_staff_view_builder.button_guild_back.callback = tenderly_callback
+            staff_view_builder.button_guild_tenderly.callback = guild_tenderly_callback
+            staff_view_builder.button_guild_meta.callback = guild_meta_callback
+            staff_view_builder.button_guild_darkness.callback = guild_darkness_callback
+            staff_view_builder.button_guild_hatory.callback = guild_hatory_callback
+            staff_view_builder.button_guild_back.callback = tenderly_callback
 
-        cross_staff_view_builder.button_tenderly.callback = tenderly_callback
-        cross_staff_view_builder.button_meta.callback = meta_callback
-        cross_staff_view_builder.button_darkness.callback = darkness_callback
-        cross_staff_view_builder.button_hatory.callback = hatory_callback
-        cross_staff_view_builder.button_guild.callback = guild_callback
+        staff_view_builder.button_tenderly.callback = tenderly_callback
+        staff_view_builder.button_meta.callback = meta_callback
+        staff_view_builder.button_darkness.callback = darkness_callback
+        staff_view_builder.button_hatory.callback = hatory_callback
+        staff_view_builder.button_guild.callback = guild_callback
 
     @event.command(name='request', description='Запрос ивента в клане', default_permission=True)
     async def request(self, interaction: discord.Interaction,
@@ -263,10 +263,10 @@ class CrossEventsMode(BaseCog):
                       users_count: Option(int, 'Введите количество человек на ивенте.', required=True),
                       comment: Option(str, 'Введите коментарий к ивенту.', required=True)):
         guild = interaction.guild
-        event_num = all_events[event_num]
+        event_num = ALL_EVENTS[event_num]
 
         channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_cross_guild(guild.id)
-        event_request_view = event_request_view_builder.create_event_request_view()
+        event_request_view = event_view_builder.create_event_request_view()
 
         member_ids = is_member_in_voice(guild.categories, client.get_channel(voice_category_id).name)
         get_event_channel = client.get_channel(channel_id)
@@ -317,10 +317,10 @@ class CrossEventsMode(BaseCog):
                 clan_staff_id=user.id
             )
 
-            event_request_view.remove_item(event_request_view_builder.button_accept)
-            event_request_view.remove_item(event_request_view_builder.button_decline)
+            event_request_view.remove_item(event_view_builder.button_accept)
+            event_request_view.remove_item(event_view_builder.button_decline)
 
-            pass_view = event_request_view_builder.pass_event_request_view()
+            pass_view = event_view_builder.pass_event_request_view()
 
             await accept_event_embed(
                 user=get_member_send,
@@ -353,8 +353,8 @@ class CrossEventsMode(BaseCog):
 
             cross_event_system.delete_clan_event(guild_id=server.id, message_id=get_msg.id)
 
-            event_request_view.remove_item(event_request_view_builder.button_accept)
-            event_request_view.remove_item(event_request_view_builder.button_decline)
+            event_request_view.remove_item(event_view_builder.button_accept)
+            event_request_view.remove_item(event_view_builder.button_decline)
 
             await decline_event_embed(
                 user=get_member_send,
@@ -380,7 +380,7 @@ class CrossEventsMode(BaseCog):
             request_member_id = cross_event_system.get_request_msg_id(guild_id=server.id,
                                                                       clan_staff_id=user.id)
 
-            event_request_view.remove_item(event_request_view_builder.button_pass)
+            event_request_view.remove_item(event_view_builder.button_pass)
 
             if cross_event_system.is_clan_staff(server.id, user.id) is False:
                 return await ctx.response.send_message(
@@ -423,9 +423,9 @@ class CrossEventsMode(BaseCog):
                 await msg.delete()
                 print(ev_num, com, clan_n, user.name, 'Ивент завершен!')
 
-        event_request_view_builder.button_decline.callback = decline_callback
-        event_request_view_builder.button_accept.callback = accept_callback
-        event_request_view_builder.button_pass.callback = pass_callback
+        event_view_builder.button_decline.callback = decline_callback
+        event_view_builder.button_accept.callback = accept_callback
+        event_view_builder.button_pass.callback = pass_callback
 
     # @tasks.loop(time=datetime.time(0, 0, 1, 0))
     # def clear(self):

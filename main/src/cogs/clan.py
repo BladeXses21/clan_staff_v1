@@ -3,14 +3,14 @@ from discord.ext import commands
 
 from cogs.base import BaseCog
 from config import CLAN_STAFF, AUCTION_STOP_WORD, AUCTION_BET_LIMIT, OWNER_IDS, BLADEXSES_ID
-from embeds.clan_events_mode.staff_embed.auction import AuctionStartEmbed, AuctionLot
-from embeds.clan_events_mode.staff_embed.clan_command import ClanCommandsEmbed
-from embeds.def_embed import DefaultEmbed
-from embeds.def_view_builder import default_view_builder
+from embeds.clan_events_mode.staff.auction import AuctionEmbed, AuctionLot
+from embeds.clan_events_mode.staff.clan_command import ClanCommandsEmbed
+from embeds.base import DefaultEmbed
+from embeds.view_builder import default_view_builder
 from main import client
 from base.funcs import *
-from systems.clan_staff.cross_event_system import cross_event_system
-from embeds.clan_events_mode.staff_embed.sending_message_to_clan import SendingMessagesClans
+from systems.cross_events.cross_event_system import cross_event_system
+from embeds.clan_events_mode.staff.clan_message import ClanMessageEmbed
 
 
 class Clan(BaseCog):
@@ -58,7 +58,7 @@ class Clan(BaseCog):
             return False
 
         get_auction_channel = client.get_channel(cross_event_system.get_auction_channel(ctx.guild.id))
-        auction_msg = await get_auction_channel.send(embed=AuctionStartEmbed(
+        auction_msg = await get_auction_channel.send(embed=AuctionEmbed(
             clan=role.mention,
             amount=amount,
             guild=ctx.guild
@@ -109,7 +109,7 @@ class Clan(BaseCog):
             for category in interaction.guild.categories:
                 if category.name == get_text_category.name:
                     for channel in category.text_channels:
-                        await channel.send(embed=SendingMessagesClans(args=send_message).embed)
+                        await channel.send(embed=ClanMessageEmbed(args=send_message).embed)
 
             return await msg.edit(
                 embed=DefaultEmbed('Отправка сообщение по кланам прошла успешно'),

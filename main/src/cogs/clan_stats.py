@@ -7,7 +7,7 @@ from config import PREFIX, STATS_CHAT, HATORY_CATEGORY_NAME, TENDERLY_CATEGORY, 
 from config import TENDERLY_CATEGORY_NAME, META_CATEGORY_NAME, TENDERLY_ID
 from config import META_ID, DARKNESS_ID, HATORY_ID, DARKNESS_CATEGORY_NAME
 from cogs.base import BaseCog
-from embeds.def_embed import DefaultEmbed
+from embeds.base import DefaultEmbed
 
 
 desire_bot = commands.Bot(command_prefix=PREFIX, intents=discord.Intents.all())
