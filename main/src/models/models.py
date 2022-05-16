@@ -1,4 +1,4 @@
-from mongoengine import *
+from mongoengine import Document, IntField, StringField
 
 
 class ClanStaffModel(Document):
