@@ -1,17 +1,17 @@
 import discord
 from discord import Option
 
-from base.funcs import check_member_on_voice, clan_text_channel_list
-from clan_staff_service.enum_close_list import EnumCloseList
+from base.funcs import is_member_in_voice, get_clan_channel_names
+from utils.close_enum import ClanCloseEnum
 from cogs.base import BaseCog
-from embeds.clan_events_mode.request_close_embed.embed_to_enemy_clan import RequestToEnemy
-from embeds.clan_events_mode.request_close_embed.enemy_accept_close import EnemyAcceptClose
-from embeds.def_embed import DefaultEmbed
+from embeds.clan_events_mode.clan_close.close import ClanCloseEmbed
+from embeds.clan_events_mode.clan_close.accepted_close import AcceptedClanCloseEmbed
+from embeds.base import DefaultEmbed
 from main import client
-from systems.clan_staff.cross_event_request_system import cross_event_system
+from systems.cross_events.cross_event_system import cross_event_system
 
 
-class CrossCloseReuqest(BaseCog):
+class CrossCloseRequest(BaseCog):
     def __init__(self, client):
         super().__init__(client)
         print("Cog 'clan close' connected!")
@@ -60,4 +60,4 @@ class CrossCloseReuqest(BaseCog):
 
 
 def setup(bot):
-    bot.add_cog(CrossCloseReuqest(bot))
+    bot.add_cog(CrossCloseRequest(bot))

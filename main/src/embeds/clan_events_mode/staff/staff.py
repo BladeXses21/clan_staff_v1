@@ -1,7 +1,7 @@
 from discord import Embed
 
 
-class StaffListEmbed(object):
+class StaffEmbed(object):
     def __init__(self, description, guild, user, icon):
         self._embed = Embed(
             description=f'{description}',

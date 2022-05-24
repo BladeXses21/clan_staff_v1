@@ -1,4 +1,4 @@
-from mongoengine import *
+from mongoengine import Document, IntField, StringField
 
 
 class ClanStaffModel(Document):
@@ -31,7 +31,7 @@ class RequestModel(Document):
     time_accept_request = IntField(min_value=0)
 
 
-class CrossRequstModel(Document):
+class CrossRequestModel(Document):
     guild_id = IntField(min_value=0)  # guild id
     message_id = IntField(min_value=0)  # response message id
     event_name = StringField()  # enum event dict

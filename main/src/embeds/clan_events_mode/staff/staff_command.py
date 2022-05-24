@@ -3,7 +3,7 @@ from discord import Embed, Colour
 from config import PREFIX
 
 
-class StaffCommandEmbed(object):
+class StaffCommandsEmbed(object):
     def __init__(self):
         self._embed = Embed(
             title='Clan Staff commands',

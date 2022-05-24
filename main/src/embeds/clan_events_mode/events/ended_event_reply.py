@@ -3,10 +3,13 @@ import time
 from discord import Embed, Colour
 
 
-class ReplyEventEnd(object):
+class EndedEventReplyEmbed(object):
     def __init__(self, event_name, event_mode, event_start_time):
         self._embed = Embed(
-            description=f'**Название ивента:**```{event_name}```\n**Ивентер:**```{event_mode}```\n**Время начала:**```{event_start_time}```\n**Время конца:**```<t:{int(time.time())}>```',
+            description=f'**Название ивента:**```{event_name}```\n'
+                        f'**Ивентер:**```{event_mode}```\n'
+                        f'**Время начала:**```{event_start_time}```\n'
+                        f'**Время конца:**```<t:{int(time.time())}>```',
             color=Colour(0x1FFF00)
         )
         self._embed.set_author(name='ивент был проведен, спасибо за участие',

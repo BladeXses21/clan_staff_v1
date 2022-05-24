@@ -1,10 +1,10 @@
 from pymongo import MongoClient
-from config import MongoToken
+from config import MONGO_TOKEN
 
 
 class DatabaseSystem(object):
     def __init__(self):
-        self.client = MongoClient(MongoToken)
+        self.client = MongoClient(MONGO_TOKEN)
         self._db = self.client.clan_staff_base
 
     @property
