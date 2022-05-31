@@ -2,7 +2,7 @@ import time
 import discord
 from discord.ext import commands, tasks
 
-from base.funcs import get_clan_stats
+from extensions.funcs import *
 from config import PREFIX, STATS_CHAT, HATORY_CATEGORY_NAME, TENDERLY_CATEGORY, META_CATEGORY
 from config import TENDERLY_CATEGORY_NAME, META_CATEGORY_NAME, TENDERLY_ID
 from config import META_ID, DARKNESS_ID, HATORY_ID, DARKNESS_CATEGORY_NAME
@@ -42,4 +42,4 @@ class ClanStats(BaseCog):
 
 def setup(bot):
     bot.add_cog(ClanStats(bot))
-    print("Cog 'voice check' connected!")
+    print("Cog 'clan stats check' connected!")

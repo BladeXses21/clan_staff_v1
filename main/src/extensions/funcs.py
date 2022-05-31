@@ -1,8 +1,12 @@
 import time
 from random import choice
-from discord import Member
 
+import discord
+from discord import Member
+from discord.ext import tasks
+from discord.ui import Select
 from config import DAY_IN_SECONDS
+from embeds.clan_events_mode.auction.trash_channel_embed import AuctionTrashEmbed
 from main import client
 from embeds.clan_events_mode.staff.staff import StaffEmbed, GuildListEmbed
 from systems.cross_events.cross_event_system import cross_event_system
@@ -13,10 +17,11 @@ def add_clan_staff_response(member: Member) -> str:
         'был пропущен(а) в рай!',
         'успешно добавлен(а) в список клан челиксов!',
         'теперь новый крутейший учасник clan staff!',
-        'был успешно добавлен, не упускай его из виду!',
+        'был успешно добавлен! Не упускай его из виду!',
         'назначен(а) самым милым участником clan staff',
         'этот супер пупс теперь в команде clan staff',
-        'успешно прибыл к нашей команде clan staff'
+        'успешно прибыл к нашей команде clan staff',
+        'добавлен в нашу колекцию клан ивентеров'
     )
     return f'***```{member.name}, {choice(response_list)}```***'
 
@@ -26,11 +31,12 @@ def remove_clan_staff_response(member: Member) -> str:
         'был изгнан из рая прямиком в ад',
         'успешно убран(а) из списка клан челиксов',
         'теперь не крутой участник clan staff',
-        'был успешно удален, грустно конечно',
+        'был успешно удален! Мы будет грустить без него(нет)',
         'теперь не является самым милым участником',
         'пупс был убран из clan staff',
         'успешно отплыл от нашей команды clan staff',
-        'был поддожен и случайно сгорел'
+        'был поддожен и случайно сгорел',
+        'был убран из нашей колекции'
     )
     return f'***```{member.name}, {choice(response_list)}```***'
 
@@ -147,3 +153,28 @@ async def get_guilds_list_async(interaction, ctx, clan_id, list_response, button
         view=button,
         delete_after=160
     )
+
+
+async def drop_down_menu(interaction):
+    clan_staff_options = []
+
+    for i in cross_event_system.enumeration_events_mode(interaction.guild.id):
+        member = interaction.guild.get_member(i['clan_staff_id'])
+        clan_staff_options.append(discord.SelectOption(label=i['clan_staff_id'], description=member.name, emoji='<a:_an:967471171480207420>'))
+
+    drop_menu = Select(options=clan_staff_options, placeholder='Выберите человека для отображения')
+
+    view = discord.ui.View(timeout=None)
+    view.add_item(drop_menu)
+
+    return view
+
+
+@tasks.loop(minutes=60)
+async def send_trash_auction(ctx, role):
+    guild = ctx.guild
+    auction_channl_id = cross_event_system.get_auction_channel(guild.id)
+    trash_channel_id = cross_event_system.get_trash_channel(guild.id)
+    get_auction_channel = client.get_channel(auction_channl_id)
+    get_trash_channel = client.get_channel(trash_channel_id)
+    await get_trash_channel.send(embed=AuctionTrashEmbed(get_auction_channel, role).embed)

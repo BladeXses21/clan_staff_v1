@@ -15,6 +15,7 @@ class StaffCommandsEmbed(object):
         self._embed.add_field(name='list', value='***```Просмотреть список clan staff```***')
         self._embed.add_field(name='clear', value='***```Очистка статистики clan staff```***')
         self._embed.add_field(name='/event request', value='***```Запрос ивента в клан```***')
+        self._embed.add_field(name='/staff profile', value='***```Профиль участников clan staff```***')
 
     @property
     def embed(self):
