@@ -1,0 +1,1266 @@
+2022-05-21 19:48:38 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:48:56 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:49:01 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:49:19 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:49:21 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:49:29 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:50:13 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:50:30 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:52:10 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:52:35 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:52:41 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:52:48 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:53:14 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:53:31 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:56:37 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:56:47 [asyncio] [ERROR]: Task was destroyed but it is pending!
+task: <Task pending name='Task-9' coro=<ConnectionState._delay_ready() running at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py:560> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\tasks.py:714]>
+2022-05-21 19:56:47 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Client.run.<locals>.runner() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py:692> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 694, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 658, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 553, in connect
+    await self.ws.poll_event()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 591, in poll_event
+    await self.received_message(msg.data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 454, in received_message
+    msg = utils._from_json(msg)
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+KeyboardInterrupt
+2022-05-21 19:56:50 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:56:55 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 19:57:09 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-21 19:57:13 [clan_staff] [INFO]: READY
+2022-05-21 20:16:28 [clan_staff] [INFO]: sanriogirlfriend#0002 вызвал комаду /event request Покер 6 poker
+2022-05-21 21:04:57 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1001
+2022-05-21 21:05:01 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1100
+2022-05-21 21:05:06 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1001
+2022-05-21 21:05:12 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 900
+2022-05-21 21:05:15 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1200
+2022-05-21 21:05:18 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1299
+2022-05-21 21:05:27 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1300
+2022-05-21 21:05:29 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 13001
+2022-05-21 21:05:30 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 13001
+2022-05-21 21:05:32 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1301
+2022-05-21 21:05:42 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1401
+2022-05-21 21:05:45 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1402
+2022-05-21 21:05:55 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1902
+2022-05-21 21:06:01 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-21 21:17:20 [clan_staff] [INFO]: Eliot#1488 вызвал комаду /event request Codenames 8 тянку ведущего
+2022-05-21 21:18:13 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-21 21:19:03 [clan_staff] [INFO]: Eliot#1488 вызвал комаду /event request Codenames 8 похуй на гендер
+2022-05-21 21:32:57 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-21 21:40:16 [clan_staff] [INFO]: Eliot#1488 вызвал комаду /event request Codenames 6 проведите кодик
+2022-05-21 22:22:09 [clan_staff] [INFO]: Eliot#1488 вызвал комаду /event request Своя игра 7 zxc
+2022-05-21 23:35:37 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-21 23:36:17 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-21 23:58:10 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-21 23:58:24 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-21 23:58:28 [clan_staff] [INFO]: READY
+2022-05-21 23:59:02 [clan_staff] [INFO]: clan
+2022-05-22 00:00:00 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-22 00:01:02 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-22 00:01:16 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-22 00:01:20 [clan_staff] [INFO]: READY
+2022-05-22 02:26:18 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-22 04:30:38 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-22 05:25:17 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 2100
+2022-05-22 05:25:59 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-22 05:26:24 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-22 05:26:38 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-22 05:26:42 [clan_staff] [INFO]: READY
+2022-05-22 05:27:49 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 2100
+2022-05-22 05:31:05 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: !clan auction 970373675243167795 2000 конец аукциона 17:00 22/06/2022
+2022-05-22 05:31:22 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-22 05:31:22 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-22 05:31:40 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 2100
+2022-05-22 05:32:27 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: !clan auction 970373675243167795 2000 конец аукциона 17:00 22/05/2022
+2022-05-22 05:32:31 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 2100
+2022-05-22 05:32:31 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 2100
+2022-05-22 05:32:55 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-22 05:32:55 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-22 05:33:28 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-22 05:33:41 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-22 05:33:45 [clan_staff] [INFO]: READY
+2022-05-22 05:33:49 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 2100
+2022-05-22 10:08:05 [clan_staff] [INFO]: auction msg: BABY ♡#8276 :: 2101
+2022-05-22 10:32:47 [clan_staff] [INFO]: auction msg: пирега сират#3565 :: 2222
+2022-05-22 13:34:15 [clan_staff] [INFO]: † F L O R E N S †#6969 вызвал комаду /event request Просмотр чего-либо 8 Elizabeth ll
+2022-05-22 14:44:00 [clan_staff] [INFO]: auction msg: HAKALOVAK#2220 :: Хуй знает
+2022-05-22 16:25:27 [clan_staff] [INFO]: auction msg: ! dixvii#6666 :: 2223
+2022-05-22 19:01:11 [clan_staff] [INFO]: Twentyfirst#4733 вызвал комаду /event request Мультипазлы 3 абоба
+2022-05-22 19:03:10 [clan_staff] [INFO]: Twentyfirst#4733 вызвал комаду /event request Мультипазлы 3 монохуена
+2022-05-22 19:46:11 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-22 20:07:33 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-22 20:59:14 [clan_staff] [INFO]: Lesss_ use command /staff profile
+2022-05-22 20:59:47 [clan_staff] [INFO]: Lesss_#0715 изменил время ивентов 454755536269869056 на 3320
+2022-05-22 21:02:07 [clan_staff] [INFO]: Lesss_ use command /staff profile
+2022-05-22 21:03:00 [clan_staff] [INFO]: Lesss_#0715 изменил время ивентов 454755536269869056 на 600
+2022-05-22 21:08:30 [clan_staff] [INFO]: Lesss_ use command /staff profile
+2022-05-22 21:08:48 [clan_staff] [INFO]: Lesss_#0715 изменил время ивентов 454755536269869056 на -140
+2022-05-22 21:09:52 [clan_staff] [INFO]: Lesss_ use command /staff profile
+2022-05-22 21:10:09 [clan_staff] [INFO]: Lesss_#0715 изменил время ивентов 454755536269869056 на -60
+2022-05-22 21:10:16 [clan_staff] [INFO]: Lesss_#0715 изменил ивенты 454755536269869056 на 1
+2022-05-22 21:11:21 [clan_staff] [INFO]: Люцио#1111 вызвал комаду /event request Просмотр чего-либо 6 лия пусть проведет
+2022-05-22 21:11:31 [clan_staff] [INFO]: piski<3#9534 вызвал комаду /event request Просмотр чего-либо 5 мама
+2022-05-22 22:17:34 [clan_staff] [INFO]: takeshi#0604 вызвал комаду /event request Valorant PUB, Valorant 2x2 4 marinochka
+2022-05-22 22:52:05 [clan_staff] [INFO]: tendiee#0101 вызвал комаду /event request Просмотр чего-либо 4 Elizabeth ll#2310
+2022-05-22 23:12:48 [clan_staff] [INFO]: sofiasaratova use command /staff profile
+2022-05-22 23:14:10 [clan_staff] [INFO]: sofiasaratova use command /staff profile
+2022-05-23 01:26:27 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-23 01:50:08 [discord.client] [ERROR]: Attempting a reconnect in 0.97s
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\aiohttp\connector.py", line 1154, in _create_direct_connection
+    hosts = await asyncio.shield(host_resolved)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\aiohttp\connector.py", line 880, in _resolve_host
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\aiohttp\resolver.py", line 33, in resolve
+    infos = await self._loop.getaddrinfo(
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 855, in getaddrinfo
+    return await self.run_in_executor(
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11002] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 550, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\tasks.py", line 445, in wait_for
+    return fut.result()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 329, in from_client
+    gateway = gateway or await client.http.get_gateway()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\http.py", line 2482, in get_gateway
+    data = await self.request(Route("GET", "/gateway"))
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\http.py", line 284, in request
+    async with self.__session.request(method, url, **kwargs) as response:
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\aiohttp\client.py", line 1138, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\aiohttp\client.py", line 535, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\aiohttp\connector.py", line 542, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\aiohttp\connector.py", line 907, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\aiohttp\connector.py", line 1166, in _create_direct_connection
+    raise ClientConnectorError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host discord.com:443 ssl:default [getaddrinfo failed]
+2022-05-23 01:50:29 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-23 01:50:44 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-23 01:50:49 [clan_staff] [INFO]: READY
+2022-05-23 01:51:34 [clan_staff] [INFO]: marili#5109 вызвал комаду /event request OSU 5 qwe
+2022-05-23 01:52:03 [discord.gateway] [WARNING]: Shard ID None heartbeat blocked for more than 10 seconds.
+Loop thread traceback (most recent call last):
+  File "C:\Users\artur\clan_staff_v1\main\src\main.py", line 20, in <module>
+    client.load_extension(f"cogs.{filename[:-3]}")
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\cog.py", line 783, in load_extension
+    self._load_from_module_spec(spec, name)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\cog.py", line 711, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan.py", line 12, in <module>
+    from main import client
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\artur\clan_staff_v1\main\src\main.py", line 22, in <module>
+    client.run(TOKEN)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 382, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\bot.py", line 1150, in on_interaction
+    await self.process_application_commands(interaction)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\bot.py", line 837, in process_application_commands
+    await self.invoke_application_command(ctx)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\bot.py", line 1098, in invoke_application_command
+    await ctx.command.invoke(ctx)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\commands\core.py", line 331, in invoke
+    await injected(ctx)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\commands\core.py", line 122, in wrapped
+    ret = await coro(arg)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\commands\core.py", line 1091, in _invoke
+    await command.invoke(ctx)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\commands\core.py", line 331, in invoke
+    await injected(ctx)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\commands\core.py", line 122, in wrapped
+    ret = await coro(arg)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\commands\core.py", line 825, in _invoke
+    await self.callback(self.cog, ctx, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\cross_event_request.py", line 274, in request
+    channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_cross_guild(guild.id)
+  File "C:\Users\artur\clan_staff_v1\main\src\systems\cross_events\cross_event_system.py", line 153, in get_cross_guild
+    res = self.cross_guild_collection.find_one(cgm.to_mongo())
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\pymongo\collection.py", line 1419, in find_one
+    for result in cursor.limit(-1):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\pymongo\cursor.py", line 1248, in next
+    if len(self.__data) or self._refresh():
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\pymongo\cursor.py", line 1139, in _refresh
+    self.__session = self.__collection.database.client._ensure_session()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\pymongo\mongo_client.py", line 1663, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\pymongo\mongo_client.py", line 1608, in __start_session
+    self._topology._check_implicit_session_support()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\pymongo\topology.py", line 519, in _check_implicit_session_support
+    self._check_session_support()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\pymongo\topology.py", line 535, in _check_session_support
+    self._select_servers_loop(
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\pymongo\topology.py", line 239, in _select_servers_loop
+    self._condition.wait(common.MIN_HEARTBEAT_INTERVAL)
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\threading.py", line 324, in wait
+    gotit = waiter.acquire(True, timeout)
+
+2022-05-23 01:52:19 [clan_staff] [INFO]: marili use command /staff profile
+2022-05-23 01:53:56 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-23 01:54:10 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-23 01:54:14 [clan_staff] [INFO]: READY
+2022-05-23 02:58:27 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-23 03:08:53 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-23 03:09:07 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-23 03:09:12 [clan_staff] [INFO]: READY
+2022-05-23 03:09:30 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-23 03:09:44 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-23 03:10:26 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-23 03:10:40 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-23 03:10:46 [clan_staff] [INFO]: READY
+2022-05-23 03:10:48 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-23 03:10:56 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-23 03:13:35 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-23 03:13:49 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-23 03:13:55 [clan_staff] [INFO]: READY
+2022-05-23 03:13:56 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-23 03:14:21 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-23 05:04:20 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 4100
+2022-05-23 05:08:08 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-23 05:54:44 [clan_staff] [INFO]: auction msg: k1wyzixx.#6565 :: 4200
+2022-05-23 05:57:04 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 4300
+2022-05-23 06:08:11 [clan_staff] [INFO]: auction msg: k1wyzixx.#6565 :: 4800
+2022-05-23 06:53:22 [clan_staff] [INFO]: auction msg: Elizabeth ll#2310 :: 4810
+2022-05-23 07:24:23 [clan_staff] [INFO]: auction msg: tendiee#0101 :: 4900
+2022-05-23 08:00:10 [clan_staff] [INFO]: auction msg: _TheDarkSoldier_#2869 :: 5000
+2022-05-23 08:36:41 [clan_staff] [INFO]: auction msg: Elizabeth ll#2310 :: 5100
+2022-05-23 09:01:55 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 7000
+2022-05-23 09:07:29 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 5400
+2022-05-23 09:24:41 [clan_staff] [INFO]: auction msg: забавный#1111 :: 5900
+2022-05-23 09:25:32 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 6300
+2022-05-23 09:28:42 [clan_staff] [INFO]: auction msg: -Мейтен#0482 :: 6500
+2022-05-23 09:30:41 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 6900
+2022-05-23 09:35:02 [clan_staff] [INFO]: auction msg: -Мейтен#0482 :: 7000
+2022-05-23 09:35:54 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 7400
+2022-05-23 09:40:08 [clan_staff] [INFO]: auction msg: -Мейтен#0482 :: 7700
+2022-05-23 09:42:29 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 8200
+2022-05-23 09:45:25 [clan_staff] [INFO]: auction msg: -Мейтен#0482 :: 8400
+2022-05-23 09:47:28 [clan_staff] [INFO]: auction msg: BogRatiOne#1941 :: 8500
+2022-05-23 09:49:01 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 9000
+2022-05-23 09:52:18 [clan_staff] [INFO]: auction msg: забавный#1111 :: 9500
+2022-05-23 09:54:19 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 10000
+2022-05-23 09:59:53 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 10100
+2022-05-23 10:00:22 [clan_staff] [INFO]: auction msg: забавный#1111 :: 10600
+2022-05-23 10:13:28 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 11100
+2022-05-23 10:48:23 [clan_staff] [INFO]: auction msg: BogRatiOne#1941 :: 11200
+2022-05-23 11:00:24 [clan_staff] [INFO]: auction msg: забавный#1111 :: 11700
+2022-05-23 11:00:56 [clan_staff] [INFO]: auction msg: piski<3#9534 :: 11701
+2022-05-23 11:07:03 [clan_staff] [INFO]: auction msg: tendiee#0101 :: 11800
+2022-05-23 11:07:59 [clan_staff] [INFO]: auction msg: BogRatiOne#1941 :: 11900
+2022-05-23 11:19:17 [clan_staff] [INFO]: auction msg: забавный#1111 :: 12400
+2022-05-23 11:29:04 [clan_staff] [INFO]: auction msg: Festaria#4703 :: 12900
+2022-05-23 11:29:10 [clan_staff] [INFO]: auction msg: забавный#1111 :: 13400
+2022-05-23 11:31:27 [clan_staff] [INFO]: auction msg: piski<3#9534 :: 13600
+2022-05-23 11:31:42 [clan_staff] [INFO]: auction msg: BogRatiOne#1941 :: 13700
+2022-05-23 11:34:23 [clan_staff] [INFO]: auction msg: Festaria#4703 :: 14200
+2022-05-23 11:34:46 [clan_staff] [INFO]: auction msg: забавный#1111 :: 14700
+2022-05-23 11:40:20 [clan_staff] [INFO]: auction msg: pussy trade#1111 :: 15200
+2022-05-23 11:40:53 [clan_staff] [INFO]: auction msg: Festaria#4703 :: 15700
+2022-05-23 11:41:17 [clan_staff] [INFO]: auction msg: забавный#1111 :: 16200
+2022-05-23 11:49:03 [clan_staff] [INFO]: auction msg: Festaria#4703 :: 16700
+2022-05-23 11:49:12 [clan_staff] [INFO]: auction msg: забавный#1111 :: 17200
+2022-05-23 11:53:16 [clan_staff] [INFO]: auction msg: pussy trade#1111 :: 17700
+2022-05-23 11:55:18 [clan_staff] [INFO]: auction msg: Festaria#4703 :: 18200
+2022-05-23 11:55:23 [clan_staff] [INFO]: auction msg: забавный#1111 :: 18700
+2022-05-23 13:09:01 [clan_staff] [INFO]: auction msg: BogRatiOne#1941 :: 19200
+2022-05-23 13:09:48 [clan_staff] [INFO]: auction msg: Elizabeth ll#2310 :: 19500
+2022-05-23 13:14:14 [clan_staff] [INFO]: auction msg: BogRatiOne#1941 :: 19999
+2022-05-23 13:19:39 [clan_staff] [INFO]: auction msg: Elizabeth ll#2310 :: 20100
+2022-05-23 13:20:51 [clan_staff] [INFO]: auction msg: marinochka#6079 :: 20600
+2022-05-23 13:22:52 [clan_staff] [INFO]: auction msg: Wh........#0581 :: 22222
+2022-05-23 13:25:41 [clan_staff] [INFO]: auction msg: BogRatiOne#1941 :: 20666
+2022-05-23 13:33:14 [clan_staff] [INFO]: auction msg: tendiee#0101 :: 21000
+2022-05-23 13:45:43 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 21500
+2022-05-23 13:52:08 [clan_staff] [INFO]: auction msg: BogRatiOne#1941 :: 21777
+2022-05-23 13:53:17 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 22000
+2022-05-23 14:47:29 [clan_staff] [INFO]: auction msg: marinochka#6079 :: 22500
+2022-05-23 15:44:01 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 23000
+2022-05-23 18:08:05 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-23 20:41:15 [clan_staff] [INFO]: Dark Angel ༒#1088 вызвал комаду /event request Просмотр чего-либо 6 takeshi
+2022-05-24 01:21:19 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request Мультипазлы 4 включая ивентёра
+2022-05-24 01:29:58 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request Счастливые числа 4 1234
+2022-05-24 01:51:15 [clan_staff] [INFO]: sanriogirlfriend#0002 вызвал комаду /event request Мультипазлы 4 монополия
+2022-05-24 02:21:52 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 05:29:45 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 05:30:06 [clan_staff] [INFO]: BladeXses#1616 изменил бабочки 450361269128790026 на 100
+2022-05-24 10:02:28 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-24 10:04:20 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:04:29 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:05:33 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:05:52 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:06:07 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:06:07 [clan_staff] [INFO]: READY
+2022-05-24 10:06:39 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:06:53 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:06:57 [clan_staff] [INFO]: READY
+2022-05-24 10:08:04 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:08:18 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:08:22 [clan_staff] [INFO]: READY
+2022-05-24 10:08:41 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:08:56 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:09:00 [clan_staff] [INFO]: READY
+2022-05-24 10:09:58 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:10:01 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:10:15 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:10:19 [clan_staff] [INFO]: READY
+2022-05-24 10:11:14 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:11:28 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:11:33 [clan_staff] [INFO]: READY
+2022-05-24 10:12:47 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:13:01 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:13:06 [clan_staff] [INFO]: READY
+2022-05-24 10:14:01 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:14:14 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:14:19 [clan_staff] [INFO]: READY
+2022-05-24 10:14:44 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:14:55 [asyncio] [ERROR]: Task was destroyed but it is pending!
+task: <Task pending name='Task-9' coro=<ConnectionState._delay_ready() running at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py:560> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\tasks.py:714]>
+2022-05-24 10:14:55 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Client.run.<locals>.runner() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py:692> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 694, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 658, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 553, in connect
+    await self.ws.poll_event()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 591, in poll_event
+    await self.received_message(msg.data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 541, in received_message
+    func(data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1340, in parse_guild_members_chunk
+    self.process_chunk_requests(guild_id, data.get("nonce"), members, complete)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 284, in process_chunk_requests
+    request.add_members(members)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 124, in add_members
+    guild._add_member(member)
+KeyboardInterrupt
+2022-05-24 10:14:56 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:15:22 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:15:35 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:15:40 [clan_staff] [INFO]: READY
+2022-05-24 10:16:02 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:16:16 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:16:20 [clan_staff] [INFO]: READY
+2022-05-24 10:20:11 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:20:19 [asyncio] [ERROR]: Task was destroyed but it is pending!
+task: <Task pending name='Task-9' coro=<ConnectionState._delay_ready() running at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py:560> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\tasks.py:714]>
+2022-05-24 10:20:19 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Client.run.<locals>.runner() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py:692> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 694, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 658, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 553, in connect
+    await self.ws.poll_event()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 591, in poll_event
+    await self.received_message(msg.data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 541, in received_message
+    func(data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1193, in parse_guild_create
+    guild = self._get_create_guild(data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
+    guild._from_data(data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\guild.py", line 517, in _from_data
+    member = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 310, in __init__
+    self._roles: utils.SnowflakeList = utils.SnowflakeList(map(int, data["roles"]))
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\utils.py", line 657, in __new__
+    return array.array.__new__(cls, "Q", data if is_sorted else sorted(data))  # type: ignore
+KeyboardInterrupt
+2022-05-24 10:20:20 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:20:34 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:20:39 [clan_staff] [INFO]: READY
+2022-05-24 10:21:50 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:22:05 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:22:10 [clan_staff] [INFO]: READY
+2022-05-24 10:23:15 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:23:29 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:23:35 [clan_staff] [INFO]: READY
+2022-05-24 10:23:45 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-24 10:23:54 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1100
+2022-05-24 10:23:57 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1500
+2022-05-24 10:23:59 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 2000
+2022-05-24 10:24:01 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-24 10:29:04 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:29:18 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:29:23 [clan_staff] [INFO]: READY
+2022-05-24 10:31:18 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-24 10:31:23 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:31:37 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:31:43 [clan_staff] [INFO]: READY
+2022-05-24 10:32:23 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:32:37 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:32:42 [clan_staff] [INFO]: READY
+2022-05-24 10:33:56 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:34:10 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:34:14 [clan_staff] [INFO]: READY
+2022-05-24 10:34:48 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1100
+2022-05-24 10:36:21 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:36:35 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:36:40 [clan_staff] [INFO]: READY
+2022-05-24 10:37:16 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1100
+2022-05-24 10:37:56 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:38:10 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:38:15 [clan_staff] [INFO]: READY
+2022-05-24 10:38:23 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1500
+2022-05-24 10:38:31 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1600
+2022-05-24 10:39:30 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:39:35 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:39:49 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:39:55 [clan_staff] [INFO]: READY
+2022-05-24 10:40:01 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:40:03 [discord.http] [WARNING]: We are being rate limited. Retrying in 28.31 seconds. Handled under the bucket "None:None:/applications/{application_id}/commands"
+2022-05-24 10:40:15 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:40:20 [clan_staff] [INFO]: READY
+2022-05-24 10:40:40 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1000
+2022-05-24 10:40:41 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 12000
+2022-05-24 10:40:43 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 1200
+2022-05-24 10:40:49 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-24 10:41:05 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:41:19 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:41:25 [clan_staff] [INFO]: READY
+2022-05-24 10:41:37 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-24 10:42:10 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:42:24 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:42:29 [clan_staff] [INFO]: READY
+2022-05-24 10:44:14 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 10:44:28 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 10:44:33 [clan_staff] [INFO]: READY
+2022-05-24 11:30:46 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 11:42:02 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-24 11:54:22 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 11:54:37 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 11:54:41 [clan_staff] [INFO]: READY
+2022-05-24 11:56:53 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 11:59:22 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:05:22 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:06:22 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:28:15 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:28:31 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 12:28:46 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 12:28:51 [clan_staff] [INFO]: READY
+2022-05-24 12:29:05 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:29:17 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:29:35 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:30:15 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 12:30:29 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 12:30:34 [clan_staff] [INFO]: READY
+2022-05-24 12:30:44 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:32:51 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:33:43 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 12:33:57 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 12:34:02 [clan_staff] [INFO]: READY
+2022-05-24 12:36:09 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:36:58 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 12:37:12 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 12:37:16 [clan_staff] [INFO]: READY
+2022-05-24 12:37:30 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:38:58 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 12:39:12 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 12:39:17 [clan_staff] [INFO]: READY
+2022-05-24 12:39:23 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:40:36 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 12:40:50 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 12:40:55 [clan_staff] [INFO]: READY
+2022-05-24 12:41:14 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:41:42 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Client.run.<locals>.runner() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py:692> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 694, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 658, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 553, in connect
+    await self.ws.poll_event()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 591, in poll_event
+    await self.received_message(msg.data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 450, in received_message
+    msg = msg.decode("utf-8")
+KeyboardInterrupt
+2022-05-24 12:41:43 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 12:41:57 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 12:42:03 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:42:03 [clan_staff] [INFO]: READY
+2022-05-24 12:42:39 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 12:42:53 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 12:42:58 [clan_staff] [INFO]: READY
+2022-05-24 12:58:02 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 12:58:14 [clan_staff] [INFO]: BladeXses#1616 изменил бабочки 758719901878976514 на 1
+2022-05-24 13:00:01 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 13:00:15 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 13:00:21 [clan_staff] [INFO]: READY
+2022-05-24 13:01:32 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 13:11:59 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 13:12:14 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 13:12:19 [clan_staff] [INFO]: READY
+2022-05-24 13:13:27 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 13:19:12 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 13:25:00 [clan_staff] [INFO]: BladeXses#1616 изменил бабочки 758719901878976514 на 1
+2022-05-24 13:25:18 [clan_staff] [INFO]: BladeXses#1616 изменил бабочки 758719901878976514 на -1
+2022-05-24 14:17:07 [clan_staff] [INFO]: sofiasaratova#0303 вызвал комаду /event request Dota 2 PUB, Dota 2 Кастомки, DOTA 2 2x2 3 люблю вас
+2022-05-24 14:18:42 [clan_staff] [INFO]: sofiasaratova#0303 вызвал комаду /event request Brawl Stars 2 е
+2022-05-24 19:44:44 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 19:44:50 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 894663985650081864.
+2022-05-24 19:44:55 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 822354240713261068.
+2022-05-24 19:45:00 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 934073000117026866.
+2022-05-24 19:45:00 [clan_staff] [INFO]: READY
+2022-05-24 20:02:22 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 20:03:43 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 20:03:58 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 20:04:05 [clan_staff] [INFO]: READY
+2022-05-24 20:04:50 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 20:05:05 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 20:05:11 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 934073000117026866.
+2022-05-24 20:05:13 [clan_staff] [INFO]: READY
+2022-05-24 20:16:04 [clan_staff] [INFO]: Lesss_ use command /staff profile
+2022-05-24 20:16:35 [clan_staff] [INFO]: Lesss_#0715 изменил бабочки 350057334690545664 на 115
+2022-05-24 20:17:00 [clan_staff] [INFO]: Lesss_#0715 изменил бабочки 758719901878976514 на 110
+2022-05-24 20:17:28 [clan_staff] [INFO]: Lesss_#0715 изменил бабочки 464858747861336074 на 20
+2022-05-24 20:17:50 [clan_staff] [INFO]: Lesss_#0715 изменил бабочки 692472578102525973 на 50
+2022-05-24 21:05:00 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 21:07:10 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 21:07:25 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 21:07:32 [clan_staff] [INFO]: READY
+2022-05-24 21:07:33 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 21:08:05 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 21:08:20 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 21:08:25 [clan_staff] [INFO]: READY
+2022-05-24 21:08:45 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 21:12:19 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 21:19:27 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 21:19:35 [clan_staff] [INFO]: READY
+2022-05-24 21:41:29 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-24 21:41:44 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-24 21:41:49 [clan_staff] [INFO]: READY
+2022-05-24 21:46:37 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-24 22:29:49 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request Кубички 4 текаши
+2022-05-24 22:31:20 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request Монополия 4 p
+2022-05-24 22:42:35 [clan_staff] [INFO]: мурзость#9175 вызвал комаду /event request Просмотр чего-либо 3 Er4en🌙#3349
+2022-05-24 23:11:49 [clan_staff] [INFO]: BUKIOLO#7618 вызвал комаду /event request Dota 2 PUB, Dota 2 Кастомки 3 ивентёр-Myrki
+2022-05-24 23:50:47 [clan_staff] [INFO]: Elizabeth ll use command /staff profile
+2022-05-25 00:33:40 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-25 04:03:31 [clan_staff] [INFO]: sanriogirlfriend#0002 вызвал комаду /event request Дурак 2 slither.io
+2022-05-25 09:17:20 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-25 18:42:58 [clan_staff] [INFO]: HoneyBadger#4925 вызвал комаду /event request Шпион 10 Valorant Begginers CP
+2022-05-25 21:15:22 [clan_staff] [INFO]: kak inache?#5964 вызвал комаду /event request Сломанный телефон 7 kkkkkkkk
+2022-05-25 23:46:37 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-25 23:48:25 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-25 23:49:24 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-25 23:49:51 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-25 23:50:06 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-25 23:50:13 [clan_staff] [INFO]: READY
+2022-05-26 00:10:45 [clan_staff] [INFO]: sanriogirlfriend#0002 вызвал комаду /event request Slither.io 3 slither.io
+2022-05-26 04:57:49 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-26 05:03:41 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: !clan auction 963379139463741450 4000 конец аукциона 19:00 26/05/2022
+2022-05-26 05:03:41 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-26125' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=Forbidden('403 Forbidden (error code: 50013): Missing Permissions')>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 178, in send_trash_auction
+    await get_trash_channel.send(embed=AuctionTrashEmbed(get_auction_channel, role).embed)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\abc.py", line 1510, in send
+    data = await state.http.send_message(
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\http.py", line 353, in request
+    raise Forbidden(response, data)
+discord.errors.Forbidden: 403 Forbidden (error code: 50013): Missing Permissions
+2022-05-26 05:04:55 [clan_staff] [INFO]: auction msg: забавный#1111 :: 4444
+2022-05-26 05:04:55 [clan_staff] [INFO]: auction msg: забавный#1111 :: 4444
+2022-05-26 05:06:03 [clan_staff] [INFO]: auction msg: neformalD#0001 :: 4555
+2022-05-26 05:06:03 [clan_staff] [INFO]: auction msg: neformalD#0001 :: 4555
+2022-05-26 05:07:32 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-26 05:07:32 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-26 05:07:50 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-26 05:08:05 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-26 05:08:10 [clan_staff] [INFO]: READY
+2022-05-26 05:08:36 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 4100
+2022-05-26 05:09:03 [clan_staff] [INFO]: auction msg: BogRatiOne#1941 :: 4444
+2022-05-26 05:22:12 [clan_staff] [INFO]: auction msg: забавный#1111 :: 4555
+2022-05-26 06:47:07 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 4666
+2022-05-26 07:59:24 [clan_staff] [ERROR]: 𓆩.𓆪#0001 | !clan me
+2022-05-26 07:59:24 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-26 07:59:37 [clan_staff] [ERROR]: keen#1000 | !clan me
+2022-05-26 07:59:37 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-26 07:59:53 [clan_staff] [ERROR]: Coffi#0155 | !clan me
+2022-05-26 07:59:53 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-26 08:01:13 [clan_staff] [INFO]: auction msg: Elizabeth ll#2310 :: 4777
+2022-05-26 08:11:26 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 100000
+2022-05-26 08:14:37 [clan_staff] [INFO]: auction msg: shigetsu#0001 :: 5000
+2022-05-26 09:09:31 [clan_staff] [INFO]: auction msg: Nicky.#7777 :: ахуеть
+2022-05-26 09:09:53 [clan_staff] [INFO]: Dvine#6644 вызвал комаду /event request Dota 2 PUB, Dota 2 Кастомки 10 А это работает ?
+2022-05-26 10:09:16 [clan_staff] [INFO]: auction msg: .20#2020 :: 5100
+2022-05-26 11:18:43 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 5600
+2022-05-26 12:11:47 [clan_staff] [INFO]: auction msg: bl1nych#3930 :: 10000
+2022-05-26 12:17:09 [clan_staff] [INFO]: hidden_S3S#3256 вызвал комаду /event request Among us 100 123
+2022-05-26 12:32:48 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 5700
+2022-05-26 13:08:14 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 6000
+2022-05-26 13:08:57 [clan_staff] [INFO]: auction msg: OMEGA#6969 :: 6001
+2022-05-26 13:38:53 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 6100
+2022-05-26 13:39:30 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 6500
+2022-05-26 13:41:02 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 6600
+2022-05-26 13:43:10 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-26 13:43:26 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 7000
+2022-05-26 13:44:20 [clan_staff] [INFO]: auction msg: Шаурма ♡#0001 :: 7500
+2022-05-26 13:45:34 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 8000
+2022-05-26 13:46:53 [clan_staff] [INFO]: auction msg: Шаурма ♡#0001 :: 8100
+2022-05-26 13:47:41 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 8200
+2022-05-26 13:53:50 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 8300
+2022-05-26 13:55:05 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 8600
+2022-05-26 13:59:12 [clan_staff] [INFO]: auction msg: Шаурма ♡#0001 :: 8700
+2022-05-26 13:59:35 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 9000
+2022-05-26 14:09:20 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 9600
+2022-05-26 14:09:26 [clan_staff] [INFO]: auction msg: Svytoedoto#8641 :: 9500
+2022-05-26 14:12:08 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 9600
+2022-05-26 14:12:14 [clan_staff] [INFO]: auction msg: Svytoedoto#8641 :: 9700
+2022-05-26 14:39:01 [clan_staff] [ERROR]: марик<3#4134 | !clan leave
+2022-05-26 14:39:01 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-26 14:43:48 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 10000
+2022-05-26 14:48:30 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 10100
+2022-05-26 14:50:34 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 10600
+2022-05-26 15:03:38 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 10700
+2022-05-26 15:03:55 [clan_staff] [INFO]: auction msg: Svytoedoto#8641 :: 11000
+2022-05-26 15:05:49 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 11500
+2022-05-26 15:16:08 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 12000
+2022-05-26 15:20:18 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 12500
+2022-05-26 15:24:19 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 12600
+2022-05-26 15:28:11 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 13000
+2022-05-26 15:36:59 [clan_staff] [INFO]: auction msg: Svytoedoto#8641 :: 13500
+2022-05-26 15:37:06 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 14000
+2022-05-26 16:09:17 [clan_staff] [INFO]: auction msg: onii#4442 :: илюха
+2022-05-26 16:11:05 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-26 16:11:05 [clan_staff] [INFO]: READY
+2022-05-26 16:12:06 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 33.7s behind.
+2022-05-26 16:12:25 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 11.4s behind.
+2022-05-26 16:39:04 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 14100
+2022-05-26 16:40:18 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 14200
+2022-05-26 16:45:29 [clan_staff] [INFO]: auction msg: Психолог🤝#2162 :: 14300
+2022-05-26 16:45:40 [clan_staff] [INFO]: auction msg: RAMAODIN#4722 :: 14500
+2022-05-26 16:53:02 [clan_staff] [ERROR]: dreamer#0829 | !clan profile
+2022-05-26 16:53:02 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-26 17:00:20 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-26 17:00:26 [clan_staff] [INFO]: READY
+2022-05-26 17:22:32 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-26 17:22:32 [clan_staff] [INFO]: READY
+2022-05-26 17:23:29 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 35.3s behind.
+2022-05-26 17:23:48 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 12.7s behind.
+2022-05-26 17:34:05 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-26 17:34:05 [clan_staff] [INFO]: READY
+2022-05-26 17:35:05 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 32.9s behind.
+2022-05-26 17:50:55 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-26 19:02:01 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-26 19:25:58 [clan_staff] [ERROR]: мята#0403 | !clan leave
+2022-05-26 19:25:58 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-26 20:45:11 [clan_staff] [INFO]: sakuta musaki#3146 вызвал комаду /event request Дурак 6 elizabeth
+2022-05-26 21:25:42 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-26 21:32:41 [clan_staff] [INFO]: sakuta musaki#3146 вызвал комаду /event request Крокодил 6 elizabeth
+2022-05-26 21:58:43 [clan_staff] [INFO]: sakuta musaki#3146 вызвал комаду /event request Сломанный телефон 7 elizabeth
+2022-05-26 22:50:49 [clan_staff] [INFO]: sakuta musaki#3146 вызвал комаду /event request ТикТок 5 elizabeth
+2022-05-26 22:52:41 [clan_staff] [ERROR]: sakuta musaki#3146 | !staff list
+2022-05-26 22:52:41 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-26 22:55:07 [clan_staff] [INFO]: BUKIOLO#7618 вызвал комаду /event request Dota 2 PUB, Dota 2 Кастомки 5 инвентёр-myrki
+2022-05-26 22:58:45 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request CS:GO PUB 4 bedolaga
+2022-05-26 22:59:10 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request CS:GO PUB 47 bedolaga
+2022-05-26 22:59:21 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request Монополия 4 bedolaga
+2022-05-26 23:20:10 [clan_staff] [ERROR]: Съел суп#9935 | !clan
+2022-05-26 23:20:10 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-26 23:24:08 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request Монополия 3 bedolaga
+2022-05-26 23:27:58 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request Монополия 4 bedolaga
+2022-05-26 23:31:15 [clan_staff] [INFO]: sofiasaratova#0303 вызвал комаду /event request Дурак 3 e
+2022-05-26 23:41:26 [clan_staff] [ERROR]: JaVi#4824 | !clan
+2022-05-26 23:41:26 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-27 00:21:08 [discord.http] [WARNING]: We are being rate limited. Retrying in 16.60 seconds. Handled under the bucket "954074045622673508:None:/channels/{channel_id}/messages/{message_id}"
+2022-05-27 05:34:43 [clan_staff] [ERROR]: bxnshee – 怒り#1596 | !clan ifo
+2022-05-27 05:34:43 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-27 05:35:08 [clan_staff] [ERROR]: bxnshee – 怒り#1596 | !clan
+2022-05-27 05:35:08 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-27 11:37:34 [clan_staff] [INFO]: † ＮＡＴＵＲＥ †#0928 вызвал комаду /event request Крокодил 6 Nicky.#7777
+2022-05-27 13:03:35 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 13:03:50 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 13:03:54 [clan_staff] [INFO]: READY
+2022-05-27 13:04:23 [clan_staff] [ERROR]: BladeXses#1616 | !clan send 1
+2022-05-27 13:04:23 [clan_staff] [ERROR]: The check functions for command clan send failed.
+2022-05-27 13:04:40 [clan_staff] [INFO]: clan
+2022-05-27 13:04:46 [clan_staff] [ERROR]: BladeXses#1616 | !clan send 123123
+2022-05-27 13:04:46 [clan_staff] [ERROR]: The check functions for command clan send failed.
+2022-05-27 13:05:47 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 13:06:01 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 13:06:05 [clan_staff] [INFO]: READY
+2022-05-27 13:06:18 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('123123',)
+2022-05-27 13:07:01 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('123',)
+2022-05-27 13:08:18 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 13:08:45 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 13:08:45 [clan_staff] [DEBUG]: send
+2022-05-27 13:08:54 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 13:08:55 [clan_staff] [DEBUG]: staff
+2022-05-27 13:09:16 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 13:09:29 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 13:09:37 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 13:09:51 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 13:09:55 [clan_staff] [INFO]: READY
+2022-05-27 13:13:40 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 13:13:54 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 13:13:58 [clan_staff] [INFO]: READY
+2022-05-27 15:46:18 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-27 15:46:47 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-27 15:49:22 [clan_staff] [INFO]: marili use command /staff profile
+2022-05-27 15:53:19 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-27 15:53:39 [clan_staff] [INFO]: лия<3 use command /staff profile
+2022-05-27 16:25:04 [clan_staff] [ERROR]: mazahist#3715 | !clan profile
+2022-05-27 16:25:04 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-27 16:25:46 [clan_staff] [ERROR]: mazahist#3715 | !clan profile 963236514584735754
+2022-05-27 16:25:46 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-27 16:26:12 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:26:27 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:26:32 [clan_staff] [INFO]: READY
+2022-05-27 16:27:02 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('<#978555425203060786>', '-', 'в', 'этом', 'канале', 'будет', 'проводится', 'аукцион')
+2022-05-27 16:27:36 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('<#978555425203060786>', '-', '```', '-', 'в', 'этом', 'канале', 'будет', 'проводится', 'аукцион```')
+2022-05-27 16:28:36 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('<@&887496800699830302>', '@Clan', 'Consigliere', 'Всем', 'приветик!!!!', 'Сейчас', 'за', 'раз', 'хочу', 'всем', 'донести', 'информацию,', 'чтобы', 'не', 'повторять', 'ее', 'отдельно', 'каждому', 'в', 'лс.', 'Что', 'по', 'поводу', 'наборов?', '-', 'Скажу', 'следующее,', 'кланы', 'которые', 'были', 'до', 'появления', 'нового', 'бота,', 'могут', 'создавать', 'наборы,', 'но', 'в', 'скором', 'времени', 'это', 'возможность', 'мы', 'уберем', 'т.к.', 'будем', 'делать', 'совсем', 'другие', 'наборы', 'в', 'категории', 'над', 'кланами,', 'чтобы', 'они', 'были', 'на', 'видном', 'месте.', 'Так', 'же', 'хочу', 'уведомить', 'вас', 'о', 'том,', 'что', 'на', 'другим', 'партнерских', 'серверах', 'на', 'примере:', 'Darkness,', 'Hatory', 'и', 'Meta', 'так', 'же', 'открылись', 'кланы,', 'где', 'вы', 'можете', 'создать', 'себе', 'клан', 'чтобы', 'развиться', 'еще', 'и', 'там.', 'За', 'формами', 'для', 'создания', 'можете', 'обратиться', 'ко', 'мне', 'в', 'лс', '@＃Оскаржник', 'или', 'к', '@киселя.', 'И', 'еще', 'раз', 'хочу', 'вам', 'напомнить', 'что', 'если', 'вы', 'хотите', 'уведомить', 'клан', 'о', 'чем', 'либо', 'НЕ', 'ЛИНКУЙТЕ', 'EVERYONE,', 'у', 'вас', 'есть', 'возможность', 'линкануть', 'клановую', 'роль,', 'в', 'противном', 'случае', 'есть', 'возможность', 'получить', 'выговор.', 'Если', 'вам', 'будет', 'скучно', 'и', 'вы', 'захотите', 'как', 'то', 'разбавить', 'свой', 'вечер,', 'вы', 'можете', 'использовать', 'команду', '/event_request', 'для', 'запроса', 'ивента', 'прямиком', 'в', 'клан', 'и', 'получить', 'за', 'это', 'конфетки,', 'а', 'в', 'сокроем', 'времени', 'еще', 'клановые', 'баллы.', 'Держите', 'еще', 'Телеграм', 'канал', 'со', 'всеми', 'обновлениями', 'https://t.me/yukine_discord')
+2022-05-27 16:28:58 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('<@&887496800699830302>', '@Clan', 'Consigliere', 'Всем', 'приветик!!!!', 'Сейчас', 'за', 'раз', 'хочу', 'всем', 'донести', 'информацию,', 'чтобы', 'не', 'повторять', 'ее', 'отдельно', 'каждому', 'в', 'лс.', 'Что', 'по', 'поводу', 'наборов?', '-', 'Скажу', 'следующее,', 'кланы', 'которые', 'были', 'до', 'появления', 'нового', 'бота,', 'могут', 'создавать', 'наборы,', 'но', 'в', 'скором', 'времени', 'это', 'возможность', 'мы', 'уберем', 'т.к.', 'будем', 'делать', 'совсем', 'другие', 'наборы', 'в', 'категории', 'над', 'кланами,', 'чтобы', 'они', 'были', 'на', 'видном', 'месте.', 'Так', 'же', 'хочу', 'уведомить', 'вас', 'о', 'том,', 'что', 'на', 'другим', 'партнерских', 'серверах', 'на', 'примере:', 'Darkness,', 'Hatory', 'и', 'Meta', 'так', 'же', 'открылись', 'кланы,', 'где', 'вы', 'можете', 'создать', 'себе', 'клан', 'чтобы', 'развиться', 'еще', 'и', 'там.', 'За', 'формами', 'для', 'создания', 'можете', 'обратиться', 'ко', 'мне', 'в', 'лс', '@＃Оскаржник', 'или', 'к', '@киселя.', 'И', 'еще', 'раз', 'хочу', 'вам', 'напомнить', 'что', 'если', 'вы', 'хотите', 'уведомить', 'клан', 'о', 'чем', 'либо', 'НЕ', 'ЛИНКУЙТЕ', 'EVERYONE,', 'у', 'вас', 'есть', 'возможность', 'линкануть', 'клановую', 'роль,', 'в', 'противном', 'случае', 'есть', 'возможность', 'получить', 'выговор.', 'Если', 'вам', 'будет', 'скучно', 'и', 'вы', 'захотите', 'как', 'то', 'разбавить', 'свой', 'вечер,', 'вы', 'можете', 'использовать', 'команду', '/event_request', 'для', 'запроса', 'ивента', 'прямиком', 'в', 'клан', 'и', 'получить', 'за', 'это', 'конфетки,', 'а', 'в', 'сокроем', 'времени', 'еще', 'клановые', 'баллы.', 'Держите', 'еще', 'Телеграм', 'канал', 'со', 'всеми', 'обновлениями', 'https://t.me/yukine_discord')
+2022-05-27 16:29:32 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('<@&887496800699830302>', '@Clan', 'Consigliere', 'Всем', 'приветик!!!!', 'Сейчас', 'за', 'раз', 'хочу', 'всем', 'донести', 'информацию,', 'чтобы', 'не', 'повторять', 'ее', 'отдельно', 'каждому', 'в', 'лс.', 'Что', 'по', 'поводу', 'наборов?', '-', 'Скажу', 'следующее,', 'кланы', 'которые', 'были', 'до', 'появления', 'нового', 'бота,', 'могут', 'создавать', 'наборы,', 'но', 'в', 'скором', 'времени', 'это', 'возможность', 'мы', 'уберем', 'т.к.', 'будем', 'делать', 'совсем', 'другие', 'наборы', 'в', 'категории', 'над', 'кланами,', 'чтобы', 'они', 'были', 'на', 'видном', 'месте.\\n', 'Так', 'же', 'хочу', 'уведомить', 'вас', 'о', 'том,', 'что', 'на', 'другим', 'партнерских', 'серверах', 'на', 'примере:', 'Darkness,', 'Hatory', 'и', 'Meta', 'так', 'же', 'открылись', 'кланы,', 'где', 'вы', 'можете', 'создать', 'себе', 'клан', 'чтобы', 'развиться', 'еще', 'и', 'там.', 'За', 'формами', 'для', 'создания', 'можете', 'обратиться', 'ко', 'мне', 'в', 'лс', '@＃Оскаржник', 'или', 'к', '@киселя.', 'И', 'еще', 'раз', 'хочу', 'вам', 'напомнить', 'что', 'если', 'вы', 'хотите', 'уведомить', 'клан', 'о', 'чем', 'либо', 'НЕ', 'ЛИНКУЙТЕ', 'EVERYONE,', 'у', 'вас', 'есть', 'возможность', 'линкануть', 'клановую', 'роль,', 'в', 'противном', 'случае', 'есть', 'возможность', 'получить', 'выговор.', 'Если', 'вам', 'будет', 'скучно', 'и', 'вы', 'захотите', 'как', 'то', 'разбавить', 'свой', 'вечер,', 'вы', 'можете', 'использовать', 'команду', '/event_request', 'для', 'запроса', 'ивента', 'прямиком', 'в', 'клан', 'и', 'получить', 'за', 'это', 'конфетки,', 'а', 'в', 'сокроем', 'времени', 'еще', 'клановые', 'баллы.', 'Держите', 'еще', 'Телеграм', 'канал', 'со', 'всеми', 'обновлениями', 'https://t.me/yukine_discord')
+2022-05-27 16:33:30 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:33:45 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:33:50 [clan_staff] [INFO]: READY
+2022-05-27 16:36:01 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:36:16 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:36:16 [clan_staff] [INFO]: READY
+2022-05-27 16:41:31 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:41:46 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:41:51 [clan_staff] [INFO]: READY
+2022-05-27 16:42:46 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:43:00 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:43:05 [clan_staff] [INFO]: READY
+2022-05-27 16:44:11 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:44:25 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:44:30 [clan_staff] [INFO]: READY
+2022-05-27 16:45:11 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:45:26 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:45:31 [clan_staff] [INFO]: READY
+2022-05-27 16:50:37 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Client.run.<locals>.runner() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py:692> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 694, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 658, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 553, in connect
+    await self.ws.poll_event()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 591, in poll_event
+    await self.received_message(msg.data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 541, in received_message
+    func(data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 778, in parse_presence_update
+    user_update = member._presence_update(data=data, user=user)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 412, in _presence_update
+    self.activities = tuple(map(create_activity, data["activities"]))
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\activity.py", line 833, in create_activity
+    return Activity(**data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\activity.py", line 227, in __init__
+    self.application_id: Optional[int] = _get_as_snowflake(kwargs, "application_id")
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\utils.py", line 505, in _get_as_snowflake
+    return value and int(value)
+KeyboardInterrupt
+2022-05-27 16:50:38 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:50:53 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:50:58 [clan_staff] [INFO]: READY
+2022-05-27 16:51:05 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send {}
+2022-05-27 16:51:40 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:51:51 [asyncio] [ERROR]: Task was destroyed but it is pending!
+task: <Task pending name='Task-9' coro=<ConnectionState._delay_ready() running at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py:560> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\tasks.py:714]>
+2022-05-27 16:51:51 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Client.run.<locals>.runner() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py:692> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 340, in store_user
+    return self._users[user_id]
+KeyError: 717461131832197141
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 694, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 658, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\client.py", line 553, in connect
+    await self.ws.poll_event()
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 591, in poll_event
+    await self.received_message(msg.data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 541, in received_message
+    func(data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in parse_guild_members_chunk
+    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in <listcomp>
+    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 306, in __init__
+    self._user: User = state.store_user(data["user"])
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 342, in store_user
+    user = User(state=self, data=data)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\user.py", line 437, in __init__
+    super().__init__(state=state, data=data)
+KeyboardInterrupt
+2022-05-27 16:51:52 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:52:06 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:52:11 [clan_staff] [INFO]: READY
+2022-05-27 16:52:20 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send {}
+2022-05-27 16:52:41 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-27 16:52:55 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-27 16:53:00 [clan_staff] [INFO]: READY
+2022-05-27 18:03:34 [clan_staff] [ERROR]: Foxybtw#7435 | !clan
+2022-05-27 18:03:34 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-27 18:43:54 [clan_staff] [INFO]: † ＮＡＴＵＲＥ †#0928 вызвал комаду /event request Brawl Stars 3 Nicky.#7777
+2022-05-27 20:05:27 [clan_staff] [ERROR]: ангелочек#0577 | !clan profile
+2022-05-27 20:05:27 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-27 20:49:42 [clan_staff] [INFO]: KalteSonne.#1449 вызвал комаду /event request Своя игра 2 .
+2022-05-27 21:35:35 [clan_staff] [ERROR]: сонек#3240 | !clan members
+2022-05-27 21:35:35 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-27 21:35:45 [clan_staff] [ERROR]: сонек#3240 | !clan member
+2022-05-27 21:35:45 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-27 21:40:07 [clan_staff] [INFO]: paravozikii#5788 вызвал комаду /event request Brawl Stars 3 ,kf ,kf
+2022-05-27 22:04:04 [clan_staff] [INFO]: marili use command /staff profile
+2022-05-27 22:13:33 [clan_staff] [INFO]: 3manul#4431 вызвал комаду /event request Монополия 3 бедолага
+2022-05-28 01:05:27 [clan_staff] [INFO]: sanriogirlfriend#0002 вызвал комаду /event request Покер 6 poker
+2022-05-28 01:51:01 [clan_staff] [ERROR]: sadness#9559 | !clan info
+2022-05-28 01:51:01 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 06:05:16 [clan_staff] [ERROR]: Жаба#5961 | !clan
+2022-05-28 06:05:16 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 07:39:48 [clan_staff] [ERROR]: Lesss_#0715 | !staff add <@709820533176270911>
+2022-05-28 07:39:48 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 11:36:40 [clan_staff] [ERROR]: fame&#3780 | !clan leave
+2022-05-28 11:36:40 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 11:44:07 [clan_staff] [ERROR]: фиджет спинер#1002 | !clan member
+2022-05-28 11:44:07 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 12:56:55 [clan_staff] [INFO]: nezuko тявка#9323 вызвал комаду /event request Brawl Stars 10 nicki
+2022-05-28 13:03:27 [clan_staff] [INFO]: nezuko тявка#9323 вызвал комаду /event request Brawl Stars 99999 Nicky
+2022-05-28 13:05:07 [clan_staff] [INFO]: Lesss_ use command /staff profile
+2022-05-28 13:05:32 [clan_staff] [INFO]: nezuko тявка#9323 вызвал комаду /event request Brawl Stars 3 Nicky
+2022-05-28 13:12:33 [clan_staff] [INFO]: Lesss_ use command /staff profile
+2022-05-28 13:15:28 [clan_staff] [INFO]: nezuko тявка#9323 вызвал комаду /event request Brawl Stars 33 Nicky
+2022-05-28 13:16:04 [clan_staff] [INFO]: nezuko тявка#9323 вызвал комаду /event request Brawl Stars 3 Nicky
+2022-05-28 16:51:58 [clan_staff] [INFO]: BUKIOLO#7618 вызвал комаду /event request Dota 2 PUB, Dota 2 Кастомки 4 инвентёр - myrki
+2022-05-28 17:14:37 [clan_staff] [ERROR]: PC1400X#7302 | !clan leave
+2022-05-28 17:14:37 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 18:24:02 [clan_staff] [ERROR]: layout#1111 | !clan kick <@691614398527176765>
+2022-05-28 18:24:02 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 18:44:56 [clan_staff] [INFO]: † ＮＡＴＵＲＥ †#0928 вызвал комаду /event request Крокодил 6 Elizabeth ll#2310
+2022-05-28 19:44:53 [clan_staff] [ERROR]: Alkash#4718 | !clan profile
+2022-05-28 19:44:53 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 20:41:40 [clan_staff] [ERROR]: qqmur#8668 | !clan leave
+2022-05-28 20:41:40 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 20:48:12 [clan_staff] [ERROR]: чика#3546 | !clan leave
+2022-05-28 20:48:12 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 20:51:50 [clan_staff] [INFO]: marili use command /staff profile
+2022-05-28 20:52:52 [clan_staff] [INFO]: Milka#9366 вызвал комаду /event request Своя игра 3 .
+2022-05-28 21:17:11 [clan_staff] [ERROR]: ангелочек#0577 | !clan voice <@691614398527176765>
+2022-05-28 21:17:11 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 21:17:42 [clan_staff] [ERROR]: ангелочек#0577 | !clan voice <@691614398527176765>
+2022-05-28 21:17:42 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 21:18:54 [clan_staff] [ERROR]: ангелочек#0577 | !clan voice <@708216728831787049>/userId
+2022-05-28 21:18:54 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 21:56:52 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-28 21:57:24 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-28 21:57:39 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-28 21:57:44 [clan_staff] [INFO]: READY
+2022-05-28 23:13:50 [clan_staff] [ERROR]: usseewa#8336 | !clan
+2022-05-28 23:13:50 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-28 23:18:24 [clan_staff] [ERROR]: marili#5109 | !staff add  <@450361269128790026>
+2022-05-28 23:18:24 [clan_staff] [ERROR]: not rights owner
+2022-05-28 23:19:51 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-28 23:20:07 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-28 23:20:13 [clan_staff] [INFO]: READY
+2022-05-29 00:01:03 [clan_staff] [ERROR]: Ещё тот авантюрист#3186 | !clan leave
+2022-05-29 00:01:03 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 00:01:24 [clan_staff] [ERROR]: Ещё тот авантюрист#3186 | !clan leave
+2022-05-29 00:01:24 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 00:01:34 [clan_staff] [ERROR]: Ещё тот авантюрист#3186 | !clan leave
+2022-05-29 00:01:34 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 00:01:51 [clan_staff] [ERROR]: Ещё тот авантюрист#3186 | !clan leave
+2022-05-29 00:01:51 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 00:01:59 [clan_staff] [ERROR]: Ещё тот авантюрист#3186 | !clan leave
+2022-05-29 00:01:59 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 00:36:36 [clan_staff] [INFO]: clan
+2022-05-29 01:05:26 [clan_staff] [ERROR]: BladeXses#1616 | !clan auction 963239433400881272 10000 конец аукциона 17:00 29/05/2022 / возможно продление
+2022-05-29 01:05:26 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 01:05:51 [clan_staff] [ERROR]: BladeXses#1616 | !clan auction 963239433400881272 10000 конец аукциона 17:00 29/05/2022 / возможно продление
+2022-05-29 01:05:51 [clan_staff] [ERROR]: BladeXses#1616 not rights owner
+2022-05-29 01:07:04 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-29 01:07:18 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-29 01:07:23 [clan_staff] [INFO]: READY
+2022-05-29 01:07:42 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 10100
+2022-05-29 02:12:23 [clan_staff] [ERROR]: zzzzzzevil#8282 | !clan leave
+2022-05-29 02:12:23 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 02:30:40 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-29 02:30:47 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 934073000117026866.
+2022-05-29 02:30:53 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 894663985650081864.
+2022-05-29 02:30:58 [clan_staff] [INFO]: READY
+2022-05-29 03:08:05 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-29 03:28:09 [clan_staff] [INFO]: clan
+2022-05-29 03:28:35 [clan_staff] [ERROR]: BogRatiOne#1941 | !clan send Я вас в рот ебал
+2022-05-29 03:28:35 [clan_staff] [ERROR]: BogRatiOne#1941 not rights owner
+2022-05-29 03:28:58 [clan_staff] [ERROR]: BogRatiOne#1941 | !clan send
+2022-05-29 03:28:58 [clan_staff] [ERROR]: BogRatiOne#1941 not rights owner
+2022-05-29 05:41:16 [clan_staff] [INFO]: mf1znocap use command /staff profile
+2022-05-29 07:12:29 [clan_staff] [INFO]: mf1znocap use command /staff profile
+2022-05-29 09:28:32 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 10500
+2022-05-29 10:07:40 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-29 10:10:40 [clan_staff] [INFO]: auction msg: † F L O R E N S †#6969 :: 11000
+2022-05-29 10:10:51 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 11500
+2022-05-29 10:12:52 [clan_staff] [INFO]: auction msg: † F L O R E N S †#6969 :: 12000
+2022-05-29 10:13:02 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 12500
+2022-05-29 10:17:03 [clan_staff] [INFO]: auction msg: piski<3#9534 :: 13000
+2022-05-29 10:17:14 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 13500
+2022-05-29 10:56:21 [clan_staff] [INFO]: kāwai#6816 вызвал комаду /event request Счастливые числа 3 .!.
+2022-05-29 11:33:49 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-29 11:55:00 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-29 13:14:08 [clan_staff] [INFO]: auction msg: TELL ME Y♡U L♡VE ME#4636 :: 14000
+2022-05-29 13:23:51 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-29 13:30:52 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 14500
+2022-05-29 13:31:06 [clan_staff] [INFO]: auction msg: TELL ME Y♡U L♡VE ME#4636 :: 14600
+2022-05-29 13:32:56 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 15000
+2022-05-29 13:33:23 [clan_staff] [INFO]: auction msg: TELL ME Y♡U L♡VE ME#4636 :: 15100
+2022-05-29 13:34:00 [clan_staff] [ERROR]: nazzik т#9352 | !clan info <@759497540462444564>
+2022-05-29 13:34:00 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 13:34:09 [clan_staff] [ERROR]: nazzik т#9352 | !clan
+2022-05-29 13:34:09 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 13:35:42 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 15500
+2022-05-29 13:55:30 [clan_staff] [ERROR]: [tmp] RS#0001 | !clan
+2022-05-29 13:55:30 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 14:03:52 [clan_staff] [INFO]: auction msg: ! FailMi.Ru#9908 :: 17000
+2022-05-29 14:05:55 [clan_staff] [INFO]: auction msg: ! FailMi.Ru#9908 :: 23000
+2022-05-29 14:07:57 [clan_staff] [INFO]: auction msg: ! FailMi.Ru#9908 :: 16000
+2022-05-29 14:08:11 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 16100
+2022-05-29 14:09:06 [clan_staff] [ERROR]: RasSV3T#8560 | !clan leave
+2022-05-29 14:09:06 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 14:09:59 [clan_staff] [INFO]: auction msg: ! FailMi.Ru#9908 :: 16600
+2022-05-29 14:11:26 [clan_staff] [INFO]: auction msg: don’t hate me…#4326 :: 16650
+2022-05-29 14:12:14 [clan_staff] [INFO]: auction msg: ! FailMi.Ru#9908 :: 17100
+2022-05-29 14:47:53 [clan_staff] [ERROR]: iwannadie&#9696 | !clan leаvу
+2022-05-29 14:47:53 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 14:50:13 [clan_staff] [INFO]: joise use command /staff profile
+2022-05-29 15:08:59 [clan_staff] [INFO]: auction msg: Maxim Anatolievich#4414 :: 19000
+2022-05-29 15:09:05 [clan_staff] [INFO]: auction msg: marinochka#6079 :: 17500
+2022-05-29 15:24:33 [clan_staff] [INFO]: auction msg: ! FailMi.Ru#9908 :: 18000
+2022-05-29 16:41:41 [clan_staff] [ERROR]: Egor-_-#3698 | !clan leave
+2022-05-29 16:41:41 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 17:09:17 [clan_staff] [INFO]: MINERVA#7106 вызвал комаду /event request Своя игра 7 .
+2022-05-29 17:29:09 [clan_staff] [ERROR]: re#9009 | !clan kick
+2022-05-29 17:29:09 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 17:29:23 [clan_staff] [ERROR]: re#9009 | !clan kick <@828651762734989332>
+2022-05-29 17:29:23 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 17:32:32 [clan_staff] [INFO]: BladeXses#1616, use !staff add to BladeXses#1616
+2022-05-29 17:33:04 [clan_staff] [INFO]: BladeXses#1616, use !staff kick to BladeXses#1616
+2022-05-29 17:34:10 [clan_staff] [INFO]: kak inache?#5964 вызвал комаду /event request Своя игра 8 gggg
+2022-05-29 17:36:34 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-29 17:50:17 [clan_staff] [INFO]: sofiasaratova#0303, use !staff add to Littleefizz#1668
+2022-05-29 18:04:58 [clan_staff] [ERROR]: нашелвыход#0577 | !clan kick <@828651762734989332>
+2022-05-29 18:04:58 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 18:46:32 [clan_staff] [INFO]: 🅱edolaga use command /staff profile
+2022-05-29 19:01:14 [clan_staff] [INFO]: MINERVA#7106 вызвал комаду /event request Codenames 6 /
+2022-05-29 19:22:52 [clan_staff] [INFO]: MINERVA#7106 вызвал комаду /event request Codenames 7 .
+2022-05-29 19:26:20 [clan_staff] [INFO]: 🅱edolaga use command /staff profile
+2022-05-29 19:27:27 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-29 19:40:23 [clan_staff] [ERROR]: Aethereal. ♡#6962 | !clan leave
+2022-05-29 19:40:23 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 20:36:53 [clan_staff] [ERROR]: gojobe#5100 | !clan leave
+2022-05-29 20:36:53 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 21:05:07 [clan_staff] [ERROR]: нуна#3390 | !clan live
+2022-05-29 21:05:07 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 21:09:08 [clan_staff] [ERROR]: нуна#3390 | !clan leave
+2022-05-29 21:09:08 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 21:10:03 [clan_staff] [ERROR]: панические атаки#5359 | !clan leave
+2022-05-29 21:10:03 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 21:12:33 [clan_staff] [ERROR]: ꧁░★𝓟𝓻𝓲𝓷𝓬𝓮𝓼𝓼★░꧂#9292 | !clan leave
+2022-05-29 21:12:33 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 21:41:17 [clan_staff] [INFO]: beda#3800 вызвал комаду /event request Монополия 5 никитка лучший
+2022-05-29 21:42:25 [clan_staff] [ERROR]: 私に触れないでください#7087 | !clan leafe
+2022-05-29 21:42:25 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 21:43:00 [clan_staff] [ERROR]: 私に触れないでください#7087 | !clan leave
+2022-05-29 21:43:00 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 21:43:15 [clan_staff] [ERROR]: 私に触れないでください#7087 | !clan leave
+2022-05-29 21:43:15 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-29 22:11:40 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-29 22:23:47 [clan_staff] [INFO]: 🅱edolaga use command /staff profile
+2022-05-30 00:17:38 [clan_staff] [ERROR]: schiz#2551 | !clan profile
+2022-05-30 00:17:38 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 00:33:25 [clan_staff] [ERROR]: whyrma#6818 | !clan invite 606189626658521089
+2022-05-30 00:33:25 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 00:56:20 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 00:56:29 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 00:56:29 [clan_staff] [INFO]: READY
+2022-05-30 00:57:32 [clan_staff] [ERROR]: BladeXses#1616 | !clan help
+2022-05-30 00:57:32 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 00:57:32 [clan_staff] [ERROR]: BladeXses#1616 | !staff list
+2022-05-30 00:57:32 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 00:57:32 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 30.2s behind.
+2022-05-30 00:57:51 [clan_staff] [ERROR]: BladeXses#1616 | !staff list
+2022-05-30 00:57:51 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 00:59:59 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 01:00:14 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 01:00:20 [clan_staff] [INFO]: READY
+2022-05-30 01:10:48 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 01:11:01 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 01:11:15 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 01:11:20 [clan_staff] [INFO]: READY
+2022-05-30 01:12:15 [clan_staff] [ERROR]: BladeXses#1616 | !staff add <@450361269128790026>
+2022-05-30 01:12:15 [clan_staff] [ERROR]: Command raised an exception: InvalidArgument: Invalid permissions given to keyword arguments.
+2022-05-30 01:13:37 [clan_staff] [INFO]: BladeXses#1616, use !staff kick to marili#5109
+2022-05-30 01:14:03 [clan_staff] [ERROR]: BladeXses#1616 | !staff add 763270830075150336
+2022-05-30 01:14:03 [clan_staff] [ERROR]: Command raised an exception: InvalidArgument: Invalid permissions given to keyword arguments.
+2022-05-30 01:14:55 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 01:15:04 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 01:15:04 [clan_staff] [INFO]: READY
+2022-05-30 01:16:04 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 26.8s behind.
+2022-05-30 01:17:09 [clan_staff] [ERROR]: BladeXses#1616 | !staff add 763270830075150336
+2022-05-30 01:17:09 [clan_staff] [ERROR]: Command raised an exception: InvalidArgument: Invalid permissions given to keyword arguments.
+2022-05-30 01:19:11 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 01:19:26 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 01:19:31 [clan_staff] [INFO]: READY
+2022-05-30 01:20:19 [clan_staff] [INFO]: BladeXses#1616, use !staff add to liopi#4649
+2022-05-30 01:20:41 [clan_staff] [INFO]: BladeXses#1616, use !staff kick to liopi#4649
+2022-05-30 01:36:00 [clan_staff] [INFO]: clan
+2022-05-30 01:54:48 [clan_staff] [INFO]: BladeXses#1616 вызвал комаду /event request Phasmophobia 4 bog its god
+2022-05-30 03:34:17 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 03:34:31 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 03:34:36 [clan_staff] [INFO]: READY
+2022-05-30 03:36:01 [clan_staff] [ERROR]: BladeXses#1616 | !clan auction 972872537631494194 5000 конец аукциона 16:00 30/05/2022 / возможно продление
+2022-05-30 03:36:01 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 03:36:38 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 5100
+2022-05-30 08:33:17 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-30 09:08:19 [clan_staff] [INFO]: help command use :: BladeXses#1616
+2022-05-30 09:24:08 [clan_staff] [INFO]: auction msg: claim#6969 :: 5200
+2022-05-30 11:22:06 [clan_staff] [INFO]: help command use :: mayes#6666
+2022-05-30 11:35:31 [clan_staff] [INFO]: Lesss_#0715, use !staff kick to Lesss_#0715
+2022-05-30 11:35:46 [clan_staff] [INFO]: да ты че#6464, use !staff kick to BogRatiOne#1941
+2022-05-30 11:36:00 [clan_staff] [INFO]: да ты че#6464, use !staff kick to marinochka#6079
+2022-05-30 11:36:07 [clan_staff] [INFO]: да ты че#6464, use !staff kick to myrki#1510
+2022-05-30 11:36:26 [clan_staff] [INFO]: да ты че#6464, use !staff kick to takeshi#0604
+2022-05-30 11:36:37 [clan_staff] [INFO]: да ты че#6464, use !staff kick to !     Esdeath#0063
+2022-05-30 11:40:16 [clan_staff] [INFO]: да ты че#6464, use !staff kick to shamitsu#7777
+2022-05-30 11:40:20 [clan_staff] [INFO]: да ты че#6464, use !staff kick to myxa_let#8785
+2022-05-30 11:40:25 [clan_staff] [INFO]: да ты че#6464, use !staff kick to 🅱edolaga#1706
+2022-05-30 11:40:34 [clan_staff] [INFO]: да ты че#6464, use !staff kick to piski<3#9534
+2022-05-30 11:40:41 [clan_staff] [INFO]: да ты че#6464, use !staff kick to Elizabeth ll#2310
+2022-05-30 11:40:48 [clan_staff] [INFO]: да ты че#6464, use !staff kick to Er4en🌙#3349
+2022-05-30 11:40:53 [clan_staff] [INFO]: да ты че#6464, use !staff kick to skr#1111
+2022-05-30 11:40:59 [clan_staff] [INFO]: да ты че#6464, use !staff kick to Nicky.#7777
+2022-05-30 11:41:30 [clan_staff] [INFO]: Lesss_#0715, use !staff add to Lesss_#0715
+2022-05-30 11:41:50 [clan_staff] [INFO]: да ты че#6464, use !staff kick to да ты че#6464
+2022-05-30 11:42:00 [clan_staff] [INFO]: да ты че#6464, use !staff add to да ты че#6464
+2022-05-30 11:42:59 [clan_staff] [INFO]: Lesss_#0715, use !staff kick to Lesss_#0715
+2022-05-30 11:43:34 [clan_staff] [INFO]: да ты че#6464, use !staff add to BogRatiOne#1941
+2022-05-30 11:43:48 [clan_staff] [INFO]: да ты че#6464, use !staff add to marinochka#6079
+2022-05-30 11:43:54 [clan_staff] [INFO]: да ты че#6464, use !staff add to myrki#1510
+2022-05-30 11:44:12 [clan_staff] [INFO]: да ты че#6464, use !staff add to takeshi#0604
+2022-05-30 11:44:45 [clan_staff] [INFO]: Lesss_ use command /staff profile
+2022-05-30 11:45:12 [clan_staff] [INFO]: да ты че#6464, use !staff add to shamitsu#7777
+2022-05-30 11:45:22 [clan_staff] [INFO]: help command use :: BladeXses#1616
+2022-05-30 11:45:26 [clan_staff] [INFO]: да ты че#6464, use !staff add to myxa_let#8785
+2022-05-30 11:45:45 [clan_staff] [INFO]: да ты че#6464, use !staff add to 🅱edolaga#1706
+2022-05-30 11:45:50 [clan_staff] [INFO]: да ты че#6464, use !staff add to piski<3#9534
+2022-05-30 11:45:55 [clan_staff] [INFO]: да ты че#6464, use !staff add to Elizabeth ll#2310
+2022-05-30 11:46:01 [clan_staff] [INFO]: да ты че#6464, use !staff add to Er4en🌙#3349
+2022-05-30 11:46:05 [clan_staff] [INFO]: да ты че#6464, use !staff add to skr#1111
+2022-05-30 11:46:18 [clan_staff] [INFO]: да ты че#6464, use !staff add to Nicky.#7777
+2022-05-30 11:46:46 [clan_staff] [INFO]: Lesss_ use command /staff profile
+2022-05-30 11:46:59 [clan_staff] [INFO]: Lesss_#0715 изменил время ивентов 350057334690545664 на 17506
+2022-05-30 11:47:11 [clan_staff] [INFO]: maneroo?#7114 вызвал комаду /event request Slither.io 1 ПОИГРАТЬ ХОЧУ
+2022-05-30 11:50:55 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 11:51:09 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 11:51:14 [clan_staff] [INFO]: READY
+2022-05-30 11:51:34 [clan_staff] [INFO]: help command use :: BladeXses#1616
+2022-05-30 11:51:47 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 11:52:01 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 11:52:06 [clan_staff] [INFO]: READY
+2022-05-30 12:25:06 [clan_staff] [ERROR]: Tsibulichhh#6452 | !clan leave
+2022-05-30 12:25:06 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 12:43:23 [clan_staff] [INFO]: help command use :: Aze#4073
+2022-05-30 12:48:29 [clan_staff] [ERROR]: dedeshka#5840 | !clan leave
+2022-05-30 12:48:29 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 12:53:16 [clan_staff] [ERROR]: Ведьма#5555 | !clan help
+2022-05-30 12:53:16 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 12:53:27 [clan_staff] [INFO]: help command use :: Ведьма#5555
+2022-05-30 12:54:07 [clan_staff] [INFO]: help command use :: BladeXses#1616
+2022-05-30 12:54:39 [clan_staff] [INFO]: help command use :: BladeXses#1616
+2022-05-30 12:55:09 [clan_staff] [INFO]: help command use :: Ranzori#7912
+2022-05-30 12:56:07 [clan_staff] [INFO]: help command use :: BladeXses#1616
+2022-05-30 13:09:14 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send {}
+2022-05-30 13:09:41 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send {}
+2022-05-30 13:10:22 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-05-30 13:10:37 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 13:10:43 [clan_staff] [INFO]: READY
+2022-05-30 13:11:01 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('Хочу', 'вам', 'напомнить', 'что', 'есть', 'замечательная', 'команда', '/event', 'request')
+2022-05-30 13:17:00 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('Всем', 'привет^^', 'Хочу', 'вам', 'напомнить', 'что', 'у', 'нас', 'есть', 'прекрасные', 'клан', 'ивентеры,', 'которые', 'могут', 'провести', 'вам', 'ивент', 'в', 'клане,', 'а', 'для', 'этого', 'всего', 'лишь', 'нужно', 'кинь', 'запрос', 'по', 'команде', '/event', 'request')
+2022-05-30 13:20:29 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('Всем', 'привет^^.', 'Хочу', 'вам', 'напомнить', 'что', 'у', 'нас', 'есть', 'прекрасные', 'клан', 'ивентеры,', 'которые', 'могут', 'провести', 'вам', 'ивент', 'в', 'клане,', 'а', 'для', 'этого', 'всего', 'лишь', 'нужно', 'кинь', 'им', 'запрос', 'по', 'команде', '/event', 'request.', 'Подробности', 'можно', 'узнать', 'в', 'чате', '├・🎠・клан-ивенты', 'в', 'категории', '⎯⎯⎯▾👥', 'ДЛЯ', 'КЛАНОВ')
+2022-05-30 13:21:48 [clan_staff] [INFO]: help command use :: Dvine#6644
+2022-05-30 13:21:49 [clan_staff] [ERROR]: BladeXses#1616 | !clan send Всем привет^^.
+Хочу вам напомнить что у нас есть прекрасные клан ивентеры, которые могут провести вам ивент в клане, а для этого всего лишь нужно кинь им запрос по команде /event request. Подробности можно узнать в чате ├・🎠・клан-ивенты в категории ⎯⎯⎯▾👥 ДЛЯ КЛАНОВ
+2022-05-30 13:21:49 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 13:22:54 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('Всем', 'привет^^.', 'Хочу', 'вам', 'напомнить', 'что', 'у', 'нас', 'есть', 'прекрасные', 'клан', 'ивентеры,', 'которые', 'могут', 'провести', 'вам', 'ивент', 'в', 'клане,', 'а', 'для', 'этого', 'всего', 'лишь', 'нужно', 'кинь', 'им', 'запрос', 'по', 'команде', '/event', 'request.', 'Подробности', 'можно', 'узнать', 'в', 'чате', '├・🎠・клан-ивенты', 'в', 'категории', '⎯⎯⎯▾👥', 'ДЛЯ', 'КЛАНОВ')
+2022-05-30 13:24:24 [clan_staff] [INFO]: don’t hate me…#4326 вызвал комаду /event request Brawl Stars 3 ивентик для маленьких детей пожалуйста
+2022-05-30 13:27:32 [clan_staff] [INFO]: BladeXses вызвал комаду !clan send ('Всем', 'привет^^.', 'Хочу', 'вам', 'напомнить', 'что', 'у', 'нас', 'есть', 'прекрасные', 'клан', 'ивентеры,', 'которые', 'могут', 'провести', 'вам', 'ивент', 'в', 'клане,', 'а', 'для', 'этого', 'всего', 'лишь', 'нужно', 'кинуть', 'им', 'запрос', 'по', 'команде', '/event', 'request.', 'Подробности', 'можно', 'узнать', 'в', 'чате', '├🎭・клан-ивенты', 'в', 'категории', '──▾・clan')
+2022-05-30 14:02:42 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-30 14:06:14 [clan_staff] [INFO]: don’t hate me…#4326 вызвал комаду /event request Крокодил 6 piski<3#9534
+2022-05-30 15:01:11 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-30 15:19:30 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 15:19:36 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-30 15:19:36 [clan_staff] [INFO]: READY
+2022-05-30 15:19:38 [clan_staff] [INFO]: help command use :: BladeXses#1616
+2022-05-30 17:17:44 [clan_staff] [ERROR]: ! Yankitero#0394 | !клан
+2022-05-30 17:17:44 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 17:41:13 [clan_staff] [ERROR]: ! Yankitero#0394 | !clan
+2022-05-30 17:41:13 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 18:10:46 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 18:10:52 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 934073000117026866.
+2022-05-30 18:10:56 [clan_staff] [INFO]: READY
+2022-05-30 18:20:37 [clan_staff] [INFO]: help command use :: mayes#6666
+2022-05-30 18:41:39 [clan_staff] [ERROR]: Kinekardin#7779 | !clan leave
+2022-05-30 18:41:39 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 19:04:59 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-30 19:05:05 [clan_staff] [INFO]: READY
+2022-05-30 19:13:10 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-05-30 20:23:53 [clan_staff] [INFO]: help command use :: ! Грибочек#7777
+2022-05-30 20:43:30 [clan_staff] [ERROR]: re#9009 | !clan leave
+2022-05-30 20:43:30 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 21:30:20 [clan_staff] [INFO]: don’t hate me…#4326 вызвал комаду /event request Brawl Stars 3 помидорка
+2022-05-30 22:04:15 [clan_staff] [INFO]: manul#0003 вызвал комаду /event request Монополия 5 такеши
+2022-05-30 22:21:55 [clan_staff] [INFO]: vodochka use command /staff profile
+2022-05-30 22:22:15 [clan_staff] [ERROR]: Makeloyb#9999 | !clan
+2022-05-30 22:22:15 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 23:51:04 [clan_staff] [ERROR]: Mail_ru#9797 | !clan leave
+2022-05-30 23:51:04 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-30 23:52:25 [clan_staff] [ERROR]: Mail_ru#9797 | !clan leave
+2022-05-30 23:52:25 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-31 00:12:47 [clan_staff] [INFO]: takeshi use command /staff profile
+2022-05-31 00:21:58 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-31 00:27:02 [clan_staff] [INFO]: sofiasaratova#0303 вызвал комаду /event request Дурак 3 .
+2022-05-31 00:32:33 [clan_staff] [INFO]: manul#0003 вызвал комаду /event request Сломанный телефон 6 помидорка
+2022-05-31 01:05:06 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-31 01:44:15 [clan_staff] [INFO]: help command use :: dekart mordenart#9999
+2022-05-31 03:20:33 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: 3100
+2022-05-31 04:01:48 [clan_staff] [ERROR]: Фейк#0040 | !clan profile 782301281473658900
+2022-05-31 04:01:48 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-31 07:35:02 [clan_staff] [INFO]: auction msg: чика#3546 :: 4000
+2022-05-31 07:36:07 [clan_staff] [INFO]: auction msg: чика#3546 :: 3200
+2022-05-31 08:23:08 [clan_staff] [INFO]: auction msg: синоним боли#9933 :: 3300
+2022-05-31 09:23:06 [clan_staff] [INFO]: auction msg: No.#6320 :: 5000
+2022-05-31 09:40:04 [clan_staff] [INFO]: piski<3 use command /staff profile
+2022-05-31 10:05:50 [clan_staff] [INFO]: auction msg: билли бучер#5430 :: 3800
+2022-05-31 10:28:38 [clan_staff] [INFO]: help command use :: Dark Angel ༒#1088
+2022-05-31 10:28:59 [clan_staff] [INFO]: help command use :: kak inache?#5964
+2022-05-31 13:33:53 [clan_staff] [ERROR]: dfsaxxxxxxxxxxxxxxxxxxxxxxxxxxxx#7777 | !clan leave
+2022-05-31 13:33:53 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-31 13:44:53 [clan_staff] [INFO]: auction msg: синоним боли#9933 :: 3900
+2022-05-31 14:15:52 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-05-31 14:15:59 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 934073000117026866.
+2022-05-31 14:16:04 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 894663985650081864.
+2022-05-31 14:16:11 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 822354240713261068.
+2022-05-31 14:16:11 [clan_staff] [INFO]: READY
+2022-05-31 14:16:17 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 10.6s behind.
+2022-05-31 14:53:53 [clan_staff] [ERROR]: pussy trade#1111 | !клан лив
+2022-05-31 14:53:53 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-31 14:58:21 [clan_staff] [ERROR]: .ak4sh1#0001 | !clan leave
+2022-05-31 14:58:21 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
+2022-05-31 15:03:39 [clan_staff] [INFO]: psycho use command /staff profile
+2022-05-31 15:12:11 [clan_staff] [INFO]: auction msg: BladeXses#1616 :: stop
+2022-05-31 15:13:47 [clan_staff] [INFO]: help command use :: ! FailMi.Ru#9908
+2022-05-31 15:18:02 [clan_staff] [INFO]: help command use :: mf1znocap#1313
+2022-05-31 15:42:38 [clan_staff] [INFO]: help command use :: danketsuu#0101
