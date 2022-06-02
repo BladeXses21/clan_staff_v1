@@ -35,10 +35,10 @@ class ClanService:
 
             if ctx.message is None:
                 await ctx.response.send_message(embed=StaffProfile(member=ctx.author, total_event=my_total_events, total_time=my_total_times, butterfly=my_butterfly, add_time=my_add_time,
-                                                                   guild=ctx.guild.name, icon=ctx.guild.icon, avatar=ctx.author.display_avatar).embed, view=view, ephemeral=True)
+                                                                   guild=ctx.guild.name, fault='0', icon=ctx.guild.icon, avatar=ctx.author.display_avatar).embed, view=view, ephemeral=True)
             else:
                 await ctx.response.edit_message(embed=StaffProfile(member=ctx.author, total_event=my_total_events, total_time=my_total_times, butterfly=my_butterfly, add_time=my_add_time,
-                                                                   guild=ctx.guild.name, icon=ctx.guild.icon, avatar=ctx.author.display_avatar).embed, view=view)
+                                                                   guild=ctx.guild.name, fault='0', icon=ctx.guild.icon, avatar=ctx.author.display_avatar).embed, view=view)
         except TypeError:
             if ctx.message is None:
                 await ctx.response.send_message(embed=DefaultEmbed('***```Выберите пользователя```***'), view=view, ephemeral=True)
@@ -57,11 +57,11 @@ class ClanService:
             if interact.user.id not in OWNER_IDS:
                 await interact.response.edit_message(
                     embed=StaffProfile(member=get_member, total_event=total_event, total_time=total_time, butterfly=get_butterfly, add_time=add_time,
-                                       guild=interact.guild.name, icon=interact.guild.icon, avatar=get_member.display_avatar).embed, view=view)
+                                       guild=interact.guild.name, fault='0', icon=interact.guild.icon, avatar=get_member.display_avatar).embed, view=view)
             else:
                 await interact.response.edit_message(
                     embed=StaffProfile(member=get_member, total_event=total_event, total_time=total_time, butterfly=get_butterfly, add_time=add_time,
-                                       guild=interact.guild.name, icon=interact.guild.icon, avatar=get_member.display_avatar).embed, view=create_profile_view)
+                                       guild=interact.guild.name, fault='0', icon=interact.guild.icon, avatar=get_member.display_avatar).embed, view=create_profile_view)
 
             async def edit_time_callback(inter: discord.Interaction):
                 await inter.response.send_message(embed=DefaultEmbed(
@@ -84,6 +84,7 @@ class ClanService:
                         staff_logger.info(f'{msg.author} изменил время ивентов {member_id} на {msg.content}')
 
                     except ValueError:
+                        staff_logger.warn(f'{msg.author}, ввів погане значення для часу.')
                         await inter.followup.send(embed=DefaultEmbed('Не коректное число.'), ephemeral=True)
                         await msg.delete()
                 else:
@@ -140,6 +141,9 @@ class ClanService:
                         await msg.delete()
                 else:
                     pass
+
+            async def edit_fault_callback(inter: discord.Interaction):
+                pass
 
             async def back_callback(inter: discord.Interaction, context: ApplicationContext = None):
                 await self.drop_menu(inter, context)

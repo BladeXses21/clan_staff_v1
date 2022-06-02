@@ -24,6 +24,14 @@ def get_random_item():
     return random.choice(remaining_item)
 
 
+
+
+
+
+
+
+
+
 class Item(BaseModel):
     name: str
     rarity: EnumItemRarity = EnumItemRarity.common

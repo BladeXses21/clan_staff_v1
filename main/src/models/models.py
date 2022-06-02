@@ -8,6 +8,7 @@ class ClanStaffModel(Document):
     sum_event_ends = IntField()  # суммарное количество проведенных ивентов
     wasting_time = IntField()  # суммарное потраченое время на все ивенты
     butterfly = IntField()  # бабочки - валюта клан стафф
+    fault = IntField()  # выговор - после третего выговора - улаояет с базы
     add_time = IntField()  # дата добавление участника выраженная в секундах unix time
 
 

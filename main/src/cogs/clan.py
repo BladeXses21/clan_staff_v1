@@ -4,7 +4,7 @@ from discord.ext import commands, tasks
 
 import extensions.logger
 from cogs.base import BaseCog
-from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, OWNER_IDS, BLADEXSES_ID
+from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT
 from embeds.clan_events_mode.auction.auction import AuctionEmbed
 from embeds.clan_events_mode.auction.lot import AuctionLot
 from embeds.clan_events_mode.help.help_embed import HelpEmbed

@@ -18,6 +18,7 @@ class CrossEventsSystem(DatabaseSystem):
         dbm.member_work_this_request = 0
         dbm.sum_event_ends = 0
         dbm.butterfly = 0
+        dbm.fault = 0
         dbm.wasting_time = 0
 
         self.cross_event_mode_collection.insert_one(dbm.to_mongo())
@@ -86,6 +87,11 @@ class CrossEventsSystem(DatabaseSystem):
         dbm = ClanStaffModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
 
         self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$inc': {'sum_event_ends': sum_event_ends}})
+
+    def update_fault(self, guild_id: int, clan_staff_id: int, fauld: int):
+        dbm = ClanStaffModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
+
+        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$inc': {'fault': fauld}})
 
     # ========================================= this cross clan system ======================================== $
 
@@ -213,6 +219,7 @@ class CrossEventsSystem(DatabaseSystem):
     def accept_clan_event(self, guild_id: int, message_id: int, clan_staff_id: int):
         crm = RequestModel(guild_id=guild_id, message_id=message_id)
         dbm = ClanStaffModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
+
         self.cross_clan_event_collection.update_one(crm.to_mongo(), {'$set': {'clan_staff_id': clan_staff_id,
                                                                               'time_accept_request': int(time.time())}})
         self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$set': {'member_work_this_request': message_id}})
