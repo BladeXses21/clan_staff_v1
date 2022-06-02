@@ -22,3 +22,11 @@ class DatabaseSystem(object):
     @property
     def cross_guild_collection(self):
         return self.db.cross_guild_collection
+
+    @property
+    def cross_stats_collection(self):
+        return self.db.cross_stats_collection
+
+    @property
+    def cross_item_collection(self):
+        return self.db.cross_item_collection

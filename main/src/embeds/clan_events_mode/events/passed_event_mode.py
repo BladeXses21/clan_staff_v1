@@ -11,8 +11,8 @@ class PassedEventModeEmbed(object):
                         f'**Коментарий:**```{comment}```\n'
                         f'**Ивентер:**```{clan_staff}```\n'
                         f'**Сумарное время:** ```{sum_time_event}```\n'
-                        f'**Время начала ивента:**<t:{time_accept_request}:R>\n'
-                        f'**Время конца:**<t:{int(time.time())}:R>\n\n{end_result}',
+                        f'**Время начала ивента:**<t:{time_accept_request}>\n'
+                        f'**Время конца:**<t:{int(time.time())}>\n\n{end_result}',
             color=Colour(0x36393F)
         )
         self._embed.set_author(name='запрос на ивент',
