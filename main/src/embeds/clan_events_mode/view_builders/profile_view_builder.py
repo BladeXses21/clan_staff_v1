@@ -1,5 +1,8 @@
 import discord
-from discord.ui import View, Button
+from discord import ApplicationContext
+from discord.ui import View, Button, Select
+
+from systems.cross_events.cross_event_system import cross_event_system
 
 
 class EditProfileView:

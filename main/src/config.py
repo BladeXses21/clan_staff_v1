@@ -91,3 +91,11 @@ NEXT_STEP_PINK_EMOJI = '<a:next_step_pink:980113385955934208>'
 BARRETTE_BLUE_EMOJI = '<:barrette_blue:980112872736718908>'
 BARRETTE_PINK_EMOJI = '<:barrette__pink:980112872690548756>'
 UKI_EMOGI = '<a:uki2:959118514814324788>'
+
+chances_for_items = {
+    'common': 54,
+    'rare': 23,
+    'mythical': 12,
+    'legendary': 11,
+    'immortal': 1
+}

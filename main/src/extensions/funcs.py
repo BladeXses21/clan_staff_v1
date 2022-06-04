@@ -2,6 +2,7 @@ import time
 from random import choice
 
 import discord
+import requests
 from discord import Member
 from discord.ext import tasks
 from discord.ui import Select
@@ -10,6 +11,7 @@ from embeds.clan_events_mode.auction.trash_channel_embed import AuctionTrashEmbe
 from main import client
 from embeds.clan_events_mode.staff.staff import StaffEmbed, GuildListEmbed
 from systems.cross_events.cross_event_system import cross_event_system
+from systems.cross_events.server_system import cross_server_system
 
 
 def add_clan_staff_response(member: Member) -> str:
@@ -63,7 +65,7 @@ def get_staff_event_list(members) -> str:
 def get_guild_list(guild) -> str:
     counter = 1
     description = ''
-    client_category = client.get_channel(cross_event_system.get_text_category_by_guild_id(guild.id))
+    client_category = client.get_channel(cross_server_system.get_text_category_by_guild_id(guild.id))
     for category in guild.categories:
         if category.name == client_category.name:
             for channel in category.text_channels:
@@ -155,26 +157,17 @@ async def get_guilds_list_async(interaction, ctx, clan_id, list_response, button
     )
 
 
-async def drop_down_menu(interaction):
-    clan_staff_options = []
-
-    for i in cross_event_system.enumeration_events_mode(interaction.guild.id):
-        member = interaction.guild.get_member(i['clan_staff_id'])
-        clan_staff_options.append(discord.SelectOption(label=i['clan_staff_id'], description=member.name, emoji='<a:_an:967471171480207420>'))
-
-    drop_menu = Select(options=clan_staff_options, placeholder='Выберите человека для отображения')
-
-    view = discord.ui.View(timeout=None)
-    view.add_item(drop_menu)
-
-    return view
-
-
 @tasks.loop(minutes=60)
 async def send_trash_auction(ctx, role):
     guild = ctx.guild
-    auction_channl_id = cross_event_system.get_auction_channel(guild.id)
-    trash_channel_id = cross_event_system.get_trash_channel(guild.id)
+    auction_channl_id = cross_server_system.get_auction_channel(guild.id)
+    trash_channel_id = cross_server_system.get_trash_channel(guild.id)
     get_auction_channel = client.get_channel(auction_channl_id)
     get_trash_channel = client.get_channel(trash_channel_id)
     await get_trash_channel.send(embed=AuctionTrashEmbed(get_auction_channel, role).embed)
+
+# def get_text_id(guild_id, member_id):
+#     url = f'https://yukine.ru/api/members/{guild_id}/{member_id}'
+#     r = requests.get(url)
+#     the_user = r.json()
+#     return the_user['clan']['textId']

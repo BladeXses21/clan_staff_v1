@@ -1,7 +1,6 @@
 from mongoengine import Document, IntField, StringField
 
-
-class ClanStaffModel(Document):
+class CrossStafModel(Document):
     guild_id = IntField(min_value=0)  # ID сервера
     clan_staff_id = IntField(min_value=0)  # ID участника clan staff
     member_work_this_request = IntField()  # ID сообщения в которым работает clan staff
@@ -9,6 +8,7 @@ class ClanStaffModel(Document):
     wasting_time = IntField()  # суммарное потраченое время на все ивенты
     butterfly = IntField()  # бабочки - валюта клан стафф
     fault = IntField()  # выговор - после третего выговора - улаояет с базы
+    little_fault = IntField()  # устный выговор - после второго такого - выдается 1 обычный выговор (fault)
     add_time = IntField()  # дата добавление участника выраженная в секундах unix time
 
 
@@ -60,3 +60,8 @@ class SavedStatModel(Document):
     butterfly = IntField()  # бабочки - валюта клан стафф
     total_event_ends = IntField()
     total_time_events = IntField()
+
+
+class InventoryModel(Document):
+    name = StringField()
+    rarity = StringField()

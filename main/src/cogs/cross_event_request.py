@@ -22,6 +22,8 @@ from embeds.base import DefaultEmbed
 from extensions.funcs import sum_event_time, is_member_in_voice, get_guilds_list_async, get_staff_list_async, get_staff_event_list, remove_clan_staff_response, add_clan_staff_response
 from extensions.logger import staff_logger
 from systems.cross_events.cross_event_system import cross_event_system
+from systems.cross_events.saved_stats_system import save_stats_system
+from systems.cross_events.server_system import cross_server_system
 from utils.events import ALL_EVENTS
 from config import TENDERLY_ID, META_ID, DARKNESS_ID, HATORY_ID, CLAN_STAFF, OWNER_IDS, STOP_WORD
 from cogs.base import BaseCog
@@ -49,7 +51,7 @@ class CrossEventsMode(BaseCog):
     async def add(self, ctx, member: discord.Member):
         author_name = ctx.author.name
         guild = ctx.guild.id
-        get_channel_id = cross_event_system.get_event_channel_by_guild_id(guild_id=ctx.guild.id)
+        get_channel_id = cross_server_system.get_event_channel_by_guild_id(guild_id=ctx.guild.id)
         event_channel = client.get_channel(get_channel_id)
         overwrite = discord.PermissionOverwrite(read_messages=True, send_messages=True, read_message_history=True)
         if member is None:
@@ -58,7 +60,7 @@ class CrossEventsMode(BaseCog):
                 delete_after=60
             )
 
-        if cross_event_system.find_guild_id(guild_id=guild) is False:
+        if cross_server_system.find_guild_id(guild_id=guild) is False:
             return await ctx.send(
                 embed=DefaultEmbed(f'***```{author_name}, клан стафф не существует на этом сервере```***'),
                 delete_after=60
@@ -73,7 +75,7 @@ class CrossEventsMode(BaseCog):
         await event_channel.set_permissions(member, overwrite=overwrite)
         staff_logger.info(f'{ctx.author}, use !staff add to {member}')
         cross_event_system.add_clan_staff(guild_id=guild, clan_staff_id=member.id)
-        cross_event_system.create_stat(guild_id=guild, clan_staff_id=member.id)
+        save_stats_system.create_stat(guild_id=guild, clan_staff_id=member.id)
         return await ctx.send(embed=DefaultEmbed(add_clan_staff_response(member)))
 
     @staff.command(description='Убрать человека из clan staff')
@@ -81,7 +83,7 @@ class CrossEventsMode(BaseCog):
     async def kick(self, ctx, member: discord.Member):
         author_name = ctx.author.name
         guild = ctx.guild.id
-        get_channel_id = cross_event_system.get_event_channel_by_guild_id(guild_id=ctx.guild.id)
+        get_channel_id = cross_server_system.get_event_channel_by_guild_id(guild_id=ctx.guild.id)
         event_channel = client.get_channel(get_channel_id)
         if member is None:
             return await ctx.send(
@@ -89,7 +91,7 @@ class CrossEventsMode(BaseCog):
                 delete_after=60
             )
 
-        if cross_event_system.find_guild_id(guild_id=guild) is False:
+        if cross_server_system.find_guild_id(guild_id=guild) is False:
             return await ctx.send(
                 embed=DefaultEmbed(f'***```{author_name}, клан стафф не существует на этом сервере```***'),
                 delete_after=60
@@ -113,7 +115,7 @@ class CrossEventsMode(BaseCog):
         guild = ctx.guild.id
         def_view = default_view_builder.create_choice_view()
 
-        if cross_event_system.find_guild_id(guild_id=guild) is False:
+        if cross_server_system.find_guild_id(guild_id=guild) is False:
             return await ctx.send(
                 embed=DefaultEmbed(f'***```{author_name}, клан стафф не существует на этом сервере```***'),
                 delete_after=60
@@ -271,7 +273,7 @@ class CrossEventsMode(BaseCog):
 
         staff_logger.info(f'{interaction.user} вызвал комаду /event request {event_num} {users_count} {comment}')
 
-        channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_cross_guild(guild.id)
+        channel_id, role_id, text_category_id, voice_category_id = cross_server_system.get_cross_guild(guild.id)
         event_request_view = event_view_builder.create_event_request_view()
 
         member_ids = is_member_in_voice(guild.categories, client.get_channel(voice_category_id).name)
@@ -422,7 +424,7 @@ class CrossEventsMode(BaseCog):
                 )
 
                 cross_event_system.pass_clan_event(guild_id=server.id, clan_staff_id=user.id, waisting_time=int(time.time()) - int(time_accept))
-                cross_event_system.add_stat(guild_id=server.id, clan_staff_id=user.id, waisting_time=int(time.time()) - int(time_accept))
+                save_stats_system.add_stat(guild_id=server.id, clan_staff_id=user.id, waisting_time=int(time.time()) - int(time_accept))
                 cross_event_system.delete_clan_event(guild_id=server.id, message_id=message.id)
                 await msg.delete()
                 print(ev_num, com, clan_n, user.name, 'Ивент завершен!')

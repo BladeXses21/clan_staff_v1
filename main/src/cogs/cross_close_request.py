@@ -17,13 +17,6 @@ class CrossCloseRequest(BaseCog):
         super().__init__(client)
         print("Cog 'clan close' connected!")
 
-        # @commands.command(name='test')
-        # async def test(self, ctx, guild_id, member_id):
-        #     url = f'https://yukine.ru/api/members/{guild_id}/{member_id}'
-        #     r = requests.get(url)
-        #     the_user = r.json()
-        #     print(the_user['clan']['textId'])
-
     # close = discord.SlashCommandGroup('event', 'commands to request event')
     #
     # @close.command(name='request', description='Запрос клоза клан на клан', default_permission=True)
