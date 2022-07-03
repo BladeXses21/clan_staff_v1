@@ -30,3 +30,19 @@ class DatabaseSystem(object):
     @property
     def cross_item_collection(self):
         return self.db.cross_item_collection
+
+    @property
+    def cross_tasks_collection(self):
+        return self.db.cross_tasks_collection
+
+    @property
+    def events_history(self):
+        return self.db.events_history
+
+    @property
+    def fault_collection(self):
+        return self.db.fault_collection
+
+    @property
+    def quest_collection(self):
+        return self.db.quest_collection

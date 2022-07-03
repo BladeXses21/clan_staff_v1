@@ -2,14 +2,14 @@ import discord
 import requests
 from discord import Option
 
-from extensions.funcs import is_member_in_voice, get_clan_channel_names
+from extensions.funcs import is_member_in_voice, get_clan_channel_names, total_amount
 from utils.close_enum import ClanCloseEnum
 from cogs.base import BaseCog
-from embeds.clan_events_mode.clan_close.close import ClanCloseEmbed
-from embeds.clan_events_mode.clan_close.accepted_close import AcceptedClanCloseEmbed
+from embeds.clan_embed.clan_close.close import ClanCloseEmbed
+from embeds.clan_embed.clan_close.accepted_close import AcceptedClanCloseEmbed
 from embeds.base import DefaultEmbed
 from main import client
-from systems.cross_events.cross_event_system import cross_event_system
+from systems.cross_events.event_system import cross_event_system
 
 
 class CrossCloseRequest(BaseCog):

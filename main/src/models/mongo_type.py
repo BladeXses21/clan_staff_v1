@@ -1,4 +1,9 @@
-from mongoengine import Document, IntField, StringField
+import json
+
+from mongoengine import *
+
+connect("clan_staff_base")
+
 
 class CrossStafModel(Document):
     guild_id = IntField(min_value=0)  # ID сервера
@@ -6,10 +11,15 @@ class CrossStafModel(Document):
     member_work_this_request = IntField()  # ID сообщения в которым работает clan staff
     sum_event_ends = IntField()  # суммарное количество проведенных ивентов
     wasting_time = IntField()  # суммарное потраченое время на все ивенты
-    butterfly = IntField()  # бабочки - валюта клан стафф
-    fault = IntField()  # выговор - после третего выговора - улаояет с базы
-    little_fault = IntField()  # устный выговор - после второго такого - выдается 1 обычный выговор (fault)
+    curator = IntField(min_value=0)  # id человека который принял
+    xp_counter = IntField(min_value=0)  # опыт полученый за выполение квестов
+    minimum_limit = IntField(min_value=0)  # минимальное количество времени нужное ивентеру для выполения нормы
+    avatar = StringField(min_length=1)
+    background = StringField(min_length=1)
+    birthday = StringField(min_length=1)
     add_time = IntField()  # дата добавление участника выраженная в секундах unix time
+    color = IntField()
+    lvl = IntField(min_value=1)
 
 
 class CrossGuildModel(Document):
@@ -62,6 +72,46 @@ class SavedStatModel(Document):
     total_time_events = IntField()
 
 
+class DailyTasksModel(Document):
+    guild_id = IntField(min_value=0)
+    clan_staff_id = IntField(min_value=0)
+    simple_quest = StringField()
+    middle_quest = StringField()
+    hard_quest = StringField()
+
+
 class InventoryModel(Document):
     name = StringField()
     rarity = StringField()
+
+
+class FaultModel(Document):
+    guild_id = IntField(min_value=0)
+    clan_staff_id = IntField(unique=True, min_value=0)
+    fault_list = ListField()
+
+    def json(self):
+        fault_dict = {
+            "guild_id": self.guild_id,
+            "clan_staff_id": self.clan_staff_id,
+            "fault_list": self.fault_list
+        }
+        return json.dumps(fault_dict)
+
+
+class QuestModel(Document):
+    guild_id = IntField(min_value=0)
+    clan_staff_id = IntField(unique=True, min_value=0)
+    quest_list = ListField()
+
+    def json(self):
+        quest_dict = {
+            "guild_id": self.guild_id,
+            "clan_staff_id": self.clan_staff_id,
+            "quest_list": self.quest_list
+        }
+        return json.dumps(quest_dict)
+
+
+class Number(EmbeddedDocument):
+    sequential_value = SequenceField(required=True)

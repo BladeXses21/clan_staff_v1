@@ -1,21 +1,30 @@
-import discord
-from discord import ApplicationContext
-from discord.ext import commands, tasks
+from json import JSONDecodeError
 
-import extensions.logger
+import discord
+from discord import ApplicationContext, Embed
+from discord.ext import commands
+import json
 from cogs.base import BaseCog
-from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT
-from embeds.clan_events_mode.auction.auction import AuctionEmbed
-from embeds.clan_events_mode.auction.lot import AuctionLot
-from embeds.clan_events_mode.help.help_embed import HelpEmbed
-from embeds.clan_events_mode.staff.clan_command import ClanCommandsEmbed
+from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE
 from embeds.base import DefaultEmbed
+from embeds.clan_embed.auction.auction import AuctionEmbed
+from embeds.clan_embed.auction.lot import AuctionLot
+from embeds.clan_embed.help.help_embed import HelpEmbed
+from embeds.clan_embed.staff.clan_command import ClanCommandsEmbed
+from embeds.clan_embed.staff.clan_message import ClanMessageEmbed
 from embeds.view_builder import default_view_builder
 from extensions.decorator import is_owner, is_owner_rights
 from extensions.logger import staff_logger
 from main import client
-from embeds.clan_events_mode.staff.clan_message import ClanMessageEmbed
+from systems.cross_events.fault_system import fault_system
 from systems.cross_events.server_system import cross_server_system
+
+
+def get_embed(json_):
+    embed_json = json.loads(json_)
+
+    embed = Embed().from_dict(embed_json)
+    return embed
 
 
 class Clan(BaseCog):
@@ -33,6 +42,11 @@ class Clan(BaseCog):
             if len(ctx.message.role_mentions) != 1:
                 staff_logger.info(self.clan)
                 return await ctx.send(embed=ClanCommandsEmbed().embed, delete_after=60)
+
+    @clan.command()
+    @is_owner()
+    async def ad(self, ctx, member: discord.Member):
+        fault_system.ad(guild_id=ctx.guild.id, clan_staff_id=member.id)
 
     @clan.command(description='Добавить новый сервер в бд')
     @is_owner()
@@ -161,6 +175,18 @@ class Clan(BaseCog):
 
         default_view_builder.button_accept.callback = accept_callback
         default_view_builder.button_decline.callback = decline_callback
+
+    @commands.command(description='Отправка ембеда')
+    @commands.has_any_role(*PERMISSION_ROLE)
+    async def emb(self, ctx: ApplicationContext, *, args):
+        try:
+            embed = get_embed(args)
+            await ctx.send(embed=embed)
+            return await ctx.message.delete()
+
+        except JSONDecodeError as e:
+            await ctx.send(embed=DefaultEmbed(f'Error: {str(e)}'))
+            return await ctx.message.delete()
 
 
 def setup(bot):

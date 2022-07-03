@@ -1,12 +1,13 @@
 import time
 
+from config import STANDART_PROFILE_AVATAR, STANDART_PROFILE_BACKGROUND, STANDART_BIRTHDAY
 from systems.database_system import DatabaseSystem
 from models.mongo_type import CrossStafModel, RequestModel
 
 
 class CrossEventsSystem(DatabaseSystem):
 
-    def add_clan_staff(self, guild_id: int, clan_staff_id: int) -> bool:
+    def add_clan_staff(self, guild_id: int, clan_staff_id: int, curator: int) -> bool:
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         if self.cross_event_mode_collection.find_one(dbm.to_mongo()):
             return False
@@ -14,10 +15,15 @@ class CrossEventsSystem(DatabaseSystem):
         dbm.add_time = int(time.time())
         dbm.member_work_this_request = 0
         dbm.sum_event_ends = 0
-        dbm.butterfly = 0
-        dbm.fault = 0
-        dbm.little_fault = 0
+        dbm.curator = curator
+        dbm.minimum_limit = 0
+        dbm.xp_counter = 0
         dbm.wasting_time = 0
+        dbm.birthday = STANDART_BIRTHDAY
+        dbm.avatar = STANDART_PROFILE_AVATAR
+        dbm.background = STANDART_PROFILE_BACKGROUND
+        dbm.color = 15222085
+        dbm.lvl = 1
 
         self.cross_event_mode_collection.insert_one(dbm.to_mongo())
         return True
@@ -49,13 +55,34 @@ class CrossEventsSystem(DatabaseSystem):
 
     def enumeration_events_mode(self, guild_id: int):
         dbm = CrossStafModel(guild_id=guild_id)
-        return self.cross_event_mode_collection.find(dbm.to_mongo(), {'clan_staff_id': 1, 'sum_event_ends': 1}).sort('sum_event_ends')
+        return self.cross_event_mode_collection.find(
+            dbm.to_mongo(),
+            {
+                '_id': 0,
+                'clan_staff_id': 1,
+                'sum_event_ends': 1
+            }
+        ).sort('sum_event_ends')
 
     def get_clan_staff(self, guild_id: int, clan_staff_id: int):
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
+        return res['clan_staff_id'], res['sum_event_ends'], res['wasting_time'], res['add_time'], res['curator'], res['xp_counter'], res['avatar'], res['background'], res['birthday'], res['color']
 
-        return res['clan_staff_id'], res['sum_event_ends'], res['wasting_time'], res['fault'], res['little_fault'], res['add_time']
+    def get_lvl_count(self, guild_id: int, clan_staff_id: int):
+        dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
+        res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
+        return res['lvl']
+
+    def get_xp_count(self, guild_id: int, clan_staff_id: int):
+        dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
+        res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
+        return res['lvl']
+
+    def get_color_and_avatar(self, guild_id: int, clan_staff_id: int):
+        dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
+        res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
+        return res['color'], res['avatar']
 
     # достает всех ивентеров с базы для таблицы
     def get_event_organizers(self, guild_id: int):
@@ -86,15 +113,30 @@ class CrossEventsSystem(DatabaseSystem):
 
         self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$inc': {'sum_event_ends': sum_event_ends}})
 
-    def update_fault(self, guild_id: int, clan_staff_id: int, fault: int):
+    def update_birthday(self, guild_id: int, clan_staff_id: int, new_birthday: str):
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
 
-        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$inc': {'fault': fault}})
+        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {"$set": {"birthday": new_birthday}})
 
-    def update_little_fault(self, guild_id: int, clan_staff_id: int, little_fault: int):
+    def update_avatar(self, guild_id: int, clan_staff_id: int, new_avatar: str):
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
 
-        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$inc': {'little_fault': little_fault}})
+        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {"$set": {"avatar": new_avatar}})
+
+    def update_background(self, guild_id: int, clan_staff_id: int, new_background: str):
+        dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
+
+        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {"$set": {"background": new_background}})
+
+    def update_xp_counter(self, guild_id: int, clan_staff_id: int, xp: int):
+        dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
+
+        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {"$inc": {"xp_counter": xp}})
+
+    def set_lvl(self, guild_id: int, clan_staff_id: int, lvl: int):
+        dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
+
+        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {"$set": {"lvl": lvl}})
 
     # ========================================= this request system ======================================== $
 
