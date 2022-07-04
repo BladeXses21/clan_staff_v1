@@ -1,21 +1,30 @@
-import discord
-from discord import ApplicationContext
-from discord.ext import commands, tasks
+from json import JSONDecodeError
 
-import extensions.logger
+import discord
+from discord import ApplicationContext, Embed
+from discord.ext import commands
+import json
 from cogs.base import BaseCog
-from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT
-from embeds.clan_events_mode.auction.auction import AuctionEmbed
-from embeds.clan_events_mode.auction.lot import AuctionLot
-from embeds.clan_events_mode.help.help_embed import HelpEmbed
-from embeds.clan_events_mode.staff.clan_command import ClanCommandsEmbed
+from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE
 from embeds.base import DefaultEmbed
+from embeds.clan_embed.auction.auction import AuctionEmbed
+from embeds.clan_embed.auction.lot import AuctionLot
+from embeds.clan_embed.help.help_embed import HelpEmbed
+from embeds.clan_embed.staff.clan_command import ClanCommandsEmbed
+from embeds.clan_embed.staff.clan_message import ClanMessageEmbed
 from embeds.view_builder import default_view_builder
 from extensions.decorator import is_owner, is_owner_rights
 from extensions.logger import staff_logger
 from main import client
-from systems.cross_events.cross_event_system import cross_event_system
-from embeds.clan_events_mode.staff.clan_message import ClanMessageEmbed
+from systems.cross_events.fault_system import fault_system
+from systems.cross_events.server_system import cross_server_system
+
+
+def get_embed(json_):
+    embed_json = json.loads(json_)
+
+    embed = Embed().from_dict(embed_json)
+    return embed
 
 
 class Clan(BaseCog):
@@ -34,20 +43,36 @@ class Clan(BaseCog):
                 staff_logger.info(self.clan)
                 return await ctx.send(embed=ClanCommandsEmbed().embed, delete_after=60)
 
+    @clan.command()
+    @is_owner()
+    async def ad(self, ctx, member: discord.Member):
+        fault_system.ad(guild_id=ctx.guild.id, clan_staff_id=member.id)
+
     @clan.command(description='Добавить новый сервер в бд')
     @is_owner()
     async def guild(self, ctx, guild: discord.Guild, event_channel: discord.TextChannel,
                     text_category: discord.CategoryChannel, voice_category: discord.CategoryChannel,
-                    clan_staff_role: discord.Role, auction_channel: discord.TextChannel, trash_channel: discord.TextChannel):
+                    clan_staff_role: discord.Role, auction_channel: discord.TextChannel, trash_channel: discord.TextChannel, leader_role_id, consliger_role_id, find_clan_channel_id,
+                    clan_info_channel_id, create_clan_url, verify_url, clan_staff_url, team_lead_id, senior_lead_id):
         # only for owner - BladeXses
-        if cross_event_system.add_guild(
+        if cross_server_system.add_guild(
                 guild_id=guild.id,
                 event_channel_id=event_channel.id,
                 text_category_id=text_category.id,
                 voice_category_id=voice_category.id,
                 clan_staff_role_id=clan_staff_role.id,
                 auction_channel_id=auction_channel.id,
-                trash_channel_id=trash_channel.id
+                trash_channel_id=trash_channel.id,
+                leader_role_id=leader_role_id,
+                consliger_role_id=consliger_role_id,
+                find_clan_channel_id=find_clan_channel_id,
+                clan_info_channel_id=clan_info_channel_id,
+                create_clan_url=create_clan_url,
+                verify_url=verify_url,
+                clan_staff_url=clan_staff_url,
+                team_lead_id=team_lead_id,
+                senior_lead_id=senior_lead_id,
+
         ):
             return await ctx.send(embed=DefaultEmbed('Сервер был успешно добавлен'))
         else:
@@ -55,7 +80,8 @@ class Clan(BaseCog):
 
     @clans.command(name='help', description='Помощник по кланам', default_permission=True)
     async def help(self, interaction: discord.Interaction):
-        leader_role_id, consliger_role_id, find_clan_id, clan_info_id, create_url, verify_url, clan_staff_url, team_lead_id, senior_lead_id = cross_event_system.get_help_fields(interaction.guild.id)
+        leader_role_id, consliger_role_id, find_clan_id, clan_info_id, create_url, verify_url, clan_staff_url, team_lead_id, senior_lead_id = cross_server_system.get_help_fields(
+            interaction.guild.id)
         leader_role = interaction.guild.get_role(leader_role_id)
         consliger_role = interaction.guild.get_role(consliger_role_id)
         find_clan = interaction.guild.get_channel(find_clan_id)
@@ -71,7 +97,7 @@ class Clan(BaseCog):
     async def auction(self, ctx, role: discord.Role, amount: int, *args):
         from extensions.funcs import send_trash_auction
 
-        get_auction_channel = client.get_channel(cross_event_system.get_auction_channel(ctx.guild.id))
+        get_auction_channel = client.get_channel(cross_server_system.get_auction_channel(ctx.guild.id))
         send_message = ' '.join(args)
         auction_msg = await get_auction_channel.send(embed=AuctionEmbed(
             clan=role.mention,
@@ -122,7 +148,7 @@ class Clan(BaseCog):
             if interaction.user.id != ctx.author.id:
                 return False
 
-            get_text_category = client.get_channel(cross_event_system.get_text_category_by_guild_id(ctx.guild.id))
+            get_text_category = client.get_channel(cross_server_system.get_text_category_by_guild_id(interaction.guild.id))
 
             for category in interaction.guild.categories:
                 if category.name == get_text_category.name:
@@ -149,6 +175,18 @@ class Clan(BaseCog):
 
         default_view_builder.button_accept.callback = accept_callback
         default_view_builder.button_decline.callback = decline_callback
+
+    @commands.command(description='Отправка ембеда')
+    @commands.has_any_role(*PERMISSION_ROLE)
+    async def emb(self, ctx: ApplicationContext, *, args):
+        try:
+            embed = get_embed(args)
+            await ctx.send(embed=embed)
+            return await ctx.message.delete()
+
+        except JSONDecodeError as e:
+            await ctx.send(embed=DefaultEmbed(f'Error: {str(e)}'))
+            return await ctx.message.delete()
 
 
 def setup(bot):

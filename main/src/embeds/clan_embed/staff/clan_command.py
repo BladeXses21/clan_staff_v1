@@ -13,6 +13,7 @@ class ClanCommandsEmbed(object):
         self._embed.add_field(name='guild', value='***```Добавить сервер в бота```***')
         self._embed.add_field(name='auction [role_id] [amount] [end_time]', value='***```Выставить клан на аукцион```***')
         self._embed.add_field(name='send [message]', value='***```Рассылка сообщения по кланам```***')
+        self._embed.add_field(name='emb {embed}', value='***```Отправка ботом эмбела с json```***')
 
     @property
     def embed(self):

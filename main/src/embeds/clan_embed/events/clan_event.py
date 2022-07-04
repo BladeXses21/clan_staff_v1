@@ -1,5 +1,6 @@
 from discord import Embed, Colour
 
+from config import png_strip_for_embed
 from embeds.base import DefaultEmbed
 
 
@@ -15,7 +16,7 @@ class ClanEventEmbed(object):
         )
         self._embed.set_author(name='запрос на ивент',
                                icon_url='https://images-ext-2.discordapp.net/external/ZtDftGSI1KwmT7ML9u9R23RJqJHQv8cx1TPHxsQY2q0/%3Fsize%3D80%26quality%3Dlossless/https/cdn.discordapp.com/emojis/936017706480717825.gif'),
-        self._embed.set_image(url='https://cdn.discordapp.com/attachments/823681920411107348/825483461040799784/1111.png')
+        self._embed.set_image(url=png_strip_for_embed)
 
     @property
     def embed(self):

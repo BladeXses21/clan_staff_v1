@@ -1,15 +1,20 @@
+import random
 import time
 from random import choice
 
-import discord
 from discord import Member
 from discord.ext import tasks
-from discord.ui import Select
-from config import DAY_IN_SECONDS
-from embeds.clan_events_mode.auction.trash_channel_embed import AuctionTrashEmbed
+
+from config import DAY_IN_SECONDS, level_multiplier
+from embeds.clan_embed.auction.trash_channel_embed import AuctionTrashEmbed
+from embeds.clan_embed.staff.staff import StaffEmbed, GuildListEmbed
 from main import client
-from embeds.clan_events_mode.staff.staff import StaffEmbed, GuildListEmbed
-from systems.cross_events.cross_event_system import cross_event_system
+from systems.cross_events.event_history_system import event_history
+from systems.cross_events.event_system import cross_event_system
+from systems.cross_events.fault_system import fault_system
+from systems.cross_events.quest_system import quest_system
+from systems.cross_events.server_system import cross_server_system
+from utils.events import ALL_EVENTS
 
 
 def add_clan_staff_response(member: Member) -> str:
@@ -46,16 +51,17 @@ def sum_time(secs: int) -> str:
     if secs >= DAY_IN_SECONDS:
         secs -= DAY_IN_SECONDS
         days += 1
-    result = time.strftime(f"{days}:%H:%M:%S", time.gmtime(secs))
+    result = time.strftime(f"0{days}:%H:%M:%S", time.gmtime(secs))
     return result
 
 
+# todo - qweqw
 def get_staff_event_list(members) -> str:
     counter = 1
     description = ''
     for member in members:
         description += f'{counter}. <@{member["clan_staff_id"]}> — {str(member["sum_event_ends"])} ивентов' \
-                       f' — {sum_time(member["wasting_time"])} времени — <t:{member["add_time"]}:R>\n'
+                       f' — {sum_time(member["wasting_time"])} времени — {total_amount(seconds=1, lvl=1)}\n'
         counter += 1
     return description
 
@@ -63,7 +69,7 @@ def get_staff_event_list(members) -> str:
 def get_guild_list(guild) -> str:
     counter = 1
     description = ''
-    client_category = client.get_channel(cross_event_system.get_text_category_by_guild_id(guild.id))
+    client_category = client.get_channel(cross_server_system.get_text_category_by_guild_id(guild.id))
     for category in guild.categories:
         if category.name == client_category.name:
             for channel in category.text_channels:
@@ -79,14 +85,82 @@ def sum_event_time(guild: int, message_id: int):
     return str(time.strftime("%H:%M:%S", result))
 
 
-# def check_member_on_voice(interaction, category_name) -> list[int]:
-#     members = []
-#     for category in interaction:
-#         if category.name == category_name:
-#             for channel in category.voice_channels:
-#                 if len(channel.members) > 0:
-#                     members.append(*channel.members)
-#     return [member.id for member in members]
+def get_event_history(guild_id: int, member_id: int):
+    counter = 1
+    description = ''
+    for history in event_history.get_history(guild_id=guild_id, clan_staff_id=member_id):
+        description += f'**#{counter}** {history["name"]} | {int(history["time"] / 60)} m. | {history["clan"]} | <t:{history["date_end"]}>\n'
+        counter += 1
+
+    return description
+
+
+def get_fault(guild_id: int, member_id: int):
+    date = ''
+    reason = ''
+    f_type = ''
+    for fault in fault_system.get_fault(guild_id=guild_id, clan_staff_id=member_id):
+        str(fault['index']) + '\n'
+        date += f"**#{str(fault['index'])}**" + f"<t:{fault['add_date']}:R>" + '\n'
+        reason += fault['reason'] + '\n'
+        f_type += fault['type'] + '\n'
+    return date, reason, f_type
+
+
+def quest_info(guild_id: int, member_id: int):
+    res = quest_system.get_quest_xp(guild_id=guild_id, clan_staff_id=member_id)
+    xp_ = {}
+    quest_time = {}
+    for quest in res["quest_list"]:
+        xp_[quest["name"]] = quest['xp']
+        quest_time[quest['name']] = quest['timer']
+
+    return xp_, quest_time
+
+
+def get_quest_list(guild_id: int, member_id: int):
+    counter = 1
+    description = ''
+    for quest in quest_system.get_quest_list(guild_id=guild_id, clan_staff_id=member_id):
+        description += f'> **#{counter}** {quest["name"]} | {int(quest["timer"])} m.***```награда: {quest["xp"]} xp```***\n'
+        counter += 1
+
+    return description
+
+
+def total_amount(seconds: int, lvl):
+    total_minutes = int(seconds / 60)
+    amount = 0
+    butterfly = 0
+    description = ''
+    if total_minutes <= 299:
+        amount += total_minutes
+        return amount
+    if total_minutes <= 350:
+        amount += 1000
+        return amount
+    if total_minutes >= 350:
+        amount += 1000
+        total_minutes -= 350
+        while True:
+            if total_minutes < 50:
+                description += f'{amount} | {int(butterfly)}'
+                return description
+            else:
+                total_minutes -= 50
+                butterfly += level_multiplier[lvl] * 20
+
+
+def xp_to_lvl(xp: int):
+    if xp < 250:
+        return 1
+    if xp < 500:
+        return 2
+    if xp < 950:
+        return 3
+    if xp > 950:
+        return 4
+
 
 def is_member_in_voice(interaction, category_name) -> list[int]:
     members_id = []
@@ -155,26 +229,17 @@ async def get_guilds_list_async(interaction, ctx, clan_id, list_response, button
     )
 
 
-async def drop_down_menu(interaction):
-    clan_staff_options = []
-
-    for i in cross_event_system.enumeration_events_mode(interaction.guild.id):
-        member = interaction.guild.get_member(i['clan_staff_id'])
-        clan_staff_options.append(discord.SelectOption(label=i['clan_staff_id'], description=member.name, emoji='<a:_an:967471171480207420>'))
-
-    drop_menu = Select(options=clan_staff_options, placeholder='Выберите человека для отображения')
-
-    view = discord.ui.View(timeout=None)
-    view.add_item(drop_menu)
-
-    return view
-
-
 @tasks.loop(minutes=60)
 async def send_trash_auction(ctx, role):
     guild = ctx.guild
-    auction_channl_id = cross_event_system.get_auction_channel(guild.id)
-    trash_channel_id = cross_event_system.get_trash_channel(guild.id)
+    auction_channl_id = cross_server_system.get_auction_channel(guild.id)
+    trash_channel_id = cross_server_system.get_trash_channel(guild.id)
     get_auction_channel = client.get_channel(auction_channl_id)
     get_trash_channel = client.get_channel(trash_channel_id)
     await get_trash_channel.send(embed=AuctionTrashEmbed(get_auction_channel, role).embed)
+
+# def get_text_id(guild_id, member_id):
+#     url = f'https://yukine.ru/api/members/{guild_id}/{member_id}'
+#     r = requests.get(url)
+#     the_user = r.json()
+#     return the_user['clan']['textId']
