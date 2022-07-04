@@ -77,7 +77,7 @@ class CrossEventsSystem(DatabaseSystem):
     def get_xp_count(self, guild_id: int, clan_staff_id: int):
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
-        return res['lvl']
+        return res['xp']
 
     def get_color_and_avatar(self, guild_id: int, clan_staff_id: int):
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)

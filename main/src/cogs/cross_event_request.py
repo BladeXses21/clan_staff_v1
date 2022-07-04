@@ -576,13 +576,15 @@ class CrossEventsMode(BaseCog):
 
     @staff.command(description='update birthday user')
     @is_owner_rights()
-    async def dr(self, ctx: ApplicationContext, member: discord.Member, new_birthday: str):
+    async def dr(self, ctx: ApplicationContext, member: discord.Member, *args: str):
+        birthday = ' '.join(args)
         if member is None:
             return await ctx.send(embed=DefaultEmbed('***```Ошибка | Форма команды: !staff dr [id/@link] [new_birthday]```***'), delete_after=10)
-        if len(new_birthday) <= 2:
-            return await ctx.send(embed=DefaultEmbed('***```Укажите больше 2 символов```***'), delete_after=10)
-        cross_event_system.update_birthday(ctx.guild.id, member.id, new_birthday)
-        return await ctx.send(embed=DefaultEmbed(f'***```{member.name}, успешно обновлен на {new_birthday}```***'), delete_after=30)
+        # if len(args) <= 2:
+        #     return await ctx.send(embed=DefaultEmbed('***```Укажите больше 2 символов```***'), delete_after=10)
+        cross_event_system.update_birthday(ctx.guild.id, member.id, birthday)
+        await ctx.send(embed=DefaultEmbed(f'***```{member.name}, успешно обновлен на {birthday}```***'), delete_after=30)
+        return await ctx.message.delete()
 
     @staff.command(description='update user avatar')
     @is_owner_rights()

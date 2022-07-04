@@ -55,12 +55,13 @@ def sum_time(secs: int) -> str:
     return result
 
 
+# todo - qweqw
 def get_staff_event_list(members) -> str:
     counter = 1
     description = ''
     for member in members:
         description += f'{counter}. <@{member["clan_staff_id"]}> — {str(member["sum_event_ends"])} ивентов' \
-                       f' — {sum_time(member["wasting_time"])} времени — <t:{member["add_time"]}:R>\n'
+                       f' — {sum_time(member["wasting_time"])} времени — {total_amount(seconds=1, lvl=1)}\n'
         counter += 1
     return description
 
