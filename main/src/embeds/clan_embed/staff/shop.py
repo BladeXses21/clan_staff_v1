@@ -1,7 +1,7 @@
 from discord import Embed
 
 from config import png_strip_for_embed
-from models.shop_type import shop_item
+from models.shop import shop_item
 
 
 class StaffShop(object):

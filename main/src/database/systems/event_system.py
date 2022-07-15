@@ -1,7 +1,7 @@
 import time
 
 from config import STANDART_PROFILE_AVATAR, STANDART_PROFILE_BACKGROUND, STANDART_BIRTHDAY
-from systems.database_system import DatabaseSystem
+from database.database_system import DatabaseSystem
 from models.mongo_type import CrossStafModel, RequestModel
 
 
@@ -77,7 +77,7 @@ class CrossEventsSystem(DatabaseSystem):
     def get_xp_count(self, guild_id: int, clan_staff_id: int):
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
-        return res['xp']
+        return res['xp_counter']
 
     def get_color_and_avatar(self, guild_id: int, clan_staff_id: int):
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)

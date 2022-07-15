@@ -1,5 +1,5 @@
 from models.mongo_type import CrossGuildModel
-from systems.database_system import DatabaseSystem
+from database.database_system import DatabaseSystem
 
 
 class CrossServerSystem(DatabaseSystem):
@@ -56,25 +56,25 @@ class CrossServerSystem(DatabaseSystem):
 
         return res['auction_channel_id']
 
-    def get_role_by_guild_id(self, guild_id: int):
+    def get_role(self, guild_id: int):
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
         return res['clan_staff_role_id']
 
-    def get_event_channel_by_guild_id(self, guild_id: int):
+    def get_event_channel(self, guild_id: int):
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
         return res['event_channel_id']
 
-    def get_text_category_by_guild_id(self, guild_id: int):
+    def get_text_category(self, guild_id: int):
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
         return res['text_category_id']
 
-    def get_voice_category_by_guild_id(self, guild_id: int):
+    def get_voice_category(self, guild_id: int):
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 

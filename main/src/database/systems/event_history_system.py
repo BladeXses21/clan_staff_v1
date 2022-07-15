@@ -1,4 +1,4 @@
-from systems.database_system import DatabaseSystem
+from database.database_system import DatabaseSystem
 
 
 class HistorySystem(DatabaseSystem):

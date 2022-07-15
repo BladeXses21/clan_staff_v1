@@ -1,5 +1,5 @@
 import time
-from systems.database_system import DatabaseSystem
+from database.database_system import DatabaseSystem
 from models.mongo_type import FaultModel, Number
 
 

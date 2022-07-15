@@ -1,5 +1,5 @@
 from models.mongo_type import SavedStatModel
-from systems.database_system import DatabaseSystem
+from database.database_system import DatabaseSystem
 
 
 class CrossSaveStatsSystem(DatabaseSystem):

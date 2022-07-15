@@ -25,7 +25,7 @@ class StaffCommandsEmbed(object):
         self._embed.add_field(name='av [id/link] [image_url]', value='***```Изменить аватарку в профиле участника```***')
         self._embed.add_field(name='back [id/link] [image_url]', value='***```Изменить фон в профиле участника```***')
         self._embed.add_field(name='quest [id/link]', value='***```Просмотреть действующие квесты участника```***')
-        self._embed.add_field(name='new_quest [event_name] [timer] [xp]', value='***```Создать новый квест для всех участников```***', inline=False)
+        self._embed.add_field(name='new_quest [timer] [xp] [event_name]', value='***```Создать новый квест для всех участников```***', inline=False)
         self._embed.add_field(name='rem_quest [id/@link] [event_name]', value='***```Удалить квест определенному участнику```***', inline=False)
 
     @property

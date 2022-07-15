@@ -1,10 +1,10 @@
 import random
 from config import CHANCE_FOR_ITEMS
 
+from utils.singltone import Singleton
 
-# todo - переделать редкость шмоток в соответсвии их стоимости разделев на 2 списка
 
-class ShopItem:
+class ShopItem(Singleton):
     def __init__(self):
         self.rariry_to_object = {
             "common": [8, 9, 10, 15, 17, 18, 19],

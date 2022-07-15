@@ -1,5 +1,3 @@
-import time
-
 from discord import Embed, Colour
 
 from config import png_strip_for_embed

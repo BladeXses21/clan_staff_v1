@@ -1,7 +1,4 @@
 import logging
-import traceback
-
-from discord.ext import commands
 
 
 def get_logger(name):

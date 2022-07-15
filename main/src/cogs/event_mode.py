@@ -1,14 +1,15 @@
-import datetime
 import time
+from io import BytesIO
 
 import discord
+from PIL import Image, ImageDraw, ImageFont
 from discord import ApplicationContext
 from discord.commands import Option
-from discord.ext import commands, tasks
+from discord.ext import commands
 from discord.ui import View
 
 from cogs.base import BaseCog
-from config import TENDERLY_ID, META_ID, DARKNESS_ID, HATORY_ID, CLAN_STAFF, STOP_WORD, SERVERS, SWEETNESS_ID, OWNER_IDS
+from config import TENDERLY_ID, META_ID, DARKNESS_ID, HATORY_ID, CLAN_STAFF, STOP_WORD, SWEETNESS_ID, OWNER_IDS
 from embeds.base import DefaultEmbed
 from embeds.clan_embed.events.accepted_event_mode import accept_event_embed
 from embeds.clan_embed.events.clan_event import full_request_respons
@@ -22,18 +23,18 @@ from embeds.clan_embed.staff.staff_command import StaffCommandsEmbed
 from embeds.clan_embed.view_builders.event_view_builder import event_view_builder
 from embeds.clan_embed.view_builders.staff_view_builder import staff_view_builder
 from embeds.view_builder import default_view_builder
-from extensions.decorator import is_owner_rights
+from extensions.decorator import is_owner_rights, is_owner
 from extensions.funcs import sum_event_time, is_member_in_voice, get_guilds_list_async, get_staff_list_async, get_staff_event_list, remove_clan_staff_response, add_clan_staff_response, \
-    get_event_history, get_fault, get_quest_list, quest_info, xp_to_lvl
+    get_event_history, get_fault, get_quest_list, quest_info, xp_to_lvl, circle, quest_limit
 from extensions.logger import staff_logger
 from main import client
 from service.staff_service import ClanService
-from systems.cross_events.event_history_system import event_history
-from systems.cross_events.event_system import cross_event_system
-from systems.cross_events.fault_system import fault_system
-from systems.cross_events.quest_system import quest_system
-from systems.cross_events.saved_stats_system import save_stats_system
-from systems.cross_events.server_system import cross_server_system
+from database.systems.event_history_system import event_history
+from database.systems.event_system import cross_event_system
+from database.systems.fault_system import fault_system
+from database.systems.quest_system import quest_system
+from database.systems.saved_stats_system import save_stats_system
+from database.systems.server_system import cross_server_system
 from utils.events import ALL_EVENTS
 
 
@@ -68,7 +69,7 @@ class CrossEventsMode(BaseCog):
     async def add(self, ctx, member: discord.Member):
         author_name = ctx.author.name
         guild = ctx.guild.id
-        get_channel_id = cross_server_system.get_event_channel_by_guild_id(guild_id=ctx.guild.id)
+        get_channel_id = cross_server_system.get_event_channel(guild_id=ctx.guild.id)
         event_channel = client.get_channel(get_channel_id)
         overwrite = discord.PermissionOverwrite(read_messages=True, send_messages=True, read_message_history=True)
         if member is None:
@@ -104,7 +105,7 @@ class CrossEventsMode(BaseCog):
     async def kick(self, ctx, member: discord.Member):
         author_name = ctx.author.name
         guild = ctx.guild.id
-        get_channel_id = cross_server_system.get_event_channel_by_guild_id(guild_id=ctx.guild.id)
+        get_channel_id = cross_server_system.get_event_channel(guild_id=ctx.guild.id)
         event_channel = client.get_channel(get_channel_id)
         if member is None:
             return await ctx.send(
@@ -187,7 +188,7 @@ class CrossEventsMode(BaseCog):
     async def list(self, ctx):
         staff_button = staff_view_builder.create_staff_list_view()
         members = cross_event_system.get_event_organizers(guild_id=ctx.guild.id)
-        description = get_staff_event_list(members)
+        description = get_staff_event_list(members, guild_id=ctx.guild.id)
         list_response = await ctx.send(
             embed=StaffEmbed(
                 description=description,
@@ -204,7 +205,7 @@ class CrossEventsMode(BaseCog):
             await get_staff_list_async(
                 interaction=interact,
                 ctx=ctx,
-                clan_id=TENDERLY_ID,
+                server_id=TENDERLY_ID,
                 list_response=list_response,
                 button=staff_button
             )
@@ -213,7 +214,7 @@ class CrossEventsMode(BaseCog):
             await get_staff_list_async(
                 interaction=interact,
                 ctx=ctx,
-                clan_id=META_ID,
+                server_id=META_ID,
                 list_response=list_response,
                 button=staff_button
             )
@@ -222,7 +223,7 @@ class CrossEventsMode(BaseCog):
             await get_staff_list_async(
                 interaction=interact,
                 ctx=ctx,
-                clan_id=DARKNESS_ID,
+                server_id=DARKNESS_ID,
                 list_response=list_response,
                 button=staff_button
             )
@@ -231,7 +232,7 @@ class CrossEventsMode(BaseCog):
             await get_staff_list_async(
                 interaction=interact,
                 ctx=ctx,
-                clan_id=HATORY_ID,
+                server_id=HATORY_ID,
                 list_response=list_response,
                 button=staff_button
             )
@@ -240,7 +241,7 @@ class CrossEventsMode(BaseCog):
             await get_staff_list_async(
                 interaction=interact,
                 ctx=ctx,
-                clan_id=SWEETNESS_ID,
+                server_id=SWEETNESS_ID,
                 list_response=list_response,
                 button=staff_button
             )
@@ -357,8 +358,7 @@ class CrossEventsMode(BaseCog):
             message = ctx.message
             channel = client.get_channel(ctx.channel.id)
             get_msg = await channel.fetch_message(message.id)
-            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id,
-                                                                                    message_id=ctx.message.id)
+            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id, message_id=ctx.message.id)
             get_member_send = ctx.guild.get_member(member_send_id)
 
             if cross_event_system.is_clan_staff(server.id, user.id) is False:
@@ -620,9 +620,51 @@ class CrossEventsMode(BaseCog):
 
     @staff.command()
     @is_owner_rights()
-    async def new_quest(self, ctx, name: str, timer: int, xp: int):
-        quest_system.create_new_quest(guild_id=ctx.guild.id, name=name, timer=timer, xp=xp)
-        await ctx.send(embed=DefaultEmbed(f'***```{ctx.author.name}, квест {name} | {timer} m. | {xp} xp, заряжен```***'))
+    async def new_quest(self, ctx, timer: int, xp: int, *args: str):
+        name = ' '.join(args)
+        response = ''
+        guild_id = ctx.guild.id
+        _members = cross_event_system.get_event_organizers(guild_id=guild_id)
+        try:
+            for member in _members:
+                if quest_limit(guild_id=guild_id, member_id=member['clan_staff_id']) is True:
+                    quest_system.create_new_quest(guild_id=guild_id, member_id=member['clan_staff_id'], name=name, timer=timer, xp=xp)
+                    response += f'<@{member["clan_staff_id"]}> ***`квест {name} | {timer} m. | {xp} xp, заряжен;`***\n'
+                else:
+                    response += f'<@{member["clan_staff_id"]}> ***`пользователь достиг лимита, квест не заряжен;`***\n'
+        except ValueError as e:
+            await ctx.send(embed=DefaultEmbed(f"***```Error: {str(e)}\nCorrect command: !staff new_quest timer xp event_name```***"), delete_after=10)
+        await ctx.send(embed=DefaultEmbed(response + "***```Зарядка окончена.```***"), delete_after=120)
+
+    @staff.command()
+    @is_owner()
+    async def p(self, ctx: ApplicationContext, member: discord.Member = None):
+
+        if not member:
+            member = ctx.author
+        _name, _Id, = str(member.name), str(member.id)
+
+        base_img = Image.open('Profile_custom.png').convert("RGBA")
+
+        pfp = member.display_avatar.with_size(256)
+        data = BytesIO(await pfp.read())
+        pfp = Image.open(data).convert('RGBA')
+
+        draw = ImageDraw.Draw(base_img)
+        pfp = circle(pfp, size=(645, 645))
+        font = ImageFont.truetype('Nunito-Italic.ttf', 38)
+        main_font = ImageFont.truetype('Nunito-Italic.ttf', 27)
+        second_font = ImageFont.truetype('Nunito-Italic.ttf', 24)
+
+        draw.text((840, 720), _name, font=font)
+        draw.text((270, 315), _Id, font=main_font)
+        # draw.text(())
+        base_img.paste(pfp, (56, 158), pfp)
+
+        with BytesIO() as i:
+            base_img.save(i, 'PNG')
+            i.seek(0)
+            await ctx.send(file=discord.File(i, 'profile.png'))
 
 
 def setup(bot):
