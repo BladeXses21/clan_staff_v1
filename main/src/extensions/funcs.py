@@ -1,7 +1,7 @@
-import random
 import time
 from random import choice
 
+from PIL import Image, ImageDraw, ImageChops
 from discord import Member
 from discord.ext import tasks
 
@@ -9,12 +9,11 @@ from config import DAY_IN_SECONDS, level_multiplier
 from embeds.clan_embed.auction.trash_channel_embed import AuctionTrashEmbed
 from embeds.clan_embed.staff.staff import StaffEmbed, GuildListEmbed
 from main import client
-from systems.cross_events.event_history_system import event_history
-from systems.cross_events.event_system import cross_event_system
-from systems.cross_events.fault_system import fault_system
-from systems.cross_events.quest_system import quest_system
-from systems.cross_events.server_system import cross_server_system
-from utils.events import ALL_EVENTS
+from database.systems.event_history_system import event_history
+from database.systems.event_system import cross_event_system
+from database.systems.fault_system import fault_system
+from database.systems.quest_system import quest_system
+from database.systems.server_system import cross_server_system
 
 
 def add_clan_staff_response(member: Member) -> str:
@@ -55,13 +54,13 @@ def sum_time(secs: int) -> str:
     return result
 
 
-# todo - qweqw
-def get_staff_event_list(members) -> str:
+def get_staff_event_list(members, guild_id) -> str:
     counter = 1
     description = ''
     for member in members:
+        lvl = cross_event_system.get_lvl_count(guild_id=guild_id, clan_staff_id=member["clan_staff_id"])
         description += f'{counter}. <@{member["clan_staff_id"]}> — {str(member["sum_event_ends"])} ивентов' \
-                       f' — {sum_time(member["wasting_time"])} времени — {total_amount(seconds=1, lvl=1)}\n'
+                       f' — {sum_time(member["wasting_time"])} времени — {total_amount(seconds=member["wasting_time"], lvl=lvl)} зарплата\n'
         counter += 1
     return description
 
@@ -69,7 +68,7 @@ def get_staff_event_list(members) -> str:
 def get_guild_list(guild) -> str:
     counter = 1
     description = ''
-    client_category = client.get_channel(cross_server_system.get_text_category_by_guild_id(guild.id))
+    client_category = client.get_channel(cross_server_system.get_text_category(guild.id))
     for category in guild.categories:
         if category.name == client_category.name:
             for channel in category.text_channels:
@@ -126,6 +125,11 @@ def get_quest_list(guild_id: int, member_id: int):
         counter += 1
 
     return description
+
+
+def quest_limit(guild_id: int, member_id: int):
+    if len(quest_system.get_quest_list(guild_id=guild_id, clan_staff_id=member_id)) <= 8:
+        return True
 
 
 def total_amount(seconds: int, lvl):
@@ -201,12 +205,12 @@ def get_clan_stats(guild, category_name):
     return result
 
 
-async def get_staff_list_async(interaction, ctx, clan_id, list_response, button):
+async def get_staff_list_async(interaction, ctx, server_id, list_response, button):
     if interaction.user.id != ctx.author.id:
         return False
-    get_tenderly_guild = client.get_guild(clan_id)
-    server_members = cross_event_system.get_event_organizers(guild_id=clan_id)
-    event_list = get_staff_event_list(server_members)
+    get_tenderly_guild = client.get_guild(server_id)
+    _members = cross_event_system.get_event_organizers(guild_id=server_id)
+    event_list = get_staff_event_list(_members, guild_id=server_id)
     await list_response.edit(
         embed=StaffEmbed(event_list, guild=get_tenderly_guild.name, user=interaction.user.name, icon=get_tenderly_guild.icon).embed,
         view=button, delete_after=160)
@@ -238,8 +242,22 @@ async def send_trash_auction(ctx, role):
     get_trash_channel = client.get_channel(trash_channel_id)
     await get_trash_channel.send(embed=AuctionTrashEmbed(get_auction_channel, role).embed)
 
+
 # def get_text_id(guild_id, member_id):
 #     url = f'https://yukine.ru/api/members/{guild_id}/{member_id}'
 #     r = requests.get(url)
 #     the_user = r.json()
 #     return the_user['clan']['textId']
+
+
+def circle(pfp, size=(215, 215)):
+    pfp = pfp.resize(size, Image.ANTIALIAS).convert("RGBA")
+
+    bigsize = (pfp.size[0] * 3, pfp.size[1] * 3)
+    mask = Image.new('L', bigsize, 0)
+    draw = ImageDraw.Draw(mask)
+    draw.ellipse((0, 0) + bigsize, fill=255)
+    mask = mask.resize(pfp.size, Image.ANTIALIAS)
+    mask = ImageChops.darker(mask, pfp.split()[-1])
+    pfp.putalpha(mask)
+    return pfp

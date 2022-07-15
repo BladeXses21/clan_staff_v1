@@ -3,9 +3,7 @@ import os
 from discord.ext import commands
 from config import TOKEN, PREFIX
 from extensions.logger import staff_logger
-from embeds.base import DefaultEmbed
-from models.mongo_type import FaultModel
-from systems.database_system import DatabaseSystem
+
 
 client = commands.Bot(command_prefix=PREFIX,
                       help_command=None,
@@ -23,7 +21,6 @@ async def on_command_error(ctx, error):
         return
     staff_logger.error(f'{str(ctx.author)} | {ctx.message.content}')
     staff_logger.error(error)
-
 
 for filename in os.listdir("cogs"):
     if filename.endswith(".py"):

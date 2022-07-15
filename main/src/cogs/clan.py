@@ -1,23 +1,26 @@
+import json
 from json import JSONDecodeError
 
 import discord
 from discord import ApplicationContext, Embed
 from discord.ext import commands
-import json
+
 from cogs.base import BaseCog
-from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE
+from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE, OWNER_IDS
+from database.systems.fault_system import fault_system
+from database.systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
 from embeds.clan_embed.auction.auction import AuctionEmbed
 from embeds.clan_embed.auction.lot import AuctionLot
 from embeds.clan_embed.help.help_embed import HelpEmbed
 from embeds.clan_embed.staff.clan_command import ClanCommandsEmbed
 from embeds.clan_embed.staff.clan_message import ClanMessageEmbed
+from embeds.clan_embed.view_builders.help_view_builder import help_view_builder
 from embeds.view_builder import default_view_builder
 from extensions.decorator import is_owner, is_owner_rights
 from extensions.logger import staff_logger
 from main import client
-from systems.cross_events.fault_system import fault_system
-from systems.cross_events.server_system import cross_server_system
+from models.modal import StaffModal, ClanModal
 
 
 def get_embed(json_):
@@ -41,7 +44,8 @@ class Clan(BaseCog):
         if not ctx.invoked_subcommand:
             if len(ctx.message.role_mentions) != 1:
                 staff_logger.info(self.clan)
-                return await ctx.send(embed=ClanCommandsEmbed().embed, delete_after=60)
+                if ctx.author.id in OWNER_IDS:
+                    return await ctx.send(embed=ClanCommandsEmbed().embed, delete_after=60)
 
     @clan.command()
     @is_owner()
@@ -82,15 +86,26 @@ class Clan(BaseCog):
     async def help(self, interaction: discord.Interaction):
         leader_role_id, consliger_role_id, find_clan_id, clan_info_id, create_url, verify_url, clan_staff_url, team_lead_id, senior_lead_id = cross_server_system.get_help_fields(
             interaction.guild.id)
-        leader_role = interaction.guild.get_role(leader_role_id)
-        consliger_role = interaction.guild.get_role(consliger_role_id)
-        find_clan = interaction.guild.get_channel(find_clan_id)
-        clan_info = interaction.guild.get_channel(clan_info_id)
+        leader_role, consliger_role = interaction.guild.get_role(leader_role_id), interaction.guild.get_role(consliger_role_id)
+        find_clan, clan_info = interaction.guild.get_channel(find_clan_id), interaction.guild.get_channel(clan_info_id)
         staff_logger.info(f'help command use :: {interaction.user}')
+
+        help_view = help_view_builder.create_staff_view()
         await interaction.response.send_message(
             embed=HelpEmbed(guild_name=interaction.guild.name, leader_role=leader_role.mention, consliger_role=consliger_role.mention,
                             find_clan_channel=find_clan.mention, create_clan_url=create_url, verify_url=verify_url, clan_info=clan_info.mention,
-                            clan_staff_url=clan_staff_url, lead=f'<@{team_lead_id}>', senior=f'<@{senior_lead_id}>').embed, ephemeral=True)
+                            clan_staff_url=clan_staff_url, lead=f'<@{team_lead_id}>', senior=f'<@{senior_lead_id}>').embed, view=help_view, ephemeral=True)
+
+        async def request_staff_callback(interact: ApplicationContext):
+            staff_modal = StaffModal(interact)
+            await interact.response.send_modal(modal=staff_modal)
+
+        async def request_clan_callback(interact: ApplicationContext):
+            clan_modal = ClanModal(interact, title="Форма для создания клана")
+            await interact.response.send_modal(modal=clan_modal)
+
+        help_view_builder.button_staff.callback = request_staff_callback
+        help_view_builder.button_clan.callback = request_clan_callback
 
     @clan.command(description='Выставить клан на аукцион')
     @is_owner_rights()
@@ -148,7 +163,7 @@ class Clan(BaseCog):
             if interaction.user.id != ctx.author.id:
                 return False
 
-            get_text_category = client.get_channel(cross_server_system.get_text_category_by_guild_id(interaction.guild.id))
+            get_text_category = client.get_channel(cross_server_system.get_text_category(interaction.guild.id))
 
             for category in interaction.guild.categories:
                 if category.name == get_text_category.name:

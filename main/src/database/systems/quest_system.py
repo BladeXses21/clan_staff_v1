@@ -1,4 +1,4 @@
-from systems.database_system import DatabaseSystem
+from database.database_system import DatabaseSystem
 from models.mongo_type import QuestModel
 import time
 
@@ -14,8 +14,8 @@ class QuestSystem(DatabaseSystem):
         quest = QuestModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         self.quest_collection.delete_one(quest.to_mongo())
 
-    def create_new_quest(self, guild_id: int, name: str, timer: int, xp: int):
-        self.quest_collection.update_many({'guild_id': guild_id}, {
+    def create_new_quest(self, guild_id: int, member_id: int, name: str, timer: int, xp: int):
+        self.quest_collection.update_one({'guild_id': guild_id, 'clan_staff_id': member_id}, {
             '$push':
                 {
                     'quest_list':

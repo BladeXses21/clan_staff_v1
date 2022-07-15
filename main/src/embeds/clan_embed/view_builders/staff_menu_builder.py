@@ -36,13 +36,12 @@ class StandartView:
         admin_view.add_item(self.button_history)
         admin_view.add_item(self.button_fault)
         admin_view.add_item(self.button_hiden)
-        admin_view.add_item(drop_down)
         admin_view.add_item(self.button_edit_time)
         admin_view.add_item(self.button_edit_event)
         admin_view.add_item(self.button_edit_butterflies)
         admin_view.add_item(self.button_edit_xp)
         admin_view.add_item(self.button_hiden_two)
-
+        admin_view.add_item(drop_down)
         return admin_view
 
 

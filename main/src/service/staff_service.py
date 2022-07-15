@@ -2,7 +2,7 @@ import discord
 from discord import ApplicationContext, Interaction
 from discord.ui import Select
 
-from config import OWNER_IDS, SHOP_CHANNEL_ID
+from config import OWNER_IDS, SHOP_CHANNEL_ID, BLADEXSES_ID
 from embeds.base import DefaultEmbed
 from embeds.clan_embed.fault.fault_embed import FaultEmbed
 from embeds.clan_embed.history.event_history import HistoryEmbed
@@ -14,9 +14,9 @@ from embeds.clan_embed.view_builders.staff_menu_builder import clan_staff_view
 from extensions.funcs import get_event_history, get_fault, get_quest_list
 from extensions.logger import staff_logger
 from main import client
-from models.shop_type import shop_item
-from systems.cross_events.event_system import cross_event_system
-from systems.cross_events.saved_stats_system import save_stats_system
+from models.shop import shop_item
+from database.systems.event_system import cross_event_system
+from database.systems.saved_stats_system import save_stats_system
 
 
 class ClanService:
@@ -73,7 +73,7 @@ class ClanService:
             get_member = interact.guild.get_member(member_id)
 
             if interact.user.id not in OWNER_IDS:
-                # todo - подумать что делать с цветом профилей / доделать квесты
+                # todo - подумать что делать с цветом профилей
                 await interact.response.edit_message(
                     embed=StaffProfile(member=get_member, total_event=total_event, total_time=total_time, butterfly=get_butterfly, add_time=add_time, curator=f'<@{curator}>', xp=xp,
                                        avatar_img=avatar, background_img=background, birthday=birthday, color=color, lvl=lvl).embed, view=common_view)
@@ -261,7 +261,7 @@ class ClanService:
                         await inter.followup.send(embed=DefaultEmbed(values_content), delete_after=120)
                         msg = await client.wait_for('message', check=check)
                         if msg.author.id == inte.user.id:
-                            await inte.client.get_channel(SHOP_CHANNEL_ID).send(embed=DefaultEmbed(f'{inte.user.mention}\n{values_content}\n{msg.content}'))
+                            await inte.client.get_channel(SHOP_CHANNEL_ID).send(content=f'<@&{BLADEXSES_ID}>', embed=DefaultEmbed(f'{inte.user.mention}\n{values_content}\n{msg.content}'))
                             return await msg.delete()
 
                 # обработка запроса кураторов на магазин | историю и т.д.
