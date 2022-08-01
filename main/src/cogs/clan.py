@@ -96,11 +96,11 @@ class Clan(BaseCog):
                             find_clan_channel=find_clan.mention, create_clan_url=create_url, verify_url=verify_url, clan_info=clan_info.mention,
                             clan_staff_url=clan_staff_url, lead=f'<@{team_lead_id}>', senior=f'<@{senior_lead_id}>').embed, view=help_view, ephemeral=True)
 
-        async def request_staff_callback(interact: ApplicationContext):
+        async def request_staff_callback(interact: interaction):
             staff_modal = StaffModal(interact)
             await interact.response.send_modal(modal=staff_modal)
 
-        async def request_clan_callback(interact: ApplicationContext):
+        async def request_clan_callback(interact: interaction):
             clan_modal = ClanModal(interact, title="Форма для создания клана")
             await interact.response.send_modal(modal=clan_modal)
 

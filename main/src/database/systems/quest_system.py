@@ -27,19 +27,15 @@ class QuestSystem(DatabaseSystem):
                         }}
         })
 
-    def get_quest_list(self, guild_id: int, clan_staff_id: int):
+    def get_quest_list(self, guild_id: int, clan_staff_id: int) -> list:
         res = self.quest_collection.find_one({'guild_id': guild_id, 'clan_staff_id': clan_staff_id})
 
         if res is None:
-            return ()
+            return []
 
         return res['quest_list']
 
-    def get_quest_info(self, guild_id: int, clan_staff_id: int):
-        res = self.quest_collection.find_one({'guild_id': guild_id, 'clan_staff_id': clan_staff_id}, projection={'_id': False})
-        return res
-
-    def get_quest_xp(self, guild_id: int, clan_staff_id: int):
+    def get_quest_xp(self, guild_id: int, clan_staff_id: int) -> dict[QuestModel.quest_list]:
         res = self.quest_collection.find_one({'guild_id': guild_id, 'clan_staff_id': clan_staff_id}, {"quest_list": 1})
         return res
 

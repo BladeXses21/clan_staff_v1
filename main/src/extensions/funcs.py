@@ -5,15 +5,15 @@ from PIL import Image, ImageDraw, ImageChops
 from discord import Member
 from discord.ext import tasks
 
-from config import DAY_IN_SECONDS, level_multiplier
+from config import DAY_IN_SECONDS, LEVEL_MULTIPLIER, XP_INCREMENT
 from embeds.clan_embed.auction.trash_channel_embed import AuctionTrashEmbed
 from embeds.clan_embed.staff.staff import StaffEmbed, GuildListEmbed
-from main import client
 from database.systems.event_history_system import event_history
 from database.systems.event_system import cross_event_system
 from database.systems.fault_system import fault_system
 from database.systems.quest_system import quest_system
 from database.systems.server_system import cross_server_system
+from main import client
 
 
 def add_clan_staff_response(member: Member) -> str:
@@ -100,7 +100,7 @@ def get_fault(guild_id: int, member_id: int):
     f_type = ''
     for fault in fault_system.get_fault(guild_id=guild_id, clan_staff_id=member_id):
         str(fault['index']) + '\n'
-        date += f"**#{str(fault['index'])}**" + f"<t:{fault['add_date']}:R>" + '\n'
+        date += f"**#{str(fault['index'])}**<t:{fault['add_date']}:R>" + '\n'
         reason += fault['reason'] + '\n'
         f_type += fault['type'] + '\n'
     return date, reason, f_type
@@ -152,17 +152,17 @@ def total_amount(seconds: int, lvl):
                 return description
             else:
                 total_minutes -= 50
-                butterfly += level_multiplier[lvl] * 20
+                butterfly += LEVEL_MULTIPLIER[lvl] * 20
 
 
 def xp_to_lvl(xp: int):
-    if xp < 250:
+    if xp < XP_INCREMENT[1]:
         return 1
-    if xp < 500:
+    if xp < XP_INCREMENT[2]:
         return 2
-    if xp < 950:
+    if xp < XP_INCREMENT[3]:
         return 3
-    if xp > 950:
+    if xp > XP_INCREMENT[4]:
         return 4
 
 
@@ -205,14 +205,23 @@ def get_clan_stats(guild, category_name):
     return result
 
 
+def number_of_people_in_clan(guild, category_name):
+    response = ''
+    for category in guild.categories:
+        if category.name == category_name:
+            for channel in category.voice_channels:
+                response += f'**{str(channel.name)}**  |  количество человек в войсе: **{str(len(channel.members))}** | \n'
+    return response
+
+
 async def get_staff_list_async(interaction, ctx, server_id, list_response, button):
     if interaction.user.id != ctx.author.id:
         return False
-    get_tenderly_guild = client.get_guild(server_id)
+    get_guild = client.get_guild(server_id)
     _members = cross_event_system.get_event_organizers(guild_id=server_id)
     event_list = get_staff_event_list(_members, guild_id=server_id)
     await list_response.edit(
-        embed=StaffEmbed(event_list, guild=get_tenderly_guild.name, user=interaction.user.name, icon=get_tenderly_guild.icon).embed,
+        embed=StaffEmbed(event_list, guild=get_guild.name, user=interaction.user.id, icon=get_guild.icon).embed,
         view=button, delete_after=160)
 
 

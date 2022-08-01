@@ -1,7 +1,6 @@
 import discord
 from discord import ApplicationContext
 from discord.ui import InputText, Modal
-
 from config import REQUEST_STAFF_CHANNEL, CURATOR_ROLE_BY_SERVER_ID, png_strip_for_embed, BLADEXSES_ID, CLAN_CREATE_REQUEST_CHANNEL
 
 
@@ -23,6 +22,7 @@ class StaffModal(Modal):
         emb.add_field(name='Укажи свой часовой пояс:', value=self.children[3].value, inline=False)
         emb.add_field(name='Количество нарушений и онлайн на сервере:', value=self.children[4].value, inline=False)
         emb.set_image(url=png_strip_for_embed)
+        await interaction.response.send_message(content=f'{interaction.user.mention}, заявка успешно отправлена', embed=emb, ephemeral=True)
         await interaction.client.get_channel(REQUEST_STAFF_CHANNEL[interaction.guild.id]).send(content=f'<@&{CURATOR_ROLE_BY_SERVER_ID[interaction.guild.id]}>', embed=emb)
 
 
@@ -43,4 +43,5 @@ class ClanModal(Modal):
         emb.add_field(name='Был ли клан в прошлом:', value=self.children[2].value, inline=False)
         emb.add_field(name='Название клана и цвет:', value=self.children[3].value, inline=False)
         emb.set_image(url=png_strip_for_embed)
+        await interaction.response.send_message(content=f'{interaction.user.mention}, заявка успешно отправлена', embed=emb, ephemeral=True)
         await interaction.client.get_channel(CLAN_CREATE_REQUEST_CHANNEL).send(content=f'<@{BLADEXSES_ID}>', embed=emb)

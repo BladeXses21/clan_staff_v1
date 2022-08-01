@@ -1,19 +1,18 @@
+from typing import Tuple, Any
+
 from models.mongo_type import CrossGuildModel
 from database.database_system import DatabaseSystem
 
 
 class CrossServerSystem(DatabaseSystem):
     # ========================================= this cross clan system ======================================== $
+    srv_modal = CrossGuildModel()
 
     def add_guild(self, guild_id: int, event_channel_id: int, text_category_id: int,
                   voice_category_id: int, clan_staff_role_id: int, auction_channel_id: int, trash_channel_id: int,
                   leader_role_id: int, consliger_role_id: int, find_clan_channel_id: int, clan_info_channel_id: int,
                   create_clan_url: str, verify_url: str, clan_staff_url: str, team_lead_id: int, senior_lead_id: int) -> bool:
-        cgm = CrossGuildModel(
-            guild_id=guild_id, event_channel_id=event_channel_id,
-            text_category_id=text_category_id, voice_category_id=voice_category_id,
-            clan_staff_role_id=clan_staff_role_id, auction_channel_id=auction_channel_id, trash_channel_id=trash_channel_id
-        )
+        cgm = CrossGuildModel(guild_id=guild_id)
 
         if self.cross_guild_collection.find_one(cgm.to_mongo()):
             return False
@@ -38,49 +37,50 @@ class CrossServerSystem(DatabaseSystem):
         self.cross_guild_collection.insert_one(cgm.to_mongo())
         return True
 
-    def get_help_fields(self, guild_id: int):
+    def get_help_fields(self, guild_id: int) -> tuple[srv_modal.leader_role_id, srv_modal.consliger_role_id, srv_modal.find_clan_channel_id, srv_modal.clan_info_channel_id,
+                                                      srv_modal.create_clan_url, srv_modal.verify_url, srv_modal.clan_staff_url, srv_modal.team_lead_id, srv_modal.senior_lead_id]:
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
         return res['leader_role_id'], res['consliger_role_id'], res['find_clan_channel_id'], res['clan_info_channel_id'], res['create_clan_url'], res['verify_url'], res['clan_staff_url'], \
                res['team_lead_id'], res['senior_lead_id']
 
-    def get_trash_channel(self, guild_id: int):
+    def get_trash_channel(self, guild_id: int) -> CrossGuildModel.trash_channel_id:
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
         return res['trash_channel_id']
 
-    def get_auction_channel(self, guild_id: int):
+    def get_auction_channel(self, guild_id: int) -> CrossGuildModel.auction_channel_id:
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
         return res['auction_channel_id']
 
-    def get_role(self, guild_id: int):
+    def get_role(self, guild_id: int) -> CrossGuildModel.clan_staff_role_id:
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
         return res['clan_staff_role_id']
 
-    def get_event_channel(self, guild_id: int):
+    def get_event_channel(self, guild_id: int) -> CrossGuildModel.event_channel_id:
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
         return res['event_channel_id']
 
-    def get_text_category(self, guild_id: int):
+    def get_text_category(self, guild_id: int) -> CrossGuildModel.text_category_id:
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
         return res['text_category_id']
 
-    def get_voice_category(self, guild_id: int):
+    def get_voice_category(self, guild_id: int) -> CrossGuildModel.voice_category_id:
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 
         return res['voice_category_id']
 
-    def get_cross_guild(self, guild_id: int):
+    def get_cross_guild(self, guild_id: int) -> tuple[srv_modal.event_channel_id, srv_modal.clan_staff_role_id, srv_modal.text_category_id, srv_modal.voice_category_id]:
         cgm = CrossGuildModel(guild_id=guild_id)
         res = self.cross_guild_collection.find_one(cgm.to_mongo())
 

@@ -1,4 +1,4 @@
-from discord import Embed, Colour
+from discord import Embed
 
 from config import PREFIX
 
@@ -26,7 +26,8 @@ class StaffCommandsEmbed(object):
         self._embed.add_field(name='back [id/link] [image_url]', value='***```Изменить фон в профиле участника```***')
         self._embed.add_field(name='quest [id/link]', value='***```Просмотреть действующие квесты участника```***')
         self._embed.add_field(name='new_quest [timer] [xp] [event_name]', value='***```Создать новый квест для всех участников```***', inline=False)
-        self._embed.add_field(name='rem_quest [id/@link] [event_name]', value='***```Удалить квест определенному участнику```***', inline=False)
+        self._embed.add_field(name='rem_quest [event_name] [id/@link]', value='***```Удалить квест определенному участнику | Если не указать человека, квест удалиться всем```***', inline=False)
+        self._embed.add_field(name='refresh [id/@link]', value='***```Используется в случае если человек не смог завершить ивент | сбрасывает ивент с человека.```***', inline=False)
 
     @property
     def embed(self):

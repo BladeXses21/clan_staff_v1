@@ -1,7 +1,7 @@
 import discord
 from discord.ui import View, Button
 
-from config import tenderly_heart_emoji, meta_heart_emoji, darkness_heart_emoji, hatory_heart_emoji, sweetness_heart_emoji, right_arrow_emoji, left_arrow_emoji
+from config import tenderly_heart_emoji, meta_heart_emoji, darkness_heart_emoji, sweetness_heart_emoji, right_arrow_emoji, left_arrow_emoji
 
 
 class StaffViewBuilder:
@@ -12,8 +12,6 @@ class StaffViewBuilder:
                                   emoji=meta_heart_emoji)
         self.button_darkness = Button(style=discord.ButtonStyle.secondary,
                                       emoji=darkness_heart_emoji)
-        self.button_hatory = Button(style=discord.ButtonStyle.secondary,
-                                    emoji=hatory_heart_emoji)
         self.button_sweetness = Button(style=discord.ButtonStyle.secondary,
                                        emoji=sweetness_heart_emoji)
         self.button_guild = Button(style=discord.ButtonStyle.secondary,
@@ -25,8 +23,6 @@ class StaffViewBuilder:
                                         emoji=meta_heart_emoji)
         self.button_guild_darkness = Button(style=discord.ButtonStyle.secondary,
                                             emoji=darkness_heart_emoji)
-        self.button_guild_hatory = Button(style=discord.ButtonStyle.secondary,
-                                          emoji=hatory_heart_emoji)
         self.button_guild_sweetness = Button(style=discord.ButtonStyle.secondary,
                                              emoji=sweetness_heart_emoji)
         self.button_guild_back = Button(style=discord.ButtonStyle.secondary,
@@ -37,7 +33,6 @@ class StaffViewBuilder:
             self.button_tenderly,
             self.button_meta,
             self.button_darkness,
-            self.button_hatory,
             self.button_sweetness,
             self.button_guild
         ])
@@ -48,7 +43,6 @@ class StaffViewBuilder:
             self.button_guild_tenderly,
             self.button_guild_meta,
             self.button_guild_darkness,
-            self.button_guild_hatory,
             self.button_guild_sweetness,
             self.button_guild_back
         ])

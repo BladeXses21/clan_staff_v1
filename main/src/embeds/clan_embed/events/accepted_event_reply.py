@@ -2,7 +2,7 @@ import time
 
 from discord import Embed, Colour
 
-from config import png_strip_for_embed
+from config import png_strip_for_embed, png_butterfly_gif
 
 
 class AcceptedEventReplyEmbed(object):
@@ -15,7 +15,7 @@ class AcceptedEventReplyEmbed(object):
             color=Colour(0x1FFF00)
         )
         self._embed.set_author(name='спасибо за ожидание, ивент был принят',
-                               icon_url='https://images-ext-2.discordapp.net/external/ZtDftGSI1KwmT7ML9u9R23RJqJHQv8cx1TPHxsQY2q0/%3Fsize%3D80%26quality%3Dlossless/https/cdn.discordapp.com/emojis/936017706480717825.gif'),
+                               icon_url=png_butterfly_gif),
         self._embed.set_image(url=png_strip_for_embed)
 
     @property

@@ -29,7 +29,7 @@ class FaultSystem(DatabaseSystem):
                         }}
         })
 
-    def get_fault(self, guild_id: int, clan_staff_id: int):
+    def get_fault(self, guild_id: int, clan_staff_id: int) -> FaultModel.fault_list:
         res = self.fault_collection.find_one({'guild_id': guild_id, 'clan_staff_id': clan_staff_id}, projection={'_id': False})
         return res['fault_list']
 

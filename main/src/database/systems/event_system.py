@@ -1,8 +1,8 @@
 import time
-
 from config import STANDART_PROFILE_AVATAR, STANDART_PROFILE_BACKGROUND, STANDART_BIRTHDAY
 from database.database_system import DatabaseSystem
 from models.mongo_type import CrossStafModel, RequestModel
+from typing import Literal
 
 
 class CrossEventsSystem(DatabaseSystem):
@@ -46,14 +46,14 @@ class CrossEventsSystem(DatabaseSystem):
 
         return False
 
-    def get_request_msg_id(self, guild_id: int, clan_staff_id: int):
+    def get_request_msg_id(self, guild_id: int, clan_staff_id: int) -> CrossStafModel.member_work_this_request:
         res = self.cross_event_mode_collection.find_one({'guild_id': guild_id, 'clan_staff_id': clan_staff_id})
 
         if res['member_work_this_request'] == 0:
             return 0
         return res['member_work_this_request']
 
-    def enumeration_events_mode(self, guild_id: int):
+    def enumeration_events_mode(self, guild_id: int) -> dict[Literal['clan_staff_id'] | Literal['sum_event_ends'], int]:
         dbm = CrossStafModel(guild_id=guild_id)
         return self.cross_event_mode_collection.find(
             dbm.to_mongo(),
@@ -64,28 +64,29 @@ class CrossEventsSystem(DatabaseSystem):
             }
         ).sort('sum_event_ends')
 
-    def get_clan_staff(self, guild_id: int, clan_staff_id: int):
+    def get_clan_staff(self, guild_id: int, clan_staff_id: int) -> tuple[int, int, int, int, int, int, str, str, str, int]:
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
-        return res['clan_staff_id'], res['sum_event_ends'], res['wasting_time'], res['add_time'], res['curator'], res['xp_counter'], res['avatar'], res['background'], res['birthday'], res['color']
+        return res['clan_staff_id'], res['sum_event_ends'], res['wasting_time'], res['add_time'], res['curator'], res['xp_counter'], res['avatar'], res['background'], res['birthday'], res[
+            'color']
 
-    def get_lvl_count(self, guild_id: int, clan_staff_id: int):
+    def get_lvl_count(self, guild_id: int, clan_staff_id: int) -> CrossStafModel.lvl:
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
         return res['lvl']
 
-    def get_xp_count(self, guild_id: int, clan_staff_id: int):
+    def get_xp_count(self, guild_id: int, clan_staff_id: int) -> CrossStafModel.xp_counter:
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
         return res['xp_counter']
 
-    def get_color_and_avatar(self, guild_id: int, clan_staff_id: int):
+    def get_color_and_avatar(self, guild_id: int, clan_staff_id: int) -> tuple[CrossStafModel.color, CrossStafModel.avatar]:
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         res = self.cross_event_mode_collection.find_one(dbm.to_mongo())
         return res['color'], res['avatar']
 
     # достает всех ивентеров с базы для таблицы
-    def get_event_organizers(self, guild_id: int):
+    def get_event_organizers(self, guild_id: int) -> dict[Literal['clan_staff_id'] | Literal['sum_event_ends'], Literal['wasting_time'] | Literal['add_time']]:
         dbm = CrossStafModel(guild_id=guild_id)
         return self.cross_event_mode_collection.find(
             dbm.to_mongo(),
@@ -160,11 +161,11 @@ class CrossEventsSystem(DatabaseSystem):
 
         self.cross_clan_event_collection.insert_one(event_request.to_mongo())
 
-    def get_clan_event(self, guild_id: int, message_id: int):
+    def get_clan_event(self, guild_id: int, message_id: int) -> tuple[RequestModel.event_num, RequestModel.comment, RequestModel.clan_name, RequestModel.member_send_request]:
         res = self.cross_clan_event_collection.find_one({'guild_id': guild_id, "message_id": message_id})
         return res['event_num'], res['comment'], res['clan_name'], res['member_send_request']
 
-    def get_time_accept_clan_event(self, guild_id: int, message_id: int):
+    def get_time_accept_clan_event(self, guild_id: int, message_id: int) -> RequestModel.time_accept_request:
         res = self.cross_clan_event_collection.find_one({'guild_id': guild_id, "message_id": message_id})
 
         if res is None:
@@ -192,6 +193,11 @@ class CrossEventsSystem(DatabaseSystem):
         self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$inc': {'sum_event_ends': 1,
                                                                               'wasting_time': waisting_time}})
         self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$set': {'member_work_this_request': 0}})
+
+    def refresh(self, guild_id: int, member_id: int):
+        dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=member_id)
+        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$set': {'member_work_this_request': 0}})
+        self.cross_clan_event_collection.delete_one(dbm.to_mongo())
 
 
 cross_event_system = CrossEventsSystem()
