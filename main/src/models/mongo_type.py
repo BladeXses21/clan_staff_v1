@@ -8,17 +8,17 @@ connect("clan_staff_base")
 class CrossStafModel(Document):
     guild_id = IntField(min_value=0)  # ID сервера
     clan_staff_id = IntField(min_value=0)  # ID участника clan staff
-    member_work_this_request = IntField()  # ID сообщения в которым работает clan staff
-    sum_event_ends = IntField()  # суммарное количество проведенных ивентов
-    wasting_time = IntField()  # суммарное потраченое время на все ивенты
+    member_work_this_request = IntField(min_value=0)  # ID сообщения в которым работает clan staff
+    sum_event_ends = IntField(min_value=0)  # суммарное количество проведенных ивентов
+    wasting_time = IntField(min_value=0)  # суммарное потраченое время на все ивенты
     curator = IntField(min_value=0)  # id человека который принял
     xp_counter = IntField(min_value=0)  # опыт полученый за выполение квестов
     minimum_limit = IntField(min_value=0)  # минимальное количество времени нужное ивентеру для выполения нормы
     avatar = StringField(min_length=1)
     background = StringField(min_length=1)
     birthday = StringField(min_length=1)
-    add_time = IntField()  # дата добавление участника выраженная в секундах unix time
-    color = IntField()
+    add_time = IntField(min_value=0)  # дата добавление участника выраженная в секундах unix time
+    color = IntField(min_value=0)
     lvl = IntField(min_value=1)
 
 
@@ -70,19 +70,6 @@ class SavedStatModel(Document):
     butterfly = IntField()  # бабочки - валюта клан стафф
     total_event_ends = IntField()
     total_time_events = IntField()
-
-
-class DailyTasksModel(Document):
-    guild_id = IntField(min_value=0)
-    clan_staff_id = IntField(min_value=0)
-    simple_quest = StringField()
-    middle_quest = StringField()
-    hard_quest = StringField()
-
-
-class InventoryModel(Document):
-    name = StringField()
-    rarity = StringField()
 
 
 class FaultModel(Document):

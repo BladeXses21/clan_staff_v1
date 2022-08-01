@@ -26,7 +26,7 @@ class CrossSaveStatsSystem(DatabaseSystem):
 
         self.cross_stats_collection.update_one(st.to_mongo(), {'$inc': {'butterfly': butterfly}})
 
-    def get_butterfly(self, guild_id: int, clan_staff_id: int):
+    def get_butterfly(self, guild_id: int, clan_staff_id: int) -> SavedStatModel.butterfly:
         st = SavedStatModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
         res = self.cross_stats_collection.find_one(st.to_mongo())
 

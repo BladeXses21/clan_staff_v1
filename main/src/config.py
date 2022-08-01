@@ -1,6 +1,7 @@
 # discord bot token
 # Token = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.ydkfdaQT_hMroG5vYEXFJUpF8qg'
-TOKEN = 'OTcwNTA1MTc3NTQ5MzgxNzAz.GnE_rM.BMa10AKw2DU8PDDzo0avsUa6RPBe4bjxyjhI44'
+# TOKEN = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.N5_r85zmSGDf45PrZHvvK7ATf5s'
+TOKEN = 'OTcwNTA1MTc3NTQ5MzgxNzAz.GW2drs.mX52QICi6fo2kOApErqMdKgvxhkqxqsbV9IFxc'
 
 # MongoDb token
 # BladeXses DB
@@ -22,6 +23,7 @@ MAYES = 270664753129455626
 KILLAKILLAKILLA = 416099760248848384
 SOPHI = 764219880786362390
 BogratiOne = 350057334690545664
+WQWQ = 808186569239822386
 
 MAIN_OWNER = 450361269128790026
 
@@ -32,7 +34,8 @@ OWNER_IDS = [
     MAYES,
     KILLAKILLAKILLA,
     SOPHI,
-    BogratiOne
+    BogratiOne,
+    WQWQ
 ]
 
 # guild ids
@@ -113,7 +116,8 @@ HATORY_CATEGORY_NAME = '⸺● КЛАН ВОЙСЫ'
 SWEETNESS_CATEGORY_NAME = '──・КЛАН ВОЙСЫ'
 
 # logs chat
-STATS_CHAT = 971631022791868447
+STATS_SERVER_CHAT = 971631022791868447
+STATS_CLAN_CHAT = 998625623197102322
 
 GUILD_DICT = {
     TENDERLY_ID: TENDERLY_CATEGORY_NAME,
@@ -139,19 +143,27 @@ BARRETTE_PINK_EMOJI = '<:barrette__pink:980112872690548756>'
 UKI_EMOGI = '<a:uki2:959118514814324788>'
 
 CHANCE_FOR_ITEMS = {
-    'common': 54,
-    'rare': 23,
-    'mythical': 12,
-    'legendary': 11,
-    'immortal': 1
+    'common': 47,
+    'rare': 21,
+    'mythical': 14,
+    'legendary': 12,
+    'immortal': 6
 }
 
-level_multiplier = {
+LEVEL_MULTIPLIER = {
     1: 1,
     2: 1.5,
     3: 2,
     4: 3
 }
+
+XP_INCREMENT = {
+    1: 250,
+    2: 500,
+    3: 950,
+    4: 950
+}
+
 
 SHOP_CHANNEL_ID = 977712132906942484
 
@@ -197,3 +209,4 @@ CLAN_CREATE_REQUEST_CHANNEL = 991274737403703356
 png_strip_for_embed = 'https://cdn.discordapp.com/attachments/836056310641459250/987354207566848010/1112.png'
 png_heart_icon = '<:png_heart_icon:990008416980320297>'
 png_signal_icon = '<:signal:973732570971897856>'
+png_butterfly_gif = 'https://images-ext-2.discordapp.net/external/ZtDftGSI1KwmT7ML9u9R23RJqJHQv8cx1TPHxsQY2q0/%3Fsize%3D80%26quality%3Dlossless/https/cdn.discordapp.com/emojis/936017706480717825.gif'

@@ -22,6 +22,7 @@ from database.systems.saved_stats_system import save_stats_system
 class ClanService:
     def __init__(self, client):
         self.client = client
+        self.xp_lenght = 15
 
     async def drop_menu(self, interaction: Interaction, ctx: ApplicationContext = None):
 
@@ -31,8 +32,11 @@ class ClanService:
         clan_staff_options = []
 
         for i in cross_event_system.enumeration_events_mode(ctx.guild.id):
-            member = ctx.guild.get_member(i['clan_staff_id'])
-            clan_staff_options.append(discord.SelectOption(label=i['clan_staff_id'], description=member.name, emoji='<a:_an:967471171480207420>'))
+            try:
+                member = ctx.guild.get_member(i['clan_staff_id'])
+                clan_staff_options.append(discord.SelectOption(label=i['clan_staff_id'], description=member.name, emoji='<a:_an:967471171480207420>'))
+            except AttributeError:
+                continue
 
         drop_down_menu = Select(options=clan_staff_options, placeholder='Выберите человека для отображения')
 
@@ -57,6 +61,11 @@ class ClanService:
             else:
                 await ctx.response.edit_message(embed=DefaultEmbed('***```Выберите пользователя```***'), view=view, delete_after=160)
 
+        async def delete_callback(intera: Interaction):
+            if intera.user.id != ctx.author.id:
+                return False
+            await intera.message.delete()
+
         async def menu_callback(interact: Interaction):
             if interact.user.id != ctx.author.id:
                 return False
@@ -76,7 +85,8 @@ class ClanService:
                 # todo - подумать что делать с цветом профилей
                 await interact.response.edit_message(
                     embed=StaffProfile(member=get_member, total_event=total_event, total_time=total_time, butterfly=get_butterfly, add_time=add_time, curator=f'<@{curator}>', xp=xp,
-                                       avatar_img=avatar, background_img=background, birthday=birthday, color=color, lvl=lvl).embed, view=common_view)
+                                       avatar_img=avatar, background_img=background, birthday=birthday, color=color, lvl=lvl).embed,
+                    view=common_view)
             else:
                 await interact.response.edit_message(
                     embed=StaffProfile(member=get_member, total_event=total_event, total_time=total_time, butterfly=get_butterfly, add_time=add_time, curator=f'<@{curator}>', xp=xp,
@@ -274,6 +284,7 @@ class ClanService:
             clan_staff_view.button_quest.callback = quest_menu
             clan_staff_view.button_history.callback = history_menu
             clan_staff_view.button_fault.callback = fault_menu
+            clan_staff_view.button_trash.callback = delete_callback
 
             # обработка кураторов клан стаффа
             clan_staff_view.button_edit_time.callback = edit_time_callback
@@ -282,5 +293,6 @@ class ClanService:
             clan_staff_view.button_edit_xp.callback = edit_xp_callback
             clan_staff_view.button_shop.callback = shop_menu
             drop_down_menu.callback = menu_callback
+            clan_staff_view.button_trash_two.callback = delete_callback
 
         drop_down_menu.callback = menu_callback

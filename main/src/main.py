@@ -4,7 +4,6 @@ from discord.ext import commands
 from config import TOKEN, PREFIX
 from extensions.logger import staff_logger
 
-
 client = commands.Bot(command_prefix=PREFIX,
                       help_command=None,
                       intents=discord.Intents.all())
@@ -22,8 +21,11 @@ async def on_command_error(ctx, error):
     staff_logger.error(f'{str(ctx.author)} | {ctx.message.content}')
     staff_logger.error(error)
 
+
 for filename in os.listdir("cogs"):
     if filename.endswith(".py"):
         client.load_extension(f"cogs.{filename[:-3]}")
 
+
 client.run(TOKEN)
+

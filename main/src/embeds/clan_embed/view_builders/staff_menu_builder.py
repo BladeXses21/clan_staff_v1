@@ -6,8 +6,8 @@ from config import history_emoji, fault_emoji, quest_emoji, xp_emoji, UKI_EMOGI,
 
 class StandartView:
     def __init__(self):
-        self.button_hiden = Button(style=discord.ButtonStyle.secondary, emoji='❕')
-        self.button_hiden_two = Button(style=discord.ButtonStyle.secondary, emoji='❕')
+        self.button_trash = Button(style=discord.ButtonStyle.secondary, emoji='🗑')
+        self.button_trash_two = Button(style=discord.ButtonStyle.secondary, emoji='🗑')
 
         self.button_shop = Button(style=discord.ButtonStyle.secondary, label='Магазин', emoji=UKI_EMOGI)
         self.button_history = Button(style=discord.ButtonStyle.secondary, label='История', emoji=history_emoji)
@@ -35,12 +35,12 @@ class StandartView:
         admin_view.add_item(self.button_quest)
         admin_view.add_item(self.button_history)
         admin_view.add_item(self.button_fault)
-        admin_view.add_item(self.button_hiden)
+        admin_view.add_item(self.button_trash)
         admin_view.add_item(self.button_edit_time)
         admin_view.add_item(self.button_edit_event)
         admin_view.add_item(self.button_edit_butterflies)
         admin_view.add_item(self.button_edit_xp)
-        admin_view.add_item(self.button_hiden_two)
+        admin_view.add_item(self.button_trash_two)
         admin_view.add_item(drop_down)
         return admin_view
 

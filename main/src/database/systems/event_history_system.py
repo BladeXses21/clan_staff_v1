@@ -8,8 +8,6 @@ class HistorySystem(DatabaseSystem):
                 'guild_id': guild_id,
                 'clan_staff_id': clan_staff_id,
                 'event_history': [
-                    {
-                    }
                 ]
             }
         )
@@ -33,7 +31,7 @@ class HistorySystem(DatabaseSystem):
     def clear_history(self, guild_id: int):
         self.events_history.update_many({"guild_id": guild_id}, {'$pull': {'event_history': {}}})
 
-    def get_history(self, guild_id: int, clan_staff_id: int):
+    def get_history(self, guild_id: int, clan_staff_id: int) -> list:
         res = self.events_history.find_one({'guild_id': guild_id, 'clan_staff_id': clan_staff_id}, projection={'_id': False})
         return res['event_history']
 
