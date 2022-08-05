@@ -2,7 +2,7 @@ from enum import Enum, unique
 
 
 @unique
-class ClanCloseEnum(Enum):
+class CloseEnumList(Enum):
     # events
     dota = 'Dota 2 5x5'
     cs_go = 'CS:GO 5x5'

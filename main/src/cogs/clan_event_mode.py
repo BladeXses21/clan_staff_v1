@@ -1,47 +1,38 @@
-import time
-from io import BytesIO
-
 import discord
-from PIL import Image, ImageDraw, ImageFont
 from discord import ApplicationContext
 from discord.commands import Option
 from discord.ext import commands
-from discord.ui import View
 
 from cogs.base import BaseCog
-from config import TENDERLY_ID, META_ID, DARKNESS_ID, CLAN_STAFF, STOP_WORD, SWEETNESS_ID, OWNER_IDS
-from embeds.base import DefaultEmbed
-from embeds.clan_embed.events.accepted_event_mode import accept_event_embed
-from embeds.clan_embed.events.clan_event import full_request_respons
-from embeds.clan_embed.events.declined_event_mode import decline_event_embed
-from embeds.clan_embed.events.passed_event_mode import pass_event_embed
-from embeds.clan_embed.fault.fault_embed import FaultEmbed
-from embeds.clan_embed.history.event_history import HistoryEmbed
-from embeds.clan_embed.quest.quest_embed import QuestEmbed
-from embeds.clan_embed.staff.staff import StaffEmbed
-from embeds.clan_embed.staff.staff_command import StaffCommandsEmbed
-from embeds.clan_embed.view_builders.event_view_builder import event_view_builder
-from embeds.clan_embed.view_builders.staff_view_builder import staff_view_builder
-from embeds.view_builder import default_view_builder
-from extensions.decorator import is_owner_rights, is_owner
-from extensions.funcs import sum_event_time, is_member_in_voice, get_guilds_list_async, get_staff_list_async, get_staff_event_list, remove_clan_staff_response, add_clan_staff_response, \
-    get_event_history, get_fault, get_quest_list, quest_info, xp_to_lvl, circle, quest_limit
-from extensions.logger import staff_logger
-from main import client
-from service.staff_service import ClanService
+from config import TENDERLY_ID, META_ID, DARKNESS_ID, CLAN_STAFF, SWEETNESS_ID, OWNER_IDS
 from database.systems.event_history_system import event_history
 from database.systems.event_system import cross_event_system
 from database.systems.fault_system import fault_system
 from database.systems.quest_system import quest_system
 from database.systems.saved_stats_system import save_stats_system
 from database.systems.server_system import cross_server_system
-from utils.events import ALL_EVENTS
+from embeds.base import DefaultEmbed
+from embeds.clan_embed.fault.fault_embed import FaultEmbed
+from embeds.clan_embed.history.event_history import HistoryEmbed
+from embeds.clan_embed.quest.quest_embed import QuestEmbed
+from embeds.clan_embed.staff.staff import StaffEmbed
+from embeds.clan_embed.staff.staff_command import StaffCommandsEmbed
+from embeds.clan_embed.view_builders.staff_view_builder import staff_view_builder
+from embeds.view_builder import default_view_builder
+from extensions.decorator import is_owner_rights
+from extensions.funcs import get_guilds_list_async, get_staff_list_async, get_staff_event_list, remove_clan_staff_response, add_clan_staff_response, \
+    get_event_history, get_fault, get_quest_list, quest_info, quest_limit
+from extensions.logger import staff_logger
+from main import client
+from service.event_service import EventService
+from service.staff_service import ClanService
 
 
 class CrossEventsMode(BaseCog):
     def __init__(self, client):
         super().__init__(client)
         self.clan_service = ClanService(client)
+        self.event_service = EventService(client)
         print("Cog 'clan event' connected!")
 
     event = discord.SlashCommandGroup('event', 'commands to request event')
@@ -294,189 +285,7 @@ class CrossEventsMode(BaseCog):
                                         min_value=1, max_value=61, required=True),
                       users_count: Option(int, 'Введите количество человек на ивенте.', required=True),
                       comment: Option(str, 'Введите коментарий к ивенту.', required=True)):
-        guild = interaction.guild
-        event_num = ALL_EVENTS[event_num]
-
-        staff_logger.info(f'{interaction.user} вызвал комаду /event request {event_num} {users_count} {comment}')
-
-        channel_id, role_id, text_category_id, voice_category_id = cross_server_system.get_cross_guild(guild.id)
-        event_request_view = event_view_builder.create_event_request_view()
-
-        member_ids = is_member_in_voice(guild.categories, client.get_channel(voice_category_id).name)
-        get_event_channel = client.get_channel(channel_id)
-
-        if interaction.user.id not in member_ids:
-            return await interaction.response.send_message(
-                embed=DefaultEmbed(f'***```Вы должны быть в голосовом канале клана.```***'),
-                ephemeral=True
-            )
-
-        clan_name = interaction.user.voice.channel.name
-
-        request_msg = await full_request_respons(
-            interaction=interaction, event_channel=get_event_channel,
-            role_id=role_id, event_num=event_num, users_count=users_count,
-            comment=comment, event_request_view=event_request_view
-        )
-
-        cross_event_system.create_request(
-            guild_id=interaction.guild.id, message_id=request_msg.id,
-            clan_name=clan_name, event_num=event_num,
-            member_send_request=interaction.user.id, comment=comment
-        )
-
-        async def accept_callback(ctx):
-            user = ctx.user
-            server = ctx.guild
-            message = ctx.message
-            channel = client.get_channel(ctx.channel.id)
-            get_msg = await channel.fetch_message(message.id)
-            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id, message_id=ctx.message.id)
-            get_member_send = ctx.guild.get_member(member_send_id)
-
-            if cross_event_system.is_clan_staff(server.id, user.id) is False:
-                return await ctx.response.send_message(
-                    embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'),
-                    ephemeral=True
-                )
-
-            if cross_event_system.is_event_completed(server.id, user.id) is False:
-                return await ctx.response.send_message(
-                    embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'),
-                    ephemeral=True
-                )
-
-            cross_event_system.accept_clan_event(
-                guild_id=server.id,
-                message_id=request_msg.id,
-                clan_staff_id=user.id
-            )
-
-            event_request_view.remove_item(event_view_builder.button_accept)
-            event_request_view.remove_item(event_view_builder.button_decline)
-
-            pass_view = event_view_builder.pass_event_request_view()
-
-            await accept_event_embed(user=get_member_send, request_msg=get_msg, clan_name=clan_n, event_num=ev_num, clan_staff=user, pass_view=pass_view)
-
-        async def decline_callback(ctx):
-            user = ctx.user
-            server = ctx.guild
-            message = ctx.message
-            channel = client.get_channel(ctx.channel.id)
-            get_msg = await channel.fetch_message(message.id)
-            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id,
-                                                                                    message_id=ctx.message.id)
-            get_member_send = ctx.guild.get_member(member_send_id)
-
-            if cross_event_system.is_clan_staff(server.id, user.id) is False:
-                return await ctx.response.send_message(
-                    embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'),
-                    ephemeral=True
-                )
-
-            if cross_event_system.is_event_completed(server.id, user.id) is False:
-                return await ctx.response.send_message(
-                    embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'),
-                    ephemeral=True
-                )
-
-            cross_event_system.delete_clan_event(guild_id=server.id, message_id=get_msg.id)
-
-            event_request_view.remove_item(event_view_builder.button_accept)
-            event_request_view.remove_item(event_view_builder.button_decline)
-
-            await decline_event_embed(
-                user=get_member_send,
-                request_msg=get_msg,
-                clan_name=clan_n,
-                event_num=ev_num,
-                clan_staff=user,
-                decline_view=event_request_view
-            )
-
-        async def pass_callback(ctx):
-            user = ctx.user
-            server = ctx.guild
-            message = ctx.message
-            channel = client.get_channel(ctx.channel.id)
-            get_msg = await channel.fetch_message(message.id)
-            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id,
-                                                                                    message_id=ctx.message.id)
-
-            time_accept = cross_event_system.get_time_accept_clan_event(guild_id=server.id,
-                                                                        message_id=message.id)
-
-            request_member_id = cross_event_system.get_request_msg_id(guild_id=server.id,
-                                                                      clan_staff_id=user.id)
-
-            event_request_view.remove_item(event_view_builder.button_pass)
-
-            if cross_event_system.is_clan_staff(server.id, user.id) is False:
-                return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
-
-            if request_member_id != message.id:
-                return await ctx.response.send_message(embed=DefaultEmbed(f'***```{user.name}, это не ваш ивент.```***'), ephemeral=True)
-
-            await ctx.response.send_message(embed=DefaultEmbed(
-                f'***```{user.name}, введите конечный итог ивента по форме\n@link [количество конфет] @link [количество конфет]...\nДля отмены ивента пропишите слово - stop```***'),
-                ephemeral=True)
-
-            def check(m):
-                if m.channel == channel:
-                    if not m.author.bot:
-                        return m
-
-            msg = await client.wait_for('message', check=check)
-
-            if msg.author.id == ctx.user.id and msg.content == STOP_WORD:
-                cross_event_system.delete_clan_event(guild_id=server.id, message_id=get_msg.id)
-                cross_event_system.set_member_request(guild_id=server.id, clan_staff_id=ctx.user.id)
-                await decline_event_embed(
-                    user=ctx.guild.get_member(ctx.user.id), request_msg=get_msg, clan_name=clan_n, event_num=ev_num, clan_staff=user, decline_view=View()
-                )
-                await msg.delete()
-                print(ev_num, com, clan_n, user.name, 'Ивент отменен!')
-
-            if msg.author.id == ctx.user.id:
-                sum_time_event = sum_event_time(guild=server.id, message_id=ctx.message.id)
-
-                await pass_event_embed(
-                    request_msg=get_msg, event_num=ev_num, clan_name=clan_n,
-                    clan_staff=user, sum_time_event=sum_time_event,
-                    time_accept_request=time_accept, comment=com,
-                    pass_view=View(), end_result=msg.content
-                )
-
-                cross_event_system.pass_clan_event(guild_id=server.id, clan_staff_id=user.id, waisting_time=int(time.time()) - int(time_accept))
-                save_stats_system.add_stat(guild_id=server.id, clan_staff_id=user.id, waisting_time=int(time.time()) - int(time_accept))
-                cross_event_system.delete_clan_event(guild_id=server.id, message_id=message.id)
-                event_history.note_history(guild_id=server.id, clan_staff_id=user.id, name=ev_num, time=int(time.time()) - int(time_accept), date_end=int(time.time()), clan_name=clan_n)
-
-                xp, quest_timer = quest_info(server.id, user.id)
-                if ev_num in xp:
-                    if int(time.time()) - int(time_accept) // 60 >= quest_timer[ev_num]:
-                        # если прошел квест, засчитывает его в профиль
-                        cross_event_system.update_xp_counter(guild_id=server.id, clan_staff_id=user.id, xp=xp[ev_num])
-                        quest_system.remove_quest(guild_id=server.id, clan_staff_id=user.id, name=ev_num)
-                        # просмотр опытна на данный момент
-                        current_xp = cross_event_system.get_xp_count(guild_id=server.id, clan_staff_id=user.id)
-                        current_level = xp_to_lvl(current_xp)
-                        # присваивание уровня в соотношении опыта
-                        cross_event_system.set_lvl(guild_id=server.id, clan_staff_id=user.id, lvl=int(current_level))
-                await msg.delete()
-
-                member = interaction.guild.get_member(interaction.user.id)
-                await member.send(embed=DefaultEmbed('***```Понравился ли вам ивент? Да/Нет```***'))
-
-                msg = await client.wait_for('message')
-                answer = str(msg.content)
-                await get_event_channel.send(content=f"{msg.author.mention} отправил отзыв:", embed=DefaultEmbed(f'{answer}'))
-                await member.send(embed=DefaultEmbed('***```Большое спасибо за отзыв!```***'))
-
-        event_view_builder.button_decline.callback = decline_callback
-        event_view_builder.button_accept.callback = accept_callback
-        event_view_builder.button_pass.callback = pass_callback
+        await self.event_service.event_request(event_num=event_num, users_count=users_count, comment=comment, interaction=interaction)
 
     @staffs.command(name='profile', description='Профиль clan staff', default_permission=False)
     @commands.has_any_role(*CLAN_STAFF)
@@ -635,35 +444,35 @@ class CrossEventsMode(BaseCog):
         cross_event_system.refresh(guild_id=ctx.guild.id, member_id=member.id)
         return await ctx.send(embed=DefaultEmbed(f'***```{member.name}, теперь может проводить ивент без ошибок```***'))
 
-    @staff.command()
-    @is_owner()
-    async def p(self, ctx: ApplicationContext, member: discord.Member = None):
+    # @commands.command()
+    # @is_owner()
+    # async def p(self, ctx: ApplicationContext, member: discord.Member = None):
 
-        if not member:
-            member = ctx.author
-        _name, _Id, = str(member.name), str(member.id)
+        # if not member:
+        #     member = ctx.author
+        # _name, _Id, = str(member.name), str(member.id)
+        #
+        # base_img = Image.open('Profile_custom.png').convert("RGBA")
+        #
+        # pfp = member.display_avatar.with_size(256)
+        # data = BytesIO(await pfp.read())
+        # pfp = Image.open(data).convert('RGBA')
+        #
+        # draw = ImageDraw.Draw(base_img)
+        # pfp = circle(pfp, size=(645, 645))
+        # font = ImageFont.truetype('Nunito-Italic.ttf', 38)
+        # main_font = ImageFont.truetype('Nunito-Italic.ttf', 27)
+        # second_font = ImageFont.truetype('Nunito-Italic.ttf', 24)
+        #
+        # draw.text((840, 720), _name, font=font)
+        # draw.text((270, 315), _Id, font=main_font)
+        # # draw.text(())
+        # base_img.paste(pfp, (56, 158), pfp)
 
-        base_img = Image.open('Profile_custom.png').convert("RGBA")
-
-        pfp = member.display_avatar.with_size(256)
-        data = BytesIO(await pfp.read())
-        pfp = Image.open(data).convert('RGBA')
-
-        draw = ImageDraw.Draw(base_img)
-        pfp = circle(pfp, size=(645, 645))
-        font = ImageFont.truetype('Nunito-Italic.ttf', 38)
-        main_font = ImageFont.truetype('Nunito-Italic.ttf', 27)
-        second_font = ImageFont.truetype('Nunito-Italic.ttf', 24)
-
-        draw.text((840, 720), _name, font=font)
-        draw.text((270, 315), _Id, font=main_font)
-        # draw.text(())
-        base_img.paste(pfp, (56, 158), pfp)
-
-        with BytesIO() as i:
-            base_img.save(i, 'PNG')
-            i.seek(0)
-            await ctx.send(file=discord.File(i, 'profile.png'))
+        # with BytesIO() as i:
+        #     base_img.save(i, 'PNG')
+        #     i.seek(0)
+        #     await ctx.send(file=discord.File(i, 'profile.png'))
 
 
 def setup(bot):

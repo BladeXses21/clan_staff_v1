@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageChops
 from discord import Member
 from discord.ext import tasks
 
-from config import DAY_IN_SECONDS, LEVEL_MULTIPLIER, XP_INCREMENT
+from config import DAY_IN_SECONDS, LEVEL_MULTIPLIER, XP_INCREMENT, META_ID, PAYMENT
 from embeds.clan_embed.auction.trash_channel_embed import AuctionTrashEmbed
 from embeds.clan_embed.staff.staff import StaffEmbed, GuildListEmbed
 from database.systems.event_history_system import event_history
@@ -132,27 +132,23 @@ def quest_limit(guild_id: int, member_id: int):
         return True
 
 
-def total_amount(seconds: int, lvl):
+def total_amount(guild_id: int, seconds: int, lvl):
     total_minutes = int(seconds / 60)
-    amount = 0
-    butterfly = 0
+    amount, butterfly = 0, 0
     description = ''
-    if total_minutes <= 299:
+    if total_minutes < PAYMENT[guild_id]['right_time']:
         amount += total_minutes
         return amount
-    if total_minutes <= 350:
-        amount += 1000
-        return amount
-    if total_minutes >= 350:
-        amount += 1000
-        total_minutes -= 350
+    if total_minutes >= PAYMENT[guild_id]['right_time']:
+        amount += PAYMENT[guild_id]['right_payment']
+        total_minutes -= PAYMENT[guild_id]['right_time']
         while True:
-            if total_minutes < 50:
+            if total_minutes < PAYMENT[guild_id]['overtime']:
                 description += f'{amount} | {int(butterfly)}'
                 return description
             else:
-                total_minutes -= 50
-                butterfly += LEVEL_MULTIPLIER[lvl] * 20
+                total_minutes -= PAYMENT[guild_id]['overtime']
+                butterfly += LEVEL_MULTIPLIER[lvl] * PAYMENT[guild_id]['bonus_payment']
 
 
 def xp_to_lvl(xp: int):

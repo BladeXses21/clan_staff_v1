@@ -1,9 +1,17 @@
 import discord
-from discord import Embed, Colour, Member
+from discord import Embed, Colour, Member, TextChannel, Interaction
 
 from config import png_strip_for_embed, png_butterfly_gif
 from embeds.base import DefaultEmbed
-from embeds.clan_embed.clan_close.accepted_close import AcceptedClanCloseEmbed
+
+
+async def request_to_the_enemy(interaction: Interaction, member_send: Member, enemy_channel: TextChannel, event_name: str, clan_name: str, comment: str, view):
+    try:
+        await member_send.send(embed=DefaultEmbed(f'***```Запрос был успешно отпрален и противник получил вызов.\nОжидайте ответа.```***'))
+        await enemy_channel.send(embed=ClanCloseEmbed(event_name, clan_name, comment).embed, view=view)
+    except discord.Forbidden:
+        await interaction.response.send_message(embed=DefaultEmbed(f'***```Запрос был успешно отпрален и противник получил вызов.\nОжидайте ответа.```***'))
+        await enemy_channel.send(embed=ClanCloseEmbed(event_name, clan_name, comment).embed, view=view)
 
 
 class ClanCloseEmbed(object):
@@ -22,12 +30,3 @@ class ClanCloseEmbed(object):
     @property
     def embed(self):
         return self._embed
-
-    async def accept_enemy_embed(member: Member, request_msg, clan_name, event_num, clan_staff, decline_view):
-        try:
-            await member.send(embed=DefaultEmbed(f'***```{clan_staff.name}, принял запрос на проведение клоза```***'))
-            await request_msg.edit(
-                embed=AcceptedClanCloseEmbed().embed, view=decline_view)
-        except discord.Forbidden:
-            await request_msg.edit(
-                embed=AcceptedClanCloseEmbed().embed, view=decline_view)

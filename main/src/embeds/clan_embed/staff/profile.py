@@ -6,7 +6,7 @@ from models.xp_bar import XpBarController
 
 
 class StaffProfile(object):
-    def __init__(self, member, total_event, total_time, butterfly, add_time, curator, xp, background_img, avatar_img, birthday, color, lvl):
+    def __init__(self, member, total_event, total_time, butterfly, add_time, curator, xp, background_img, avatar_img, birthday, color, lvl, guild_id):
 
         xp_lenght = 10
         green_pool = ceil(xp / XP_INCREMENT[4] * 100 / xp_lenght)
@@ -19,7 +19,7 @@ class StaffProfile(object):
         )
         self._embed.add_field(name='``всего ивентов:``', value=total_event, inline=True)
         self._embed.add_field(name='``всего минут:``', value=sum_time(total_time), inline=True)
-        self._embed.add_field(name='``зарплата:``', value=f"{total_amount(total_time, lvl)}", inline=True)
+        self._embed.add_field(name='``зарплата:``', value=f"{total_amount(guild_id, total_time, lvl)}", inline=True)
         self._embed.add_field(name='``бабочек:``', value=butterfly, inline=True)
         self._embed.add_field(name='``на должности:``', value=f'<t:{add_time}:R>', inline=True)
         self._embed.add_field(name='``принял:``', value=curator, inline=True)

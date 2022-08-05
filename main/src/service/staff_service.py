@@ -31,7 +31,8 @@ class ClanService:
 
         clan_staff_options = []
 
-        for i in cross_event_system.enumeration_events_mode(ctx.guild.id):
+        guild_id = ctx.guild.id
+        for i in cross_event_system.enumeration_events_mode(guild_id):
             try:
                 member = ctx.guild.get_member(i['clan_staff_id'])
                 clan_staff_options.append(discord.SelectOption(label=i['clan_staff_id'], description=member.name, emoji='<a:_an:967471171480207420>'))
@@ -44,17 +45,17 @@ class ClanService:
         view.add_item(drop_down_menu)
 
         try:
-            author_id, t_events, t_times, my_add_time, my_curator, my_xp, my_avatar, my_background, my_birthday, my_color = cross_event_system.get_clan_staff(ctx.guild.id, ctx.author.id)
-            my_lvl = cross_event_system.get_lvl_count(ctx.guild.id, ctx.author.id)
-            my_butterfly = save_stats_system.get_butterfly(ctx.guild.id, ctx.author.id)
+            author_id, t_events, t_times, my_add_time, my_curator, my_xp, my_avatar, my_background, my_birthday, my_color = cross_event_system.get_clan_staff(guild_id, ctx.author.id)
+            my_lvl = cross_event_system.get_lvl_count(guild_id, ctx.author.id)
+            my_butterfly = save_stats_system.get_butterfly(guild_id, ctx.author.id)
             if ctx.message is None:
                 await ctx.response.send_message(
                     embed=StaffProfile(member=ctx.author, total_event=t_events, total_time=t_times, butterfly=my_butterfly, add_time=my_add_time, curator=f"<@{my_curator}>",
-                                       xp=my_xp, avatar_img=my_avatar, background_img=my_background, birthday=my_birthday, color=my_color, lvl=my_lvl).embed, view=view, delete_after=160)
+                                       xp=my_xp, avatar_img=my_avatar, background_img=my_background, birthday=my_birthday, color=my_color, lvl=my_lvl, guild_id=guild_id).embed, view=view, delete_after=160)
             else:
                 await ctx.response.edit_message(
                     embed=StaffProfile(member=ctx.author, total_event=t_events, total_time=t_times, butterfly=my_butterfly, add_time=my_add_time, curator=f"<@{my_curator}>",
-                                       xp=my_xp, avatar_img=my_avatar, background_img=my_background, birthday=my_birthday, color=my_color, lvl=my_lvl).embed, view=view, delete_after=160)
+                                       xp=my_xp, avatar_img=my_avatar, background_img=my_background, birthday=my_birthday, color=my_color, lvl=my_lvl, guild_id=guild_id).embed, view=view, delete_after=160)
         except TypeError:
             if ctx.message is None:
                 await ctx.response.send_message(embed=DefaultEmbed('***```Выберите пользователя```***'), view=view, delete_after=160)
@@ -73,10 +74,11 @@ class ClanService:
 
             admin_view = clan_staff_view.admin_profile_view(drop_down_menu)
 
-            member_id, total_event, total_time, add_time, curator, xp, avatar, background, birthday, color = cross_event_system.get_clan_staff(interact.guild.id, drop_down_menu.values[0])
-            lvl = cross_event_system.get_lvl_count(interact.guild.id, drop_down_menu.values[0])
+            guild_id = interact.guild.id
+            member_id, total_event, total_time, add_time, curator, xp, avatar, background, birthday, color = cross_event_system.get_clan_staff(guild_id, drop_down_menu.values[0])
+            lvl = cross_event_system.get_lvl_count(guild_id, drop_down_menu.values[0])
             try:
-                get_butterfly = save_stats_system.get_butterfly(interact.guild.id, drop_down_menu.values[0])
+                get_butterfly = save_stats_system.get_butterfly(guild_id, drop_down_menu.values[0])
             except TypeError:
                 get_butterfly = 0
             get_member = interact.guild.get_member(member_id)
@@ -85,12 +87,12 @@ class ClanService:
                 # todo - подумать что делать с цветом профилей
                 await interact.response.edit_message(
                     embed=StaffProfile(member=get_member, total_event=total_event, total_time=total_time, butterfly=get_butterfly, add_time=add_time, curator=f'<@{curator}>', xp=xp,
-                                       avatar_img=avatar, background_img=background, birthday=birthday, color=color, lvl=lvl).embed,
+                                       avatar_img=avatar, background_img=background, birthday=birthday, color=color, lvl=lvl, guild_id=guild_id).embed,
                     view=common_view)
             else:
                 await interact.response.edit_message(
                     embed=StaffProfile(member=get_member, total_event=total_event, total_time=total_time, butterfly=get_butterfly, add_time=add_time, curator=f'<@{curator}>', xp=xp,
-                                       avatar_img=avatar, background_img=background, birthday=birthday, color=color, lvl=lvl).embed, view=admin_view)
+                                       avatar_img=avatar, background_img=background, birthday=birthday, color=color, lvl=lvl, guild_id=guild_id).embed, view=admin_view)
 
             async def edit_time_callback(inter: Interaction):
                 if inter.user.id != ctx.author.id:

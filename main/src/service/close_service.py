@@ -1,10 +1,13 @@
 import requests
-from discord import Interaction, ApplicationContext, Member, Forbidden
+from discord import Interaction, ApplicationContext, Member
+from discord.ui import View
 
+from config import RIGHT_AMOUNT_PEOPLE
 from database.systems.event_system import cross_event_system
 from database.systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
-from embeds.clan_embed.clan_close.enemy_response import ClanCloseEmbed
+from embeds.clan_embed.clan_close.accepted_close import accept_enemy_embed
+from embeds.clan_embed.clan_close.enemy_response import request_to_the_enemy
 from embeds.clan_embed.view_builders.event_view_builder import event_view_builder
 from extensions.funcs import is_member_in_voice
 
@@ -17,56 +20,51 @@ class CloseService:
 
         if ctx is None:
             ctx = await self.client.get_application_context(interaction)
+        server = ctx.guild
+        author = ctx.user
 
-        author = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}')
-        author_info = author.json()
-        member = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{member.id}')
-        member_info = member.json()
-        guild = interaction.guild
-
-        accept_view = event_view_builder.create_event_request_view()
-
-        event_channel = cross_server_system.get_event_channel(guild.id)
-
-        if game_name == 'Dota 2 5x5' or 'CS:GO 5x5' and users_count < 5:
-            return await interaction.response.send_message(embed=DefaultEmbed(f'***```{interaction.user.name}, количество указаных участников не подходит под данный ивент.```***'))
+        if RIGHT_AMOUNT_PEOPLE[game_name] != users_count:
+            return await interaction.response.send_message(
+                embed=DefaultEmbed(f'***```{author.name}, количество указаных участников не подходит под данный ивент.\n Нужное количество: {RIGHT_AMOUNT_PEOPLE[game_name]}```***'),
+                ephemeral=True)
         if comment is None:
             comment = 'No comments...'
-        channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_all_by_guild_id(guild.id)
-        member_ids = is_member_in_voice(guild.categories, self.client.get_channel(voice_category_id).name)
+        channel_id, role_id, text_category_id, voice_category_id = cross_event_system.get_all_by_guild_id(server.id)
+        member_ids = is_member_in_voice(server.categories, self.client.get_channel(voice_category_id).name)
 
-        if interaction.user.id not in member_ids:
+        if author.id not in member_ids:
             return await interaction.response.send_message(
                 embed=DefaultEmbed(f'***```Вы должны быть в голосовом канале клана.```***'),
                 ephemeral=True
             )
 
-        await interaction.response.send_message(embed=DefaultEmbed((f'**Отправитель:** {interaction.user.mention}\n***```Запрос на клоз был успешно отправлен.```***'
-                                                                    f'\n***```Дождитесь ответа ивентёра...```***')), ephemeral=True)
+        author_response = requests.get(f'https://yukine.ru/api/members/{server.id}/{author.id}')
+        member_response = requests.get(f'https://yukine.ru/api/members/{server.id}/{member.id}')
+        author_info = author_response.json()
+        member_info = member_response.json()
 
-        try:
-            await interaction.user.send(embed=DefaultEmbed(f'**Отправитель:** {interaction.user.mention}\n***```Запрос на клоз был успешно отправлен.```***'
-                                                           f'\n***```Дождитесь ответа...```***\n**Получатель клан:** {member_info["clan"]["name"]}.'))
-            response_enemy_clan = await interaction.response.send_message(embed=ClanCloseEmbed(event_name=game_name, clan_name=member_info["clan"]["name"], comment=comment).embed,
-                                                                          view=accept_view)
-        except Forbidden:
-            await interaction.response.send_message(embed=DefaultEmbed(f'**Отправитель:** {interaction.user.mention}\n***```Запрос на клоз был успешно отправлен.```***'
-                                                                       f'\n***```Дождитесь ответа...```***\n**Получатель клан:** {member_info["clan"]["name"]}.'), ephemeral=True)
-            response_enemy_clan = await interaction.response.send_message(embed=ClanCloseEmbed(event_name=game_name, clan_name=member_info["clan"]["name"], comment=comment).embed,
-                                                                          view=accept_view)
+        choice_view = event_view_builder.create_event_request_view()
+        event_channel = cross_server_system.get_event_channel(server.id)
+
+        enemy_txt_channel = self.client.get_channel(member_info['clan']['textId'])
+        response_msg = await request_to_the_enemy(interaction, member_send=author, enemy_channel=enemy_txt_channel, event_name=game_name, clan_name=enemy_txt_channel.name, comment=comment,
+                                                  view=choice_view)
 
         async def enemy_accept_callback(interact: Interaction):
-            if interact.user.id not in member['members']:
-                await response_enemy_clan.edit()
+            if interact.user.id not in member_info['members']:
+                pass
+            # todo - добавить view для ивентеров в этой функции
+            await accept_enemy_embed(member_send=author, request_msg=response_msg, clan_name=enemy_txt_channel.name, enemy_member=interact.user, view=View(), event_channel=event_channel,
+                                     event_name=game_name, clan_enemy=enemy_txt_channel.name)
 
-            async def acccept_callback(inter: Interaction):
+            async def closemod_acccept_callback(inter: Interaction):
                 pass
 
-            async def decline_callback(inter: Interaction):
+            async def closemod_decline_callback(inter: Interaction):
                 pass
 
         async def enemy_decline_callback(interact: Interaction):
-            if interact.user.id not in member['members']:
+            if interact.user.id not in member_info['members']:
                 pass
 
         event_view_builder.button_accept.callback = enemy_accept_callback

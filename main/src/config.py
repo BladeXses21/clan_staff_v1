@@ -1,7 +1,9 @@
 # discord bot token
 # Token = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.ydkfdaQT_hMroG5vYEXFJUpF8qg'
-# TOKEN = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.N5_r85zmSGDf45PrZHvvK7ATf5s'
-TOKEN = 'OTcwNTA1MTc3NTQ5MzgxNzAz.GW2drs.mX52QICi6fo2kOApErqMdKgvxhkqxqsbV9IFxc'
+TOKEN = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.N5_r85zmSGDf45PrZHvvK7ATf5s'
+
+# TOKEN = 'OTcwNTA1MTc3NTQ5MzgxNzAz.GW2drs.mX52QICi6fo2kOApErqMdKgvxhkqxqsbV9IFxc'
+
 
 # MongoDb token
 # BladeXses DB
@@ -164,6 +166,38 @@ XP_INCREMENT = {
     4: 950
 }
 
+PAYMENT = {
+    TENDERLY_ID: {
+        'right_time': 350,
+        'right_payment': 1000,
+        'overtime': 50,
+        'bonus_payment': 20
+    },
+    META_ID: {
+        'right_time': 180,
+        'right_payment': 1500,
+        'overtime': 120,
+        'bonus_payment': 20
+    },
+    DARKNESS_ID: {
+        'right_time': 350,
+        'right_payment': 1000,
+        'overtime': 50,
+        'bonus_payment': 20
+    },
+    SWEETNESS_ID: {
+        'right_time': 350,
+        'right_payment': 1000,
+        'overtime': 50,
+        'bonus_payment': 20
+    }
+}
+
+RIGHT_AMOUNT_PEOPLE = {
+    'Dota 2 5x5': 5,
+    'CS:GO 5x5': 5,
+    'VALORANT 5x5': 5
+}
 
 SHOP_CHANNEL_ID = 977712132906942484
 

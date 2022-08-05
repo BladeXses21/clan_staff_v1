@@ -390,7 +390,7 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 284, in process_chunk_requests
     request.add_members(members)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 124, in add_members
-    guild._add_member(member)
+    guild._add_member(self)
 KeyboardInterrupt
 2022-05-24 10:14:56 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
 2022-05-24 10:15:22 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -430,8 +430,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 310, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 310, in __init__
     self._roles: utils.SnowflakeList = utils.SnowflakeList(map(int, data["roles"]))
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\utils.py", line 657, in __new__
     return array.array.__new__(cls, "Q", data if is_sorted else sorted(data))  # type: ignore
@@ -840,8 +840,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 541, in received_message
     func(data)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 778, in parse_presence_update
-    user_update = member._presence_update(data=data, user=user)
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 412, in _presence_update
+    user_update = self._presence_update(data=data, user=user)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 412, in _presence_update
     self.activities = tuple(map(create_activity, data["activities"]))
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\activity.py", line 833, in create_activity
     return Activity(**data)
@@ -888,10 +888,10 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 541, in received_message
     func(data)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in parse_guild_members_chunk
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in <listcomp>
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 306, in __init__
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 306, in __init__
     self._user: User = state.store_user(data["user"])
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 342, in store_user
     user = User(state=self, data=data)
@@ -913,7 +913,7 @@ KeyboardInterrupt
 2022-05-27 20:49:42 [clan_staff] [INFO]: KalteSonne.#1449 вызвал комаду /event request Своя игра 2 .
 2022-05-27 21:35:35 [clan_staff] [ERROR]: сонек#3240 | !clan members
 2022-05-27 21:35:35 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
-2022-05-27 21:35:45 [clan_staff] [ERROR]: сонек#3240 | !clan member
+2022-05-27 21:35:45 [clan_staff] [ERROR]: сонек#3240 | !clan self
 2022-05-27 21:35:45 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-05-27 21:40:07 [clan_staff] [INFO]: paravozikii#5788 вызвал комаду /event request Brawl Stars 3 ,kf ,kf
 2022-05-27 22:04:04 [clan_staff] [INFO]: marili use command /staff profile
@@ -927,7 +927,7 @@ KeyboardInterrupt
 2022-05-28 07:39:48 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-05-28 11:36:40 [clan_staff] [ERROR]: fame&#3780 | !clan leave
 2022-05-28 11:36:40 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
-2022-05-28 11:44:07 [clan_staff] [ERROR]: фиджет спинер#1002 | !clan member
+2022-05-28 11:44:07 [clan_staff] [ERROR]: фиджет спинер#1002 | !clan self
 2022-05-28 11:44:07 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-05-28 12:56:55 [clan_staff] [INFO]: nezuko тявка#9323 вызвал комаду /event request Brawl Stars 10 nicki
 2022-05-28 13:03:27 [clan_staff] [INFO]: nezuko тявка#9323 вызвал комаду /event request Brawl Stars 99999 Nicky
@@ -1291,13 +1291,13 @@ KeyboardInterrupt
 2022-05-31 20:23:33 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
 2022-05-31 20:23:39 [clan_staff] [INFO]: READY
 2022-05-31 20:41:03 [clan_staff] [INFO]: piski<3 use command /staff profile
-2022-05-31 21:00:50 [clan_staff] [ERROR]: Akashi#1501 | !clan member
+2022-05-31 21:00:50 [clan_staff] [ERROR]: Akashi#1501 | !clan self
 2022-05-31 21:00:50 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-05-31 21:09:19 [clan_staff] [ERROR]: usseewa#8336 | !clan
 2022-05-31 21:09:19 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-05-31 21:18:59 [clan_staff] [INFO]: help command use :: BladeXses#1616
 2022-05-31 21:20:46 [clan_staff] [INFO]: help command use :: BladeXses#1616
-2022-05-31 21:49:29 [clan_staff] [ERROR]: doreford#1800 | !clan member
+2022-05-31 21:49:29 [clan_staff] [ERROR]: doreford#1800 | !clan self
 2022-05-31 21:49:29 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-05-31 21:49:39 [clan_staff] [ERROR]: doreford#1800 | !clan me
 2022-05-31 21:49:39 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
@@ -1584,10 +1584,10 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 541, in received_message
     func(data)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in parse_guild_members_chunk
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in <listcomp>
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 306, in __init__
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 306, in __init__
     self._user: User = state.store_user(data["user"])
 KeyboardInterrupt
 2022-06-03 00:19:30 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -1825,7 +1825,7 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
     await self.coro(*args, **kwargs)
   File "C:\Users\artur\clan_staff_v1\main\src\cogs\cross_event_request.py", line 461, in daily_tasks
-    for member in daily_tasks_system.get_all_members():
+    for self in daily_tasks_system.get_all_members():
   File "C:\Users\artur\clan_staff_v1\main\src\systems\cross_events\task_system.py", line 31, in get_all_members
     return res['clan_staff_id']
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\pymongo\cursor.py", line 761, in __getitem__
@@ -2004,7 +2004,7 @@ KeyboardInterrupt
 2022-06-04 22:12:29 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
 2022-06-04 22:12:46 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
 2022-06-04 22:12:54 [clan_staff] [INFO]: READY
-2022-06-04 22:12:55 [clan_staff] [ERROR]: Deadclown#1300 | !clan member
+2022-06-04 22:12:55 [clan_staff] [ERROR]: Deadclown#1300 | !clan self
 2022-06-04 22:12:55 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-06-04 22:25:50 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
 2022-06-04 22:26:08 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
@@ -2279,7 +2279,7 @@ KeyboardInterrupt
 2022-06-06 18:08:52 [clan_staff] [INFO]: READY
 2022-06-06 18:09:10 [clan_staff] [INFO]: BladeXses#1616, use !staff add to BladeXses#1616
 2022-06-06 18:10:25 [clan_staff] [ERROR]: BladeXses#1616 | !staff his
-2022-06-06 18:10:25 [clan_staff] [ERROR]: member is a required argument that is missing.
+2022-06-06 18:10:25 [clan_staff] [ERROR]: self is a required argument that is missing.
 2022-06-06 18:11:43 [clan_staff] [ERROR]: BladeXses#1616 | !staff his @сек
 2022-06-06 18:11:43 [clan_staff] [ERROR]: Member "@сек" not found.
 2022-06-06 18:14:03 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -2347,7 +2347,7 @@ KeyboardInterrupt
 2022-06-06 18:49:53 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
 2022-06-06 18:49:58 [clan_staff] [INFO]: READY
 2022-06-06 18:50:13 [clan_staff] [ERROR]: BladeXses#1616 | !staff rem
-2022-06-06 18:50:13 [clan_staff] [ERROR]: member is a required argument that is missing.
+2022-06-06 18:50:13 [clan_staff] [ERROR]: self is a required argument that is missing.
 2022-06-06 18:50:22 [clan_staff] [ERROR]: BladeXses#1616 | !staff rem <@450361269128790026>
 2022-06-06 18:50:22 [clan_staff] [ERROR]: Command raised an exception: TypeError: 'Collection' object is not callable. If you meant to call the 'update' method on a 'Collection' object it is failing because no such method exists.
 2022-06-06 18:53:35 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -2358,7 +2358,7 @@ KeyboardInterrupt
 2022-06-06 18:56:09 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
 2022-06-06 18:56:14 [clan_staff] [INFO]: READY
 2022-06-06 18:56:56 [clan_staff] [ERROR]: BladeXses#1616 | !staff rem
-2022-06-06 18:56:56 [clan_staff] [ERROR]: member is a required argument that is missing.
+2022-06-06 18:56:56 [clan_staff] [ERROR]: self is a required argument that is missing.
 2022-06-06 18:57:05 [clan_staff] [ERROR]: BladeXses#1616 | !staff rem <@450361269128790026>
 2022-06-06 18:57:05 [clan_staff] [ERROR]: Command raised an exception: TypeError: HistorySystem.clear_history() missing 1 required positional argument: 'guild_id'
 2022-06-06 18:57:23 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -2416,7 +2416,7 @@ KeyboardInterrupt
 2022-06-07 01:06:10 [clan_staff] [INFO]: help command use :: dreamer#0829
 2022-06-07 01:06:25 [clan_staff] [ERROR]: Sightless#2138 | !clan profile
 2022-06-07 01:06:25 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
-2022-06-07 01:22:04 [clan_staff] [ERROR]: Szuperman89#6245 | !clan member
+2022-06-07 01:22:04 [clan_staff] [ERROR]: Szuperman89#6245 | !clan self
 2022-06-07 01:22:04 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-06-07 01:23:48 [clan_staff] [ERROR]: Szuperman89#6245 | !clan
 2022-06-07 01:23:48 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
@@ -2492,10 +2492,10 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 541, in received_message
     func(data)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in parse_guild_members_chunk
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in <listcomp>
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 310, in __init__
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 310, in __init__
     self._roles: utils.SnowflakeList = utils.SnowflakeList(map(int, data["roles"]))
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\utils.py", line 657, in __new__
     return array.array.__new__(cls, "Q", data if is_sorted else sorted(data))  # type: ignore
@@ -2829,8 +2829,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\guild.py", line 527, in _from_data
     self._sync(guild)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\guild.py", line 548, in _sync
-    member._presence_update(presence, empty_tuple)  # type: ignore
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 412, in _presence_update
+    self._presence_update(presence, empty_tuple)  # type: ignore
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 412, in _presence_update
     self.activities = tuple(map(create_activity, data["activities"]))
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\activity.py", line 842, in create_activity
     return CustomActivity(name=name, **data)  # type: ignore
@@ -2901,7 +2901,7 @@ KeyboardInterrupt
 2022-06-08 20:50:31 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
 2022-06-08 20:50:36 [clan_staff] [INFO]: READY
 2022-06-08 20:50:44 [clan_staff] [ERROR]: BladeXses#1616 | !staff his
-2022-06-08 20:50:44 [clan_staff] [ERROR]: member is a required argument that is missing.
+2022-06-08 20:50:44 [clan_staff] [ERROR]: self is a required argument that is missing.
 2022-06-08 20:50:53 [clan_staff] [INFO]: BladeXses use command !staff his on Elizabeth ll
 2022-06-08 20:51:57 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
 2022-06-08 20:52:13 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
@@ -2997,8 +2997,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\guild.py", line 527, in _from_data
     self._sync(guild)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\guild.py", line 548, in _sync
-    member._presence_update(presence, empty_tuple)  # type: ignore
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 418, in _presence_update
+    self._presence_update(presence, empty_tuple)  # type: ignore
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 418, in _presence_update
     if len(user) > 1:
 KeyboardInterrupt
 2022-06-09 02:02:14 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -3342,7 +3342,7 @@ KeyboardInterrupt
 2022-06-09 23:02:19 [clan_staff] [ERROR]: Toxic Ay#4018 | !clan profile
 2022-06-09 23:02:19 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-06-09 23:19:48 [clan_staff] [INFO]: sakuta#3146 вызвал комаду /event request Brawl Stars 3 elizabeth
-2022-06-09 23:36:23 [clan_staff] [ERROR]: zzmkhs#0199 | !clan member
+2022-06-09 23:36:23 [clan_staff] [ERROR]: zzmkhs#0199 | !clan self
 2022-06-09 23:36:23 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-06-10 01:45:05 [clan_staff] [INFO]: help command use :: Wanrun#7999
 2022-06-10 02:41:15 [clan_staff] [INFO]: sanriogirlfriend#0002 вызвал комаду /event request Монополия 3 монополию
@@ -3663,8 +3663,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 310, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 310, in __init__
     self._roles: utils.SnowflakeList = utils.SnowflakeList(map(int, data["roles"]))
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\utils.py", line 657, in __new__
     return array.array.__new__(cls, "Q", data if is_sorted else sorted(data))  # type: ignore
@@ -3688,9 +3688,9 @@ KeyboardInterrupt
 2022-06-13 06:20:49 [clan_staff] [INFO]: help command use :: fosiydo#9391
 2022-06-13 08:58:48 [clan_staff] [ERROR]: .... square_#0265 | !clan
 2022-06-13 08:58:48 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
-2022-06-13 12:13:32 [clan_staff] [ERROR]: zzmkhs#0199 | !clan member
+2022-06-13 12:13:32 [clan_staff] [ERROR]: zzmkhs#0199 | !clan self
 2022-06-13 12:13:32 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
-2022-06-13 12:13:50 [clan_staff] [ERROR]: zzmkhs#0199 | !clan member
+2022-06-13 12:13:50 [clan_staff] [ERROR]: zzmkhs#0199 | !clan self
 2022-06-13 12:13:50 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
 2022-06-13 14:53:37 [clan_staff] [ERROR]: Wellcum#7502 | !clan leave
 2022-06-13 14:53:37 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '948739416820711424', or '955570935518343208'
@@ -3757,10 +3757,10 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\gateway.py", line 541, in received_message
     func(data)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in parse_guild_members_chunk
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1327, in <listcomp>
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 312, in __init__
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 312, in __init__
     self.activities: Tuple[ActivityTypes, ...] = tuple()
 KeyboardInterrupt
 2022-06-14 04:43:52 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -6105,13 +6105,20 @@ Traceback (most recent call last):
     data = await state.http.send_message(
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\http.py", line 372, in request
     raise DiscordServerError(response, data)
-discord.errors.DiscordServerError: 500 Internal Server Error (error code: 0): <html>
-<head><title>500 Internal Server Error</title><script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
-<body bgcolor="white">
-<center><h1>500 Internal Server Error</h1></center>
-<hr><center>nginx</center>
-<script type="text/javascript">(function(){window['__CF$cv$params']={r:'71eab60ee86c9030',m:'cVARDw14aXMz2laaIHCBG4RFhfdrpeq1VH090hU7HME-1655793190-0-AQq5198T+Xh6lt7jkt9oYRGQ7oaMpSbOrrx9ERa89V+/KEgYoRnmQWB27EQHdVxnXwp/02xHXxPfh4aluEWpc7IEeXTGVMbS7F8sGcqkn5g0LQ3FDhBEpeJvXRCSHYvF82sq8fzxS6C3NyGCIZPRABu+2aJYfJrAJofys7h4tjCm',s:[0xbc5ef12ac8,0x9b28874b24],}})();</script></body>
-</html>
+discord.errors.DiscordServerError: 500 Internal Server Error (error code: 0): <html>
+
+<head><title>500 Internal Server Error</title><script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
+
+<body bgcolor="white">
+
+<center><h1>500 Internal Server Error</h1></center>
+
+<hr><center>nginx</center>
+
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'71eab60ee86c9030',m:'cVARDw14aXMz2laaIHCBG4RFhfdrpeq1VH090hU7HME-1655793190-0-AQq5198T+Xh6lt7jkt9oYRGQ7oaMpSbOrrx9ERa89V+/KEgYoRnmQWB27EQHdVxnXwp/02xHXxPfh4aluEWpc7IEeXTGVMbS7F8sGcqkn5g0LQ3FDhBEpeJvXRCSHYvF82sq8fzxS6C3NyGCIZPRABu+2aJYfJrAJofys7h4tjCm',s:[0xbc5ef12ac8,0x9b28874b24],}})();</script></body>
+
+</html>
+
 
 2022-06-21 10:22:52 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 14.1s behind.
 2022-06-21 12:12:09 [clan_staff] [ERROR]: mea maxima culpa#0315 | !clan members
@@ -6161,13 +6168,20 @@ Traceback (most recent call last):
     data = await state.http.send_message(
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\http.py", line 372, in request
     raise DiscordServerError(response, data)
-discord.errors.DiscordServerError: 500 Internal Server Error (error code: 0): <html>
-<head><title>500 Internal Server Error</title><script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
-<body bgcolor="white">
-<center><h1>500 Internal Server Error</h1></center>
-<hr><center>nginx</center>
-<script type="text/javascript">(function(){window['__CF$cv$params']={r:'71eb0663ffa29bfb',m:'4ubKK4Zl.Pk46ddoesL27wClA_e7gU0_0.GVE9Hl4RU-1655796480-0-AT0sIAtZ3oE0S6W4MPBpP9L39sJCiyRqoWZmetfkcpiN4o/W211WQhbLPPAo43OtM/xwnV3d480nU6eqZ3pfUXb5IGmJJ+c3px82DaCgl2JUzPYo7JAs8ZlyMopgtabZYoSU8ZoExzPcembJUinYPx8GOH2ZKgIJ6iyxNYCr1QQ2',s:[0x25f5267100,0x0006ffb283],}})();</script></body>
-</html>
+discord.errors.DiscordServerError: 500 Internal Server Error (error code: 0): <html>
+
+<head><title>500 Internal Server Error</title><script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
+
+<body bgcolor="white">
+
+<center><h1>500 Internal Server Error</h1></center>
+
+<hr><center>nginx</center>
+
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'71eb0663ffa29bfb',m:'4ubKK4Zl.Pk46ddoesL27wClA_e7gU0_0.GVE9Hl4RU-1655796480-0-AT0sIAtZ3oE0S6W4MPBpP9L39sJCiyRqoWZmetfkcpiN4o/W211WQhbLPPAo43OtM/xwnV3d480nU6eqZ3pfUXb5IGmJJ+c3px82DaCgl2JUzPYo7JAs8ZlyMopgtabZYoSU8ZoExzPcembJUinYPx8GOH2ZKgIJ6iyxNYCr1QQ2',s:[0x25f5267100,0x0006ffb283],}})();</script></body>
+
+</html>
+
 
 2022-06-22 16:59:20 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 13.5s behind.
 2022-06-22 18:32:48 [clan_staff] [INFO]: help command use :: ♡ٴ 𝐀 𝐋 𝐑 𝐄 𝐙 𝐙 𝐘 𝐘 𝐘#1414
@@ -6218,8 +6232,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 306, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 306, in __init__
     self._user: User = state.store_user(data["user"])
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 342, in store_user
     user = User(state=self, data=data)
@@ -6469,7 +6483,7 @@ In embeds.0.description: This field is required
 2022-06-23 20:13:32 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 934073000117026866.
 2022-06-23 20:13:41 [clan_staff] [INFO]: READY
 2022-06-23 20:13:41 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 15.8s behind.
-2022-06-23 20:22:34 [clan_staff] [ERROR]: Hennessy#5688 | !clan member
+2022-06-23 20:22:34 [clan_staff] [ERROR]: Hennessy#5688 | !clan self
 2022-06-23 20:22:34 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
 2022-06-23 20:28:15 [clan_staff] [ERROR]: creel#4262 | !clan members
 2022-06-23 20:28:15 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
@@ -7025,7 +7039,7 @@ Loop thread traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\commands\core.py", line 181, in wrapped
     ret = await coro(*args, **kwargs)
   File "C:\Users\artur\clan_staff_v1\main\src\cogs\cross_event_request.py", line 534, in warn
-    fault_system.add_fault(guild_id=ctx.guild.id, clan_staff_id=member.id, reason=reason, fault_type=f_type)
+    fault_system.add_fault(guild_id=ctx.guild.id, clan_staff_id=self.id, reason=reason, fault_type=f_type)
   File "C:\Users\artur\clan_staff_v1\main\src\systems\cross_events\fault_system.py", line 24, in add_fault
     'fault_list': {"index": num_index.sequential_value, "reason": reason, "type": fault_type, "add_date": int(time.time())}
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\mongoengine\fields.py", line 2197, in __get__
@@ -7083,7 +7097,7 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\commands\core.py", line 181, in wrapped
     ret = await coro(*args, **kwargs)
   File "C:\Users\artur\clan_staff_v1\main\src\cogs\cross_event_request.py", line 534, in warn
-    fault_system.add_fault(guild_id=ctx.guild.id, clan_staff_id=member.id, reason=reason, fault_type=f_type)
+    fault_system.add_fault(guild_id=ctx.guild.id, clan_staff_id=self.id, reason=reason, fault_type=f_type)
   File "C:\Users\artur\clan_staff_v1\main\src\systems\cross_events\fault_system.py", line 24, in add_fault
     'fault_list': {"index": num_index.sequential_value, "reason": reason, "type": fault_type, "add_date": int(time.time())}
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\mongoengine\fields.py", line 2197, in __get__
@@ -7610,7 +7624,7 @@ discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message
 2022-07-01 21:38:11 [clan_staff] [ERROR]: BladeXses#1616 | !staff quest monopoly 30 30
 2022-07-01 21:38:11 [clan_staff] [ERROR]: Member "monopoly" not found.
 2022-07-01 21:41:41 [clan_staff] [ERROR]: BladeXses#1616 | !staff task
-2022-07-01 21:41:41 [clan_staff] [ERROR]: member is a required argument that is missing.
+2022-07-01 21:41:41 [clan_staff] [ERROR]: self is a required argument that is missing.
 2022-07-01 21:41:55 [clan_staff] [ERROR]: BladeXses#1616 | !staff task <@450361269128790026>
 2022-07-01 21:41:55 [clan_staff] [ERROR]: Command raised an exception: TypeError: QuestSystem.remove_quest() missing 1 required positional argument: 'name'
 2022-07-01 21:43:20 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -8030,7 +8044,7 @@ KeyboardInterrupt
 2022-07-02 04:33:28 [clan_staff] [INFO]: BladeXses#1616 изменил бабочки 692472578102525973 на 20
 2022-07-02 06:10:15 [clan_staff] [ERROR]: Енотик#4096 | !clan mem
 2022-07-02 06:10:15 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
-2022-07-02 07:03:09 [clan_staff] [ERROR]: kdwpeach#2956 | !clan member
+2022-07-02 07:03:09 [clan_staff] [ERROR]: kdwpeach#2956 | !clan self
 2022-07-02 07:03:09 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
 2022-07-02 10:26:27 [clan_staff] [INFO]: Wayliese#0135 вызвал комаду /event request Brawlhalla 3 По фану.
 2022-07-02 13:24:16 [clan_staff] [INFO]: BladeXses use command /staff profile
@@ -11144,8 +11158,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\member.py", line 306, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\self.py", line 306, in __init__
     self._user: User = state.store_user(data["user"])
   File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\state.py", line 342, in store_user
     user = User(state=self, data=data)
@@ -11173,7 +11187,7 @@ KeyboardInterrupt
 2022-07-03 16:35:48 [clan_staff] [INFO]: READY
 2022-07-03 17:38:29 [clan_staff] [INFO]: help command use :: Wayliese#0135
 2022-07-03 17:38:33 [clan_staff] [INFO]: BladeXses use command /staff profile
-2022-07-03 18:38:22 [clan_staff] [ERROR]: classni_igrok#1338 | !clan member
+2022-07-03 18:38:22 [clan_staff] [ERROR]: classni_igrok#1338 | !clan self
 2022-07-03 18:38:22 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
 2022-07-03 19:40:05 [clan_staff] [ERROR]: mayes#1867 | !staff list
 2022-07-03 19:40:05 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
@@ -11182,7 +11196,7 @@ KeyboardInterrupt
 2022-07-03 19:40:18 [clan_staff] [ERROR]: mayes#1867 | !staff list
 2022-07-03 19:40:18 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
 2022-07-03 19:41:26 [clan_staff] [ERROR]: killakillakilla#0228 | !staff add
-2022-07-03 19:41:26 [clan_staff] [ERROR]: member is a required argument that is missing.
+2022-07-03 19:41:26 [clan_staff] [ERROR]: self is a required argument that is missing.
 2022-07-03 19:42:04 [clan_staff] [ERROR]: mayes#1867 | !staff
 2022-07-03 19:42:04 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
 2022-07-03 19:44:03 [clan_staff] [ERROR]: mayes#1867 | !staff
@@ -12058,8 +12072,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\member.py", line 306, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\self.py", line 306, in __init__
     self._user: User = state.store_user(data["user"])
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 342, in store_user
     user = User(state=self, data=data)
@@ -12108,8 +12122,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\member.py", line 310, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\self.py", line 310, in __init__
     self._roles: utils.SnowflakeList = utils.SnowflakeList(map(int, data["roles"]))
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\utils.py", line 657, in __new__
     return array.array.__new__(cls, "Q", data if is_sorted else sorted(data))  # type: ignore
@@ -12392,8 +12406,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\member.py", line 310, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\self.py", line 310, in __init__
     self._roles: utils.SnowflakeList = utils.SnowflakeList(map(int, data["roles"]))
 KeyboardInterrupt
 2022-07-14 00:21:50 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -12534,8 +12548,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\member.py", line 317, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\self.py", line 317, in __init__
     data.get("communication_disabled_until")
 KeyboardInterrupt
 2022-07-14 01:00:40 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -12647,10 +12661,10 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\gateway.py", line 541, in received_message
     func(data)
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 1327, in parse_guild_members_chunk
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 1327, in <listcomp>
-    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
-  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\member.py", line 310, in __init__
+    members = [Member(guild=guild, data=self, state=self) for self in data.get("members", [])]  # type: ignore
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\self.py", line 310, in __init__
     self._roles: utils.SnowflakeList = utils.SnowflakeList(map(int, data["roles"]))
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\utils.py", line 657, in __new__
     return array.array.__new__(cls, "Q", data if is_sorted else sorted(data))  # type: ignore
@@ -12693,7 +12707,7 @@ KeyboardInterrupt
 2022-07-14 14:02:51 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 934073000117026866.
 2022-07-14 14:02:51 [clan_staff] [INFO]: READY
 2022-07-14 14:02:54 [discord.gateway] [WARNING]: Can't keep up, shard ID None websocket is 15.9s behind.
-2022-07-14 15:27:40 [clan_staff] [ERROR]: doreford#1800 | !clan member 936621352738250843
+2022-07-14 15:27:40 [clan_staff] [ERROR]: doreford#1800 | !clan self 936621352738250843
 2022-07-14 15:27:40 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
 2022-07-14 15:30:47 [clan_staff] [ERROR]: Sata#2233 | !clan leave
 2022-07-14 15:30:47 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
@@ -13035,8 +13049,8 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\member.py", line 306, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\self.py", line 306, in __init__
     self._user: User = state.store_user(data["user"])
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 342, in store_user
     user = User(state=self, data=data)
@@ -13458,7 +13472,7 @@ AttributeError: 'NoneType' object has no attribute 'categories'
 2022-07-30 19:31:04 [clan_staff] [INFO]: BladeXses#1616 изменил время ивентов 925729126101442580 на 7200
 2022-07-30 19:31:10 [clan_staff] [INFO]: BladeXses#1616 изменил ивенты 925729126101442580 на 1
 2022-07-30 19:57:31 [clan_staff] [INFO]: help command use :: usth#8304
-2022-07-30 22:27:52 [clan_staff] [ERROR]: 74#4110 | !clan member
+2022-07-30 22:27:52 [clan_staff] [ERROR]: 74#4110 | !clan self
 2022-07-30 22:27:52 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
 2022-07-30 23:41:41 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
 2022-07-30 23:41:52 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
@@ -13731,14 +13745,14 @@ Traceback (most recent call last):
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\state.py", line 1157, in _get_create_guild
     guild._from_data(data)
   File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\guild.py", line 517, in _from_data
-    member = Member(data=mdata, guild=self, state=state)
-  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\member.py", line 308, in __init__
+    self = Member(data=mdata, guild=self, state=state)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\self.py", line 308, in __init__
     self.joined_at: Optional[datetime.datetime] = utils.parse_time(data.get("joined_at"))
 KeyboardInterrupt
 2022-08-01 04:22:48 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
 2022-08-01 04:23:03 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
 2022-08-01 04:23:07 [clan_staff] [INFO]: READY
-2022-08-01 08:08:06 [clan_staff] [ERROR]: Kano#9143 | !clan member
+2022-08-01 08:08:06 [clan_staff] [ERROR]: Kano#9143 | !clan self
 2022-08-01 08:08:06 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
 2022-08-01 10:53:56 [discord.client] [ERROR]: Attempting a reconnect in 0.35s
 Traceback (most recent call last):
@@ -13808,3 +13822,706 @@ aiohttp.client_exceptions.ClientOSError: [WinError 64] The specified network nam
 2022-08-01 23:11:39 [clan_staff] [INFO]: wa!un4ik use command /staff profile
 2022-08-01 23:13:07 [clan_staff] [INFO]: Lwiri use command /staff profile
 2022-08-01 23:36:26 [clan_staff] [INFO]: help command use :: hesuz#9009
+2022-08-02 00:00:27 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Client.run.<locals>.runner() done, defined at C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\client.py:692> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\artur\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\client.py", line 694, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\client.py", line 658, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\client.py", line 553, in connect
+    await self.ws.poll_event()
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\gateway.py", line 591, in poll_event
+    await self.received_message(msg.data)
+  File "C:\Users\artur\.virtualenvs\DesireBot_v4-MlW_hv-j\lib\site-packages\discord\gateway.py", line 449, in received_message
+    msg = self._zlib.decompress(self._buffer)
+KeyboardInterrupt
+2022-08-02 00:55:32 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 00:56:51 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 00:59:04 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 00:59:17 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 00:59:39 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:00:09 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:00:16 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:00:25 [clan_staff] [INFO]: READY
+2022-08-02 01:00:48 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:00:48 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:00:49 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:00:53 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:01:01 [clan_staff] [INFO]: READY
+2022-08-02 01:02:51 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:02:51 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:02:52 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:04:16 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:04:25 [clan_staff] [INFO]: READY
+2022-08-02 01:04:32 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:04:32 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:04:33 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:04:42 [clan_staff] [INFO]: READY
+2022-08-02 01:05:14 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:05:14 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:05:15 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:05:17 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:05:23 [discord.http] [WARNING]: We are being rate limited. Retrying in 0.69 seconds. Handled under the bucket "None:None:/applications/{application_id}/commands"
+2022-08-02 01:05:25 [clan_staff] [INFO]: READY
+2022-08-02 01:05:28 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:05:28 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-20' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:05:55 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:06:05 [clan_staff] [INFO]: READY
+2022-08-02 01:06:38 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:06:38 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:06:39 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:06:49 [clan_staff] [INFO]: READY
+2022-08-02 01:08:14 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:08:14 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:08:15 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:08:34 [clan_staff] [INFO]: READY
+2022-08-02 01:16:06 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:16:06 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:16:07 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:16:22 [clan_staff] [INFO]: READY
+2022-08-02 01:16:39 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:16:39 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 01:16:40 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:17:33 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:17:44 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:18:43 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 01:23:22 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 02:53:55 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 02:54:32 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 02:54:38 [clan_staff] [INFO]: READY
+2022-08-02 02:55:04 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 02:55:04 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 02:55:05 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 02:55:10 [clan_staff] [INFO]: READY
+2022-08-02 02:55:36 [clan_staff] [ERROR]: BladeXses#1616 | !staff p <@450361269128790026>
+2022-08-02 02:55:36 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
+2022-08-02 02:55:57 [clan_staff] [ERROR]: BladeXses#1616 | !staff p <@450361269128790026>
+2022-08-02 02:55:57 [clan_staff] [ERROR]: You are missing at least one of the required roles: '774059907317497867', '911700891357306900', '953752849366532097', '963789217891233792', '985561662868324415', '948739416820711424', or '955570935518343208'
+2022-08-02 02:56:20 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 02:56:20 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 02:56:21 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 02:56:26 [clan_staff] [INFO]: READY
+2022-08-02 02:56:36 [clan_staff] [ERROR]: BladeXses#1616 | !p
+2022-08-02 02:56:36 [clan_staff] [ERROR]: Command raised an exception: TypeError: Figure.savefig() takes 2 positional arguments but 3 were given
+2022-08-02 02:58:17 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 02:58:17 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 02:58:18 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 02:58:23 [clan_staff] [INFO]: READY
+2022-08-02 02:58:27 [clan_staff] [ERROR]: BladeXses#1616 | !p
+2022-08-02 02:58:27 [clan_staff] [ERROR]: Command raised an exception: TypeError: expected str, bytes or os.PathLike object, not NoneType
+2022-08-02 02:58:54 [clan_staff] [ERROR]: BladeXses#1616 | !p
+2022-08-02 02:58:54 [clan_staff] [ERROR]: Command raised an exception: TypeError: expected str, bytes or os.PathLike object, not NoneType
+2022-08-02 02:59:47 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 02:59:47 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 02:59:48 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 02:59:52 [clan_staff] [INFO]: READY
+2022-08-02 03:00:13 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:00:13 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:00:14 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 03:00:19 [clan_staff] [INFO]: READY
+2022-08-02 03:02:48 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:02:48 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:02:49 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 03:02:54 [clan_staff] [INFO]: READY
+2022-08-02 03:03:44 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:03:44 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:03:45 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 03:03:49 [clan_staff] [INFO]: READY
+2022-08-02 03:04:20 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:04:20 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:04:21 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 03:04:25 [clan_staff] [INFO]: READY
+2022-08-02 03:06:29 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:06:29 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:06:30 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 03:06:35 [clan_staff] [INFO]: READY
+2022-08-02 03:11:17 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 03:11:17 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 23:45:02 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 23:45:06 [clan_staff] [INFO]: READY
+2022-08-02 23:45:44 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 23:45:44 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 23:46:20 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-02 23:46:23 [clan_staff] [INFO]: READY
+2022-08-02 23:47:04 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-02 23:47:04 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-03 20:14:53 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-03 20:14:57 [clan_staff] [INFO]: READY
+2022-08-03 20:15:50 [clan_staff] [INFO]: marie#7098 вызвал комаду /event request OSU 5 qwe
+2022-08-03 20:16:21 [clan_staff] [INFO]: BladeXses#1616 вызвал комаду /event request OSU 5 qwe
+2022-08-03 20:16:29 [clan_staff] [INFO]: marie#7098 вызвал комаду /event request OSU 5 qwe
+2022-08-03 20:16:45 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 192, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-03 20:16:45 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 210, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-05 03:09:48 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-05 03:09:52 [clan_staff] [INFO]: READY
+2022-08-05 03:17:23 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 188, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-05 03:17:23 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 206, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-05 03:28:21 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-05 03:28:25 [clan_staff] [INFO]: READY
+2022-08-05 03:29:51 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 188, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-05 03:29:51 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 206, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-05 03:29:52 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-05 03:29:56 [clan_staff] [INFO]: READY
+2022-08-05 03:31:04 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-18' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 35, in servers_stats
+    tenderly = get_clan_stats(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 188, in get_clan_stats
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
+2022-08-05 03:31:04 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<Loop._loop() done, defined at C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=AttributeError("'NoneType' object has no attribute 'categories'")>
+Traceback (most recent call last):
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur\.virtualenvs\clan_staff_v1-8BREwGZT\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur\clan_staff_v1\main\src\cogs\clan_stats.py", line 48, in servers_clan_stats
+    tenderly_members = number_of_people_in_clan(self.client.get_guild(TENDERLY_ID), TENDERLY_CATEGORY_NAME)
+  File "C:\Users\artur\clan_staff_v1\main\src\extensions\funcs.py", line 206, in number_of_people_in_clan
+    for category in guild.categories:
+AttributeError: 'NoneType' object has no attribute 'categories'
