@@ -200,7 +200,7 @@ class EventService:
                 await msg.delete()
 
                 member = server.get_member(user.id)
-                analitic_msg = await member.send(embed=DefaultEmbed('***```Понравился ли вам ивент? Да/Нет```***'))
+                analitic_msg = await member.send(embed=DefaultEmbed('***```Понравился ли вам ивент?\nДайте свой коментарий.```***'))
 
                 def check(m):
                     if m.channel == analitic_msg.channel:

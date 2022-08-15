@@ -8,10 +8,11 @@ from embeds.base import DefaultEmbed
 async def request_to_the_enemy(interaction: Interaction, member_send: Member, enemy_channel: TextChannel, event_name: str, clan_name: str, comment: str, view):
     try:
         await member_send.send(embed=DefaultEmbed(f'***```Запрос был успешно отпрален и противник получил вызов.\nОжидайте ответа.```***'))
-        await enemy_channel.send(embed=ClanCloseEmbed(event_name, clan_name, comment).embed, view=view)
+        enemy_msg = await enemy_channel.send(embed=ClanCloseEmbed(event_name, clan_name, comment).embed, view=view)
     except discord.Forbidden:
         await interaction.response.send_message(embed=DefaultEmbed(f'***```Запрос был успешно отпрален и противник получил вызов.\nОжидайте ответа.```***'))
-        await enemy_channel.send(embed=ClanCloseEmbed(event_name, clan_name, comment).embed, view=view)
+        enemy_msg = await enemy_channel.send(embed=ClanCloseEmbed(event_name, clan_name, comment).embed, view=view)
+    return enemy_msg
 
 
 class ClanCloseEmbed(object):

@@ -1,7 +1,7 @@
 import time
 from config import STANDART_PROFILE_AVATAR, STANDART_PROFILE_BACKGROUND, STANDART_BIRTHDAY
 from database.database_system import DatabaseSystem
-from models.mongo_type import CrossStafModel, RequestModel
+from models.mongo_type import CrossStafModel, RequestEventModel
 from typing import Literal
 
 
@@ -143,7 +143,7 @@ class CrossEventsSystem(DatabaseSystem):
 
     def create_request(self, guild_id: int, message_id: int, event_num: int,
                        clan_name: str, member_send_request: int, comment: str):
-        event_request = RequestModel(
+        event_request = RequestEventModel(
             guild_id=guild_id,
             message_id=message_id,
             event_num=event_num,
@@ -161,11 +161,11 @@ class CrossEventsSystem(DatabaseSystem):
 
         self.cross_clan_event_collection.insert_one(event_request.to_mongo())
 
-    def get_clan_event(self, guild_id: int, message_id: int) -> tuple[RequestModel.event_num, RequestModel.comment, RequestModel.clan_name, RequestModel.member_send_request]:
+    def get_clan_event(self, guild_id: int, message_id: int) -> tuple[RequestEventModel.event_num, RequestEventModel.comment, RequestEventModel.clan_name, RequestEventModel.member_send_request]:
         res = self.cross_clan_event_collection.find_one({'guild_id': guild_id, "message_id": message_id})
         return res['event_num'], res['comment'], res['clan_name'], res['member_send_request']
 
-    def get_time_accept_clan_event(self, guild_id: int, message_id: int) -> RequestModel.time_accept_request:
+    def get_time_accept_clan_event(self, guild_id: int, message_id: int) -> RequestEventModel.time_accept_request:
         res = self.cross_clan_event_collection.find_one({'guild_id': guild_id, "message_id": message_id})
 
         if res is None:
@@ -174,7 +174,7 @@ class CrossEventsSystem(DatabaseSystem):
         return res['time_accept_request']
 
     def accept_clan_event(self, guild_id: int, message_id: int, clan_staff_id: int):
-        crm = RequestModel(guild_id=guild_id, message_id=message_id)
+        crm = RequestEventModel(guild_id=guild_id, message_id=message_id)
         dbm = CrossStafModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
 
         self.cross_clan_event_collection.update_one(crm.to_mongo(), {'$set': {'clan_staff_id': clan_staff_id,

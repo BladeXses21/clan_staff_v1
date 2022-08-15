@@ -60,7 +60,7 @@ def get_staff_event_list(members, guild_id) -> str:
     for member in members:
         lvl = cross_event_system.get_lvl_count(guild_id=guild_id, clan_staff_id=member["clan_staff_id"])
         description += f'{counter}. <@{member["clan_staff_id"]}> — {str(member["sum_event_ends"])} ивентов' \
-                       f' — {sum_time(member["wasting_time"])} времени — {total_amount(seconds=member["wasting_time"], lvl=lvl)} зарплата\n'
+                       f' — {sum_time(member["wasting_time"])} времени — {total_amount(guild_id=guild_id, seconds=member["wasting_time"], lvl=lvl)} зарплата\n'
         counter += 1
     return description
 

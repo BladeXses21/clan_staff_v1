@@ -5,13 +5,16 @@ from config import png_strip_for_embed, png_butterfly_gif
 from embeds.base import DefaultEmbed
 
 
-async def accept_enemy_embed(member_send: Member, request_msg: Message, clan_name: str, enemy_member: Member, view, event_channel: TextChannel, event_name: str, clan_enemy: str):
+async def accept_enemy_embed(member_send: Member, request_msg: Message, clan_name: str, member_enemy: Member, view, event_channel: TextChannel, event_name: str, clan_enemy: str,
+                             staff_view):
     try:
-        await member_send.send(embed=DefaultEmbed(f'***```{enemy_member.name}, принял ваш запрос.\nОжидайте ответа ивентера.```***'))
+        await member_send.send(embed=DefaultEmbed(f'***```{member_enemy.name}, принял ваш запрос.\nОжидайте ответа ивентера.```***'))
         await request_msg.edit(embed=AcceptedEnemyClanEmbed(clan_name=clan_name).embed, view=view)
-        await event_channel.send(embed=RequestToTheEventChannel(event_name=event_name, clan_send=clan_name, clan_enemy=clan_enemy).embed)
+        event_channel_msg = await event_channel.send(embed=RequestToTheEventChannel(event_name=event_name, clan_send=clan_name, clan_enemy=clan_enemy).embed, view=staff_view)
     except discord.Forbidden:
         await request_msg.edit(embed=AcceptedEnemyClanEmbed(clan_name=clan_name).embed, view=view)
+        event_channel_msg = await event_channel.send(embed=RequestToTheEventChannel(event_name=event_name, clan_send=clan_name, clan_enemy=clan_enemy).embed, view=staff_view)
+    return event_channel_msg
 
 
 class AcceptedEnemyClanEmbed(object):

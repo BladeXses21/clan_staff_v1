@@ -41,7 +41,7 @@ class CrossGuildModel(Document):
     senior_lead_id = IntField(min_value=0)  # ID помощника по кланам
 
 
-class RequestModel(Document):
+class RequestEventModel(Document):
     guild_id = IntField(min_value=0)
     message_id = IntField(min_value=0)
     event_num = IntField(min_value=0)
@@ -51,6 +51,20 @@ class RequestModel(Document):
     clan_staff_id = IntField(default=0)
     time_send_request = IntField(min_value=0)
     time_accept_request = IntField(min_value=0)
+
+
+class RequestCloseModel(Document):
+    guild_id = IntField(min_value=0)
+    enemy_msg_id = IntField(min_value=0)
+    close_message_id = IntField(min_value=0)
+    event_name = StringField(min_length=1)
+    member_send_request = IntField(min_value=0)
+    clan_send_request = StringField(min_length=1)
+    clan_customer_request = StringField(default='None')
+    comment = StringField()
+    clan_staff_id = IntField(default=0)
+    time_send_request = IntField(min_value=0)
+    time_accept_request = IntField(default=0)
 
 
 class CrossRequestModel(Document):

@@ -20,20 +20,16 @@ class DatabaseSystem(object):
         return self.db.cross_clan_event_collection
 
     @property
+    def close_collection(self):
+        return self.db.close_collection
+
+    @property
     def cross_guild_collection(self):
         return self.db.cross_guild_collection
 
     @property
     def cross_stats_collection(self):
         return self.db.cross_stats_collection
-
-    @property
-    def cross_item_collection(self):
-        return self.db.cross_item_collection
-
-    @property
-    def cross_tasks_collection(self):
-        return self.db.cross_tasks_collection
 
     @property
     def events_history(self):

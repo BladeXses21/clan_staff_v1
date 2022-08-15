@@ -18,6 +18,8 @@ async def on_ready():
 async def on_command_error(ctx, error):
     if type(error) == commands.CommandNotFound:
         return
+    if type(error) == TimeoutError:
+        return
     staff_logger.error(f'{str(ctx.author)} | {ctx.message.content}')
     staff_logger.error(error)
 

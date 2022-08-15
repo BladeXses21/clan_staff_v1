@@ -4,8 +4,8 @@ import discord
 from discord.ext import commands, tasks
 
 from cogs.base import BaseCog
-from config import META_ID, DARKNESS_ID, HATORY_ID, DARKNESS_CATEGORY_NAME
-from config import PREFIX, STATS_SERVER_CHAT, HATORY_CATEGORY_NAME, SWEETNESS_ID, SWEETNESS_CATEGORY_NAME, SERVER_EMOGI, STATS_CLAN_CHAT, png_strip_for_embed
+from config import META_ID, DARKNESS_ID, DARKNESS_CATEGORY_NAME
+from config import PREFIX, STATS_SERVER_CHAT, SWEETNESS_ID, SWEETNESS_CATEGORY_NAME, SERVER_EMOGI, STATS_CLAN_CHAT, png_strip_for_embed
 from config import TENDERLY_CATEGORY_NAME, META_CATEGORY_NAME, TENDERLY_ID
 from embeds.base import DefaultEmbed
 from extensions.funcs import get_clan_stats, number_of_people_in_clan
