@@ -56,7 +56,8 @@ class Clan(BaseCog):
     @is_owner()
     async def guild(self, ctx, guild: discord.Guild, event_channel: discord.TextChannel,
                     text_category: discord.CategoryChannel, voice_category: discord.CategoryChannel,
-                    clan_staff_role: discord.Role, auction_channel: discord.TextChannel, trash_channel: discord.TextChannel, leader_role_id, consliger_role_id, find_clan_channel_id,
+                    clan_staff_role: discord.Role, auction_channel: discord.TextChannel,
+                    trash_channel: discord.TextChannel, leader_role_id, consliger_role_id, find_clan_channel_id,
                     clan_info_channel_id, create_clan_url, verify_url, clan_staff_url, team_lead_id, senior_lead_id):
         # only for owner - BladeXses
         if cross_server_system.add_guild(
@@ -68,7 +69,7 @@ class Clan(BaseCog):
                 auction_channel_id=auction_channel.id,
                 trash_channel_id=trash_channel.id,
                 leader_role_id=leader_role_id,
-                consliger_role_id=consliger_role_id,
+                consigliere_role_id=consliger_role_id,
                 find_clan_channel_id=find_clan_channel_id,
                 clan_info_channel_id=clan_info_channel_id,
                 create_clan_url=create_clan_url,
@@ -86,15 +87,19 @@ class Clan(BaseCog):
     async def help(self, interaction: discord.Interaction):
         leader_role_id, consliger_role_id, find_clan_id, clan_info_id, create_url, verify_url, clan_staff_url, team_lead_id, senior_lead_id = cross_server_system.get_help_fields(
             interaction.guild.id)
-        leader_role, consliger_role = interaction.guild.get_role(leader_role_id), interaction.guild.get_role(consliger_role_id)
+        leader_role, consliger_role = interaction.guild.get_role(leader_role_id), interaction.guild.get_role(
+            consliger_role_id)
         find_clan, clan_info = interaction.guild.get_channel(find_clan_id), interaction.guild.get_channel(clan_info_id)
         staff_logger.info(f'help command use :: {interaction.user}')
 
         help_view = help_view_builder.create_staff_view()
         await interaction.response.send_message(
-            embed=HelpEmbed(guild_name=interaction.guild.name, leader_role=leader_role.mention, consliger_role=consliger_role.mention,
-                            find_clan_channel=find_clan.mention, create_clan_url=create_url, verify_url=verify_url, clan_info=clan_info.mention,
-                            clan_staff_url=clan_staff_url, lead=f'<@{team_lead_id}>', senior=f'<@{senior_lead_id}>').embed, view=help_view, ephemeral=True)
+            embed=HelpEmbed(guild_name=interaction.guild.name, leader_role=leader_role.mention,
+                            consliger_role=consliger_role.mention,
+                            find_clan_channel=find_clan.mention, create_clan_url=create_url, verify_url=verify_url,
+                            clan_info=clan_info.mention,
+                            clan_staff_url=clan_staff_url, lead=f'<@{team_lead_id}>',
+                            senior=f'<@{senior_lead_id}>').embed, view=help_view, ephemeral=True)
 
         async def request_staff_callback(interact: interaction):
             staff_modal = StaffModal(interact)

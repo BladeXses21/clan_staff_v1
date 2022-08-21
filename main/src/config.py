@@ -1,9 +1,8 @@
 # discord bot token
 # Token = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.ydkfdaQT_hMroG5vYEXFJUpF8qg'
-TOKEN = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.N5_r85zmSGDf45PrZHvvK7ATf5s'
+# TOKEN = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.N5_r85zmSGDf45PrZHvvK7ATf5s'
 
-# TOKEN = 'OTcwNTA1MTc3NTQ5MzgxNzAz.GW2drs.mX52QICi6fo2kOApErqMdKgvxhkqxqsbV9IFxc'
-
+TOKEN = 'OTcwNTA1MTc3NTQ5MzgxNzAz.GW2drs.mX52QICi6fo2kOApErqMdKgvxhkqxqsbV9IFxc'
 
 # MongoDb token
 # BladeXses DB
@@ -224,6 +223,7 @@ REQUEST_STAFF_CHANNEL = {
 }
 
 CLAN_CREATE_REQUEST_CHANNEL = 991274737403703356
+CHANNEL_WITHOUT_CLAN = 1011029284988653639
 
 png_strip_for_embed = 'https://cdn.discordapp.com/attachments/836056310641459250/987354207566848010/1112.png'
 png_heart_icon = '<:png_heart_icon:990008416980320297>'

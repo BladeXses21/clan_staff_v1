@@ -1,14 +1,16 @@
 import time
 
 import discord
+import requests
 from discord.ext import commands, tasks
 
 from cogs.base import BaseCog
-from config import META_ID, DARKNESS_ID, DARKNESS_CATEGORY_NAME
-from config import PREFIX, STATS_SERVER_CHAT, SWEETNESS_ID, SWEETNESS_CATEGORY_NAME, SERVER_EMOGI, STATS_CLAN_CHAT, png_strip_for_embed
+from config import META_ID, DARKNESS_ID, DARKNESS_CATEGORY_NAME, CHANNEL_WITHOUT_CLAN, BLADEXSES_ID
+from config import PREFIX, STATS_SERVER_CHAT, SWEETNESS_ID, SWEETNESS_CATEGORY_NAME, SERVER_EMOGI, STATS_CLAN_CHAT, \
+    png_strip_for_embed
 from config import TENDERLY_CATEGORY_NAME, META_CATEGORY_NAME, TENDERLY_ID
 from embeds.base import DefaultEmbed
-from extensions.funcs import get_clan_stats, number_of_people_in_clan
+from extensions.funcs import get_clan_stats, number_of_people_in_clan, getClanNameList
 
 desire_bot = commands.Bot(command_prefix=PREFIX, intents=discord.Intents.all())
 
@@ -29,6 +31,51 @@ class ClanStats(BaseCog):
             self.servers_stats.start()
         if not self.servers_clan_stats.is_running():
             self.servers_clan_stats.start()
+        if not self.check_member_role.is_running():
+            self.check_member_role.start()
+
+    @tasks.loop(minutes=30)
+    async def check_member_role(self):
+        tenderly_clan_list = getClanNameList(guild=TENDERLY_ID)
+        meta_clan_list = getClanNameList(guild=META_ID)
+        darkness_clan_list = getClanNameList(guild=DARKNESS_ID)
+        sweetness_clan_list = getClanNameList(guild=SWEETNESS_ID)
+        tenderly = self.client.get_guild(TENDERLY_ID)
+        meta = self.client.get_guild(TENDERLY_ID)
+        darkness = self.client.get_guild(TENDERLY_ID)
+        sweetness = self.client.get_guild(TENDERLY_ID)
+        for t in tenderly_clan_list:
+            clan_role_members = discord.utils.get(tenderly.roles, name=t).members
+            for member in clan_role_members:
+                get_clan_members = requests.get(f'https://yukine.ru/api/members/{TENDERLY_ID}/{member.id}')
+                if member not in get_clan_members['clan']['members']:
+                    await self.client.get_channel(CHANNEL_WITHOUT_CLAN).send(content=f'<@{BLADEXSES_ID}>',
+                                                                             embed=DefaultEmbed(
+                                                                                 f'спіймав {member.id} без клана'))
+        for m in meta_clan_list:
+            clan_role_members = discord.utils.get(meta.roles, name=m).members
+            for member in clan_role_members:
+                get_clan_members = requests.get(f'https://yukine.ru/api/members/{META_ID}/{member.id}')
+                if member not in get_clan_members['clan']['members']:
+                    await self.client.get_channel(CHANNEL_WITHOUT_CLAN).send(content=f'<@{BLADEXSES_ID}>',
+                                                                             embed=DefaultEmbed(
+                                                                                 f'спіймав {member.id} без клана'))
+        for d in darkness_clan_list:
+            clan_role_members = discord.utils.get(darkness.roles, name=d).members
+            for member in clan_role_members:
+                get_clan_members = requests.get(f'https://yukine.ru/api/members/{DARKNESS_ID}/{member.id}')
+                if member not in get_clan_members['clan']['members']:
+                    await self.client.get_channel(CHANNEL_WITHOUT_CLAN).send(content=f'<@{BLADEXSES_ID}>',
+                                                                             embed=DefaultEmbed(
+                                                                                 f'спіймав {member.id} без клана'))
+        for s in sweetness_clan_list:
+            clan_role_members = discord.utils.get(sweetness.roles, name=s).members
+            for member in clan_role_members:
+                get_clan_members = requests.get(f'https://yukine.ru/api/members/{SWEETNESS_ID}/{member.id}')
+                if member not in get_clan_members['clan']['members']:
+                    await self.client.get_channel(CHANNEL_WITHOUT_CLAN).send(content=f'<@{BLADEXSES_ID}>',
+                                                                             embed=DefaultEmbed(
+                                                                                 f'спіймав {member.id} без клана'))
 
     @tasks.loop(minutes=5)
     async def servers_stats(self):
@@ -49,10 +96,18 @@ class ClanStats(BaseCog):
         meta_members = number_of_people_in_clan(self.client.get_guild(META_ID), META_CATEGORY_NAME)
         darkness_members = number_of_people_in_clan(self.client.get_guild(DARKNESS_ID), DARKNESS_CATEGORY_NAME)
         sweetness_members = number_of_people_in_clan(self.client.get_guild(SWEETNESS_ID), SWEETNESS_CATEGORY_NAME)
-        await self.stats_clan_chat.send(embed=DefaultEmbed(f'{SERVER_EMOGI[TENDERLY_ID]} TENDERLY\n\n {tenderly_members}\n\n'f'<t:{int(time.time())}>').set_image(url=png_strip_for_embed))
-        await self.stats_clan_chat.send(embed=DefaultEmbed(f'{SERVER_EMOGI[META_ID]} META\n\n {meta_members}\n\n'f'<t:{int(time.time())}>').set_image(url=png_strip_for_embed))
-        await self.stats_clan_chat.send(embed=DefaultEmbed(f'{SERVER_EMOGI[DARKNESS_ID]} DARKNESS\n\n {darkness_members}\n\n'f'<t:{int(time.time())}>').set_image(url=png_strip_for_embed))
-        await self.stats_clan_chat.send(embed=DefaultEmbed(f'{SERVER_EMOGI[SWEETNESS_ID]} SWEETNESS\n\n {sweetness_members}\n\n'f'<t:{int(time.time())}>').set_image(url=png_strip_for_embed))
+        await self.stats_clan_chat.send(embed=DefaultEmbed(
+            f'{SERVER_EMOGI[TENDERLY_ID]} TENDERLY\n\n {tenderly_members}\n\n'f'<t:{int(time.time())}>').set_image(
+            url=png_strip_for_embed))
+        await self.stats_clan_chat.send(embed=DefaultEmbed(
+            f'{SERVER_EMOGI[META_ID]} META\n\n {meta_members}\n\n'f'<t:{int(time.time())}>').set_image(
+            url=png_strip_for_embed))
+        await self.stats_clan_chat.send(embed=DefaultEmbed(
+            f'{SERVER_EMOGI[DARKNESS_ID]} DARKNESS\n\n {darkness_members}\n\n'f'<t:{int(time.time())}>').set_image(
+            url=png_strip_for_embed))
+        await self.stats_clan_chat.send(embed=DefaultEmbed(
+            f'{SERVER_EMOGI[SWEETNESS_ID]} SWEETNESS\n\n {sweetness_members}\n\n'f'<t:{int(time.time())}>').set_image(
+            url=png_strip_for_embed))
 
 
 def setup(bot):

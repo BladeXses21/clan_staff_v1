@@ -31,7 +31,7 @@ class CrossGuildModel(Document):
     auction_channel_id = IntField(min_value=0)  # ID текстового канала аукциона
     trash_channel_id = IntField(min_value=0)  # ID текстового канала корзины
     leader_role_id = IntField(min_value=0)  # ID роли лидера клана
-    consliger_role_id = IntField(min_value=0)  # ID роли заместителя клана
+    consigliere_role_id = IntField(min_value=0)  # ID роли заместителя клана
     find_clan_channel_id = IntField(min_value=0)  # ID текстового канала поиск клана
     clan_info_channel_id = IntField(min_value=0)  # ID текстового канала клан инфо
     create_clan_url = StringField(min_length=0)  # ссылка формы создания клана
@@ -55,16 +55,16 @@ class RequestEventModel(Document):
 
 class RequestCloseModel(Document):
     guild_id = IntField(min_value=0)
-    enemy_msg_id = IntField(min_value=0)
-    close_message_id = IntField(min_value=0)
-    event_name = StringField(min_length=1)
-    member_send_request = IntField(min_value=0)
-    clan_send_request = StringField(min_length=1)
-    clan_customer_request = StringField(default='None')
-    comment = StringField()
     clan_staff_id = IntField(default=0)
-    time_send_request = IntField(min_value=0)
-    time_accept_request = IntField(default=0)
+    eventName = StringField(min_length=1)
+    memberSendRequest_Id = IntField(min_value=0)
+    teamTwoMsg_Id = IntField(min_value=0)
+    closeMsg_Id = IntField(min_value=0)
+    teamOne_Id = IntField(min_value=0)
+    teamTwo_Id = IntField(min_value=0)
+    comment = StringField()
+    timeSendRequest = IntField(min_value=0)
+    timeAcceptRequest = IntField(default=0)
 
 
 class CrossRequestModel(Document):

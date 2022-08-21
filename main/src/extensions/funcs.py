@@ -1,5 +1,6 @@
 import time
 from random import choice
+from typing import List, Any
 
 from PIL import Image, ImageDraw, ImageChops
 from discord import Member
@@ -63,6 +64,16 @@ def get_staff_event_list(members, guild_id) -> str:
                        f' — {sum_time(member["wasting_time"])} времени — {total_amount(guild_id=guild_id, seconds=member["wasting_time"], lvl=lvl)} зарплата\n'
         counter += 1
     return description
+
+
+def getClanNameList(guild) -> list[str]:
+    clan_name_list = []
+    category_names = client.get_channel(cross_server_system.get_text_category(guild.id))
+    for category in guild.categories:
+        if category.name == category_names.name:
+            for channel in category.text_channels:
+                clan_name_list.append(channel.name)
+    return clan_name_list
 
 
 def get_guild_list(guild) -> str:

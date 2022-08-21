@@ -22,8 +22,10 @@ class CloseService:
     def __init__(self, client):
         self.client = client
 
-    async def close_request(self, member: Member, game_name, comment, users_count, interaction: Interaction, ctx: ApplicationContext = None):
-        staff_logger.info(f'{interaction.user} вызвал комаду /event request {member.name} {game_name} {comment} {users_count}')
+    async def closeRequest(self, member: Member, game_name, comment, users_count, interaction: Interaction,
+                           ctx: ApplicationContext = None):
+        staff_logger.info(
+            f'{interaction.user} вызвал комаду /event request {member.name} {game_name} {comment} {users_count}')
 
         if ctx is None:
             ctx = await self.client.get_application_context(interaction)
@@ -32,7 +34,9 @@ class CloseService:
 
         if RIGHT_AMOUNT_PEOPLE[game_name] != users_count:
             return await interaction.response.send_message(
-                embed=DefaultEmbed(f'***```{author.name}, количество указаных участников не подходит под данный ивент.\n Нужное количество: {RIGHT_AMOUNT_PEOPLE[game_name]}```***'),
+                embed=DefaultEmbed(
+                    f'***```{author.name}, количество указаных участников не подходит под данный ивент.\n Нужное '
+                    f'количество: {RIGHT_AMOUNT_PEOPLE[game_name]}```***'),
                 ephemeral=True)
         if comment is None:
             comment = 'No comments...'
@@ -60,22 +64,28 @@ class CloseService:
         event_channel = cross_server_system.get_event_channel(server.id)
 
         enemy_txt_channel = self.client.get_channel(member_info['clan']['textId'])
-        enemy_msg = await request_to_the_enemy(interaction, member_send=author, enemy_channel=enemy_txt_channel, event_name=game_name, clan_name=enemy_txt_channel.name, comment=comment,
+        enemy_msg = await request_to_the_enemy(interaction, member_send=author, enemy_channel=enemy_txt_channel,
+                                               event_name=game_name, clan_name=enemy_txt_channel.name, comment=comment,
                                                view=choice_view)
-        close_system.create_close(guild_id=server.id, event_name=game_name, member_send_request=author.id, clan_send_request=author_info['clan']['name'], comment=comment,
-                                  enemy_msg_id=enemy_msg.id)
+        close_system.create_close(guild_id=server.id, event_name=game_name, member_send_request=author.id,
+                                  teamOneId=author_info['clan']['roleId'], comment=comment,
+                                  enemy_msg_id=enemy_msg.id, teamTwoId=member_info['clan']['roleId'])
 
-        async def enemy_accept_callback(interact: Interaction):
+        async def enemyAcceptCallback(interact: Interaction):
             if interact.user.id not in member_info['members']:
                 return await interact.response.send_message(
                     embed=DefaultEmbed(f'***```{interact.user.name}, ты не являешься участником клана.```***'),
                     ephemeral=True)
 
-            event_channel_msg = await accept_enemy_embed(member_send=author, request_msg=enemy_msg, clan_name=member_info['clan']['name'], member_enemy=interact.user, view=View(),
-                                                         event_channel=event_channel, event_name=game_name, clan_enemy=enemy_txt_channel.name, staff_view=choice_view)
-            close_system.enemy_accept_close(guild_id=interact.guild.id, enemy_msg_id=interact.message.id, close_message_id=event_channel_msg.id)
+            event_channel_msg = await accept_enemy_embed(member_send=author, request_msg=enemy_msg,
+                                                         clan_name=member_info['clan']['name'],
+                                                         member_enemy=interact.user, view=View(),
+                                                         event_channel=event_channel, event_name=game_name,
+                                                         clan_enemy=enemy_txt_channel.name, staff_view=choice_view)
+            close_system.enemy_accept_close(guild_id=interact.guild.id, enemy_msg_id=interact.message.id,
+                                            close_message_id=event_channel_msg.id)
 
-            async def closemod_acccept_callback(inter: Interaction):
+            async def closeModAcceptCallback(inter: Interaction):
                 user = inter.user
                 view = close_view_builder.wining_close()
                 if cross_event_system.is_clan_staff(server.id, user.id) is False:
@@ -88,16 +98,20 @@ class CloseService:
                         embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'),
                         ephemeral=True)
 
-                close_system.staff_accept_close(guild_id=inter.guild.id, message_id=inter.message.id, clan_staff_id=inter.user.id)
+                close_system.staff_accept_close(guild_id=inter.guild.id, message_id=inter.message.id,
+                                                clan_staff_id=inter.user.id)
                 event_channel_message = await take_close_embed(event_channel_msg=inter.message.id, )
 
-                async def team_one_win(inte: Interaction):
-                    await inte.response.send_message(embed=DefaultEmbed(
-                        f'***```{inte.user.name}, введите конечный итог ивента по форме\n@link [количество конфет] @link [количество конфет]...\nДля отмены ивента пропишите слово - stop```***'),
+                async def team_one_win(interplay: Interaction):
+                    eventName, teamOne_Id, teamTwo_Id, comment, memberSendRequest_Id = close_system.get_res(
+                        guild_id=interplay.guild.id, close_message_id=interplay.message.id)
+                    await interplay.response.send_message(embed=DefaultEmbed(
+                        f'***```{interplay.user.name}, введите конечный итог ивента по форме\n@link [количество конфет] '
+                        f'@link [количество конфет]...\nДля отмены ивента пропишите слово - stop```***'),
                         ephemeral=True)
 
                     def check(m):
-                        if m.channel == inte.channel:
+                        if m.channel == interplay.channel:
                             if not m.author.bot:
                                 return m
 
@@ -108,18 +122,22 @@ class CloseService:
                         await msg.delete()
 
                     if msg.author.id == interact.user.id:
-                        sum_time_event = sum_event_time(guild=server.id, message_id=inte.message.id)
+                        sum_time_event = sum_event_time(guild=server.id, message_id=interplay.message.id)
 
-                        await pass_close_embed(reques_msg=event_channel_message, event_name=game_name, team_win=author_info['clan']['name'], team_lose=member_info['clan']['name'],
-                                               clan_staff=inte.user, time_start=123, sum_time=sum_time_event, end_result=msg.content)
+                        await pass_close_embed(reques_msg=event_channel_message, event_name=game_name,
+                                               team_win=author_info['clan']['name'],
+                                               team_lose=member_info['clan']['name'],
+                                               clan_staff=interplay.user, time_start=123, sum_time=sum_time_event,
+                                               end_result=msg.content)
 
-                async def team_two_win(inte: Interaction):
-                    await inte.response.send_message(embed=DefaultEmbed(
-                        f'***```{inte.user.name}, введите конечный итог ивента по форме\n@link [количество конфет] @link [количество конфет]...\nДля отмены ивента пропишите слово - stop```***'),
+                async def teamTwoWin(interplay: Interaction):
+                    await interplay.response.send_message(embed=DefaultEmbed(
+                        f'***```{interplay.user.name}, введите конечный итог ивента по форме\n@link [количество конфет] '
+                        f'@link [количество конфет]...\nДля отмены ивента пропишите слово - stop```***'),
                         ephemeral=True)
 
                     def check(m):
-                        if m.channel == inte.channel:
+                        if m.channel == interplay.channel:
                             if not m.author.bot:
                                 return m
 
@@ -130,18 +148,21 @@ class CloseService:
                         await msg.delete()
 
                     if msg.author.id == interact.user.id:
-                        sum_time_event = sum_event_time(guild=server.id, message_id=inte.message.id)
+                        sum_time_event = sum_event_time(guild=server.id, message_id=interplay.message.id)
 
-                        await pass_close_embed(reques_msg=event_channel_message, event_name=game_name, team_win=author_info['clan']['name'], team_lose=member_info['clan']['name'],
-                                               clan_staff=inte.user, time_start=123, sum_time=sum_time_event, end_result=msg.content)
+                        await pass_close_embed(reques_msg=event_channel_message, event_name=game_name,
+                                               team_win=author_info['clan']['name'],
+                                               team_lose=member_info['clan']['name'],
+                                               clan_staff=interplay.user, time_start=123, sum_time=sum_time_event,
+                                               end_result=msg.content)
 
-                async def draw_close(inte: Interaction):
+                async def drawClose():
                     pass
 
-                async def reject_close(inte: Interaction):
+                async def rejectClose():
                     pass
 
-            async def closemod_decline_callback(inter: Interaction):
+            async def closeModDeclineCallback(inter: Interaction):
                 user = inter.user
                 if cross_event_system.is_clan_staff(server.id, user.id) is False:
                     return await interact.response.send_message(
@@ -153,15 +174,16 @@ class CloseService:
                         embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'),
                         ephemeral=True)
 
-            event_view_builder.button_accept.callback = closemod_acccept_callback
-            event_view_builder.button_decline.callback = closemod_decline_callback
+            event_view_builder.button_accept.callback = closeModAcceptCallback
+            event_view_builder.button_decline.callback = closeModDeclineCallback
 
-        async def enemy_decline_callback(interact: Interaction):
+        async def enemyDeclineCallback(interact: Interaction):
             if interact.user.id not in member_info['members']:
                 return await interact.response.send_message(
                     embed=DefaultEmbed(f'***```{interact.user.name}, ты не являешься участником клана.```***'),
                     ephemeral=True)
-            return await decline_enemy_embed(member_send=author, request_msg=enemy_msg, event_name=game_name, member_enemy=interact.user)
+            return await decline_enemy_embed(member_send=author, request_msg=enemy_msg, event_name=game_name,
+                                             member_enemy=interact.user)
 
-        event_view_builder.button_accept.callback = enemy_accept_callback
-        event_view_builder.button_decline.callback = enemy_decline_callback
+        event_view_builder.button_accept.callback = enemyAcceptCallback
+        event_view_builder.button_decline.callback = enemyDeclineCallback

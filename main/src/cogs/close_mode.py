@@ -20,7 +20,8 @@ class CloseMode(BaseCog):
                       member: Option(discord.Member, 'Укажите пользователя с вражеского клана.', required=True),
                       users_count: Option(int, 'Сколько людей у вас собралось?.', required=True),
                       comment: Option(str, 'Введите коментарий к ивенту.', required=False)):
-        await self.close_service.close_request(member=member, game_name=game_name, users_count=users_count, comment=comment, interaction=interaction)
+        await self.close_service.closeRequest(member=member, game_name=game_name, users_count=users_count,
+                                              comment=comment, interaction=interaction)
 
     # @close.command(name='profile', description='Просмотреть профиль клозов', default_permission=True)
     # async def profile(self, interaction: Interaction, member: discord.Member = None):
