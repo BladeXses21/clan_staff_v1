@@ -1,16 +1,15 @@
 import time
 
 import discord
-import requests
 from discord.ext import commands, tasks
 
 from cogs.base import BaseCog
-from config import META_ID, DARKNESS_ID, DARKNESS_CATEGORY_NAME, CHANNEL_WITHOUT_CLAN, BLADEXSES_ID
+from config import META_ID, DARKNESS_ID, DARKNESS_CATEGORY_NAME
 from config import PREFIX, STATS_SERVER_CHAT, SWEETNESS_ID, SWEETNESS_CATEGORY_NAME, SERVER_EMOGI, STATS_CLAN_CHAT, \
     png_strip_for_embed
 from config import TENDERLY_CATEGORY_NAME, META_CATEGORY_NAME, TENDERLY_ID
 from embeds.base import DefaultEmbed
-from extensions.funcs import get_clan_stats, number_of_people_in_clan, getClanNameList
+from extensions.funcs import get_clan_stats, number_of_people_in_clan
 
 desire_bot = commands.Bot(command_prefix=PREFIX, intents=discord.Intents.all())
 
@@ -31,32 +30,6 @@ class ClanStats(BaseCog):
             self.servers_stats.start()
         if not self.servers_clan_stats.is_running():
             self.servers_clan_stats.start()
-        if not self.check_member_role.is_running():
-            self.check_member_role.start()
-
-    @tasks.loop(minutes=30)
-    async def check_member_role(self):
-        tenderly = self.client.get_guild(TENDERLY_ID)
-        tenderly_clan_list = getClanNameList(guild=TENDERLY_ID)
-
-        for t in tenderly_clan_list:
-
-            clan_role_members = discord.utils.get(tenderly.roles, name=t).members
-
-            for member in clan_role_members:
-
-                members_list = []
-                get_clan_members = requests.get(f'https://yukine.ru/api/members/{TENDERLY_ID}/{member.id}').json()
-
-                for users in get_clan_members['clan']['members']:
-                    for user in users['userId']:
-                        members_list.append(user)
-                if member.id not in members_list:
-                    await self.client.get_channel(CHANNEL_WITHOUT_CLAN).send(content=f'<@{BLADEXSES_ID}>',
-                                                                             embed=DefaultEmbed(
-                                                                                 f'спіймав {member.id} без клана'))
-                else:
-                    pass
 
     @tasks.loop(minutes=5)
     async def servers_stats(self):

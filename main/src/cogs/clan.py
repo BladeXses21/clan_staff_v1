@@ -2,6 +2,7 @@ import json
 from json import JSONDecodeError
 
 import discord
+import requests
 from discord import ApplicationContext, Embed
 from discord.ext import commands
 
@@ -12,6 +13,7 @@ from database.systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
 from embeds.clan_embed.auction.auction import AuctionEmbed
 from embeds.clan_embed.auction.lot import AuctionLot
+from embeds.clan_embed.clan_embed.permittedMember import FaultEmbed
 from embeds.clan_embed.help.help_embed import HelpEmbed
 from embeds.clan_embed.staff.clan_command import ClanCommandsEmbed
 from embeds.clan_embed.staff.clan_message import ClanMessageEmbed
@@ -48,9 +50,19 @@ class Clan(BaseCog):
                     return await ctx.send(embed=ClanCommandsEmbed().embed, delete_after=60)
 
     @clan.command()
-    @is_owner()
-    async def ad(self, ctx, member: discord.Member):
-        fault_system.ad(guild_id=ctx.guild.id, clan_staff_id=member.id)
+    @commands.cooldown(1, 30, commands.BucketType.user)
+    async def vlist(self, ctx: ApplicationContext, member: discord.Member):
+        if member is None:
+            member = ctx.author
+        response_json = requests.get(f'https://yukine.ru/api/members/{ctx.guild.id}/{member.id}').json()
+        permitted_description = ''
+        counter = 1
+        for permittedMember in response_json['clan']['permittedMembers']:
+            permitted_description += f"**#{counter}** <@{permittedMember}>\n"
+            counter += 1
+        await ctx.send(
+            embed=FaultEmbed(clan_name=response_json['clan']['altName'], description=permitted_description).embed,
+            delete_after=60)
 
     @clan.command(description='Добавить новый сервер в бд')
     @is_owner()

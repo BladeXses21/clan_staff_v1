@@ -66,16 +66,6 @@ def get_staff_event_list(members, guild_id) -> str:
     return description
 
 
-def getClanNameList(guild) -> list[str]:
-    clan_name_list = []
-    category_names = client.get_channel(cross_server_system.get_text_category(guild.id))
-    for category in guild.categories:
-        if category.name == category_names.name:
-            for channel in category.text_channels:
-                clan_name_list.append(channel.name)
-    return clan_name_list
-
-
 def get_guild_list(guild) -> str:
     counter = 1
     description = ''

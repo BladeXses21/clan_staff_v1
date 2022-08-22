@@ -1,4 +1,4 @@
-from discord import Embed, Color
+from discord import Embed
 
 from config import png_strip_for_embed
 

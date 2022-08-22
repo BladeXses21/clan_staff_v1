@@ -20,6 +20,8 @@ async def on_command_error(ctx, error):
         return
     if type(error) == TimeoutError:
         return
+    if isinstance(error, commands.CommandOnCooldown):
+        return
     staff_logger.error(f'{str(ctx.author)} | {ctx.message.content}')
     staff_logger.error(error)
 
