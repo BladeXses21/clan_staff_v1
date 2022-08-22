@@ -36,46 +36,27 @@ class ClanStats(BaseCog):
 
     @tasks.loop(minutes=30)
     async def check_member_role(self):
-        tenderly_clan_list = getClanNameList(guild=TENDERLY_ID)
-        meta_clan_list = getClanNameList(guild=META_ID)
-        darkness_clan_list = getClanNameList(guild=DARKNESS_ID)
-        sweetness_clan_list = getClanNameList(guild=SWEETNESS_ID)
         tenderly = self.client.get_guild(TENDERLY_ID)
-        meta = self.client.get_guild(TENDERLY_ID)
-        darkness = self.client.get_guild(TENDERLY_ID)
-        sweetness = self.client.get_guild(TENDERLY_ID)
+        tenderly_clan_list = getClanNameList(guild=TENDERLY_ID)
+
         for t in tenderly_clan_list:
+
             clan_role_members = discord.utils.get(tenderly.roles, name=t).members
+
             for member in clan_role_members:
-                get_clan_members = requests.get(f'https://yukine.ru/api/members/{TENDERLY_ID}/{member.id}')
-                if member not in get_clan_members['clan']['members']:
+
+                members_list = []
+                get_clan_members = requests.get(f'https://yukine.ru/api/members/{TENDERLY_ID}/{member.id}').json()
+
+                for users in get_clan_members['clan']['members']:
+                    for user in users['userId']:
+                        members_list.append(user)
+                if member.id not in members_list:
                     await self.client.get_channel(CHANNEL_WITHOUT_CLAN).send(content=f'<@{BLADEXSES_ID}>',
                                                                              embed=DefaultEmbed(
                                                                                  f'спіймав {member.id} без клана'))
-        for m in meta_clan_list:
-            clan_role_members = discord.utils.get(meta.roles, name=m).members
-            for member in clan_role_members:
-                get_clan_members = requests.get(f'https://yukine.ru/api/members/{META_ID}/{member.id}')
-                if member not in get_clan_members['clan']['members']:
-                    await self.client.get_channel(CHANNEL_WITHOUT_CLAN).send(content=f'<@{BLADEXSES_ID}>',
-                                                                             embed=DefaultEmbed(
-                                                                                 f'спіймав {member.id} без клана'))
-        for d in darkness_clan_list:
-            clan_role_members = discord.utils.get(darkness.roles, name=d).members
-            for member in clan_role_members:
-                get_clan_members = requests.get(f'https://yukine.ru/api/members/{DARKNESS_ID}/{member.id}')
-                if member not in get_clan_members['clan']['members']:
-                    await self.client.get_channel(CHANNEL_WITHOUT_CLAN).send(content=f'<@{BLADEXSES_ID}>',
-                                                                             embed=DefaultEmbed(
-                                                                                 f'спіймав {member.id} без клана'))
-        for s in sweetness_clan_list:
-            clan_role_members = discord.utils.get(sweetness.roles, name=s).members
-            for member in clan_role_members:
-                get_clan_members = requests.get(f'https://yukine.ru/api/members/{SWEETNESS_ID}/{member.id}')
-                if member not in get_clan_members['clan']['members']:
-                    await self.client.get_channel(CHANNEL_WITHOUT_CLAN).send(content=f'<@{BLADEXSES_ID}>',
-                                                                             embed=DefaultEmbed(
-                                                                                 f'спіймав {member.id} без клана'))
+                else:
+                    pass
 
     @tasks.loop(minutes=5)
     async def servers_stats(self):
