@@ -20,7 +20,8 @@ from embeds.clan_embed.staff.staff_command import StaffCommandsEmbed
 from embeds.clan_embed.view_builders.staff_view_builder import staff_view_builder
 from embeds.view_builder import default_view_builder
 from extensions.decorator import is_owner_rights
-from extensions.funcs import get_guilds_list_async, get_staff_list_async, get_staff_event_list, remove_clan_staff_response, add_clan_staff_response, \
+from extensions.funcs import get_guilds_list_async, get_staff_list_async, get_staff_event_list, \
+    remove_clan_staff_response, add_clan_staff_response, \
     get_event_history, get_fault, get_quest_list, quest_info, quest_limit
 from extensions.logger import staff_logger
 from main import client
@@ -70,7 +71,8 @@ class CrossEventsMode(BaseCog):
 
         if cross_event_system.is_clan_staff(guild_id=guild, clan_staff_id=member.id) is True:
             return await ctx.send(
-                embed=DefaultEmbed(f'***```{author_name}, пользователь {member.name}, уже есть в списке clan staff```***'),
+                embed=DefaultEmbed(
+                    f'***```{author_name}, пользователь {member.name}, уже есть в списке clan staff```***'),
                 delete_after=60
             )
         # <end>
@@ -118,12 +120,6 @@ class CrossEventsMode(BaseCog):
         await ctx.send(embed=DefaultEmbed(remove_clan_staff_response(member)))
         return await ctx.message.delete()
 
-    # @staff.command(description='')
-    # @is_owner_rights()
-    # async def his(self, ctx, member: discord.Member):
-    #     event_history.note_history(guild_id=ctx.guild.id, clan_staff_id=member.id, name='test', time='000001', date_end='000001')
-    #     return await ctx.send(embed=DefaultEmbed(f'***```{member.name}, история обновлена```***'))
-
     @staff.command(description='Очистка статы clan staff')
     @is_owner_rights()
     async def clear(self, ctx):
@@ -149,7 +145,8 @@ class CrossEventsMode(BaseCog):
 
             cross_event_system.reset_staff_stats(guild)
             return await msg.edit(
-                embed=DefaultEmbed(f'***```{author_name}, вы успешно очистили статистику clan staff на {ctx.guild.name}```***'),
+                embed=DefaultEmbed(
+                    f'***```{author_name}, вы успешно очистили статистику clan staff на {ctx.guild.name}```***'),
                 delete_after=60,
                 view=default_view_builder.create_view()
             )
@@ -285,7 +282,8 @@ class CrossEventsMode(BaseCog):
                                         min_value=1, max_value=61, required=True),
                       users_count: Option(int, 'Введите количество человек на ивенте.', required=True),
                       comment: Option(str, 'Введите коментарий к ивенту.', required=True)):
-        await self.event_service.event_request(event_num=event_num, users_count=users_count, comment=comment, interaction=interaction)
+        await self.event_service.event_request(event_num=event_num, users_count=users_count, comment=comment,
+                                               interaction=interaction)
 
     @staffs.command(name='profile', description='Профиль clan staff', default_permission=False)
     @commands.has_any_role(*CLAN_STAFF)
@@ -300,12 +298,14 @@ class CrossEventsMode(BaseCog):
         if member is not None:
             get_description = get_quest_list(guild_id=ctx.guild.id, member_id=member.id)
             color, avatar = cross_event_system.get_color_and_avatar(guild_id=ctx.guild.id, clan_staff_id=member.id)
-            await ctx.send(embed=QuestEmbed(member=member, description=get_description, msg_author=author, color=color, avatar=avatar).embed, delete_after=90)
+            await ctx.send(embed=QuestEmbed(member=member, description=get_description, msg_author=author, color=color,
+                                            avatar=avatar).embed, delete_after=90)
             return await ctx.message.delete()
         else:
             get_description = get_quest_list(guild_id=ctx.guild.id, member_id=author.id)
             color, avatar = cross_event_system.get_color_and_avatar(guild_id=ctx.guild.id, clan_staff_id=author.id)
-            await ctx.send(embed=QuestEmbed(member=author, description=get_description, msg_author=author, color=color, avatar=avatar).embed, delete_after=90)
+            await ctx.send(embed=QuestEmbed(member=author, description=get_description, msg_author=author, color=color,
+                                            avatar=avatar).embed, delete_after=90)
             return await ctx.message.delete()
 
     @staff.command(description='see your event history')
@@ -316,33 +316,42 @@ class CrossEventsMode(BaseCog):
                 staff_logger.info(f'{ctx.author.name} use command !staff his on {member.name}')
                 get_description = get_event_history(guild_id=ctx.guild.id, member_id=member.id)
                 color, avatar = cross_event_system.get_color_and_avatar(guild_id=ctx.guild.id, clan_staff_id=member.id)
-                await ctx.send(embed=HistoryEmbed(member=member, description=get_description, msg_author=ctx.author, color=color, avatar=avatar).embed, delete_after=90)
+                await ctx.send(
+                    embed=HistoryEmbed(member=member, description=get_description, msg_author=ctx.author, color=color,
+                                       avatar=avatar).embed, delete_after=90)
                 return await ctx.message.delete()
         except TypeError:
-            await ctx.send(embed=DefaultEmbed('***```История участника пуста или его нет в списке.```***'), delete_after=30)
+            await ctx.send(embed=DefaultEmbed('***```История участника пуста или его нет в списке.```***'),
+                           delete_after=30)
             return await ctx.message.delete()
         try:
             if member is None:
                 staff_logger.info(f'{ctx.author.name} use command !staff his')
                 get_description = get_event_history(guild_id=ctx.guild.id, member_id=ctx.author.id)
-                color, avatar = cross_event_system.get_color_and_avatar(guild_id=ctx.guild.id, clan_staff_id=ctx.author.id)
-                await ctx.send(embed=HistoryEmbed(member=ctx.author, description=get_description, msg_author=ctx.author, color=color, avatar=avatar).embed, delete_after=90)
+                color, avatar = cross_event_system.get_color_and_avatar(guild_id=ctx.guild.id,
+                                                                        clan_staff_id=ctx.author.id)
+                await ctx.send(embed=HistoryEmbed(member=ctx.author, description=get_description, msg_author=ctx.author,
+                                                  color=color, avatar=avatar).embed, delete_after=90)
                 return await ctx.message.delete()
         except TypeError:
-            await ctx.send(embed=DefaultEmbed('***```История участника пуста или его нет в списке.```***'), delete_after=30)
+            await ctx.send(embed=DefaultEmbed('***```История участника пуста или его нет в списке.```***'),
+                           delete_after=30)
             return await ctx.message.delete()
 
     @staff.command(description='clear event history')
     @is_owner_rights()
     async def clear_his(self, ctx: ApplicationContext):
         event_history.clear_history(ctx.guild.id)
-        return await ctx.send(embed=DefaultEmbed(f'***```История участников на сервере {ctx.guild.name}, была сброшена.```***'), delete_after=30)
+        return await ctx.send(
+            embed=DefaultEmbed(f'***```История участников на сервере {ctx.guild.name}, была сброшена.```***'),
+            delete_after=30)
 
     @staff.command(description='clear event history')
     @is_owner_rights()
     async def warn(self, ctx: ApplicationContext, member: discord.Member, reason: str, f_type: str):
         fault_system.add_fault(guild_id=ctx.guild.id, clan_staff_id=member.id, reason=reason, fault_type=f_type)
-        return await ctx.send(embed=DefaultEmbed(f'***```{member.name}, получил выговор по причине {reason} с типом {f_type}```***'))
+        return await ctx.send(
+            embed=DefaultEmbed(f'***```{member.name}, получил выговор по причине {reason} с типом {f_type}```***'))
 
     @staff.command(description='see your fault')
     @commands.has_any_role(*CLAN_STAFF)
@@ -351,17 +360,23 @@ class CrossEventsMode(BaseCog):
             if member is None:
                 staff_logger.info(f'{ctx.author.name} use command !staff fault')
                 date, reason, f_type = get_fault(guild_id=ctx.guild.id, member_id=ctx.author.id)
-                color, avatar = cross_event_system.get_color_and_avatar(guild_id=ctx.guild.id, clan_staff_id=ctx.author.id)
-                await ctx.send(embed=FaultEmbed(member=ctx.author, command_use=ctx.author, date=date, reason=reason, fault_type=f_type, color=color, avatar=avatar).embed)
+                color, avatar = cross_event_system.get_color_and_avatar(guild_id=ctx.guild.id,
+                                                                        clan_staff_id=ctx.author.id)
+                await ctx.send(embed=FaultEmbed(member=ctx.author, command_use=ctx.author, date=date, reason=reason,
+                                                fault_type=f_type, color=color, avatar=avatar).embed)
         except:
-            await ctx.send(embed=DefaultEmbed('***```История участника пуста или его нет в списке.```***'), delete_after=30)
+            await ctx.send(embed=DefaultEmbed('***```История участника пуста или его нет в списке.```***'),
+                           delete_after=30)
         try:
             staff_logger.info(f'{ctx.author.name} use command !staff fault on {member.name}')
             date, reason, f_type = get_fault(guild_id=ctx.guild.id, member_id=member.id)
             color, avatar = cross_event_system.get_color_and_avatar(guild_id=ctx.guild.id, clan_staff_id=member.id)
-            await ctx.send(embed=FaultEmbed(member=member, command_use=ctx.author, date=date, reason=reason, fault_type=f_type, color=color, avatar=avatar).embed)
+            await ctx.send(
+                embed=FaultEmbed(member=member, command_use=ctx.author, date=date, reason=reason, fault_type=f_type,
+                                 color=color, avatar=avatar).embed)
         except:
-            await ctx.send(embed=DefaultEmbed('***```История участника пуста или его нет в списке.```***'), delete_after=30)
+            await ctx.send(embed=DefaultEmbed('***```История участника пуста или его нет в списке.```***'),
+                           delete_after=30)
         return await ctx.message.delete()
 
     @staff.command(description='update birthday user')
@@ -369,11 +384,14 @@ class CrossEventsMode(BaseCog):
     async def dr(self, ctx: ApplicationContext, member: discord.Member, *args: str):
         birthday = ' '.join(args)
         if member is None:
-            return await ctx.send(embed=DefaultEmbed('***```Ошибка | Форма команды: !staff dr [id/@link] [new_birthday]```***'), delete_after=10)
+            return await ctx.send(
+                embed=DefaultEmbed('***```Ошибка | Форма команды: !staff dr [id/@link] [new_birthday]```***'),
+                delete_after=10)
         # if len(args) <= 2:
         #     return await ctx.send(embed=DefaultEmbed('***```Укажите больше 2 символов```***'), delete_after=10)
         cross_event_system.update_birthday(ctx.guild.id, member.id, birthday)
-        await ctx.send(embed=DefaultEmbed(f'***```{member.name}, успешно обновлен на {birthday}```***'), delete_after=30)
+        await ctx.send(embed=DefaultEmbed(f'***```{member.name}, успешно обновлен на {birthday}```***'),
+                       delete_after=30)
         return await ctx.message.delete()
 
     @staff.command(description='update user avatar')
@@ -394,7 +412,8 @@ class CrossEventsMode(BaseCog):
             return await ctx.send(embed=DefaultEmbed('***```Ошибка | участник не указан```***'), delete_after=10)
         if background_url is None:
             return await ctx.send(embed=DefaultEmbed('***```Ошибка | background_url не указан```***'), delete_after=10)
-        cross_event_system.update_background(guild_id=ctx.guild.id, clan_staff_id=member.id, new_background=background_url)
+        cross_event_system.update_background(guild_id=ctx.guild.id, clan_staff_id=member.id,
+                                             new_background=background_url)
         await ctx.send(embed=DefaultEmbed(f'***```{member.name}, background обновлен```***'), delete_after=10)
         return await ctx.message.delete()
 
@@ -418,21 +437,25 @@ class CrossEventsMode(BaseCog):
         try:
             for member in _members:
                 if quest_limit(guild_id=guild_id, member_id=member['clan_staff_id']) is True:
-                    quest_system.create_new_quest(guild_id=guild_id, member_id=member['clan_staff_id'], name=name, timer=timer, xp=xp)
+                    quest_system.create_new_quest(guild_id=guild_id, member_id=member['clan_staff_id'], name=name,
+                                                  timer=timer, xp=xp)
                     response += f'<@{member["clan_staff_id"]}> ***`квест {name} | {timer} m. | {xp} xp, заряжен;`***\n'
                 else:
                     response += f'<@{member["clan_staff_id"]}> ***`пользователь достиг лимита, квест не заряжен;`***\n'
         except ValueError as e:
-            await ctx.send(embed=DefaultEmbed(f"***```Error: {str(e)}\nCorrect command: !staff new_quest timer xp event_name```***"), delete_after=10)
+            await ctx.send(embed=DefaultEmbed(
+                f"***```Error: {str(e)}\nCorrect command: !staff new_quest timer xp event_name```***"), delete_after=10)
         await ctx.send(embed=DefaultEmbed(response + "***```Зарядка окончена.```***"), delete_after=120)
 
     @staff.command()
     @is_owner_rights()
-    async def rem_quest(self, ctx, name: str, member: discord.Member = None):
+    async def rem_quest(self, ctx, member: discord.Member = None, *args: str):
+        name = ' '.join(args)
         if member is not None:
             xp, timer = quest_info(ctx.guild.id, member.id)
             quest_system.remove_quest(guild_id=ctx.guild.id, clan_staff_id=member.id, name=name)
-            return await ctx.send(embed=DefaultEmbed(f'***```Квест {name} {xp[name]} xp. {timer[name]} timer. у {member.name} был удален ```***'))
+            return await ctx.send(embed=DefaultEmbed(
+                f'***```Квест {name} {xp[name]} xp. {timer[name]} timer. у {member.name} был удален ```***'))
         _members = cross_event_system.get_event_organizers(guild_id=ctx.guild.id)
         for member in _members:
             quest_system.remove_quest(guild_id=ctx.guild.id, clan_staff_id=member['clan_staff_id'], name=name)
@@ -443,36 +466,6 @@ class CrossEventsMode(BaseCog):
     async def refresh(self, ctx, member: discord.Member):
         cross_event_system.refresh(guild_id=ctx.guild.id, member_id=member.id)
         return await ctx.send(embed=DefaultEmbed(f'***```{member.name}, теперь может проводить ивент без ошибок```***'))
-
-    # @commands.command()
-    # @is_owner()
-    # async def p(self, ctx: ApplicationContext, member: discord.Member = None):
-
-        # if not member:
-        #     member = ctx.author
-        # _name, _Id, = str(member.name), str(member.id)
-        #
-        # base_img = Image.open('Profile_custom.png').convert("RGBA")
-        #
-        # pfp = member.display_avatar.with_size(256)
-        # data = BytesIO(await pfp.read())
-        # pfp = Image.open(data).convert('RGBA')
-        #
-        # draw = ImageDraw.Draw(base_img)
-        # pfp = circle(pfp, size=(645, 645))
-        # font = ImageFont.truetype('Nunito-Italic.ttf', 38)
-        # main_font = ImageFont.truetype('Nunito-Italic.ttf', 27)
-        # second_font = ImageFont.truetype('Nunito-Italic.ttf', 24)
-        #
-        # draw.text((840, 720), _name, font=font)
-        # draw.text((270, 315), _Id, font=main_font)
-        # # draw.text(())
-        # base_img.paste(pfp, (56, 158), pfp)
-
-        # with BytesIO() as i:
-        #     base_img.save(i, 'PNG')
-        #     i.seek(0)
-        #     await ctx.send(file=discord.File(i, 'profile.png'))
 
 
 def setup(bot):

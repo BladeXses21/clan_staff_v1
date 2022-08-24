@@ -1,17 +1,18 @@
 import json
+import time
 
 from mongoengine import *
 
 connect("clan_staff_base")
 
 
-class CrossStafModel(Document):
+class CrossStaffModel(Document):
     guild_id = IntField(min_value=0)  # ID сервера
     clan_staff_id = IntField(min_value=0)  # ID участника clan staff
     member_work_this_request = IntField(min_value=0)  # ID сообщения в которым работает clan staff
     sum_event_ends = IntField(min_value=0)  # суммарное количество проведенных ивентов
     wasting_time = IntField(min_value=0)  # суммарное потраченое время на все ивенты
-    curator = IntField(min_value=0)  # id человека который принял
+    curator = IntField(min_value=0)  # id человека, который принял
     xp_counter = IntField(min_value=0)  # опыт полученый за выполение квестов
     minimum_limit = IntField(min_value=0)  # минимальное количество времени нужное ивентеру для выполения нормы
     avatar = StringField(min_length=1)
@@ -116,3 +117,26 @@ class QuestModel(Document):
 
 class Number(EmbeddedDocument):
     sequential_value = SequenceField(required=True)
+
+
+class ClanWarnModal(Document):
+    guild_id = IntField(unique=True, min_value=1)
+    clan_staff_id = IntField(min_value=1)
+    clan_role_id = IntField(min_value=1)
+    reason = StringField(min_length=1)
+    mute_date = IntField(min_value=1)
+    unmute_date = IntField(min_value=1)
+    warn_list = ListField()
+
+    def json(self):
+        warn_dict = {
+            "guild_id": self.guild_id,
+            "clan_staff_id": self.clan_staff_id,
+            "clan_role_id": self.clan_role_id,
+            "reason": self.reason,
+            "mute_date": self.mute_date,
+            "unmute_date": self.unmute_date,
+            'warn_list': self.warn_list
+        }
+
+        return json.dumps(warn_dict)

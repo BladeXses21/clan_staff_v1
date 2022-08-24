@@ -247,23 +247,3 @@ async def send_trash_auction(ctx, role):
     get_auction_channel = client.get_channel(auction_channl_id)
     get_trash_channel = client.get_channel(trash_channel_id)
     await get_trash_channel.send(embed=AuctionTrashEmbed(get_auction_channel, role).embed)
-
-
-# def get_text_id(guild_id, member_id):
-#     url = f'https://yukine.ru/api/members/{guild_id}/{member_id}'
-#     r = requests.get(url)
-#     the_user = r.json()
-#     return the_user['clan']['textId']
-
-
-def circle(pfp, size=(215, 215)):
-    pfp = pfp.resize(size, Image.ANTIALIAS).convert("RGBA")
-
-    bigsize = (pfp.size[0] * 3, pfp.size[1] * 3)
-    mask = Image.new('L', bigsize, 0)
-    draw = ImageDraw.Draw(mask)
-    draw.ellipse((0, 0) + bigsize, fill=255)
-    mask = mask.resize(pfp.size, Image.ANTIALIAS)
-    mask = ImageChops.darker(mask, pfp.split()[-1])
-    pfp.putalpha(mask)
-    return pfp

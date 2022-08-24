@@ -42,3 +42,7 @@ class DatabaseSystem(object):
     @property
     def quest_collection(self):
         return self.db.quest_collection
+
+    @property
+    def clan_warn_collection(self):
+        return self.db.clan_warn_collection

@@ -40,7 +40,8 @@ class QuestSystem(DatabaseSystem):
         return res
 
     def remove_quest(self, guild_id: int, clan_staff_id: int, name: str):
-        self.quest_collection.update_one({'guild_id': guild_id, 'clan_staff_id': clan_staff_id}, {"$pull": {"quest_list": {"name": name}}})
+        self.quest_collection.update_one({'guild_id': guild_id, 'clan_staff_id': clan_staff_id},
+                                         {"$pull": {"quest_list": {"name": name}}})
 
 
 quest_system = QuestSystem()

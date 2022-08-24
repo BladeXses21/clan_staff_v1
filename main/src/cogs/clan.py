@@ -7,13 +7,14 @@ from discord import ApplicationContext, Embed
 from discord.ext import commands
 
 from cogs.base import BaseCog
-from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE, OWNER_IDS
+from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE, OWNER_IDS, CLAN_MEMBER_ACCESS_ROLE
+from database.systems.clan_warn import clan_warn_system
 from database.systems.fault_system import fault_system
 from database.systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
 from embeds.clan_embed.auction.auction import AuctionEmbed
 from embeds.clan_embed.auction.lot import AuctionLot
-from embeds.clan_embed.clan_embed.permittedMember import FaultEmbed
+from embeds.clan_embed.clan_embed.permittedMember import PermittedEmbed
 from embeds.clan_embed.help.help_embed import HelpEmbed
 from embeds.clan_embed.staff.clan_command import ClanCommandsEmbed
 from embeds.clan_embed.staff.clan_message import ClanMessageEmbed
@@ -50,8 +51,9 @@ class Clan(BaseCog):
                     return await ctx.send(embed=ClanCommandsEmbed().embed, delete_after=60)
 
     @clan.command()
+    @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
     @commands.cooldown(1, 30, commands.BucketType.user)
-    async def vlist(self, ctx: ApplicationContext, member: discord.Member):
+    async def v_list(self, ctx: ApplicationContext, member: discord.Member):
         if member is None:
             member = ctx.author
         response_json = requests.get(f'https://yukine.ru/api/members/{ctx.guild.id}/{member.id}').json()
@@ -61,7 +63,7 @@ class Clan(BaseCog):
             permitted_description += f"**#{counter}** <@{permittedMember}>\n"
             counter += 1
         await ctx.send(
-            embed=FaultEmbed(clan_name=response_json['clan']['altName'], description=permitted_description).embed,
+            embed=PermittedEmbed(clan_name=response_json['clan']['altName'], description=permitted_description).embed,
             delete_after=60)
 
     @clan.command(description='Добавить новый сервер в бд')
@@ -219,6 +221,23 @@ class Clan(BaseCog):
         except JSONDecodeError as e:
             await ctx.send(embed=DefaultEmbed(f'Error: {str(e)}'))
             return await ctx.message.delete()
+
+    @clan.command(description='Просмотр выговоров кланов')
+    @is_owner_rights()
+    async def warn(self, ctx: ApplicationContext):
+        warn_list = clan_warn_system.get_clan_warn_list(guild_id=ctx.guild.id)
+        return await ctx.send(content=warn_list)
+
+    @clan.command(description='Выдать выговор клану')
+    @is_owner_rights()
+    async def add_warn(self, ctx: ApplicationContext, clan_role_id: discord.Role.id, mute_day: int, *args):
+        guild_id = ctx.guild.id
+        reason = ' '.join(args)
+        clan_warn_system.addGuildToWarnSystem(guild_id=guild_id)
+        clan_warn_system.addWarn(guild_id=guild_id, clan_staff_id=ctx.author.id, clan_role_id=clan_role_id,
+                                 mute_days=reason)
+        return await ctx.send(embed=DefaultEmbed(f'Выдан выговор клану <@&{clan_role_id}> с причиной {reason}.'),
+                              delete_after=30)
 
 
 def setup(bot):
