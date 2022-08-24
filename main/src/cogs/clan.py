@@ -15,12 +15,14 @@ from embeds.base import DefaultEmbed
 from embeds.clan_embed.auction.auction import AuctionEmbed
 from embeds.clan_embed.auction.lot import AuctionLot
 from embeds.clan_embed.clan_embed.permittedMember import PermittedEmbed
+from embeds.clan_embed.clan_embed.warn import ClanWarnEmbed
 from embeds.clan_embed.help.help_embed import HelpEmbed
 from embeds.clan_embed.staff.clan_command import ClanCommandsEmbed
 from embeds.clan_embed.staff.clan_message import ClanMessageEmbed
 from embeds.clan_embed.view_builders.help_view_builder import help_view_builder
 from embeds.view_builder import default_view_builder
 from extensions.decorator import is_owner, is_owner_rights
+from extensions.funcs import get_clan_warn
 from extensions.logger import staff_logger
 from main import client
 from models.modal import StaffModal, ClanModal
@@ -50,21 +52,20 @@ class Clan(BaseCog):
                 if ctx.author.id in OWNER_IDS:
                     return await ctx.send(embed=ClanCommandsEmbed().embed, delete_after=60)
 
-    @clan.command()
+    @clans.command(name='v_list', description='Просмотреть список доступов в клан', default_permission=True)
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
     @commands.cooldown(1, 30, commands.BucketType.user)
-    async def v_list(self, ctx: ApplicationContext, member: discord.Member):
-        if member is None:
-            member = ctx.author
-        response_json = requests.get(f'https://yukine.ru/api/members/{ctx.guild.id}/{member.id}').json()
+    async def v_list(self, interaction: discord.Interaction):
+        response_json = requests.get(
+            f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
         permitted_description = ''
         counter = 1
         for permittedMember in response_json['clan']['permittedMembers']:
             permitted_description += f"**#{counter}** <@{permittedMember}>\n"
             counter += 1
-        await ctx.send(
+        await interaction.response.send_message(
             embed=PermittedEmbed(clan_name=response_json['clan']['altName'], description=permitted_description).embed,
-            delete_after=60)
+            delete_after=120, ephemeral=True)
 
     @clan.command(description='Добавить новый сервер в бд')
     @is_owner()
@@ -226,7 +227,10 @@ class Clan(BaseCog):
     @is_owner_rights()
     async def warn(self, ctx: ApplicationContext):
         warn_list = clan_warn_system.get_clan_warn_list(guild_id=ctx.guild.id)
-        return await ctx.send(content=warn_list)
+        clan_role, reason, remove_date = get_clan_warn(guild_id=ctx.guild.id)
+        return await ctx.send(
+            embed=ClanWarnEmbed(guild=ctx.guild, clan_role=clan_role, reason=reason, remove_date=remove_date,
+                                command_use=ctx.author).embed, delete_after=120)
 
     @clan.command(description='Выдать выговор клану')
     @is_owner_rights()

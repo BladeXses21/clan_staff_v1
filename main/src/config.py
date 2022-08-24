@@ -236,7 +236,6 @@ STANDART_BIRTHDAY = 'never born'
 tenderly_heart_emoji = '<:tenderly_icon:990008413842976799>'
 meta_heart_emoji = '<:meta_icon:990008420478382171>'
 darkness_heart_emoji = '<:darkness_icon:990008419501101056>'
-hatory_heart_emoji = '<:hatory_icon:990008418171506708>'
 sweetness_heart_emoji = '<:sweetness_icon:990008412853129326>'
 # endregion
 

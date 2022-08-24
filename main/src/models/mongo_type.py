@@ -124,8 +124,8 @@ class ClanWarnModal(Document):
     clan_staff_id = IntField(min_value=1)
     clan_role_id = IntField(min_value=1)
     reason = StringField(min_length=1)
-    mute_date = IntField(min_value=1)
-    unmute_date = IntField(min_value=1)
+    warn_date = IntField(min_value=1)
+    unwarn_date = IntField(min_value=1)
     warn_list = ListField()
 
     def json(self):
@@ -134,8 +134,8 @@ class ClanWarnModal(Document):
             "clan_staff_id": self.clan_staff_id,
             "clan_role_id": self.clan_role_id,
             "reason": self.reason,
-            "mute_date": self.mute_date,
-            "unmute_date": self.unmute_date,
+            "warn_date": self.warn_date,
+            "unwarn_date": self.unwarn_date,
             'warn_list': self.warn_list
         }
 

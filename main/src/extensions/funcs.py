@@ -7,6 +7,7 @@ from discord import Member
 from discord.ext import tasks
 
 from config import DAY_IN_SECONDS, LEVEL_MULTIPLIER, XP_INCREMENT, META_ID, PAYMENT
+from database.systems.clan_warn import clan_warn_system
 from embeds.clan_embed.auction.trash_channel_embed import AuctionTrashEmbed
 from embeds.clan_embed.staff.staff import StaffEmbed, GuildListEmbed
 from database.systems.event_history_system import event_history
@@ -105,6 +106,19 @@ def get_fault(guild_id: int, member_id: int):
         reason += fault['reason'] + '\n'
         f_type += fault['type'] + '\n'
     return date, reason, f_type
+
+
+def get_clan_warn(guild_id: int):
+    clan_role = ''
+    reason = ''
+    remove_date = ''
+    counter = 1
+    for warn in clan_warn_system.getClanWarnList(guild_id=guild_id):
+        clan_role += f"**#{counter}**<@&{warn['clan_role_id']}>" + '\n'
+        reason += f"`{warn['reason']}`" + '\n'
+        remove_date += warn['unwarn_date'] + '\n'
+        counter += 1
+    return clan_role, reason, remove_date
 
 
 def quest_info(guild_id: int, member_id: int):
@@ -242,8 +256,8 @@ async def get_guilds_list_async(interaction, ctx, clan_id, list_response, button
 @tasks.loop(minutes=60)
 async def send_trash_auction(ctx, role):
     guild = ctx.guild
-    auction_channl_id = cross_server_system.get_auction_channel(guild.id)
+    auction_channel_id = cross_server_system.get_auction_channel(guild.id)
     trash_channel_id = cross_server_system.get_trash_channel(guild.id)
-    get_auction_channel = client.get_channel(auction_channl_id)
+    get_auction_channel = client.get_channel(auction_channel_id)
     get_trash_channel = client.get_channel(trash_channel_id)
     await get_trash_channel.send(embed=AuctionTrashEmbed(get_auction_channel, role).embed)

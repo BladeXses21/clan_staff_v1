@@ -13,7 +13,7 @@ class ClanWarnSystem(DatabaseSystem):
 
         self.clan_warn_collection.insert_one(cw.to_mongo())
 
-    def addWarn(self, guild_id: int, clan_staff_id: int, clan_role_id: int, mute_days: int, reason: str):
+    def addWarn(self, guild_id: int, clan_staff_id: int, clan_role_id: int, warn_days: int, reason: str):
         self.clan_warn_collection.update_one({'guild_id': guild_id}, {
             '$push': {
                 'warn_list':
@@ -21,8 +21,8 @@ class ClanWarnSystem(DatabaseSystem):
                         'clan_staff_id': clan_staff_id,
                         'clan_role_id': clan_role_id,
                         'reason': reason,
-                        'mute_date': int(time.time()),
-                        'unmute_date': int(time.time()) + mute_days * 86400
+                        'warn_date': int(time.time()),
+                        'unwarn_date': int(time.time()) + warn_days * 86400
                     }
             }
         })
