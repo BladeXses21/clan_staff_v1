@@ -116,7 +116,7 @@ def get_clan_warn(guild_id: int):
     for warn in clan_warn_system.getClanWarnList(guild_id=guild_id):
         clan_role += f"**#{counter}**<@&{warn['clan_role_id']}>" + '\n'
         reason += f"`{warn['reason']}`" + '\n'
-        remove_date += warn['unwarn_date'] + '\n'
+        remove_date += f"<t:{warn['unwarn_date']}:R>" + '\n'
         counter += 1
     return clan_role, reason, remove_date
 

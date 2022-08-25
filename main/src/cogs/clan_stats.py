@@ -4,12 +4,14 @@ import discord
 from discord.ext import commands, tasks
 
 from cogs.base import BaseCog
-from config import META_ID, DARKNESS_ID, DARKNESS_CATEGORY_NAME
+from config import META_ID, DARKNESS_ID, DARKNESS_CATEGORY_NAME, SERVERS
 from config import PREFIX, STATS_SERVER_CHAT, SWEETNESS_ID, SWEETNESS_CATEGORY_NAME, SERVER_EMOGI, STATS_CLAN_CHAT, \
     png_strip_for_embed
 from config import TENDERLY_CATEGORY_NAME, META_CATEGORY_NAME, TENDERLY_ID
+from database.systems.clan_warn import clan_warn_system
 from embeds.base import DefaultEmbed
 from extensions.funcs import get_clan_stats, number_of_people_in_clan
+from extensions.logger import staff_logger
 
 desire_bot = commands.Bot(command_prefix=PREFIX, intents=discord.Intents.all())
 
@@ -30,6 +32,18 @@ class ClanStats(BaseCog):
             self.servers_stats.start()
         if not self.servers_clan_stats.is_running():
             self.servers_clan_stats.start()
+        if not self.check_warns.is_running():
+            self.check_warns.start()
+
+    @tasks.loop(minutes=5)
+    async def check_warns(self):
+        current_time = int(time.time())
+        for i in SERVERS:
+            warn_list = clan_warn_system.addWarn(i)
+            for w in warn_list:
+                if current_time >= w['unwarn_date']:
+                    clan_warn_system.removeClanWarn(clan_role_id=w['clan_role_id'], reason=w['reason'])
+                    staff_logger.info(f'{w["clan_role_id"]} clan warn был снят')
 
     @tasks.loop(minutes=5)
     async def servers_stats(self):

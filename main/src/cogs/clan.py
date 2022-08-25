@@ -9,7 +9,6 @@ from discord.ext import commands
 from cogs.base import BaseCog
 from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE, OWNER_IDS, CLAN_MEMBER_ACCESS_ROLE
 from database.systems.clan_warn import clan_warn_system
-from database.systems.fault_system import fault_system
 from database.systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
 from embeds.clan_embed.auction.auction import AuctionEmbed
@@ -22,7 +21,6 @@ from embeds.clan_embed.staff.clan_message import ClanMessageEmbed
 from embeds.clan_embed.view_builders.help_view_builder import help_view_builder
 from embeds.view_builder import default_view_builder
 from extensions.decorator import is_owner, is_owner_rights
-from extensions.funcs import get_clan_warn
 from extensions.logger import staff_logger
 from main import client
 from models.modal import StaffModal, ClanModal
@@ -211,7 +209,7 @@ class Clan(BaseCog):
         default_view_builder.button_accept.callback = accept_callback
         default_view_builder.button_decline.callback = decline_callback
 
-    @commands.command(description='Отправка ембеда')
+    @commands.command(description='Отправка эмбеда')
     @commands.has_any_role(*PERMISSION_ROLE)
     async def emb(self, ctx: ApplicationContext, *, args):
         try:
@@ -226,7 +224,7 @@ class Clan(BaseCog):
     @clan.command(description='Просмотр выговоров кланов')
     @is_owner_rights()
     async def warn(self, ctx: ApplicationContext):
-        warn_list = clan_warn_system.get_clan_warn_list(guild_id=ctx.guild.id)
+        from extensions.funcs import get_clan_warn
         clan_role, reason, remove_date = get_clan_warn(guild_id=ctx.guild.id)
         return await ctx.send(
             embed=ClanWarnEmbed(guild=ctx.guild, clan_role=clan_role, reason=reason, remove_date=remove_date,
@@ -234,12 +232,12 @@ class Clan(BaseCog):
 
     @clan.command(description='Выдать выговор клану')
     @is_owner_rights()
-    async def add_warn(self, ctx: ApplicationContext, clan_role_id: discord.Role.id, mute_day: int, *args):
+    async def add_warn(self, ctx: ApplicationContext, clan_role_id: int, warn_day: int, *args):
         guild_id = ctx.guild.id
         reason = ' '.join(args)
         clan_warn_system.addGuildToWarnSystem(guild_id=guild_id)
         clan_warn_system.addWarn(guild_id=guild_id, clan_staff_id=ctx.author.id, clan_role_id=clan_role_id,
-                                 mute_days=reason)
+                                 warn_days=warn_day, reason=reason)
         return await ctx.send(embed=DefaultEmbed(f'Выдан выговор клану <@&{clan_role_id}> с причиной {reason}.'),
                               delete_after=30)
 
