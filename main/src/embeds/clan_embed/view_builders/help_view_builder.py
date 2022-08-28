@@ -1,13 +1,12 @@
-import discord
-from discord.ui import View, Button
+from discord.ui import View
 
-from config import png_heart_icon, png_signal_icon
+from embeds.button import buttons
 
 
 class HelpViewBuilder:
     def __init__(self):
-        self.button_staff = Button(style=discord.ButtonStyle.secondary, label='Подать заявку на клан стафф', emoji=png_heart_icon)
-        self.button_clan = Button(style=discord.ButtonStyle.secondary, label='Подать заявку на создание клана', emoji=png_signal_icon)
+        self.button_staff = buttons.button_staff
+        self.button_clan = buttons.button_clan
 
     def create_staff_view(self) -> View:
         view = View(timeout=None)

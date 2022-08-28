@@ -8,7 +8,7 @@ from config import META_ID, DARKNESS_ID, DARKNESS_CATEGORY_NAME, SERVERS
 from config import PREFIX, STATS_SERVER_CHAT, SWEETNESS_ID, SWEETNESS_CATEGORY_NAME, SERVER_EMOGI, STATS_CLAN_CHAT, \
     png_strip_for_embed
 from config import TENDERLY_CATEGORY_NAME, META_CATEGORY_NAME, TENDERLY_ID
-from database.systems.clan_warn import clan_warn_system
+from database.clan_systems.clan_warn import clan_warn_system
 from embeds.base import DefaultEmbed
 from extensions.funcs import get_clan_stats, number_of_people_in_clan
 from extensions.logger import staff_logger

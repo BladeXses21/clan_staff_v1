@@ -5,16 +5,16 @@ from discord.ext import commands
 
 from cogs.base import BaseCog
 from config import TENDERLY_ID, META_ID, DARKNESS_ID, CLAN_STAFF, SWEETNESS_ID, OWNER_IDS
-from database.systems.event_history_system import event_history
-from database.systems.event_system import cross_event_system
-from database.systems.fault_system import fault_system
-from database.systems.quest_system import quest_system
-from database.systems.saved_stats_system import save_stats_system
-from database.systems.server_system import cross_server_system
+from database.clan_systems.event_history_system import event_history
+from database.clan_systems.event_system import cross_event_system
+from database.clan_systems.fault_system import fault_system
+from database.clan_systems.quest_system import quest_system
+from database.clan_systems.saved_stats_system import save_stats_system
+from database.clan_systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
-from embeds.clan_embed.fault.fault_embed import FaultEmbed
-from embeds.clan_embed.history.event_history import HistoryEmbed
-from embeds.clan_embed.quest.quest_embed import QuestEmbed
+from embeds.clan_embed.staff.fault.fault_embed import FaultEmbed
+from embeds.clan_embed.staff.history.event_history import HistoryEmbed
+from embeds.clan_embed.staff.quest.quest_embed import QuestEmbed
 from embeds.clan_embed.staff.staff import StaffEmbed
 from embeds.clan_embed.staff.staff_command import StaffCommandsEmbed
 from embeds.clan_embed.view_builders.staff_view_builder import staff_view_builder
@@ -342,16 +342,15 @@ class CrossEventsMode(BaseCog):
     @is_owner_rights()
     async def clear_his(self, ctx: ApplicationContext):
         event_history.clear_history(ctx.guild.id)
-        return await ctx.send(
-            embed=DefaultEmbed(f'***```История участников на сервере {ctx.guild.name}, была сброшена.```***'),
-            delete_after=30)
+        await ctx.send(embed=DefaultEmbed(f'***```История участников на сервере {ctx.guild.name}, была сброшена.```***'), delete_after=30)
+        return await ctx.message.delete()
 
     @staff.command(description='clear event history')
     @is_owner_rights()
     async def warn(self, ctx: ApplicationContext, member: discord.Member, reason: str, f_type: str):
         fault_system.add_fault(guild_id=ctx.guild.id, clan_staff_id=member.id, reason=reason, fault_type=f_type)
-        return await ctx.send(
-            embed=DefaultEmbed(f'***```{member.name}, получил выговор по причине {reason} с типом {f_type}```***'))
+        await ctx.send(embed=DefaultEmbed(f'***```{member.name}, получил выговор по причине {reason} с типом {f_type}```***'))
+        return await ctx.message.delete()
 
     @staff.command(description='see your fault')
     @commands.has_any_role(*CLAN_STAFF)
@@ -446,6 +445,7 @@ class CrossEventsMode(BaseCog):
             await ctx.send(embed=DefaultEmbed(
                 f"***```Error: {str(e)}\nCorrect command: !staff new_quest timer xp event_name```***"), delete_after=10)
         await ctx.send(embed=DefaultEmbed(response + "***```Зарядка окончена.```***"), delete_after=120)
+        return await ctx.message.delete()
 
     @staff.command()
     @is_owner_rights()
@@ -459,13 +459,15 @@ class CrossEventsMode(BaseCog):
         _members = cross_event_system.get_event_organizers(guild_id=ctx.guild.id)
         for member in _members:
             quest_system.remove_quest(guild_id=ctx.guild.id, clan_staff_id=member['clan_staff_id'], name=name)
-        return await ctx.send(embed=DefaultEmbed('***```Квест сброшен со всех ивентеров.```***'))
+        await ctx.send(embed=DefaultEmbed('***```Квест сброшен со всех ивентеров.```***'))
+        return await ctx.message.delete()
 
     @staff.command()
     @is_owner_rights()
     async def refresh(self, ctx, member: discord.Member):
         cross_event_system.refresh(guild_id=ctx.guild.id, member_id=member.id)
-        return await ctx.send(embed=DefaultEmbed(f'***```{member.name}, теперь может проводить ивент без ошибок```***'))
+        await ctx.send(embed=DefaultEmbed(f'***```{member.name}, теперь может проводить ивент без ошибок```***'))
+        return await ctx.message.delete()
 
 
 def setup(bot):

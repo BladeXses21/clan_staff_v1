@@ -1,18 +1,13 @@
-import discord
-from discord.ui import View, Button
+from discord.ui import View
+
+from embeds.button import buttons
 
 
 class EventViewBuilder:
     def __init__(self):
-        self.button_accept = Button(style=discord.ButtonStyle.secondary,
-                                    label='Взять ивент',
-                                    emoji='<:freeiconplaybutton64597:960536938752925716>')
-        self.button_pass = Button(style=discord.ButtonStyle.secondary,
-                                  label='Сдать ивент',
-                                  emoji='<:933511914384920577:960339396350050406>')
-        self.button_decline = Button(style=discord.ButtonStyle.secondary,
-                                     label='Отказ от ивента',
-                                     emoji='<:933511914707906590:960339513765429278>')
+        self.button_accept = buttons.button_accept
+        self.button_pass = buttons.button_pass
+        self.button_decline = buttons.button_decline
 
     def create_event_request_view(self) -> View:
         view = View(timeout=None)

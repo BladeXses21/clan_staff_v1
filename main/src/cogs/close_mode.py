@@ -23,13 +23,6 @@ class CloseMode(BaseCog):
         await self.close_service.closeRequest(member=member, game_name=game_name, users_count=users_count,
                                               comment=comment, interaction=interaction)
 
-    # @close.command(name='profile', description='Просмотреть профиль клозов', default_permission=True)
-    # async def profile(self, interaction: Interaction, member: discord.Member = None):
-    #     if member is not None:
-    #         return await interaction.response.send_message(embed=ProfileClose(user_avatar=member.avatar.url, user_name=interaction.user.name,
-    #                                                                           game_counter=10, rating=str(333), winrate=str(46), first_game=int(time.time()),
-    #                                                                           last_game=int(time.time()), clan='Clown').embed)
-
 
 def setup(bot):
     bot.add_cog(CloseMode(bot))

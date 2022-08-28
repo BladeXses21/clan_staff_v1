@@ -3,11 +3,11 @@ from discord import Interaction, ApplicationContext
 from discord.ui import View
 
 from config import STOP_WORD
-from database.systems.event_history_system import event_history
-from database.systems.event_system import cross_event_system
-from database.systems.quest_system import quest_system
-from database.systems.saved_stats_system import save_stats_system
-from database.systems.server_system import cross_server_system
+from database.clan_systems.event_history_system import event_history
+from database.clan_systems.event_system import cross_event_system
+from database.clan_systems.quest_system import quest_system
+from database.clan_systems.saved_stats_system import save_stats_system
+from database.clan_systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
 from embeds.clan_embed.events.accepted_event_mode import accept_event_embed
 from embeds.clan_embed.events.clan_event import full_request_respons
@@ -23,7 +23,8 @@ class EventService:
     def __init__(self, client):
         self.client = client
 
-    async def event_request(self, event_num, users_count, comment, interaction: Interaction, ctx: ApplicationContext = None):
+    async def event_request(self, event_num, users_count, comment, interaction: Interaction,
+                            ctx: ApplicationContext = None):
 
         if ctx is None:
             ctx = await self.client.get_application_context(interaction)
@@ -64,7 +65,8 @@ class EventService:
             message = interact.message
             channel = self.client.get_channel(interact.channel.id)
             get_msg = await channel.fetch_message(message.id)
-            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id, message_id=message.id)
+            ev_num, com, clan_n, member_send_id = cross_event_system.get_clan_event(guild_id=server.id,
+                                                                                    message_id=message.id)
             get_member_send = server.get_member(member_send_id)
 
             if cross_event_system.is_clan_staff(server.id, user.id) is False:
@@ -90,7 +92,8 @@ class EventService:
 
             pass_view = event_view_builder.pass_event_request_view()
 
-            await accept_event_embed(user=get_member_send, request_msg=get_msg, clan_name=clan_n, event_num=ev_num, clan_staff=user, pass_view=pass_view)
+            await accept_event_embed(user=get_member_send, request_msg=get_msg, clan_name=clan_n, event_num=ev_num,
+                                     clan_staff=user, pass_view=pass_view)
 
         async def decline_callback(interact: Interaction):
             user = interact.user
@@ -146,10 +149,12 @@ class EventService:
             event_request_view.remove_item(event_view_builder.button_pass)
 
             if cross_event_system.is_clan_staff(server.id, user.id) is False:
-                return await interact.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
+                return await interact.response.send_message(
+                    embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
 
             if request_member_id != message.id:
-                return await interact.response.send_message(embed=DefaultEmbed(f'***```{user.name}, это не ваш ивент.```***'), ephemeral=True)
+                return await interact.response.send_message(
+                    embed=DefaultEmbed(f'***```{user.name}, это не ваш ивент.```***'), ephemeral=True)
 
             await interact.response.send_message(embed=DefaultEmbed(
                 f'***```{user.name}, введите конечный итог ивента по форме\n@link [количество конфет] @link [количество конфет]...\nДля отмены ивента пропишите слово - stop```***'),
@@ -166,7 +171,8 @@ class EventService:
                 cross_event_system.delete_clan_event(guild_id=server.id, message_id=get_msg.id)
                 cross_event_system.set_member_request(guild_id=server.id, clan_staff_id=ctx.user.id)
                 await decline_event_embed(
-                    user=server.get_member(ctx.user.id), request_msg=get_msg, clan_name=clan_n, event_num=ev_num, clan_staff=user, decline_view=View()
+                    user=server.get_member(ctx.user.id), request_msg=get_msg, clan_name=clan_n, event_num=ev_num,
+                    clan_staff=user, decline_view=View()
                 )
                 await msg.delete()
                 print(ev_num, com, clan_n, user.name, 'Ивент отменен!')
@@ -181,10 +187,14 @@ class EventService:
                     pass_view=View(), end_result=msg.content
                 )
 
-                cross_event_system.pass_clan_event(guild_id=server.id, clan_staff_id=user.id, waisting_time=int(time.time()) - int(time_accept))
-                save_stats_system.add_stat(guild_id=server.id, clan_staff_id=user.id, waisting_time=int(time.time()) - int(time_accept))
+                cross_event_system.pass_clan_event(guild_id=server.id, clan_staff_id=user.id,
+                                                   waisting_time=int(time.time()) - int(time_accept))
+                save_stats_system.add_stat(guild_id=server.id, clan_staff_id=user.id,
+                                           waisting_time=int(time.time()) - int(time_accept))
                 cross_event_system.delete_clan_event(guild_id=server.id, message_id=message.id)
-                event_history.note_history(guild_id=server.id, clan_staff_id=user.id, name=ev_num, time=int(time.time()) - int(time_accept), date_end=int(time.time()), clan_name=clan_n)
+                event_history.note_history(guild_id=server.id, clan_staff_id=user.id, name=ev_num,
+                                           time=int(time.time()) - int(time_accept), date_end=int(time.time()),
+                                           clan_name=clan_n)
 
                 xp, quest_timer = quest_info(server.id, user.id)
                 if ev_num in xp:
@@ -200,7 +210,8 @@ class EventService:
                 await msg.delete()
 
                 member = server.get_member(user.id)
-                analitic_msg = await member.send(embed=DefaultEmbed('***```Понравился ли вам ивент?\nДайте свой коментарий.```***'))
+                analitic_msg = await member.send(
+                    embed=DefaultEmbed('***```Понравился ли вам ивент?\nДайте свой коментарий.```***'))
 
                 def check(m):
                     if m.channel == analitic_msg.channel:
@@ -208,7 +219,8 @@ class EventService:
 
                 msg = await self.client.wait_for('message', check=check, timeout=120)
                 answer = str(msg.content)
-                await get_event_channel.send(content=f"{msg.author.mention} отправил отзыв:", embed=DefaultEmbed(f'{answer}'))
+                await get_event_channel.send(content=f"{msg.author.mention} отправил отзыв:",
+                                             embed=DefaultEmbed(f'{answer}'))
                 await member.send(embed=DefaultEmbed('***```Большое спасибо за отзыв!```***'))
 
         event_view_builder.button_decline.callback = decline_callback

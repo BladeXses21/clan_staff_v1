@@ -1,11 +1,13 @@
 import discord
 from discord.ui import View, Button
 
+from embeds.button import buttons
+
 
 class DefaultViewBuilder:
     def __init__(self):
-        self.button_accept = Button(style=discord.ButtonStyle.secondary, emoji='<:gal:970365886076715128>')
-        self.button_decline = Button(style=discord.ButtonStyle.secondary, emoji='<:krest:970365794707980398>')
+        self.button_accept = buttons.accept_btn
+        self.button_decline = buttons.decline_btn
 
     def create_choice_view(self) -> View:
         view = View(timeout=None)

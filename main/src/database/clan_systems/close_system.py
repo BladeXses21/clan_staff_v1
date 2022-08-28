@@ -1,7 +1,7 @@
 import time
 
 from database.database_system import DatabaseSystem
-from models.mongo_type import RequestCloseModel
+from models.mongo_type import RequestCloseModel, CrossStaffModel
 
 
 class CloseSystem(DatabaseSystem):
@@ -39,12 +39,14 @@ class CloseSystem(DatabaseSystem):
 
     def staff_accept_close(self, guild_id: int, close_message_id: int, clan_staff_id: int):
         close_request = RequestCloseModel(guild_id=guild_id, close_message_id=close_message_id)
-
+        dbm = CrossStaffModel(guild_id=guild_id, clan_staff_id=clan_staff_id)
+        self.cross_event_mode_collection.update_one(dbm.to_mongo(),
+                                                    {'$set': {'member_work_this_request': close_message_id}})
         self.close_collection.update_one(close_request.to_mongo(),
                                          {'$set': {'clan_staff_id': clan_staff_id,
                                                    'timeAcceptRequest': int(time.time())}})
 
-    def get_time_send(self, guild_id: int, close_message_id: int) -> RequestCloseModel.timeSendRequest:
+    def get_time_send_request(self, guild_id: int, close_message_id: int) -> RequestCloseModel.timeSendRequest:
         res = self.close_collection.find_one({'guild_id': guild_id, "close_message_id": close_message_id})
         return res['timeSendRequest']
 
@@ -52,9 +54,15 @@ class CloseSystem(DatabaseSystem):
         res = self.close_collection.find_one({'guild_id': guild_id, "close_message_id": close_message_id})
         return res['memberSendRequest_Id']
 
-    def get_res(self, guild_id: int, close_message_id: int) -> tuple[str, int, int, str, int]:
+    def getRes(self, guild_id: int, close_message_id: int) -> tuple[str, int, int, str, int]:
         res = self.close_collection.find_one({'guild_id': guild_id, "close_message_id": close_message_id})
         return res['eventName'], res['teamOne_Id'], res['teamTwo_Id'], res['comment'], res['memberSendRequest_Id']
+
+    def removeCloseFromClanStaff(self, guild_id: int, member_id: int):
+        dbm = CrossStaffModel(guild_id=guild_id, clan_staff_id=member_id)
+        close_request = RequestCloseModel(guild_id=guild_id, clan_staff_id=member_id)
+        self.cross_event_mode_collection.update_one(dbm.to_mongo(), {'$set': {'member_work_this_request': 0}})
+        self.close_collection.delete_one(close_request.to_mongo())
 
 
 close_system = CloseSystem()

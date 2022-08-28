@@ -1,13 +1,14 @@
-import discord
-from discord.ui import View, Button
+from discord.ui import View
+
+from embeds.button import buttons
 
 
 class CloseViewBuilder:
     def __init__(self):
-        self.first_clan = Button(style=discord.ButtonStyle.secondary, label='Clan first', emoji='')
-        self.second_clan = Button(style=discord.ButtonStyle.secondary, label='Clan second', emoji='')
-        self.draw_close = Button(style=discord.ButtonStyle.green, label='Ничья', emoji='<:freeiconhandshake7195325:960536938639659089>')
-        self.reject_close = Button(style=discord.ButtonStyle.red, label='Убрать клоз', emoji='<:icons8100:933511914707906590>')
+        self.first_clan = buttons.clan_first
+        self.second_clan = buttons.clan_second
+        self.draw_close = buttons.close_draw
+        self.reject_close = buttons.close_reject
 
     def wining_close(self, clan_one, clan_two) -> View:
         two_clans = View(timeout=None)

@@ -3,9 +3,9 @@ from discord import Interaction, ApplicationContext, Member
 from discord.ui import View
 
 from config import RIGHT_AMOUNT_PEOPLE, STOP_WORD
-from database.systems.close_system import close_system
-from database.systems.event_system import cross_event_system
-from database.systems.server_system import cross_server_system
+from database.clan_systems.close_system import close_system
+from database.clan_systems.event_system import cross_event_system
+from database.clan_systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
 from embeds.clan_embed.clan_close.accepted_close_embed import accept_enemy_embed
 from embeds.clan_embed.clan_close.decline_close_embed import decline_enemy_embed
@@ -100,15 +100,24 @@ class CloseService:
 
                 close_system.staff_accept_close(guild_id=inter.guild.id, message_id=inter.message.id,
                                                 clan_staff_id=inter.user.id)
-                event_channel_message = await take_close_embed(event_channel_msg=inter.message.id, )
+                event_channel_message = await take_close_embed(event_channel_msg=inter.message.id)
 
                 async def team_one_win(interplay: Interaction):
-                    eventName, teamOne_Id, teamTwo_Id, comment, memberSendRequest_Id = close_system.get_res(
-                        guild_id=interplay.guild.id, close_message_id=interplay.message.id)
+                    request_member_id = cross_event_system.get_request_msg_id(guild_id=server.id, clan_staff_id=user.id)
+
+                    if cross_event_system.is_clan_staff(server.id, user.id) is False:
+                        return await interact.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'),
+                                                                    ephemeral=True)
+
+                    if request_member_id != interplay.message.id:
+                        return await interact.response.send_message(embed=DefaultEmbed(f'***```{user.name}, это не ваш ивент.```***'),
+                                                                    ephemeral=True)
+
+                    eventName, teamOne_Id, teamTwo_Id, comments, memberSendRequest_Id = close_system.getRes(guild_id=interplay.guild.id,
+                                                                                                            close_message_id=interplay.message.id)
                     await interplay.response.send_message(embed=DefaultEmbed(
                         f'***```{interplay.user.name}, введите конечный итог ивента по форме\n@link [количество конфет] '
-                        f'@link [количество конфет]...\nДля отмены ивента пропишите слово - stop```***'),
-                        ephemeral=True)
+                        f'@link [количество конфет]...\nДля отмены ивента пропишите слово - stop```***'), ephemeral=True)
 
                     def check(m):
                         if m.channel == interplay.channel:
@@ -118,7 +127,8 @@ class CloseService:
                     msg = await self.client.wait_for('message', check=check)
 
                     if msg.author.id == ctx.user.id and msg.content == STOP_WORD:
-                        # todo - закрытие ивента
+                        close_system.removeCloseFromClanStaff(guild_id=interplay.guild.id, member_id=interplay.user.id)
+                        # todo - использовать эмбед завершения клоза
                         await msg.delete()
 
                     if msg.author.id == interact.user.id:
@@ -131,6 +141,15 @@ class CloseService:
                                                end_result=msg.content)
 
                 async def teamTwoWin(interplay: Interaction):
+                    request_member_id = cross_event_system.get_request_msg_id(guild_id=server.id, clan_staff_id=user.id)
+
+                    if cross_event_system.is_clan_staff(server.id, user.id) is False:
+                        return await interact.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'),
+                                                                    ephemeral=True)
+
+                    if request_member_id != interplay.message.id:
+                        return await interact.response.send_message(embed=DefaultEmbed(f'***```{user.name}, это не ваш ивент.```***'),
+                                                                    ephemeral=True)
                     await interplay.response.send_message(embed=DefaultEmbed(
                         f'***```{interplay.user.name}, введите конечный итог ивента по форме\n@link [количество конфет] '
                         f'@link [количество конфет]...\nДля отмены ивента пропишите слово - stop```***'),
@@ -144,7 +163,8 @@ class CloseService:
                     msg = await self.client.wait_for('message', check=check)
 
                     if msg.author.id == ctx.user.id and msg.content == STOP_WORD:
-                        # todo - закрытие ивента
+                        close_system.removeCloseFromClanStaff(guild_id=interplay.guild.id, member_id=interplay.user.id)
+                        # todo - использовать эмбед завершения клоза
                         await msg.delete()
 
                     if msg.author.id == interact.user.id:
@@ -165,14 +185,11 @@ class CloseService:
             async def closeModDeclineCallback(inter: Interaction):
                 user = inter.user
                 if cross_event_system.is_clan_staff(server.id, user.id) is False:
-                    return await interact.response.send_message(
-                        embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'),
-                        ephemeral=True)
+                    return await interact.response.send_message(embed=DefaultEmbed(f'***```{user.name}, тебя нет в clan staff```***'), ephemeral=True)
 
                 if cross_event_system.is_event_completed(server.id, user.id) is False:
-                    return await interact.response.send_message(
-                        embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'),
-                        ephemeral=True)
+                    return await interact.response.send_message(embed=DefaultEmbed(f'***```{user.name}, ты не закончил прошлый ивент.```***'),
+                                                                ephemeral=True)
 
             event_view_builder.button_accept.callback = closeModAcceptCallback
             event_view_builder.button_decline.callback = closeModDeclineCallback
@@ -182,8 +199,7 @@ class CloseService:
                 return await interact.response.send_message(
                     embed=DefaultEmbed(f'***```{interact.user.name}, ты не являешься участником клана.```***'),
                     ephemeral=True)
-            return await decline_enemy_embed(member_send=author, request_msg=enemy_msg, event_name=game_name,
-                                             member_enemy=interact.user)
+            return await decline_enemy_embed(member_send=author, request_msg=enemy_msg, event_name=game_name, member_enemy=interact.user)
 
         event_view_builder.button_accept.callback = enemyAcceptCallback
         event_view_builder.button_decline.callback = enemyDeclineCallback

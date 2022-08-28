@@ -6,6 +6,7 @@ from mongoengine import *
 connect("clan_staff_base")
 
 
+# region STAFF MODAL | MONGODB
 class CrossStaffModel(Document):
     guild_id = IntField(min_value=0)  # ID сервера
     clan_staff_id = IntField(min_value=0)  # ID участника clan staff
@@ -23,6 +24,9 @@ class CrossStaffModel(Document):
     lvl = IntField(min_value=1)
 
 
+# endregion
+
+# region GUILD MODAL | MONGODB
 class CrossGuildModel(Document):
     guild_id = IntField(min_value=0)  # ID сервера
     event_channel_id = IntField(min_value=0)  # ID текстового канала clan staff
@@ -42,6 +46,9 @@ class CrossGuildModel(Document):
     senior_lead_id = IntField(min_value=0)  # ID помощника по кланам
 
 
+# endregion
+
+# region REQUEST EVENT MODAL | MONGODB
 class RequestEventModel(Document):
     guild_id = IntField(min_value=0)
     message_id = IntField(min_value=0)
@@ -54,6 +61,9 @@ class RequestEventModel(Document):
     time_accept_request = IntField(min_value=0)
 
 
+# endregion
+
+# region REQUEST CLOSE MODAL | MONGODB
 class RequestCloseModel(Document):
     guild_id = IntField(min_value=0)
     clan_staff_id = IntField(default=0)
@@ -68,17 +78,9 @@ class RequestCloseModel(Document):
     timeAcceptRequest = IntField(default=0)
 
 
-class CrossRequestModel(Document):
-    guild_id = IntField(min_value=0)  # guild id
-    message_id = IntField(min_value=0)  # response message id
-    event_name = StringField()  # enum event dict
-    clan_send_request = StringField()  # name clan which send close request
-    clan_accept_request = StringField()  # name clan which accept close request
-    clan_staff_id = IntField(min_value=0)  # id clan staff user which accept this close request
-    time_send_request = IntField(min_value=0)  # time send request
-    time_accept_request = IntField(min_value=0)  # time accept request
+# endregion
 
-
+# region SAVED STAT STAFF MODAL | MONGODB
 class SavedStatModel(Document):
     guild_id = IntField(min_value=0)  # guild_id - id сервера
     clan_staff_id = IntField(min_value=0)  # clan staff id - id челикса из клан стафф
@@ -87,6 +89,9 @@ class SavedStatModel(Document):
     total_time_events = IntField()
 
 
+# endregion
+
+# region FAULT MODAL STAFF | MONGODB
 class FaultModel(Document):
     guild_id = IntField(min_value=0)
     clan_staff_id = IntField(unique=True, min_value=0)
@@ -101,6 +106,9 @@ class FaultModel(Document):
         return json.dumps(fault_dict)
 
 
+# endregion
+
+# region QUEST MODAL STAFF | MONGODB
 class QuestModel(Document):
     guild_id = IntField(min_value=0)
     clan_staff_id = IntField(unique=True, min_value=0)
@@ -115,10 +123,13 @@ class QuestModel(Document):
         return json.dumps(quest_dict)
 
 
+# endregion
+
 class Number(EmbeddedDocument):
     sequential_value = SequenceField(required=True)
 
 
+# region CLAN WARN MODAL | MONGODB
 class ClanWarnModal(Document):
     guild_id = IntField(unique=True, min_value=1)
     clan_staff_id = IntField(min_value=1)
@@ -140,3 +151,16 @@ class ClanWarnModal(Document):
         }
 
         return json.dumps(warn_dict)
+
+
+# endregion
+
+# region BOSS MODAL FOR GAME | MONGODB
+class BossModal(Document):
+    name = StringField(min_length=1)
+    current_health = IntField(min_value=1)
+    max_health = IntField(min_value=1)
+    attack_dmg = IntField(min_value=1)
+    boss_img = StringField(min_length=1)
+    inventory = DictField()
+# endregion

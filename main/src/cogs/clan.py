@@ -8,14 +8,14 @@ from discord.ext import commands
 
 from cogs.base import BaseCog
 from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE, OWNER_IDS, CLAN_MEMBER_ACCESS_ROLE
-from database.systems.clan_warn import clan_warn_system
-from database.systems.server_system import cross_server_system
+from database.clan_systems.clan_warn import clan_warn_system
+from database.clan_systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
-from embeds.clan_embed.auction.auction import AuctionEmbed
-from embeds.clan_embed.auction.lot import AuctionLot
+from embeds.clan_embed.clan_embed.auction.auction import AuctionEmbed
+from embeds.clan_embed.clan_embed.auction.lot import AuctionLot
 from embeds.clan_embed.clan_embed.permittedMember import PermittedEmbed
 from embeds.clan_embed.clan_embed.warn import ClanWarnEmbed
-from embeds.clan_embed.help.help_embed import HelpEmbed
+from embeds.clan_embed.clan_embed.help.help_embed import HelpEmbed
 from embeds.clan_embed.staff.clan_command import ClanCommandsEmbed
 from embeds.clan_embed.staff.clan_message import ClanMessageEmbed
 from embeds.clan_embed.view_builders.help_view_builder import help_view_builder
@@ -226,9 +226,10 @@ class Clan(BaseCog):
     async def warn(self, ctx: ApplicationContext):
         from extensions.funcs import get_clan_warn
         clan_role, reason, remove_date = get_clan_warn(guild_id=ctx.guild.id)
-        return await ctx.send(
-            embed=ClanWarnEmbed(guild=ctx.guild, clan_role=clan_role, reason=reason, remove_date=remove_date,
-                                command_use=ctx.author).embed, delete_after=120)
+        await ctx.send(
+            embed=ClanWarnEmbed(guild=ctx.guild, clan_role=clan_role, reason=reason, remove_date=remove_date, command_use=ctx.author).embed,
+            delete_after=120)
+        return await ctx.message.delete()
 
     @clan.command(description='Выдать выговор клану')
     @is_owner_rights()
@@ -238,8 +239,8 @@ class Clan(BaseCog):
         clan_warn_system.addGuildToWarnSystem(guild_id=guild_id)
         clan_warn_system.addWarn(guild_id=guild_id, clan_staff_id=ctx.author.id, clan_role_id=clan_role_id,
                                  warn_days=warn_day, reason=reason)
-        return await ctx.send(embed=DefaultEmbed(f'Выдан выговор клану <@&{clan_role_id}> с причиной {reason}.'),
-                              delete_after=30)
+        await ctx.send(embed=DefaultEmbed(f'Выдан выговор клану <@&{clan_role_id}> с причиной {reason}.'), delete_after=30)
+        return await ctx.message.delete()
 
 
 def setup(bot):

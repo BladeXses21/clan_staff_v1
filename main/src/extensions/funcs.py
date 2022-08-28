@@ -1,20 +1,18 @@
 import time
 from random import choice
-from typing import List, Any
 
-from PIL import Image, ImageDraw, ImageChops
 from discord import Member
 from discord.ext import tasks
 
-from config import DAY_IN_SECONDS, LEVEL_MULTIPLIER, XP_INCREMENT, META_ID, PAYMENT
-from database.systems.clan_warn import clan_warn_system
-from embeds.clan_embed.auction.trash_channel_embed import AuctionTrashEmbed
+from config import DAY_IN_SECONDS, LEVEL_MULTIPLIER, XP_INCREMENT, PAYMENT
+from database.clan_systems.clan_warn import clan_warn_system
+from embeds.clan_embed.clan_embed.auction.trash_channel_embed import AuctionTrashEmbed
 from embeds.clan_embed.staff.staff import StaffEmbed, GuildListEmbed
-from database.systems.event_history_system import event_history
-from database.systems.event_system import cross_event_system
-from database.systems.fault_system import fault_system
-from database.systems.quest_system import quest_system
-from database.systems.server_system import cross_server_system
+from database.clan_systems.event_history_system import event_history
+from database.clan_systems.event_system import cross_event_system
+from database.clan_systems.fault_system import fault_system
+from database.clan_systems.quest_system import quest_system
+from database.clan_systems.server_system import cross_server_system
 from main import client
 
 
