@@ -20,7 +20,7 @@ class GameAdminService:
             await interaction.response.edit_message(embed=None, view=None)
 
     async def gameBoss(self, interaction: Interaction, index: int = 1):
-        bosses = boss_system.get_all_bosses()
+        bosses = boss_system.all_bosses()
         index = len(bosses) if index < 1 else 1 if index > len(bosses) else index
 
         async def up_callback(interact: Interaction):

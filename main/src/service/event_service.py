@@ -16,7 +16,7 @@ from embeds.clan_embed.events.passed_event_mode import pass_event_embed
 from embeds.clan_embed.view_builders.event_view_builder import event_view_builder
 from extensions.funcs import is_member_in_voice, sum_event_time, quest_info, xp_to_lvl
 from extensions.logger import staff_logger
-from utils.events import ALL_EVENTS
+from utils.events_dict import ALL_EVENTS
 
 
 class EventService:

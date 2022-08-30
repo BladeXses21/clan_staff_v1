@@ -8,7 +8,7 @@ from models.mongo_type import BossModal
 
 class BossSystem(DatabaseSystem):
 
-    def createBoss(self, name: str, health: int, attack_dmg: int, image: str):
+    def create_boss(self, name: str, health: int, attack_dmg: int, image: str):
         bm = BossModal(name=name)
         if self.game_boss_collection.find_one(bm.to_mongo()):
             return False
@@ -26,7 +26,7 @@ class BossSystem(DatabaseSystem):
         random_enemy_data = self.game_boss_collection.find().limit(-1).skip(random_number).next()
         return Enemy.parse_obj(random_enemy_data)
 
-    def get_all_bosses(self) -> list[Enemy]:
+    def all_bosses(self) -> list[Enemy]:
         bosses_date = self.game_boss_collection.find({})
         bosses = []
         for i in bosses_date:

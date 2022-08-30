@@ -22,7 +22,6 @@ from database.clan_systems.saved_stats_system import save_stats_system
 class ClanService:
     def __init__(self, client):
         self.client = client
-        self.xp_lenght = 15
 
     async def drop_menu(self, interaction: Interaction, ctx: ApplicationContext = None):
 
@@ -35,9 +34,9 @@ class ClanService:
         for i in cross_event_system.enumeration_events_mode(guild_id):
             try:
                 member = ctx.guild.get_member(i['clan_staff_id'])
-                clan_staff_options.append(discord.SelectOption(label=i['clan_staff_id'], description=member.name,
-                                                               emoji='<a:_an:967471171480207420>'))
-            except AttributeError:
+                clan_staff_options.append(discord.SelectOption(label=i['clan_staff_id'], description=member.name, emoji='<a:_an:967471171480207420>'))
+            except AttributeError as e:
+                print(str(e))
                 continue
 
         drop_down_menu = Select(options=clan_staff_options, placeholder='Выберите человека для отображения')
@@ -95,7 +94,6 @@ class ClanService:
             get_member = interact.guild.get_member(member_id)
 
             if interact.user.id not in OWNER_IDS:
-                # todo - подумать что делать с цветом профилей
                 await interact.response.edit_message(
                     embed=StaffProfile(member=get_member, total_event=total_event, total_time=total_time,
                                        butterfly=get_butterfly, add_time=add_time, curator=f'<@{curator}>', xp=xp,

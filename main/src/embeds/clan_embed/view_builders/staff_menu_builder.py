@@ -1,22 +1,24 @@
-from discord.ui import View
+import discord
+from discord.ui import View, Button
 
+from config import history_emoji, UKI_EMOGI, quest_emoji, fault_emoji, time_emoji, event_emoji, butterfly_emoji, xp_emoji
 from embeds.button import buttons
 
 
 class StandardView:
     def __init__(self):
-        self.button_trash = buttons.button_trash
-        self.button_trash_two = buttons.button_trash_two
+        self.button_trash = Button(style=discord.ButtonStyle.secondary, emoji='🗑')
+        self.button_trash_two = Button(style=discord.ButtonStyle.secondary, emoji='🗑')
 
-        self.button_shop = buttons.button_shop
-        self.button_history = buttons.button_history
-        self.button_fault = buttons.button_fault
-        self.button_quest = buttons.button_quest
+        self.button_shop = Button(style=discord.ButtonStyle.secondary, label='Магазин', emoji=UKI_EMOGI)
+        self.button_history = Button(style=discord.ButtonStyle.secondary, label='История', emoji=history_emoji)
+        self.button_fault = Button(style=discord.ButtonStyle.secondary, label='Выговоры', emoji=fault_emoji)
+        self.button_quest = Button(style=discord.ButtonStyle.secondary, label='Квесты', emoji=quest_emoji)
 
-        self.button_edit_time = buttons.button_edit_time
-        self.button_edit_event = buttons.button_edit_event
-        self.button_edit_butterflies = buttons.button_edit_butterflies
-        self.button_edit_xp = buttons.button_edit_xp
+        self.button_edit_time = Button(style=discord.ButtonStyle.grey, label='Время', emoji=time_emoji)
+        self.button_edit_event = Button(style=discord.ButtonStyle.grey, label='Ивенты', emoji=event_emoji)
+        self.button_edit_butterflies = Button(style=discord.ButtonStyle.grey, label='Бабочки', emoji=butterfly_emoji)
+        self.button_edit_xp = Button(style=discord.ButtonStyle.grey, label='Опыт', emoji=xp_emoji)
 
     def standard_profile_view(self, drop_down) -> View:
         clan_staff_view = View(timeout=None)

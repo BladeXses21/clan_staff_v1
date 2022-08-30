@@ -38,18 +38,18 @@ class Buttons:
                                   emoji=png_signal_icon)
         # endregion
         # region STAFF PROFILE BUTTON
-        self.button_trash = Button(style=discord.ButtonStyle.secondary, emoji='🗑')
-        self.button_trash_two = Button(style=discord.ButtonStyle.secondary, emoji='🗑')
-
-        self.button_shop = Button(style=discord.ButtonStyle.secondary, label='Магазин', emoji=UKI_EMOGI)
-        self.button_history = Button(style=discord.ButtonStyle.secondary, label='История', emoji=history_emoji)
-        self.button_fault = Button(style=discord.ButtonStyle.secondary, label='Выговоры', emoji=fault_emoji)
-        self.button_quest = Button(style=discord.ButtonStyle.secondary, label='Квесты', emoji=quest_emoji)
-
-        self.button_edit_time = Button(style=discord.ButtonStyle.grey, label='Время', emoji=time_emoji)
-        self.button_edit_event = Button(style=discord.ButtonStyle.grey, label='Ивенты', emoji=event_emoji)
-        self.button_edit_butterflies = Button(style=discord.ButtonStyle.grey, label='Бабочки', emoji=butterfly_emoji)
-        self.button_edit_xp = Button(style=discord.ButtonStyle.grey, label='Опыт', emoji=xp_emoji)
+        # self.button_trash = Button(style=discord.ButtonStyle.secondary, emoji='🗑')
+        # self.button_trash_two = Button(style=discord.ButtonStyle.secondary, emoji='🗑')
+        #
+        # self.button_shop = Button(style=discord.ButtonStyle.secondary, label='Магазин', emoji=UKI_EMOGI)
+        # self.button_history = Button(style=discord.ButtonStyle.secondary, label='История', emoji=history_emoji)
+        # self.button_fault = Button(style=discord.ButtonStyle.secondary, label='Выговоры', emoji=fault_emoji)
+        # self.button_quest = Button(style=discord.ButtonStyle.secondary, label='Квесты', emoji=quest_emoji)
+        #
+        # self.button_edit_time = Button(style=discord.ButtonStyle.grey, label='Время', emoji=time_emoji)
+        # self.button_edit_event = Button(style=discord.ButtonStyle.grey, label='Ивенты', emoji=event_emoji)
+        # self.button_edit_butterflies = Button(style=discord.ButtonStyle.grey, label='Бабочки', emoji=butterfly_emoji)
+        # self.button_edit_xp = Button(style=discord.ButtonStyle.grey, label='Опыт', emoji=xp_emoji)
         # endregion
         # region STAFF LIST BUTTON | GUILD BUTTON
         self.button_tenderly = Button(style=discord.ButtonStyle.secondary,

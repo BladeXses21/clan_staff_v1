@@ -17,19 +17,19 @@ class GameAdmin(BaseCog):
         super().__init__(client)
         print('Cog "GameAdmin connected"')
 
-    games = discord.SlashCommandGroup('clan', 'commands to clan')
+    games = discord.SlashCommandGroup('game', 'commands to game')
 
-    @commands.group(aliases=['игра'])
+    @commands.group(aliases=['админ'])
     @commands.has_any_role(*PERMISSION_ROLE)
-    async def game(self, ctx: ApplicationContext):
+    async def admin(self, ctx: ApplicationContext):
         # todo - invoked_subcommand
         if not ctx.invoked_subcommand:
             staff_logger.info(f'{ctx.author}')
             return await ctx.send(embed=AdminHelpEmbed().embed, delete_after=60)
 
-    @game.command(description='Создать боса для игры | Create enemy for game')
+    @admin.command(description='Создать боса для игры | Create enemy for game')
     @commands.has_any_role(*PERMISSION_ROLE)
-    async def create_boss(self, ctx: ApplicationContext, name: str, health: int, attack_dmg: int, image: str):
+    async def create_enemy(self, ctx: ApplicationContext, name: str, health: int, attack_dmg: int, image: str):
         if name or health or attack_dmg or image is None:
             return await ctx.send(embed=DefaultEmbed(f'***```{ctx.author.name}, check argument.```***'),
                                   delete_after=10)
@@ -38,7 +38,7 @@ class GameAdmin(BaseCog):
         except ValueError | TypeError as e:
             return await ctx.send(embed=DefaultEmbed(f'***```{ctx.author.name}, check link.\n{str(e)}.```***'),
                                   delete_after=20)
-        boss_system.createBoss(name=name, health=health, attack_dmg=attack_dmg, image=image)
+        boss_system.create_boss(name=name, health=health, attack_dmg=attack_dmg, image=image)
         await ctx.send(embed=DefaultEmbed(
             f'***```boss {name} has been created```***\nhis argument n:{name} h:{health} a:{attack_dmg} i:{image}'))
 

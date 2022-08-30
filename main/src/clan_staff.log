@@ -14583,3 +14583,69 @@ AttributeError: 'NoneType' object has no attribute 'categories'
 2022-08-19 02:45:44 [clan_staff] [INFO]: help command use :: Дикарь<3#0818
 2022-08-19 03:14:47 [clan_staff] [INFO]: help command use :: Anni#8764
 2022-08-19 03:22:49 [clan_staff] [INFO]: d1uvxlikss use command /staff profile
+2022-08-28 16:31:59 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-28 16:32:18 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-28 16:32:23 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-28 16:32:28 [clan_staff] [INFO]: READY
+2022-08-28 16:39:12 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-64' coro=<Loop._loop() done, defined at C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=TypeError("'NoneType' object is not subscriptable")>
+Traceback (most recent call last):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\cogs\clan_stats.py", line 42, in check_warns
+    warn_list = clan_warn_system.getClanWarnList(i)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\database\clan_systems\clan_warn.py", line 32, in getClanWarnList
+    return res['warn_list']
+TypeError: 'NoneType' object is not subscriptable
+2022-08-28 16:39:14 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-28 16:39:32 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-28 16:39:37 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-28 16:39:42 [clan_staff] [INFO]: READY
+2022-08-28 16:40:48 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-51' coro=<Loop._loop() done, defined at C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=TypeError("'NoneType' object is not subscriptable")>
+Traceback (most recent call last):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\cogs\clan_stats.py", line 42, in check_warns
+    warn_list = clan_warn_system.getClanWarnList(i)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\database\clan_systems\clan_warn.py", line 32, in getClanWarnList
+    return res['warn_list']
+TypeError: 'NoneType' object is not subscriptable
+2022-08-28 16:40:49 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-28 16:41:08 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-28 16:41:13 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-28 16:41:18 [clan_staff] [INFO]: READY
+2022-08-28 16:42:08 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-53' coro=<Loop._loop() done, defined at C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=TypeError("'NoneType' object is not subscriptable")>
+Traceback (most recent call last):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\cogs\clan_stats.py", line 42, in check_warns
+    warn_list = clan_warn_system.getClanWarnList(i)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\database\clan_systems\clan_warn.py", line 32, in getClanWarnList
+    return res['warn_list']
+TypeError: 'NoneType' object is not subscriptable
+2022-08-30 17:40:51 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 17:41:06 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 17:41:11 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 17:41:17 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 934073000117026866.
+2022-08-30 17:41:17 [clan_staff] [INFO]: READY
+2022-08-30 17:41:37 [clan_staff] [INFO]: BladeXses use command /staff profile
+2022-08-30 17:41:47 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-48' coro=<Loop._loop() done, defined at C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py:159> exception=TypeError("'NoneType' object is not subscriptable")>
+Traceback (most recent call last):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py", line 205, in _loop
+    raise exc
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\ext\tasks\__init__.py", line 176, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\cogs\clan_stats.py", line 42, in check_warns
+    warn_list = clan_warn_system.getClanWarnList(i)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\database\clan_systems\clan_warn.py", line 32, in getClanWarnList
+    return res['warn_list']
+TypeError: 'NoneType' object is not subscriptable

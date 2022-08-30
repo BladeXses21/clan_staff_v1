@@ -49,6 +49,8 @@ class Clan(BaseCog):
                 staff_logger.info(self.clan)
                 if ctx.author.id in OWNER_IDS:
                     return await ctx.send(embed=ClanCommandsEmbed().embed, delete_after=60)
+                else:
+                    pass
 
     @clans.command(name='v_list', description='Просмотреть список доступов в клан', default_permission=True)
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
