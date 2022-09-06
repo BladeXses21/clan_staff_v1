@@ -14649,3 +14649,193 @@ Traceback (most recent call last):
   File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\database\clan_systems\clan_warn.py", line 32, in getClanWarnList
     return res['warn_list']
 TypeError: 'NoneType' object is not subscriptable
+2022-08-30 18:27:05 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 18:27:23 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 18:27:28 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 18:27:32 [clan_staff] [INFO]: READY
+2022-08-30 18:27:56 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:29:00 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:29:17 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:32:28 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 18:32:45 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 18:32:50 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 18:32:54 [clan_staff] [INFO]: READY
+2022-08-30 18:33:02 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:33:11 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:33:14 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:33:17 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:35:58 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:36:04 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:36:07 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:36:10 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:43:33 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 18:43:47 [asyncio] [ERROR]: Task was destroyed but it is pending!
+task: <Task pending name='Task-9' coro=<ConnectionState._delay_ready() running at C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\state.py:560> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\tasks.py:720]>
+2022-08-30 18:43:47 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Client.run.<locals>.runner() done, defined at C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py:692> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\state.py", line 340, in store_user
+    return self._users[user_id]
+KeyError: 287267772734373898
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 600, in run_forever
+    self._run_once()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1896, in _run_once
+    handle._run()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 694, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 658, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 553, in connect
+    await self.ws.poll_event()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\gateway.py", line 591, in poll_event
+    await self.received_message(msg.data)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\gateway.py", line 541, in received_message
+    func(data)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\state.py", line 1327, in parse_guild_members_chunk
+    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\state.py", line 1327, in <listcomp>
+    members = [Member(guild=guild, data=member, state=self) for member in data.get("members", [])]  # type: ignore
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\member.py", line 306, in __init__
+    self._user: User = state.store_user(data["user"])
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\state.py", line 340, in store_user
+    return self._users[user_id]
+KeyboardInterrupt
+2022-08-30 18:44:25 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 18:44:42 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 18:44:48 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 18:44:52 [clan_staff] [INFO]: READY
+2022-08-30 18:45:01 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:47:21 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 18:47:38 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 18:47:43 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 18:47:48 [clan_staff] [INFO]: READY
+2022-08-30 18:47:48 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:48:04 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:48:07 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:49:46 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 18:50:04 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 18:50:09 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 18:50:14 [clan_staff] [INFO]: READY
+2022-08-30 18:51:20 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 18:54:05 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 18:54:19 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 18:54:24 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 18:54:29 [clan_staff] [INFO]: READY
+2022-08-30 18:54:53 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 19:05:46 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 19:11:55 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 19:12:12 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 19:12:18 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 19:12:22 [clan_staff] [INFO]: READY
+2022-08-30 19:12:29 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 19:13:42 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 19:14:00 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 19:14:05 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 19:14:10 [clan_staff] [INFO]: READY
+2022-08-30 19:14:45 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 19:14:50 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 19:15:21 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 19:15:35 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 19:15:40 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 19:15:45 [clan_staff] [INFO]: READY
+2022-08-30 19:16:24 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 19:17:04 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 19:17:21 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 19:17:26 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 19:17:31 [clan_staff] [INFO]: READY
+2022-08-30 19:18:10 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 19:22:55 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 19:23:13 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 19:23:18 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 19:23:23 [clan_staff] [INFO]: READY
+2022-08-30 19:23:30 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 19:24:39 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-08-30 19:24:55 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-08-30 19:25:00 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-08-30 19:25:05 [clan_staff] [INFO]: READY
+2022-08-30 19:25:07 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-08-30 19:25:15 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-01 02:44:11 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-01 02:44:28 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-01 02:44:37 [clan_staff] [INFO]: READY
+2022-09-01 02:44:52 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-01 02:44:57 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-01 02:45:01 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-01 02:45:04 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-01 02:46:22 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-01 02:46:37 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-01 02:46:46 [clan_staff] [INFO]: READY
+2022-09-01 02:47:24 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-01 02:47:40 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-01 02:47:49 [clan_staff] [INFO]: READY
+2022-09-01 02:47:56 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-01 02:50:08 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-01 02:50:25 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-01 02:50:33 [clan_staff] [INFO]: READY
+2022-09-01 02:52:06 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-01 02:52:23 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-01 02:52:32 [clan_staff] [INFO]: READY
+2022-09-01 02:52:48 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-01 02:53:23 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-01 02:53:37 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-05 02:31:18 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-05 02:31:35 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-05 02:31:44 [clan_staff] [INFO]: READY
+2022-09-05 02:31:52 [clan_staff] [INFO]: BladeXses#1616 use !admin command
+2022-09-05 02:31:59 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-05 02:32:08 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-05 02:32:14 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-05 02:32:19 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-05 02:37:07 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-05 02:37:24 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-05 02:37:33 [clan_staff] [INFO]: READY
+2022-09-05 02:38:28 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-05 02:38:44 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-05 02:38:49 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-09-05 02:38:54 [clan_staff] [INFO]: READY
+2022-09-05 02:40:05 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-05 02:40:22 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-05 02:40:27 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-09-05 02:40:31 [clan_staff] [INFO]: READY
+2022-09-05 02:44:38 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-05 02:44:54 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-05 02:45:03 [clan_staff] [INFO]: READY
+2022-09-05 02:45:21 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-05 02:55:03 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-05 02:55:19 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-05 02:55:29 [clan_staff] [INFO]: READY
+2022-09-05 02:55:54 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-05 02:57:05 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-05 02:58:22 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-05 03:02:12 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-05 03:02:29 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-05 03:02:34 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-09-05 03:02:38 [clan_staff] [INFO]: READY
+2022-09-06 04:03:50 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-06 04:04:17 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-06 04:04:25 [clan_staff] [INFO]: READY
+2022-09-06 04:06:04 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-06 04:06:28 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-06 04:06:33 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-09-06 04:06:37 [clan_staff] [INFO]: READY
+2022-09-06 04:07:24 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-06 04:10:33 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-06 04:10:57 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-06 04:11:02 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-09-06 04:11:08 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 934073000117026866.
+2022-09-06 04:11:08 [clan_staff] [INFO]: READY
+2022-09-06 04:11:17 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-06 04:14:04 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-06 04:14:26 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-06 04:14:34 [clan_staff] [INFO]: READY
+2022-09-06 04:15:59 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu

@@ -29,6 +29,8 @@ class ClanWarnSystem(DatabaseSystem):
 
     def getClanWarnList(self, guild_id: int) -> ClanWarnModal.warn_list:
         res = self.clan_warn_collection.find_one({'guild_id': guild_id}, projection={'_id': False})
+        if res is None:
+            return []
         return res['warn_list']
 
     def removeClanWarn(self, guild_id: int, clan_role_id: int, reason: str, unwarn_date: int):

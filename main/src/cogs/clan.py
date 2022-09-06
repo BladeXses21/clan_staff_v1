@@ -184,16 +184,15 @@ class Clan(BaseCog):
                 return False
 
             get_text_category = client.get_channel(cross_server_system.get_text_category(interaction.guild.id))
-
             for category in interaction.guild.categories:
                 if category.name == get_text_category.name:
                     for channel in category.text_channels:
                         await channel.send(embed=ClanMessageEmbed(send_message).embed)
 
-            staff_logger.info(f'{ctx.author.name} вызвал комаду !clan send {args}')
+            staff_logger.info(f'{ctx.author.name} вызвал команду !clan send {args}')
 
             return await msg.edit(
-                embed=DefaultEmbed('Отправка сообщения по кланам прошла успешно'),
+                embed=DefaultEmbed('Отправка сообщения по кланам прошла успешно\nОтправлять еще раз не нужно!!!\nРуки оторву.'),
                 view=default_view_builder.create_view(),
                 delete_after=60
             )

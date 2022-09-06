@@ -50,3 +50,15 @@ class DatabaseSystem(object):
     @property
     def game_boss_collection(self):
         return self.db.boss_collection
+
+    @property
+    def item_collection(self):
+        return self.db.item_collection
+
+    @property
+    def game_battle_collection(self):
+        return self.db.battle_collection
+
+    @property
+    def game_hero_collection(self):
+        return self.db.hero_collection

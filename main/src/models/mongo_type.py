@@ -152,15 +152,4 @@ class ClanWarnModal(Document):
 
         return json.dumps(warn_dict)
 
-
-# endregion
-
-# region BOSS MODAL FOR GAME | MONGODB
-class BossModal(Document):
-    name = StringField(min_length=1)
-    current_health = IntField(min_value=1)
-    max_health = IntField(min_value=1)
-    attack_dmg = IntField(min_value=1)
-    boss_img = StringField(min_length=1)
-    inventory = DictField()
 # endregion

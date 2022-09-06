@@ -1,6 +1,5 @@
 from enum import Enum, unique
 import random
-
 from pydantic import BaseModel, Field
 
 

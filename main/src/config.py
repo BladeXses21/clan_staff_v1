@@ -43,6 +43,7 @@ TENDERLY_ID = 457902248660434944
 META_ID = 822354240713261068
 DARKNESS_ID = 934073000117026866
 SWEETNESS_ID = 890304318643785769
+YUKI_ID = 955126116589383800
 
 SERVERS = [
     TENDERLY_ID,
@@ -276,4 +277,14 @@ png_strip_for_embed = 'https://cdn.discordapp.com/attachments/836056310641459250
 png_heart_icon = '<:png_heart_icon:990008416980320297>'
 png_signal_icon = '<:signal:973732570971897856>'
 png_butterfly_gif = 'https://images-ext-2.discordapp.net/external/ZtDftGSI1KwmT7ML9u9R23RJqJHQv8cx1TPHxsQY2q0/%3Fsize%3D80%26quality%3Dlossless/https/cdn.discordapp.com/emojis/936017706480717825.gif'
+# endregion
+
+# region BOSS GAME
+
+NEW_HERO_START_HEALTH = 100
+NEW_HERO_START_ATTACK = 1
+HERO_RES_TIME = 12  # time in hours
+HERO_REGEN = 60  # time in seconds to regen 1 hp
+ITEM_RARITY_DENOMINATOR = 1000
+
 # endregion
