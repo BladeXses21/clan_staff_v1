@@ -103,6 +103,19 @@ class Buttons:
         self.inventory_btn = Button(style=ButtonStyle.blurple, label='Inventory',
                                     emoji='<:premiumiconbackpack4672563:960536938631270450>')
         # endregion
+        # region CHOOSE CLASS VIEW BUILDER
+        self.choice_hero_class = Button(style=ButtonStyle.secondary, label='Choice hero class')
+        self.choose_class_fighter = Button(style=ButtonStyle.secondary, emoji='<:Fighter:1016886174008229959>')
+        self.choose_class_archer = Button(style=ButtonStyle.secondary, emoji='<:Archer:1016886179293057024>')
+        self.choose_class_barbarian = Button(style=ButtonStyle.secondary, emoji='<:Barbarian:1016886177430781992>')
+        self.choose_class_druid = Button(style=ButtonStyle.secondary, emoji='<:Druid:1016887074730811464>')
+        self.choose_class_ranger = Button(style=ButtonStyle.secondary, emoji='<:Ranger:1016886175513989130>')
+        self.choose_class_rogue = Button(style=ButtonStyle.secondary, emoji='<:Rogue:1016886181339869284>')
+        self.choose_class_wizard = Button(style=ButtonStyle.secondary, emoji='<:Wizard:1016886171932033024>')
+        # endregion
+        # region HEROES VIEW BUILDER
+        self.next_page_btn = Button(style=ButtonStyle.secondary, emoji='<:freeicon3dforwardarrow64844:960536938782285894>')
+        # endregion
 
 
 buttons = Buttons()

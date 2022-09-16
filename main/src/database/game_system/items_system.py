@@ -32,8 +32,8 @@ class ItemsSystem(DatabaseSystem):
             items.append(Item.parse_obj(i))
         return items
 
-    def delete_item(self, item: Item):
-        self.item_collection.delete_one({"name": item.name})
+    def delete_item(self, item: str):
+        self.item_collection.delete_one({"name": item})
 
 
 items_system = ItemsSystem()

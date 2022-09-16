@@ -169,15 +169,16 @@ class Clan(BaseCog):
 
     @clan.command(description='Отправка сообщения по всем кланам')
     @is_owner_rights()
-    async def send(self, ctx, *args):
+    async def send(self, ctx, *, args):
         def_view = default_view_builder.create_choice_view()
-        send_message = ' '.join(args)
+        try:
+            embed = get_embed(args)
+            test_message = await ctx.send(content=f'{ctx.author.name}, подтвердите отправку оповещений.', embed=embed, view=def_view, delete_after=60)
+            await ctx.message.delete()
 
-        msg = await ctx.send(
-            embed=DefaultEmbed(f'{ctx.author.name}, подтвердите отправку оповещений.'),
-            view=def_view,
-            delete_after=60
-        )
+        except JSONDecodeError as e:
+            await ctx.send(embed=DefaultEmbed(f'Error: {str(e)}'))
+            return await ctx.message.delete()
 
         async def accept_callback(interaction: discord.Interaction):
             if interaction.user.id != ctx.author.id:
@@ -187,11 +188,11 @@ class Clan(BaseCog):
             for category in interaction.guild.categories:
                 if category.name == get_text_category.name:
                     for channel in category.text_channels:
-                        await channel.send(embed=ClanMessageEmbed(send_message).embed)
+                        await channel.send(embed=embed)
 
             staff_logger.info(f'{ctx.author.name} вызвал команду !clan send {args}')
 
-            return await msg.edit(
+            return await test_message.edit(
                 embed=DefaultEmbed('Отправка сообщения по кланам прошла успешно\nОтправлять еще раз не нужно!!!\nРуки оторву.'),
                 view=default_view_builder.create_view(),
                 delete_after=60
@@ -201,7 +202,7 @@ class Clan(BaseCog):
             if interaction.user.id != ctx.author.id:
                 return False
 
-            return await msg.edit(
+            return await test_message.edit(
                 embed=DefaultEmbed(f'Команда была отклонена'),
                 view=default_view_builder.create_view(),
                 delete_after=60

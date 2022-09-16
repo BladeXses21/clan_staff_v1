@@ -24,14 +24,17 @@ class BattleEmbed(Embed):
         self.add_field(name='Top 3', value='heroes', inline=True)
 
         sorted_stats = sorted(battle.stats, key=lambda x: x.dmg_dealt, reverse=True)
-        for i in range(0, -3):
+        for i in range(0, 3):
             if i > 3:
                 break
-            hero_stat = sorted_stats.pop()
-
-            if hero_stat is not None:
-                self.add_field(name=f'{hero_system.name_by_id(hero_stat.hero_id)}',
-                               value=f'{hero_stat.dmg_dealt} ⚔', inline=True)
+            try:
+                hero_stat = [sorted_stats.pop()]
+                for h in hero_stat:
+                    if hero_stat is not None:
+                        self.add_field(name=f'{hero_system.name_by_id(h.hero_id)}',
+                                       value=f'{h.dmg_dealt} ⚔', inline=True)
+            except IndexError:
+                break
 
         if enemy.is_dead():
             self.set_image(

@@ -10,6 +10,7 @@ class BossesEmbed(object):
 
         bosses_string = f""
         i = 1
+
         for boss in bosses:
             if i == selected:
                 bosses_string = f'{bosses_string}\n{self.cursor} {i}.  {boss}'

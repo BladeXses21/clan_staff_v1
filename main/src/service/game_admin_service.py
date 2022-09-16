@@ -1,8 +1,10 @@
 from discord import Interaction
 
 from database.game_system.boss_system import boss_system
+from database.game_system.hero_system import hero_system
 from database.game_system.items_system import items_system
 from embeds.base import DefaultEmbed
+from embeds.game.admin_game.all_heroes_embed import AllHeroesEmbed
 from embeds.game.admin_game.boss_embed import BossEmbed
 from embeds.game.admin_game.bosses_embed import BossesEmbed
 from embeds.game.game_view_builder.add_item_builder import AddItemsView
@@ -10,6 +12,7 @@ from embeds.game.game_view_builder.admin_view_builder import AdminMenuView
 from embeds.game.game_view_builder.boss_view_builder import BossView
 from embeds.game.game_view_builder.bosses_view_builder import BossesView
 from embeds.game.game_items_embed import GameItemsEmbed
+from embeds.game.game_view_builder.heroes_view_builder import HeroesView
 from extensions.logger import staff_logger
 
 
@@ -27,7 +30,7 @@ class GameAdminService:
             await self.gameBoss(interact)
 
         async def heroes_callback(interact: Interaction):
-            await self.gameBoss(interact)
+            await self.gameHeroes(interact)
 
         bosses_view = AdminMenuView(boss_callback, items_callback, heroes_callback)
         if interaction.message is None:
@@ -63,6 +66,30 @@ class GameAdminService:
             await interaction.response.edit_message(embed=BossesEmbed(bosses, index).embed,
                                                     view=bosses_view)
 
+    async def gameHeroes(self, interaction: Interaction, index: int = 1, set_index: int = 10):
+        heroes = hero_system.get_all_heroes()
+        if heroes is None:
+            return
+        index = len(heroes) if index < 1 else 1 if index > len(heroes) else index
+
+        async def back_callback(interact: Interaction):
+            await self.adminMenu(interact)
+
+        async def up_callback(interact: Interaction):
+            await self.gameHeroes(interact, index - 1, set_index - 1)
+
+        async def down_callback(interact: Interaction):
+            await self.gameHeroes(interact, index + 1, set_index + 1)
+
+        async def next_callback(interact: Interaction):
+            await self.gameHeroes(interact, index + 1, set_index + 10)
+
+        heroes_view = HeroesView(back_callback, up_callback, down_callback, next_callback)
+        if interaction.message is None:
+            await interaction.response.send_message(embed=AllHeroesEmbed(index, set_index).embed, view=heroes_view, ephemeral=True)  # ephemeral add
+        else:
+            await interaction.response.edit_message(embed=AllHeroesEmbed(index, set_index).embed, view=heroes_view)
+
     async def enemy(self, interaction: Interaction, enemy_name: str):
         boss = boss_system.get_by_name(enemy_name)
         if boss is None:
@@ -96,7 +123,7 @@ class GameAdminService:
         index = len(items) if index < 1 else 1 if index > len(items) else index
 
         async def back_enemies_callback(interact: Interaction):
-            await self.game_enemies(interact)
+            await self.gameBoss(interact)
 
         async def back_callback(interact: Interaction):
             await self.enemy(interact, enemy_name)

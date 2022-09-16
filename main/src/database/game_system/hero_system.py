@@ -2,7 +2,7 @@ import time
 
 from discord import User
 
-from config import NEW_HERO_START_HEALTH, NEW_HERO_START_ATTACK, HERO_REGEN
+from config import NEW_HERO_START_HEALTH, NEW_HERO_START_ATTACK, HERO_REGEN, HERO_DMG_BY_CLASS, CHANGE_HEALTH_BY_CLASS
 from database.database_system import DatabaseSystem
 from models.game_model.lifeform_types.hero_type import Hero
 
@@ -44,8 +44,22 @@ class HeroSystem(DatabaseSystem):
         print(f"Hero with id = {id} doesnt exist ")
         return None
 
+    def add_class_to_hero(self, user: User, hero_class: str):
+        self.game_hero_collection.update_one({"id": user.id}, {'$set': {"hero_class": hero_class}})
+        self.game_hero_collection.update_one({"id": user.id}, {"$inc": {"attack_dmg": HERO_DMG_BY_CLASS[hero_class],
+                                                                        "current_health": CHANGE_HEALTH_BY_CLASS[hero_class],
+                                                                        "max_health": CHANGE_HEALTH_BY_CLASS[hero_class]}})
+
     def name_by_id(self, user_id: int) -> str:
         return self.game_hero_collection.find_one({"id": user_id}, {'name': 1})['name']
+
+    def check_hero_on_the_class_by_user(self, user: User):
+        hero_data = self.game_hero_collection.find_one({"id": user.id}, {})
+        try:
+            if hero_data['hero_class'] is not None:
+                return True
+        except KeyError:
+            return False
 
     def health_change(self, hero: Hero):
         self.game_hero_collection.update_one({'id': hero.id}, {"$set": {'current_health': self.health_to_time(hero.current_health,
@@ -56,6 +70,16 @@ class HeroSystem(DatabaseSystem):
     def modify_inventory(self, hero: Hero):
         self.game_hero_collection.update_one({"id": hero.id}, {"$set": {'inventory': hero.inventory.dict()}})
         return True
+
+    def get_all_heroes(self) -> list[Hero] | None:
+        heroes_date = self.game_hero_collection.find({})
+        if heroes_date is None:
+            print("There arent any heroes in a game!!!!")
+            return None
+        heroes = []
+        for hero in heroes_date:
+            heroes.append(Hero.parse_obj(hero))
+        return heroes
 
     @staticmethod
     def time_to_health(time_millis: int, max_health: int) -> int:

@@ -147,7 +147,6 @@ class CrossEventsMode(BaseCog):
             return await msg.edit(
                 embed=DefaultEmbed(
                     f'***```{author_name}, вы успешно очистили статистику clan staff на {ctx.guild.name}```***'),
-                delete_after=60,
                 view=default_view_builder.create_view()
             )
 
@@ -157,7 +156,6 @@ class CrossEventsMode(BaseCog):
 
             return await msg.edit(
                 embed=DefaultEmbed(f'Команда была отклонена'),
-                delete_after=60,
                 view=default_view_builder.create_view()
             )
 

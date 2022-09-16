@@ -8,10 +8,13 @@ from discord import slash_command, Interaction, Bot, ApplicationContext, Option
 from config import PERMISSION_ROLE, OWNER_IDS, YUKI_ID
 from database.game_system.battle_system import battle_system
 from database.game_system.boss_system import boss_system
+from database.game_system.hero_system import hero_system
 from database.game_system.items_system import items_system
 from embeds.base import DefaultEmbed
 from embeds.game.admin_game.admin_help_embed import AdminHelpEmbed
+from embeds.game.admin_game.all_items import AllItemEmbed
 from embeds.game.admin_game.boss_drop_embed import BossDropEmbed
+from embeds.game.admin_game.heal_embed import HealEmbed
 from extensions.logger import staff_logger
 from models.game_model.inventory_types.item_types import EnumItemTypes, EnumItemRarity, Item
 from service.game_admin_service import GameAdminService
@@ -100,7 +103,28 @@ class GameAdmin(BaseCog):
     async def see_boss_inventory(self, interaction: Interaction, boss_name: str):
         boss = boss_system.get_by_name(boss_name)
         return await interaction.response.send_message(embed=BossDropEmbed(boss).embed)
+
     # endregion
+
+    # region HEAL ME OR ENY HERO - FOR ADMIN
+    @admins.command(name='heal', description='Heal hero')
+    async def heal(self, interaction: Interaction, member: discord.Member):
+        hero = hero_system.get_hero_by_user(member)
+        hero.full_regen()
+        await interaction.response.send_message(embed=HealEmbed(hero).embed)
+        hero_system.health_change(hero)
+        return
+
+    # endregion
+
+    @admins.command(name='all_items', description='Show all items')
+    async def all_items(self, interaction: Interaction):
+        return await interaction.response.send_message(embed=AllItemEmbed().embed)
+
+    @admins.command(name='delete_item', description='Delete item from db')
+    async def delete_item(self, interaction: Interaction, item_name: str):
+        items_system.delete_item(item_name)
+        return await interaction.response.send_message(embed=DefaultEmbed(f'***```item {item_name} has success delete```***'))
 
 
 def setup(bot):

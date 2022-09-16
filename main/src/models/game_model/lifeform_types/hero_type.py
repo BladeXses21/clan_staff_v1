@@ -1,6 +1,6 @@
 import time
 
-from config import HERO_RES_TIME
+from config import HERO_RES_TIME, HERO_DMG_BY_CLASS
 from models.game_model.inventory_types.hero_inventory import HeroInventory
 from models.game_model.lifeform_types.life_form import LifeForm
 

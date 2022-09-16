@@ -1,5 +1,6 @@
 from discord import Colour, Embed
 
+from extensions.funcs import equipped_item_string
 from models.game_model.lifeform_types.hero_type import Hero
 
 
@@ -10,19 +11,7 @@ class HeroInventoryEmbed(Embed):
         inventory = hero.inventory
         equipped = inventory.equipped
 
-        helmet = equipped.helmet.name if equipped.helmet is not None else " "
-        gloves = equipped.gloves.name if equipped.gloves is not None else " "
-        chest = equipped.chest.name if equipped.chest is not None else " "
-        pants = equipped.pants.name if equipped.pants is not None else " "
-        boots = equipped.boots.name if equipped.boots is not None else " "
-        weapon = equipped.weapon.name if equipped.weapon is not None else " "
-
-        items_string = f"<:helmet2:960570021036310568> : {helmet}"
-        items_string = f"{items_string}\n<:gauntlet2:960570020960821349> : {gloves}"
-        items_string = f"{items_string}\n<:chest2:960570021514453012> : {chest}"
-        items_string = f"{items_string}\n<:pants2:960570027894001714> : {pants}"
-        items_string = f"{items_string}\n<:boots:960570039721939034> : {boots}\n"
-        items_string = f"{items_string}\nweapon : {weapon}\n"
+        items_string = equipped_item_string(equipped)
 
         i = 1
         for item in inventory.items:

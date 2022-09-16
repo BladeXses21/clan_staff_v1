@@ -287,4 +287,44 @@ HERO_RES_TIME = 12  # time in hours
 HERO_REGEN = 60  # time in seconds to regen 1 hp
 ITEM_RARITY_DENOMINATOR = 1000
 
+HERO_CLASS_BY_INDEX = {
+    1: 'Fighter',
+    2: 'Archer',
+    3: 'Barbarian',
+    4: 'Druid',
+    5: 'Ranger',
+    6: 'Rogue',
+    7: 'Wizard'
+}
+
+HERO_DMG_BY_CLASS = {
+    'Fighter': 2,
+    'Archer': 2,
+    'Barbarian': 1,
+    'Druid': 1,
+    'Ranger': 2,
+    'Rogue': 3,
+    'Wizard': 3
+}
+
+CHANGE_HEALTH_BY_CLASS = {
+    'Fighter': 0,
+    'Archer': 0,
+    'Barbarian': 20,
+    'Druid': 20,
+    'Ranger': 0,
+    'Rogue': -20,
+    'Wizard': -20
+}
+
+HERO_CLASS_ARRAY = [
+    f'<:Fighter:1016886174008229959> : Fighter',
+    f'<:Archer:1016886179293057024> : Archer',
+    f'<:Barbarian:1016886177430781992> : Barbarian',
+    f'<:Druid:1016887074730811464> : Druid',
+    f'<:Ranger:1016886175513989130> : Ranger',
+    f'<:Rogue:1016886181339869284> : Rogue',
+    f'<:Wizard:1016886171932033024> : Wizard'
+]
+
 # endregion
