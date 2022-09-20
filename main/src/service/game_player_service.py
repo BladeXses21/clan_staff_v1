@@ -24,6 +24,7 @@ class GameService:
         if ctx is None:
             ctx = await self.client.get_application_context(interaction)
 
+        hero_system.get_hero_by_user(ctx.user)
         battle = battle_system.get_current_battle()
 
         async def attack_callback(interact: Interaction):

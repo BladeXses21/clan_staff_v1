@@ -3,8 +3,9 @@ from json import JSONDecodeError
 
 import discord
 import requests
-from discord import ApplicationContext, Embed
+from discord import ApplicationContext, Embed, Option
 from discord.ext import commands
+from typing import List
 
 from cogs.base import BaseCog
 from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE, OWNER_IDS, CLAN_MEMBER_ACCESS_ROLE
@@ -54,10 +55,24 @@ class Clan(BaseCog):
 
     @clans.command(name='v_list', description='Просмотреть список доступов в клан', default_permission=True)
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
+    async def v_lock(self, interaction: discord.Interaction, member: discord.Member,
+                     access: Option(str, 'Открыть или Закрыть доступ в войс', choices=List['Open', 'Close'])):
+        response_json = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
+        if interaction.user.id not in response_json['userId'] or response_json['clan']['deputies']:
+            return False
+        recruit_voice = interaction.guild.get_channel(response_json['clan']['recruitId'])
+        if access == 'Close':
+            await recruit_voice.set_permissions(member, overwrite=discord.PermissionOverwrite(connect=False))
+            return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'))
+        if access == 'Open':
+            await recruit_voice.set_permissions(member, overwrite=discord.PermissionOverwrite(connect=True))
+            return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'))
+
+    @clans.command(name='v_list', description='Просмотреть список доступов в клан', default_permission=True)
+    @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def v_list(self, interaction: discord.Interaction):
-        response_json = requests.get(
-            f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
+        response_json = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
         permitted_description = ''
         counter = 1
         for permittedMember in response_json['clan']['permittedMembers']:
