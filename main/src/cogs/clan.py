@@ -61,12 +61,14 @@ class Clan(BaseCog):
                      access: Option(str, 'Открыть или Закрыть доступ в войс', choices=AccessEnum.list(), required=True)):
         response_json = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
         recruit_voice = self.client.get_channel(int(response_json['clan']['recruitId']))
+        if interaction.user.id == member.id:
+            return False
         if access == 'Close':
-            await recruit_voice.set_permissions(member, connect=False)
-            return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'))
+            await recruit_voice.set_permissions(member, connect=False, speek=False)
+            return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'), ephemeral=True)
         if access == 'Open':
-            await recruit_voice.set_permissions(member, connect=True)
-            return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'))
+            await recruit_voice.set_permissions(member, connect=True, speek=True)
+            return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был открыт для {member}```***'), ephemeral=True)
 
     @clans.command(name='v_list', description='Просмотреть список доступов в клан', default_permission=True)
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)

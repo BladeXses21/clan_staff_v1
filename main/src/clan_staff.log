@@ -15731,3 +15731,75 @@ KeyboardInterrupt
 2022-09-16 04:11:25 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
 2022-09-16 04:11:28 [clan_staff] [INFO]: READY
 2022-09-16 04:13:19 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-20 06:34:49 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-20 06:35:02 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 822354240713261068.
+2022-09-20 06:35:07 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-20 06:35:12 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-09-20 06:35:12 [clan_staff] [INFO]: READY
+2022-09-20 06:36:01 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='pycord: on_interaction' coro=<Client._run_event() done, defined at C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py:374> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\urllib3\util\connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11002] getaddrinfo failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 600, in run_forever
+    self._run_once()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1896, in _run_once
+    handle._run()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 382, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\bot.py", line 1150, in on_interaction
+    await self.process_application_commands(interaction)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\bot.py", line 837, in process_application_commands
+    await self.invoke_application_command(ctx)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\bot.py", line 1098, in invoke_application_command
+    await ctx.command.invoke(ctx)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\commands\core.py", line 331, in invoke
+    await injected(ctx)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\commands\core.py", line 122, in wrapped
+    ret = await coro(arg)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\commands\core.py", line 1091, in _invoke
+    await command.invoke(ctx)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\commands\core.py", line 331, in invoke
+    await injected(ctx)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\commands\core.py", line 122, in wrapped
+    ret = await coro(arg)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\commands\core.py", line 825, in _invoke
+    await self.callback(self.cog, ctx, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\PycharmProjects\clan_staff_v1\main\src\cogs\clan.py", line 62, in v_lock
+    response_json = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\requests\sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\requests\sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\requests\adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\urllib3\connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\urllib3\connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\urllib3\connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\urllib3\connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+KeyboardInterrupt
