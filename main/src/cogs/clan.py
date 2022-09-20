@@ -55,7 +55,7 @@ class Clan(BaseCog):
                 else:
                     pass
 
-    @clans.command(name='v_list', description='Просмотреть список доступов в клан', default_permission=True)
+    @clans.command(name='v_lock', description='Выдать или забрать доступ в клан наборы', default_permission=True)
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
     async def v_lock(self, interaction: discord.Interaction, member: discord.Member,
                      access: Option(str, 'Открыть или Закрыть доступ в войс', choices=AccessEnum.list())):
