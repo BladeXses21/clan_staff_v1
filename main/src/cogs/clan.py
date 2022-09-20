@@ -64,10 +64,12 @@ class Clan(BaseCog):
         if interaction.user.id == member.id:
             return False
         if access == 'Close':
-            await recruit_voice.set_permissions(member, connect=False, speek=False)
+            await recruit_voice.set_permissions(member, connect=False)
+            if member.voice.channel.id == interaction.user.voice.channel.id:
+                await member.kick()
             return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'), ephemeral=True)
         if access == 'Open':
-            await recruit_voice.set_permissions(member, connect=True, speek=True)
+            await recruit_voice.set_permissions(member, connect=True)
             return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был открыт для {member}```***'), ephemeral=True)
 
     @clans.command(name='v_list', description='Просмотреть список доступов в клан', default_permission=True)
