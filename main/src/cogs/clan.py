@@ -58,16 +58,14 @@ class Clan(BaseCog):
     @clans.command(name='v_lock', description='Выдать или забрать доступ в клан наборы', default_permission=True)
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
     async def v_lock(self, interaction: discord.Interaction, member: discord.Member,
-                     access: Option(str, 'Открыть или Закрыть доступ в войс', choices=AccessEnum.list())):
+                     access: Option(str, 'Открыть или Закрыть доступ в войс', choices=AccessEnum.list(), required=True)):
         response_json = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
-        if interaction.user.id not in response_json['userId'] or response_json['clan']['deputies']:
-            return False
-        recruit_voice = interaction.guild.get_channel(response_json['clan']['recruitId'])
+        recruit_voice = self.client.get_channel(int(response_json['clan']['recruitId']))
         if access == 'Close':
-            await recruit_voice.set_permissions(member, overwrite=discord.PermissionOverwrite(connect=False))
+            await recruit_voice.set_permissions(member, connect=False)
             return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'))
         if access == 'Open':
-            await recruit_voice.set_permissions(member, overwrite=discord.PermissionOverwrite(connect=True))
+            await recruit_voice.set_permissions(member, connect=True)
             return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'))
 
     @clans.command(name='v_list', description='Просмотреть список доступов в клан', default_permission=True)
