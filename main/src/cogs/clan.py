@@ -1,4 +1,5 @@
 import json
+from enum import Enum
 from json import JSONDecodeError
 
 import discord
@@ -25,6 +26,7 @@ from extensions.decorator import is_owner, is_owner_rights
 from extensions.logger import staff_logger
 from main import client
 from models.modal import StaffModal, ClanModal
+from utils.access_enum_for_clan import AccessEnum
 
 
 def get_embed(json_):
@@ -56,7 +58,7 @@ class Clan(BaseCog):
     @clans.command(name='v_list', description='Просмотреть список доступов в клан', default_permission=True)
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
     async def v_lock(self, interaction: discord.Interaction, member: discord.Member,
-                     access: Option(str, 'Открыть или Закрыть доступ в войс', choices=List['Open', 'Close'])):
+                     access: Option(str, 'Открыть или Закрыть доступ в войс', choices=AccessEnum.list())):
         response_json = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
         if interaction.user.id not in response_json['userId'] or response_json['clan']['deputies']:
             return False
