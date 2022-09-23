@@ -58,12 +58,14 @@ class Clan(BaseCog):
 
     @clan.command(aliases=['афк'])
     async def afk(self, ctx: ApplicationContext, member: discord.Member):
+        staff_logger.info(f'!clan afk command use: {ctx.author.id} for {member.id}')
         if member is None:
             return False
         response_json = requests.get(f'https://yukine.ru/api/members/{ctx.guild.id}/{member.id}').json()
         await member.move_to(channel=None)
         await client.get_channel(982672022003924992).send(
-            embed=DefaultEmbed(f'1. <t:{int(time.time())}>\n2. {member.mention}\n3. {response_json["clan"]["name"]}\n4. <@{709820533176270911}>'))
+            embed=DefaultEmbed(
+                f'1. {ctx.author.mention}\n2. <t:{int(time.time())}>\n3. {member.mention}\n4. {response_json["clan"]["name"]}\n5. <@{709820533176270911}>'))
         clan_leader = client.get_user(response_json["userId"])
         return await clan_leader.send(embed=DefaultEmbed(f"***```Предупреждение за афк!\n{member.name}\n{member.id}```***"))
 
