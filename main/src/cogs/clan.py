@@ -55,6 +55,16 @@ class Clan(BaseCog):
                 else:
                     pass
 
+    @clan.command(aliases=['афк'])
+    async def afk(self, ctx: ApplicationContext, member: discord.Member):
+        if member is None:
+            return False
+        response_json = requests.get(f'https://yukine.ru/api/members/{ctx.guild.id}/{member.id}').json()
+        await member.move_to(channel=None)
+        await ctx.send(embed=DefaultEmbed(f'***```{member.name}, был кикнут за афк из клана {response_json["clan"]["name"]}```***'))
+        clan_leader = client.get_user(response_json["userId"])
+        return await clan_leader.send(embed=DefaultEmbed(f"***```Предупреждение за афк!\n{member.name}\n{member.id}```***"))
+
     @clans.command(name='v_lock', description='Выдать или забрать доступ в клан наборы', default_permission=True)
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
     async def v_lock(self, interaction: discord.Interaction, member: discord.Member,
@@ -65,8 +75,6 @@ class Clan(BaseCog):
             return False
         if access == 'Close':
             await recruit_voice.set_permissions(member, connect=False)
-            if member.voice.channel.id == interaction.user.voice.channel.id:
-                await member.kick()
             return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'), ephemeral=True)
         if access == 'Open':
             await recruit_voice.set_permissions(member, connect=True)
