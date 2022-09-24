@@ -73,12 +73,14 @@ class Clan(BaseCog):
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
     async def v_lock(self, interaction: discord.Interaction, member: discord.Member,
                      access: Option(str, 'Открыть или Закрыть доступ в войс', choices=AccessEnum.list(), required=True)):
+        staff_logger.info(f'/clan v_lock command use: {interaction.user.id}')
         response_json = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
         recruit_voice = self.client.get_channel(int(response_json['clan']['recruitId']))
         if interaction.user.id == member.id:
             return False
         if access == 'Close':
             await recruit_voice.set_permissions(member, connect=False)
+            await member.move_to(channel=None)
             return await interaction.response.send_message(embed=DefaultEmbed(f'***```Набор был закрыт для {member}```***'), ephemeral=True)
         if access == 'Open':
             await recruit_voice.set_permissions(member, connect=True)
@@ -88,6 +90,7 @@ class Clan(BaseCog):
     @commands.has_any_role(*CLAN_MEMBER_ACCESS_ROLE)
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def v_list(self, interaction: discord.Interaction):
+        staff_logger.info(f'/clan v_list command use: {interaction.user.id}')
         response_json = requests.get(f'https://yukine.ru/api/members/{interaction.guild.id}/{interaction.user.id}').json()
         permitted_description = ''
         counter = 1
