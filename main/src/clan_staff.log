@@ -15803,3 +15803,52 @@ Traceback (most recent call last):
   File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\urllib3\connection.py", line 174, in _new_conn
     conn = connection.create_connection(
 KeyboardInterrupt
+2022-09-26 00:30:31 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-26 00:30:47 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-26 00:30:52 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-09-26 00:30:57 [clan_staff] [INFO]: READY
+2022-09-26 00:31:17 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-26 00:32:20 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-26 00:32:31 [asyncio] [ERROR]: Task was destroyed but it is pending!
+task: <Task pending name='Task-9' coro=<ConnectionState._delay_ready() running at C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\state.py:560> wait_for=<Future pending cb=[Task.task_wakeup()]> cb=[gather.<locals>._done_callback() at C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\tasks.py:720]>
+2022-09-26 00:32:32 [asyncio] [ERROR]: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Client.run.<locals>.runner() done, defined at C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py:692> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 705, in run
+    loop.run_forever()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 600, in run_forever
+    self._run_once()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1896, in _run_once
+    handle._run()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 694, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 658, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\client.py", line 553, in connect
+    await self.ws.poll_event()
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\gateway.py", line 591, in poll_event
+    await self.received_message(msg.data)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\gateway.py", line 541, in received_message
+    func(data)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\state.py", line 1340, in parse_guild_members_chunk
+    self.process_chunk_requests(guild_id, data.get("nonce"), members, complete)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\state.py", line 284, in process_chunk_requests
+    request.add_members(members)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\state.py", line 122, in add_members
+    existing = guild.get_member(member.id)
+  File "C:\Users\artur.DESKTOP-NAHR5UK\.virtualenvs\clan_staff_v1-6iT5duR7\lib\site-packages\discord\guild.py", line 809, in get_member
+    def get_member(self, user_id: int, /) -> Optional[Member]:
+KeyboardInterrupt
+2022-09-26 00:37:16 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-26 00:37:31 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-26 00:37:37 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 822354240713261068.
+2022-09-26 00:37:42 [clan_staff] [INFO]: READY
+2022-09-26 00:38:18 [clan_staff] [INFO]: BladeXses#1616 вызвал adminMenu
+2022-09-26 00:39:05 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-26 00:39:20 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-26 00:39:25 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-09-26 00:39:29 [clan_staff] [INFO]: READY

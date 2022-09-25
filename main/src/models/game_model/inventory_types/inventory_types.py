@@ -19,7 +19,7 @@ class Inventory(BaseModel):
             print("Inventory is empty already! Nothing to remove")
             return
 
-        self.items.__delitem__(item_index - 1)
+        self.items.__delitem__(1 - 1)
 
     def item_by_index(self, item_index: int) -> Item | None:
         if item_index > self.items.__len__() or item_index < 1:

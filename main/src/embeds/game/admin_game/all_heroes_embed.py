@@ -2,7 +2,6 @@ from discord import Embed, Colour
 import numpy as np
 from database.game_system.hero_system import hero_system
 from extensions.funcs import equipped_item_string
-from models.game_model.lifeform_types.hero_type import Hero
 
 
 class AllHeroesEmbed(object):
@@ -11,7 +10,7 @@ class AllHeroesEmbed(object):
         self.cursor = '<:arrow:959084748796465222>'
 
         heroes = hero_system.get_all_heroes()
-
+        var = []
         if heroes is None:
             return
 
@@ -19,7 +18,9 @@ class AllHeroesEmbed(object):
         all_items = 'all items:\n'
         count = 1
 
-        for hero in heroes:
+        for i in range(0, len(heroes), set_index):
+            var = heroes[i:i + set_index]
+        for hero in var:
             inventory = hero.inventory
             equipped = inventory.equipped
 
@@ -34,10 +35,11 @@ class AllHeroesEmbed(object):
                     heroes_string = f"{heroes_string}\n{self.cursor}**{count}.** name: **`{hero.name}`**\n {inventory.items} {inventory.max_size} {inventory.equipped}"
             else:
                 heroes_string = f"{heroes_string}\n**{count}.** name: **`{hero.name}`**"
+            np.delete(hero, count)
             count = count + 1
-            np.delete(heroes, count)
             if count > set_index:
                 break
+
         self._embed.description = str(heroes_string)
 
     @property
