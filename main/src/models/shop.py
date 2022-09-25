@@ -1,5 +1,5 @@
 import random
-from config import CHANCE_FOR_ITEMS
+from config import CHANCE_FOR_ITEMS, TENDERLY_ID, DARKNESS_ID, SWEETNESS_ID, META_ID
 
 from utils.singltone import Singleton
 
@@ -59,35 +59,103 @@ class ShopItem(Singleton):
         }
 
         self.SHOP_ITEM_AMOUNT = {
-            1: 275,
-            2: 275,
-            3: 275,
-            4: 20,
-            5: 2500,
-            6: 500,
-            7: 300,
-            8: 120,
-            9: 150,
-            10: 150,
-            11: 400,
-            12: 260,
-            13: 800,
-            14: 1600,
-            15: 150,
-            16: 250,
-            17: 100,
-            18: 100,
-            19: 100,
-            20: 3000,
+            TENDERLY_ID: {
+                1: 275,
+                2: 275,
+                3: 275,
+                4: 20,
+                5: 2500,
+                6: 500,
+                7: 300,
+                8: 120,
+                9: 150,
+                10: 150,
+                11: 400,
+                12: 260,
+                13: 800,
+                14: 1600,
+                15: 150,
+                16: 250,
+                17: 100,
+                18: 100,
+                19: 100,
+                20: 3000,
+            },
+            DARKNESS_ID: {
+                1: 275,
+                2: 275,
+                3: 275,
+                4: 20,
+                5: 2500,
+                6: 500,
+                7: 300,
+                8: 120,
+                9: 150,
+                10: 150,
+                11: 400,
+                12: 260,
+                13: 800,
+                14: 1600,
+                15: 150,
+                16: 250,
+                17: 100,
+                18: 100,
+                19: 100,
+                20: 3000,
+            },
+            SWEETNESS_ID: {
+                1: 275,
+                2: 275,
+                3: 275,
+                4: 20,
+                5: 2500,
+                6: 500,
+                7: 300,
+                8: 120,
+                9: 150,
+                10: 150,
+                11: 400,
+                12: 260,
+                13: 800,
+                14: 1600,
+                15: 150,
+                16: 250,
+                17: 100,
+                18: 100,
+                19: 100,
+                20: 3000,
+            },
+            META_ID: {
+                1: 375,
+                2: 375,
+                3: 375,
+                4: 40,
+                5: 2900,
+                6: 700,
+                7: 700,
+                8: 240,
+                9: 240,
+                10: 240,
+                11: 680,
+                12: 680,
+                13: 1200,
+                14: 1800,
+                15: 240,
+                16: 240,
+                17: 160,
+                18: 160,
+                19: 160,
+                20: 3000,
+            }
         }
 
-    def get_random_item(self):
-        things_chance = [i for i in self.rariry_to_object["common"]] * CHANCE_FOR_ITEMS['common'] + \
-                        [i for i in self.rariry_to_object["rare"]] * CHANCE_FOR_ITEMS['rare'] + \
-                        [i for i in self.rariry_to_object["mythical"]] * CHANCE_FOR_ITEMS['mythical'] + \
-                        [i for i in self.rariry_to_object["legendary"]] * CHANCE_FOR_ITEMS['legendary'] + \
-                        [i for i in self.rariry_to_object["immortal"]] * CHANCE_FOR_ITEMS['immortal']
-        return things_chance[int(random.randint(0, things_chance.__len__()))]
+        def get_random_item(self):
+            things_chance = [i for i in self.rariry_to_object["common"]] * CHANCE_FOR_ITEMS['common'] + \
+                            [i for i in self.rariry_to_object["rare"]] * CHANCE_FOR_ITEMS['rare'] + \
+                            [i for i in self.rariry_to_object["mythical"]] * CHANCE_FOR_ITEMS['mythical'] + \
+                            [i for i in self.rariry_to_object["legendary"]] * CHANCE_FOR_ITEMS['legendary'] + \
+                            [i for i in self.rariry_to_object["immortal"]] * CHANCE_FOR_ITEMS['immortal']
+            return things_chance[int(random.randint(0, things_chance.__len__()))]
 
 
 shop_item = ShopItem()

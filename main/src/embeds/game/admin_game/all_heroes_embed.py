@@ -1,5 +1,5 @@
 from discord import Embed, Colour
-
+import numpy as np
 from database.game_system.hero_system import hero_system
 from extensions.funcs import equipped_item_string
 from models.game_model.lifeform_types.hero_type import Hero
@@ -35,6 +35,7 @@ class AllHeroesEmbed(object):
             else:
                 heroes_string = f"{heroes_string}\n**{count}.** name: **`{hero.name}`**"
             count = count + 1
+            np.delete(heroes, count)
             if count > set_index:
                 break
         self._embed.description = str(heroes_string)

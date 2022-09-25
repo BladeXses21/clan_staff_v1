@@ -1,13 +1,11 @@
 import json
 import time
-from enum import Enum
 from json import JSONDecodeError
 
 import discord
 import requests
 from discord import ApplicationContext, Embed, Option
 from discord.ext import commands
-from typing import List
 
 from cogs.base import BaseCog
 from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE, OWNER_IDS, CLAN_MEMBER_ACCESS_ROLE
@@ -16,11 +14,10 @@ from database.clan_systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
 from embeds.clan_embed.clan_embed.auction.auction import AuctionEmbed
 from embeds.clan_embed.clan_embed.auction.lot import AuctionLot
+from embeds.clan_embed.clan_embed.help.help_embed import HelpEmbed
 from embeds.clan_embed.clan_embed.permittedMember import PermittedEmbed
 from embeds.clan_embed.clan_embed.warn import ClanWarnEmbed
-from embeds.clan_embed.clan_embed.help.help_embed import HelpEmbed
 from embeds.clan_embed.staff.clan_command import ClanCommandsEmbed
-from embeds.clan_embed.staff.clan_message import ClanMessageEmbed
 from embeds.clan_embed.view_builders.help_view_builder import help_view_builder
 from embeds.view_builder import default_view_builder
 from extensions.decorator import is_owner, is_owner_rights
@@ -59,7 +56,7 @@ class Clan(BaseCog):
     @clan.command(aliases=['афк'])
     async def afk(self, ctx: ApplicationContext, member: discord.Member):
         staff_logger.info(f'!clan afk command use: {ctx.author.id} for {member.id}')
-        if member is None:
+        if member is not None:
             return False
         response_json = requests.get(f'https://yukine.ru/api/members/{ctx.guild.id}/{member.id}').json()
         await member.move_to(channel=None)
