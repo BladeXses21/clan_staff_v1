@@ -10,7 +10,7 @@ class AllHeroesEmbed(object):
         self.cursor = '<:arrow:959084748796465222>'
 
         heroes = hero_system.get_all_heroes()
-        var = []
+
         if heroes is None:
             return
 
@@ -18,9 +18,7 @@ class AllHeroesEmbed(object):
         all_items = 'all items:\n'
         count = 1
 
-        for i in range(0, len(heroes), set_index):
-            var = heroes[i:i + set_index]
-        for hero in var:
+        for hero in heroes:
             inventory = hero.inventory
             equipped = inventory.equipped
 
@@ -39,7 +37,6 @@ class AllHeroesEmbed(object):
             count = count + 1
             if count > set_index:
                 break
-
         self._embed.description = str(heroes_string)
 
     @property

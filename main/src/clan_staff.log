@@ -15852,3 +15852,7 @@ KeyboardInterrupt
 2022-09-26 00:39:20 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
 2022-09-26 00:39:25 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
 2022-09-26 00:39:29 [clan_staff] [INFO]: READY
+2022-09-26 02:55:16 [discord.client] [WARNING]: PyNaCl is not installed, voice will NOT be supported
+2022-09-26 02:55:30 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 457902248660434944.
+2022-09-26 02:55:36 [discord.state] [WARNING]: Shard ID 0 timed out waiting for chunks for guild_id 890304318643785769.
+2022-09-26 02:55:41 [clan_staff] [INFO]: READY

@@ -56,7 +56,7 @@ class Clan(BaseCog):
     @clan.command(aliases=['афк'])
     async def afk(self, ctx: ApplicationContext, member: discord.Member):
         staff_logger.info(f'!clan afk command use: {ctx.author.id} for {member.id}')
-        if member is not None:
+        if member is None:
             return False
         response_json = requests.get(f'https://yukine.ru/api/members/{ctx.guild.id}/{member.id}').json()
         await member.move_to(channel=None)
