@@ -4,7 +4,9 @@ from config import NEXT_STEP_EMOJI, NEXT_STEP_PINK_EMOJI, BARRETTE_BLUE_EMOJI, B
 
 
 class HelpEmbed(object):
-    def __init__(self, guild_name, leader_role, consliger_role, find_clan_channel, create_clan_url, verify_url, clan_info, clan_staff_url, lead, senior):
+    def __init__(self, guild_name, leader_role, consliger_role, find_clan_channel, create_clan_url, verify_url, clan_info, clan_staff_url, lead,
+                 senior,
+                 verification_cost: str):
         self._embed = Embed(
             title=f'Клановый помощник | {guild_name}',
             description=f'Для вступления в клан, вы должны получить приглашение от Лидера или Заместителя клана.'
@@ -15,7 +17,7 @@ class HelpEmbed(object):
                         f'\n\n **Так же у вас** есть возможность **создать свой клан**, для этого нужно заполнить - [**заявку для создания**]({create_clan_url}) и если она будет одобрена, вам ответят в личные сообщения.'
                         f'\n\nПосле **завершения создания** клана, вам **не будут доступны** все внутри клановые возможности, чтобы это исправить вам нужно верифицировать клан [**заполнив заявку**]({verify_url}).'
                         f'\n\n{BARRETTE_PINK_EMOJI}**Верификация** - это процесс после которого у клана появляется доступ к полному функционалу.'
-                        f'\n{BARRETTE_BLUE_EMOJI}**Требования:** 20.000{UKI_EMOGI} (Юки) в казне и 500 часов онлайна.'
+                        f'\n{BARRETTE_BLUE_EMOJI}**Требования:** {verification_cost}{UKI_EMOGI} (Юки) в казне и 500 часов онлайна.'
                         f'\n{UKI_EMOGI}**Юки** - клановая валюта. Её можно получить за онлайн в клановом войсе, а так же за проведение ивента внутри клана запросив его по команде: **/event request.**'
                         f'\n\n> **Вся информация о кланах, их правила и команды находятся здесь:**'
                         f'\n{NEXT_STEP_PINK_EMOJI} {clan_info}'

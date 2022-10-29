@@ -8,7 +8,7 @@ from discord import ApplicationContext, Embed, Option
 from discord.ext import commands
 
 from cogs.base import BaseCog
-from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE, OWNER_IDS, CLAN_MEMBER_ACCESS_ROLE
+from config import CLAN_STAFF, STOP_WORD, AUCTION_BET_LIMIT, PERMISSION_ROLE, OWNER_IDS, CLAN_MEMBER_ACCESS_ROLE, VERIFICATION_COST_BY_GUILD_ID
 from database.clan_systems.clan_warn import clan_warn_system
 from database.clan_systems.server_system import cross_server_system
 from embeds.base import DefaultEmbed
@@ -54,6 +54,7 @@ class Clan(BaseCog):
                     pass
 
     @clan.command(aliases=['афк'])
+    @commands.has_any_role(*CLAN_STAFF)
     async def afk(self, ctx: ApplicationContext, member: discord.Member):
         staff_logger.info(f'!clan afk command use: {ctx.author.id} for {member.id}')
         if member is None:
@@ -63,6 +64,28 @@ class Clan(BaseCog):
         await client.get_channel(982672022003924992).send(
             embed=DefaultEmbed(
                 f'1. {ctx.author.mention}\n2. <t:{int(time.time())}>\n3. {member.mention}\n4. {response_json["clan"]["name"]}\n5. <@{709820533176270911}>'))
+        clan_leader = client.get_user(response_json["userId"])
+        return await clan_leader.send(embed=DefaultEmbed(f"***```Предупреждение за афк!\n{member.name}\n{member.id}```***"))
+
+    @clan.command()
+    @commands.has_any_role(*CLAN_STAFF)
+    async def unafk(self, ctx: ApplicationContext, member: discord.Member):
+        staff_logger.info(f'!clan unafk command use: {ctx.author.id} for {member.id}')
+        if member is None:
+            return False
+        response_json = requests.get(f'https://yukine.ru/api/members/{ctx.guild.id}/{member.id}').json()
+        await client.get_channel(982672022003924992).send(embed=DefaultEmbed(
+            f'**Снятие афк**\n1. {ctx.author.mention}\n2. <t:{int(time.time())}>\n3. {member.mention}\n4. {response_json["clan"]["name"]}\n5. <@{709820533176270911}>'))
+
+    @clan.command()
+    @commands.has_any_role(*CLAN_STAFF)
+    async def unvoice(self, ctx: ApplicationContext, member: discord.Member):
+        staff_logger.info(f'!clan unvoice command use: {ctx.author.id} for {member.id}')
+        if member is None:
+            return False
+        response_json = requests.get(f'https://yukine.ru/api/members/{ctx.guild.id}/{member.id}').json()
+        await client.get_channel(982672022003924992).send(embed=DefaultEmbed(
+            f'1. {ctx.author.mention}\n2. <t:{int(time.time())}>\n3. {member.mention}\n4. {response_json["clan"]["name"]}\n5. <@{709820533176270911}>'))
         clan_leader = client.get_user(response_json["userId"])
         return await clan_leader.send(embed=DefaultEmbed(f"***```Предупреждение за афк!\n{member.name}\n{member.id}```***"))
 
@@ -145,7 +168,8 @@ class Clan(BaseCog):
                             find_clan_channel=find_clan.mention, create_clan_url=create_url, verify_url=verify_url,
                             clan_info=clan_info.mention,
                             clan_staff_url=clan_staff_url, lead=f'<@{team_lead_id}>',
-                            senior=f'<@{senior_lead_id}>').embed, view=help_view, ephemeral=True)
+                            senior=f'<@{senior_lead_id}>', verification_cost=VERIFICATION_COST_BY_GUILD_ID[interaction.guild.id]).embed,
+            view=help_view, ephemeral=True)
 
         async def request_staff_callback(interact: interaction):
             staff_modal = StaffModal(interact)
