@@ -203,9 +203,9 @@ XP_INCREMENT = {
 PAYMENT = {
     TENDERLY_ID: {
         'right_time': 300,
-        'right_payment': 1000,
+        'right_payment': 750,
         'overtime': 50,
-        'bonus_payment': 20
+        'bonus_payment': 50
     },
     META_ID: {
         'right_time': 180,
