@@ -1,7 +1,7 @@
 # discord bot token
 # Token = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.ydkfdaQT_hMroG5vYEXFJUpF8qg'
-# TOKEN = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.N5_r85zmSGDf45PrZHvvK7ATf5s'
-TOKEN = 'OTcwNTA1MTc3NTQ5MzgxNzAz.GW2drs.mX52QICi6fo2kOApErqMdKgvxhkqxqsbV9IFxc'
+# TOKEN = 'ODY2MDUwNzkzMzAwMDMzNTk2.YPM6pw.N5_r85zmSGDf45PrZHvvK7ATf5s'xc
+TOKEN = 'OTcwNTA1MTc3NTQ5MzgxNzAz.GW2drs.mX52QICi6fo2kOApErqMdKgvxhkqxqsbV9IF'
 
 # MongoDb token
 # BladeXses DB
